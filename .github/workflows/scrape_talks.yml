@@ -1,5 +1,6 @@
 name: Scrape Talk Locations
 
+
 on:
   push:
     paths:
@@ -23,18 +24,31 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install jupyter nbconvert nbclient ipykernel 
-        pip install pandas requests beautifulsoup4 geopy getorg
+        python -m pip install jupyter nbconvert nbclient ipykernel nbformat
+        python -m pip install pandas requests beautifulsoup4 geopy getorg
         python -m ipykernel install --user --name python3 --display-name "Python 3"
-
- 
-
-
+        jupyter kernelspec list
+    
+    - name: Force kernelspec in talkmap.ipynb
+      run: |
+        python - <<'PY'
+        import nbformat
+        path = "talkmap.ipynb"
+        nb = nbformat.read(path, as_version=4)
+        nb.metadata.setdefault("kernelspec", {})
+        nb.metadata["kernelspec"]["name"] = "python3"
+        nb.metadata["kernelspec"]["display_name"] = "Python 3"
+        nbformat.write(nb, path)
+        print("Patched kernelspec to python3")
+        PY
+    
     - name: Run Jupyter Notebook
       run: |
-        jupyter nbconvert --to notebook --execute talkmap.ipynb \
+        python -m jupyter nbconvert --to notebook --execute talkmap.ipynb \
           --ExecutePreprocessor.kernel_name=python3 \
           --output talkmap_out.ipynb
+
+  
 
     - name: Commit changes
       run: |
