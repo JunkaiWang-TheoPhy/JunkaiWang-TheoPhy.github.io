@@ -21,14 +21,28 @@ jobs:
       with:
         python-version: '3.9'   # Specify the Python version you need
 
+
+
     - name: Install dependencies
       run: |
-        pip install jupyter pandas requests beautifulsoup4 geopy  # Add other dependencies as needed
-        pip install getorg --upgrade
+        python -m pip install --upgrade pip
+        pip install jupyter nbconvert nbclient ipykernel
+        pip install pandas requests beautifulsoup4 geopy getorg
+        python -m ipykernel install --user --name python3 --display-name "Python 3"
+
+
 
     - name: Run Jupyter Notebook
       run: |
         jupyter nbconvert --to notebook --execute talkmap.ipynb --output talkmap_out.ipynb
+
+
+
+    - name: Run Jupyter Notebook
+      run: |
+        jupyter nbconvert --to notebook --execute talkmap.ipynb \
+          --ExecutePreprocessor.kernel_name=python3 \
+          --output talkmap_out.ipynb
 
     - name: Commit changes
       run: |
