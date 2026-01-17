@@ -78,7 +78,7 @@ Welcome to my AcademicPage! 🤓Basically it's my Online CV now.
 I'm a theoretical physics student researching quantum gravity and cosmology. Let's unite to make human science brighter and stride bravely into tomorrow! ✨
 
 ## Q&A and writing
-I'm most active on Zhihu (China's StackExchange) as a theoretical physics answerer, and I'm one of 70 优秀答主 in physics among 400 million users. Some 代表作 have been translated into English on my blog ([link](...)).
+I'm most active on Zhihu (China's StackExchange) as a theoretical physics answerer, and I'm one of 70 Top Answerers in physics among 400 million users. Some 代表作 have been translated into English on my blog ([link](...)).
 
 ## Motto
 > “Alone we can do so little; together we can do so much.” — Helen Keller

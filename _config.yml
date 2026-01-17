@@ -245,6 +245,12 @@ collections:
   activities:
     output: true
     permalink: /activities/:path/
+  learn_practicum:
+    output: true
+    permalink: /learn-practicum/:path/
+  news:
+    output: true
+    permalink: /news/:path/
 
 
 # These settings control how pages and collections are included in the site
@@ -318,6 +324,21 @@ defaults:
       layout: single
       author_profile: true
       share: true
+  # _learn_practicum
+  - scope:
+      path: ""
+      type: learn_practicum
+    values:
+      layout: single
+      author_profile: true
+      share: true
+  # _news
+  - scope:
+      path: ""
+      type: news
+    values:
+      layout: single
+      author_profile: true
 
 
 # Sass/SCSS

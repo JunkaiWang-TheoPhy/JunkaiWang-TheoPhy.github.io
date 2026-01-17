@@ -1,0 +1,33 @@
+{% include base_path %}
+
+{% if post.id %}
+  {% assign title = post.title | markdownify | remove: "<p>" | remove: "</p>" %}
+{% else %}
+  {% assign title = post.title %}
+{% endif %}
+
+{% assign start_date = post.start_date | default: post.date %}
+
+<div class="{{ include.type | default: "list" }}__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <h2 class="archive__item-title" itemprop="headline">
+      <a href="{{ base_path }}{{ post.url }}" rel="permalink">{{ title }}</a>
+    </h2>
+    {% if start_date %}
+      {% if post.end_date %}
+        <p class="page__meta"><i class="fa fa-clock" aria-hidden="true"></i> {{ start_date | date: '%B %Y' }} - {{ post.end_date | date: '%B %Y' }}</p>
+      {% else %}
+        <p class="page__meta"><i class="fa fa-clock" aria-hidden="true"></i> {{ start_date | date: '%B %Y' }}</p>
+      {% endif %}
+    {% endif %}
+    {% if post.supervisor %}
+      <p class="archive__item-excerpt" itemprop="description">Supervisor: {{ post.supervisor }}</p>
+    {% endif %}
+    {% if post.output %}
+      <p class="archive__item-excerpt" itemprop="description">Output: {{ post.output }}</p>
+    {% endif %}
+    {% if post.excerpt %}
+      <p class="archive__item-excerpt" itemprop="description">{{ post.excerpt | markdownify }}</p>
+    {% endif %}
+  </article>
+</div>

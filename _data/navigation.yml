@@ -19,6 +19,12 @@ main:
 
   - title: "Activities"
     url: /activities/
+
+  - title: "Learn Practicum"
+    url: /learn-practicum/
+
+  - title: "News"
+    url: /news/
     
   - title: "Portfolio"
     url: /portfolio/
