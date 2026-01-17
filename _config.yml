@@ -23,7 +23,7 @@ repository               : "academicpages/academicpages.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "my-avatar.jpg"
+  avatar           : "images/my-avatar.jpg"
   name             : "Your Sidebar Name"
   pronouns         : # example: "she/her"  
   bio              : "Short biography for the left-hand sidebar"
@@ -38,7 +38,8 @@ author:
   googlescholar    : # "https://scholar.google.com/citations?user=PS_CX0AAAAAJ"
   inspire-hep      : # URL
   impactstory      : # URL
-  orcid            : "https://orcid.org/0009-0006-8036-143X"
+  orcid            : https://orcid.org/0009-0006-8036-143X
+  alphaxiv         : https://www.alphaxiv.org/@junkai-thomas-wang
   semantic         : # URL
   ssrn             : # URL
   ## pubmed           : "https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
