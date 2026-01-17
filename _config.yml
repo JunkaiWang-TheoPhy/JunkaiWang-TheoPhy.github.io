@@ -26,7 +26,12 @@ author:
   avatar           : "my-avatar.jpg"
   name             : "Junkai (Julianus K.) Wang"  # Update this with your name
   pronouns         : "They/Them/Their"  
-  bio              : "Enthusiast in Quantum Matter, Quantum Gravity, Quantum Infomation, and AI for Fundamental Science."
+  bio              : |-
+    Enthusiast of:
+    - Quantum Matter
+    - Quantum Gravity
+    - Quantum Infomation
+    - AI for Fundamental Science
   location         : "Beijing, China"
   employer         : "Tsinghua University"
   uri              : # URL
