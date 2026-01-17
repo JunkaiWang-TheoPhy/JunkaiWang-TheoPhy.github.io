@@ -26,7 +26,7 @@ author:
   avatar           : "my-avatar.jpg"
   name             : "Junkai (Julianus K.) Wang"  # Update this with your name
   pronouns         : "They/Them/Their"  
-  bio              : "Enthusiast in Quantum Matter, Quantum Gravity, Quantum Infomation, and AI for Physics."
+  bio              : "Enthusiast in Quantum Matter, Quantum Gravity, Quantum Infomation, and AI for Fundamental Science."
   location         : "Beijing, China"
   employer         : "Tsinghua University"
   uri              : # URL
@@ -34,12 +34,11 @@ author:
 
   # Academic websites
   academia         : # URL
-  arxiv            : # URL - Update with the correct link to your profile
+  arxiv            : "https://www.alphaxiv.org/@junkai-thomas-wang"
   googlescholar    : # "https://scholar.google.com/citations?user=PS_CX0AAAAAJ"
   inspire-hep      : # URL
   impactstory      : # URL
   orcid            : https://orcid.org/0009-0006-8036-143X
-  alphaxiv         : https://www.alphaxiv.org/@junkai-thomas-wang
   semantic         : # URL
   ssrn             : # URL
   ## pubmed        : "https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
