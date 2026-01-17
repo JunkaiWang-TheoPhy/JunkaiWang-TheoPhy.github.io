@@ -24,9 +24,9 @@ repository               : "academicpages/academicpages.github.io"
 author:
   # Biographic information
   avatar           : "my-avatar.jpg"
-  name             : "Your Sidebar Name"
-  pronouns         : # example: "she/her"  
-  bio              : "Short biography for the left-hand sidebar"
+  name             : "Junkai (Julianus K.) Wang"  # Update this with your name
+  pronouns         : "They/Them/Their"  
+  bio              : "Enthusiast in Quantum Matter, Quantum Gravity, Quantum Infomation, and AI for Physics."
   location         : "Beijing, China"
   employer         : "Tsinghua University"
   uri              : # URL
