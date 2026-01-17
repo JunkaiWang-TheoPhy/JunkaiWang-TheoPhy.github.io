@@ -1,7 +1,7 @@
 ---
 title: "LeanCat: A Benchmark Suite for Formal Category Theory in Lean (Part I: 1-Categories)"
 collection: publications
-category: journals
+category: manuscripts
 permalink: /publication/2025-12-31-leancat-a-benchmark-suite-for-formal-category-theory-in-lean-part-i-1-categories
 excerpt: 'Journal article, 2025-12-31.'
 date: 2025-12-31

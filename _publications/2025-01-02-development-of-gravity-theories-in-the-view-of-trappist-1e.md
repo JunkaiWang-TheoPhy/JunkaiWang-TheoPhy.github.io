@@ -1,7 +1,7 @@
 ---
 title: "Development of Gravity Theories in the View of TRAPPIST-1e"
 collection: publications
-category: journals
+category: manuscripts
 permalink: /publication/2025-01-02-development-of-gravity-theories-in-the-view-of-trappist-1e
 excerpt: 'Journal article in Research in Astronomy and Astrophysics.'
 date: 2025-01-02
