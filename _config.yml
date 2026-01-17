@@ -34,11 +34,12 @@ author:
 
   # Academic websites
   academia         : # URL
+  zhihu            : Junkai-Wang
+  orcid            : https://orcid.org/0009-0006-8036-143X
   arxiv            : "https://www.alphaxiv.org/@junkai-thomas-wang"
   googlescholar    : # "https://scholar.google.com/citations?user=PS_CX0AAAAAJ"
   inspire-hep      : # URL
   impactstory      : # URL
-  orcid            : https://orcid.org/0009-0006-8036-143X
   semantic         : # URL
   ssrn             : # URL
   ## pubmed        : "https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
@@ -80,7 +81,6 @@ author:
   wikipedia        : # Username
   xing             : # Username
   youtube          : # Username
-  zhihu            : Junkai-Wang
 
 
 # Publication Category - The following the list of publication categories and their headings
