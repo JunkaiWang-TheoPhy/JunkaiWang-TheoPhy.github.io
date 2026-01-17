@@ -239,6 +239,12 @@ collections:
   talks:
     output: true
     permalink: /:collection/:path/
+  conference_attending:
+    output: true
+    permalink: /conference-attending/:path/
+  activities:
+    output: true
+    permalink: /activities/:path/
 
 
 # These settings control how pages and collections are included in the site
@@ -294,6 +300,22 @@ defaults:
       type: talks
     values:
       layout: talk
+      author_profile: true
+      share: true
+  # _conference_attending
+  - scope:
+      path: ""
+      type: conference_attending
+    values:
+      layout: single
+      author_profile: true
+      share: true
+  # _activities
+  - scope:
+      path: ""
+      type: activities
+    values:
+      layout: single
       author_profile: true
       share: true
 

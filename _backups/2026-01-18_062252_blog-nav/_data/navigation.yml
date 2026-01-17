@@ -14,11 +14,8 @@ main:
   - title: "Talks"
     url: /talks/    
 
-  - title: "Conference Attending"
-    url: /conference-attending/
-
-  - title: "Activities"
-    url: /activities/
+  - title: "Teaching"
+    url: /teaching/    
     
   - title: "Portfolio"
     url: /portfolio/
