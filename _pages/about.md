@@ -8,8 +8,23 @@ redirect_from:
 ---
 
 <style>
+:root {
+  --home-grad-blue: rgba(52, 152, 219, 0.18);
+  --home-grad-gold: rgba(212, 175, 55, 0.18);
+  --home-grad-base-1: rgba(248, 249, 250, 0.95);
+  --home-grad-base-2: rgba(255, 255, 255, 0.98);
+}
+
+html[data-theme="dark"] {
+  --home-grad-blue: rgba(14, 161, 197, 0.18);
+  --home-grad-gold: rgba(248, 148, 6, 0.14);
+  --home-grad-base-1: rgba(39, 41, 46, 0.98);
+  --home-grad-base-2: rgba(49, 51, 56, 0.98);
+}
+
 body {
   position: relative;
+  background-color: var(--global-bg-color);
 }
 
 body::before {
@@ -17,9 +32,9 @@ body::before {
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(800px 500px at 12% -8%, rgba(52, 152, 219, 0.18), transparent 60%),
-    radial-gradient(700px 520px at 88% -18%, rgba(212, 175, 55, 0.18), transparent 55%),
-    linear-gradient(180deg, rgba(248, 249, 250, 0.95), rgba(255, 255, 255, 0.98));
+    radial-gradient(800px 500px at 12% -8%, var(--home-grad-blue), transparent 60%),
+    radial-gradient(700px 520px at 88% -18%, var(--home-grad-gold), transparent 55%),
+    linear-gradient(180deg, var(--home-grad-base-1), var(--home-grad-base-2));
   background-size: 140% 140%;
   opacity: 0;
   transform: translateY(-10px);
@@ -59,12 +74,14 @@ body::before {
 
 Welcome to my AcademicPage! 🤓
 
-
-## How to know me better?
-I'm mostly active on Q&A platform as a Theoretical Physics Answer on Zhihu (StackExchange in China), and is one of 70 优秀答主 in Physics among 400 millon users.  Some 代表作 has been translated into English in my Blog(link here).
-
+## About me
 I'm a theoretical physics student researching quantum gravity and cosmology. Let's unite to make human science brighter and stride bravely into tomorrow! ✨
 
-"Alone we can do so little; together we can do so much" —— Helen Keller  
-**How to memorize me**: my first name "Jun-Kai" in Chinese means "talented" and "triumph", and my last name "Wang" means "King".
-Call me "Julian K. Wang" if you'd like! I revere Caesar & Schwinger.
+## Q&A and writing
+I'm most active on Zhihu (China's StackExchange) as a theoretical physics answerer, and I'm one of 70 优秀答主 in physics among 400 million users. Some 代表作 have been translated into English on my blog ([link](...)).
+
+## Motto
+> “Alone we can do so little; together we can do so much.” — Helen Keller
+
+## Name and nickname
+My first name, "Jun-Kai," means "talented" and "triumph" in Chinese, and my last name "Wang" means "king." Call me "Julian K. Wang" if you'd like! I revere Caesar and Schwinger.
