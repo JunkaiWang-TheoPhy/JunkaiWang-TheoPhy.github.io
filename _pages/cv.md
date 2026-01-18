@@ -9,11 +9,12 @@ redirect_from:
 
 {% include base_path %}
 
-Education
+Education Experience
 ======
-* Ph.D in Version Control Theory, GitHub University, 2018 (expected)
-* M.S. in Jekyll, GitHub University, 2014
-* B.S. in GitHub, GitHub University, 2012
+* Tsinghua University - Visiting Scholar - Sep 2024 - Present
+* University of California, Santa Barbara - Visiting Student for summer research - Jun 2023 - Aug 2023
+* University of California, Berkeley - International Student (Berkeley Physics International Education) - Jan 2023 - Jun 2023
+* Nanjing University - Bachelor in Physics (National Top-notch Student Education Program) - Sep 2020 - Jul 2024
 
 Work experience
 ======

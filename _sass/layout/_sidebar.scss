@@ -130,10 +130,12 @@
   }
 }
 .sidebar .author__name {
-  font-family: "Snell Roundhand", "Apple Chancery", "Zapfino", "Segoe Script",
+  font-family: "Apple Chancery", "Zapfino", "Segoe Script",
     "Brush Script MT", "Lucida Handwriting", cursive;
   font-size: $type-size-5;
 }
+// "Snell Roundhand","Apple Chancery", "Zapfino", "Segoe Script",
+// "Brush Script MT", "Lucida Handwriting", cursive;
 /*  .sidebar .author__name {
   font-family: $sans-serif;
   font-size: $type-size-5;
