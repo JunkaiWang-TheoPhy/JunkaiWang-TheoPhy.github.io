@@ -22,24 +22,9 @@ Education Experience
   * Berkeley Physics International Education (BPIE)
 * Nanjing University - Sep 2020 - Jul 2024
   * Bachelor in Physics 
-  * National Top-notch Student Education Program for Fundamental Sciences
+  * National Top-notch Student Education Program for Fundamental Sciences (5‰ percentage)
 
-Work experience
-======
-* Spring 2024: Academic Pages Collaborator
-  * GitHub University
-  * Duties includes: Updates and improvements to template
-  * Supervisor: The Users
-
-* Fall 2015: Research Assistant
-  * GitHub University
-  * Duties included: Merging pull requests
-  * Supervisor: Professor Hub
-
-* Summer 2015: Research Assistant
-  * GitHub University
-  * Duties included: Tagging issues
-  * Supervisor: Professor Git
+ 
   
 Skills
 ======
