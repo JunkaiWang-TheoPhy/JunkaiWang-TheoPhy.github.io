@@ -13,12 +13,16 @@ Education Experience
 ======
 * Tsinghua University - Sep 2024 - Present
   * Visiting Scholar
+  * Co-advised by Quantum Information Group and Mathematical Physics Group
 * University of California, Santa Barbara - Jun 2023 - Aug 2023
   * Visiting Student for summer research
+  * In High Energy Theory Group
 * University of California, Berkeley - Jan 2023 - Jun 2023
-  * International Student (Berkeley Physics International Education)
+  * International Student 
+  * Berkeley Physics International Education (BPIE)
 * Nanjing University - Sep 2020 - Jul 2024
-  * Bachelor in Physics (National Top-notch Student Education Program)
+  * Bachelor in Physics 
+  * National Top-notch Student Education Program for Fundamental Sciences
 
 Work experience
 ======
