@@ -130,9 +130,15 @@
   }
 }
 .sidebar .author__name {
-  font-family: $sans-serif;
+  font-family: "Snell Roundhand", "Apple Chancery", "Zapfino", "Segoe Script",
+    "Brush Script MT", "Lucida Handwriting", cursive;
   font-size: $type-size-5;
 }
+/*  .sidebar .author__name {
+  font-family: $sans-serif;
+  font-size: $type-size-5;
+} */
+
 
 .sidebar .author__desktop {
   display: none;
