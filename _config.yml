@@ -9,7 +9,7 @@
 # Basic Site Settings
 locale                   : "en-US"
 site_theme               : "default" # Currently available options are "default", "air"
-title                    : "Julian K. Wang|Apprentice of Nature"
+title                    : "Julian K. Wang | Apprentice of Nature"
 title_separator          : "-"
 name                     : &name "Junkai Wang"          # Update this with your name
 description              : &description "Apprentice of Nature"   # Update this with a general description of your site, this is the default if not overridden by a page
