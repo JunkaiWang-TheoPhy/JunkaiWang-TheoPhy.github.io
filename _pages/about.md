@@ -72,7 +72,14 @@ body::before {
 }
 </style>
 
-Welcome to my AcademicPage! 🤓Basically it's my Online CV now.
+Welcome to my AcademicPage! 🤓 Now it's my Online CV.
+
+
+## Metto
+
+Man must live it so as to feel no torturing regrets for wasted years, never know the burning shame of a mean and petty past; so live that, dying, he might say: all my life, all my strength were given to the finest cause in all the humanity —— the fight for the Liberation of Mankind.
+
+—— Nikolai Ostrovsky, *How the Steel Was Tempered*.
 
 ## About me
 I'm a theoretical physics student researching quantum gravity and cosmology. Let's unite to make human science brighter and stride bravely into tomorrow! ✨
