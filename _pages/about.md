@@ -77,11 +77,12 @@ Welcome to my AcademicPage! 🤓Basically it's my Online CV now.
 ## About me
 I'm a theoretical physics student researching quantum gravity and cosmology. Let's unite to make human science brighter and stride bravely into tomorrow! ✨
 
-## Q&A and writing
+## How to know me better!
 I'm most active on Zhihu (China's StackExchange) as a theoretical physics answerer, and I'm one of 70 Top Answerers in physics among 400 million users. Some 代表作 have been translated into English on my blog ([link](...)).
 
-## Motto
-> “Alone we can do so little; together we can do so much.” — Helen Keller
+kind of scientifc outrearch
 
-## Name and nickname
+
+
+## How to memorize me?
 My first name, "Jun-Kai," means "talented" and "triumph" in Chinese, and my last name "Wang" means "king." Call me "Julian K. Wang" if you'd like! I revere Caesar and Schwinger.

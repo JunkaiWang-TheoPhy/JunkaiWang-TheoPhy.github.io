@@ -11,10 +11,14 @@ redirect_from:
 
 Education Experience
 ======
-* Tsinghua University - Visiting Scholar - Sep 2024 - Present
-* University of California, Santa Barbara - Visiting Student for summer research - Jun 2023 - Aug 2023
-* University of California, Berkeley - International Student (Berkeley Physics International Education) - Jan 2023 - Jun 2023
-* Nanjing University - Bachelor in Physics (National Top-notch Student Education Program) - Sep 2020 - Jul 2024
+* Tsinghua University - Sep 2024 - Present
+  * Visiting Scholar
+* University of California, Santa Barbara - Jun 2023 - Aug 2023
+  * Visiting Student for summer research
+* University of California, Berkeley - Jan 2023 - Jun 2023
+  * International Student (Berkeley Physics International Education)
+* Nanjing University - Sep 2020 - Jul 2024
+  * Bachelor in Physics (National Top-notch Student Education Program)
 
 Work experience
 ======
