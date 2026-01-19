@@ -43,9 +43,39 @@ Publications
   
 Talks
 ======
-  <ul>{% for post in site.talks reversed %}
-    {% include archive-single-talk-cv.html  %}
-  {% endfor %}</ul>
+**Academic Talks**
+- **Fudan Student Workshop on Theoretical Physics (in Preparation)** - 2026  
+  *On recent progress of generalised symmetries, mixed states, and SSB*  
+  *On recent progress of Quantizing 3d Gravity and its relation with LQG and TQFT*  
+  Fudan University
+- **3rd SUSTech Mathematical Physics Workshop** - 2025  
+  *An Introduction to String Phenomenology and Recent Progress in the Swampland Program*  
+  Southern University of Science and Technology (SUSTech)
+- **25th Corfu Summer Institute 2025 - Workshop on Quantum Gravity and Strings** - 2025  
+  *Quantum Gravity Meets DESI: Dynamical Dark Energy in Light of Swampland Trans-Planckian Censorship Conjecture*  
+  European Institute for Sciences and their Applications (EISA)
+- **25th Corfu Summer Institute 2025 - Tensions in Cosmology** - 2025  
+  *Quantum Gravity Meets DESI: Dynamical Dark Energy in Light of Swampland Trans-Planckian Censorship Conjecture*  
+  European Institute for Sciences and their Applications (EISA)
+- **International Symposium on Cosmology and Particle Astrophysics (CosPA 2025)** - 2025  
+  *Quantum Gravity Meets DESI: Dynamical Dark Energy in Light of Swampland Trans-Planckian Censorship Conjecture*  
+  Institute for Basic Science (IBS) & Korea Institute for Advanced Study (KIAS)
+- **2nd SUSTech Mathematical Physics Workshop** - 2024  
+  *(1) Recent Developments in Black Hole Thermodynamics and the Information Paradox*  
+  *(2) The Art of Estimation and Dimensional Analysis in Zee's _Fly by Night Physics_*  
+  Southern University of Science and Technology (SUSTech)
+- **Quantum Many-Body Grain Pecking Seminar Seminar** - 2023  
+  *A Comparative Study of Quantum Field Theory Mathematics in Condensed Matter Physics and High-Energy Physics*  
+  Online seminar
+- **1st SUSTech Mathematical Physics Workshop** - 2023  
+  *Monopoles in Classical Field Theory, Supersymmetric Field Theory, and Topological Defect Theory*  
+  Southern University of Science and Technology (SUSTech)
+- **Workshop on Algebraic Quantum Gravity** - 2023  
+  *Algebraic Quantum Field Theory and Its Applications to Quantum Gravity*  
+  Institute of Philosophy, Chinese Academy of Sciences
+- **5th National Symposium on Philosophy of Physics** - 2021  
+  *Form & Function: A Linguistic-Semiotic Investigation on Modern Physics*  
+  University of Science and Technology of China
   
 Teaching
 ======
