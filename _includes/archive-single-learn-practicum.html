@@ -23,9 +23,6 @@
     {% if post.supervisor %}
       <p class="archive__item-excerpt" itemprop="description">Supervisor: {{ post.supervisor }}</p>
     {% endif %}
-    {% if post.output %}
-      <p class="archive__item-excerpt" itemprop="description">Output: {{ post.output }}</p>
-    {% endif %}
     {% if post.excerpt %}
       <p class="archive__item-excerpt" itemprop="description">{{ post.excerpt | markdownify }}</p>
     {% endif %}
