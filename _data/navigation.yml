@@ -34,6 +34,9 @@ main:
     
   - title: "CV"
     url: /cv/
+
+  - title: "SoI"
+    url: /soi/
     
   # - title: "CV"
   #   url: /cv-json/
