@@ -76,8 +76,7 @@ Welcome to my AcademicPage! 🤓 Now it's my Online CV.
 
 
 ## Motto
-
-Man must live it so as to feel no torturing regrets for wasted years, never know the burning shame of a mean and petty past; so live that, dying, he might say: all my life, all my strength were given to the finest cause in all the humanity —— the fight for the Liberation of Mankind.
+Man must live it so as to feel no torturing regrets for wasted years, never know the burning shame of a mean and petty past; so live that, dying, he might say: all my life, all my strength were given to the finest cause in all the humanity —— the fight for the (Intellectual) Liberation of Mankind.
 
 —— Nikolai Ostrovsky, *How the Steel Was Tempered*.
 
