@@ -7,6 +7,89 @@ author_profile: true
 
 {% include base_path %}
 
-{% for post in site.activities reversed %}
-  {% include archive-single.html %}
-{% endfor %}
+<style>
+  .leadership-grid {
+    display: grid;
+    gap: 2rem;
+    margin-top: 1.5rem;
+  }
+
+  .leadership-column h2 {
+    margin: 0 0 1rem;
+    font-size: 1.1rem;
+  }
+
+  .leadership-item {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--global-border-color);
+  }
+
+  .leadership-item:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .leadership-item-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+    font-weight: 600;
+  }
+
+  .leadership-item-title {
+    flex: 1 1 auto;
+  }
+
+  .leadership-item-dates {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    color: var(--global-text-color-light);
+    font-size: 0.95em;
+  }
+
+  .leadership-item-org,
+  .leadership-item-role {
+    margin-top: 0.2rem;
+  }
+
+  .leadership-item-details ul {
+    margin: 0.4rem 0 0 1.1rem;
+  }
+
+  @media (min-width: 48em) {
+    .leadership-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>
+
+{% assign leadership_sections = "Organizer Experience|Leadership and Activities|Social Engagement" | split: "|" %}
+
+<div class="leadership-grid">
+  {% for section in leadership_sections %}
+    {% assign items = site.activities | where: "category", section | sort: "order" %}
+    <section class="leadership-column">
+      <h2>{{ section }}</h2>
+      {% for item in items %}
+        {% assign trimmed_content = item.content | strip %}
+        <div class="leadership-item">
+          <div class="leadership-item-header">
+            <span class="leadership-item-title">{{ item.title }}</span>
+            {% if item.dates %}
+              <span class="leadership-item-dates">{{ item.dates }}</span>
+            {% endif %}
+          </div>
+          {% if item.organization %}
+            <div class="leadership-item-org">{{ item.organization }}</div>
+          {% endif %}
+          {% if item.role %}
+            <div class="leadership-item-role"><em>{{ item.role }}</em></div>
+          {% endif %}
+          {% if trimmed_content != "" %}
+            <div class="leadership-item-details">{{ item.content }}</div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </section>
+  {% endfor %}
+</div>

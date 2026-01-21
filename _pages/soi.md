@@ -44,6 +44,7 @@ Some topics I am actively working on and care about:
   - Using neural networks to study HEPT models based on non-relativistic string and matrix string
 
 ## Working with neurodiversity and overcoming it
+In primary and middle school I don't dare to ask a question in front of the class.
 I have ADHD and mild Asperger's traits, and my undergraduate program lacks a formal theoretical physics group. This created early social friction and limited access to advanced theory courses. I responded by building a rigorous self-study routine, seeking advanced lectures when available, and developing strategies to manage attention and communication. I seek peer discussion whenever possible and work productively in structured environments, and I am ready to contribute in collaborative research teams.
 
 Thank you for your time and consideration. I would be grateful for the opportunity to join PSI Start, learn within Perimeter's research community, and contribute through focused, reproducible research outputs.
