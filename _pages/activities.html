@@ -12,6 +12,7 @@ author_profile: true
     display: grid;
     gap: 2rem;
     margin-top: 1.5rem;
+    grid-template-columns: 1fr;
   }
 
   .leadership-column h2 {
@@ -56,11 +57,6 @@ author_profile: true
     margin: 0.4rem 0 0 1.1rem;
   }
 
-  @media (min-width: 48em) {
-    .leadership-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-  }
 </style>
 
 {% assign leadership_sections = "Organizer Experience|Leadership and Activities|Social Engagement" | split: "|" %}
