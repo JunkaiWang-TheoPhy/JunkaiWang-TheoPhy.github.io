@@ -36,12 +36,6 @@
     {% if post.read_time %}
       <p class="page__meta"><i class="fa fa-clock" aria-hidden="true"></i> {% include read-time.html %}</p>
     {% endif %}
-    {% if post.author %}
-      <p class="archive__item-excerpt"><strong>Authors:</strong> {{ post.author }}</p>
-    {% endif %}
-    {% if post.summary %}
-      <p class="archive__item-excerpt">{{ post.summary | markdownify | remove: "<p>" | remove: "</p>" }}</p>
-    {% endif %}
     {% if post.venue%}<p class="archive__item-excerpt" itemprop="description">{{ post.citation }}</p> {% endif %}
     </li>
  </article>
