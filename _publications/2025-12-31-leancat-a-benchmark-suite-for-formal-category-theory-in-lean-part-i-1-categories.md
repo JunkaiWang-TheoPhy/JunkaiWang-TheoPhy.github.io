@@ -9,7 +9,7 @@ venue: 'arXiv (preprint)'
 hide_venue: true
 paperurl: 'https://doi.org/10.48550/ARXIV.2512.24796'
 doi: '10.48550/ARXIV.2512.24796'
-author: "Xu, Rongge; Dai, Hui; Fu, Yiming; Jiang, Jiedong; Nie, Tianjiao; Wang, Hongwei; Wang, Junkai; Yang, Holiverse; Yang, Jiatong; Zhang, Zhi-Hao. [Equal contributions; authors listed by surname.]"
+author: "Xu, Rongge; Dai, Hui; Fu, Yiming; Jiang, Jiedong; Nie, Tianjiao; Wang, Hongwei; Wang, Junkai; Yang, Holiverse; Yang, Jiatong; Zhang, Zhi-Hao.<br />[Equal contributions; authors listed by surname.]"
 summary: >-
   First Lean benchmark dedicated to formal category theory: Statement-level Lean
   tasks across 8 clusters (e.g., adjunctions, limits-colimits, abelian
