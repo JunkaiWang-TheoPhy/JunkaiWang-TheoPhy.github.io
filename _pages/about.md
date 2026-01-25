@@ -81,12 +81,15 @@ Man must live it so as to feel no torturing regrets for wasted years, never know
 —— Nikolai Ostrovsky, *How the Steel Was Tempered*.
 
 ## About me
-I'm a theoretical physics student researching quantum gravity and cosmology. Let's unite to make human science brighter and stride bravely into tomorrow! ✨
+I'm a theoretical physics student researching fundamental aspects of our universe. I am deeply passionate about theoretical physics, and out of passion for research, I continued to pursue scholarly study as a visiting scholar after completing my undergraduate degree, and now I believe I am qualified to be a   graduate candidate in theoretical physics.
+
+Let's unite to make human science brighter and stride bravely into tomorrow! ✨
 
 ## How to know me better!
-I'm most active on Zhihu (China's StackExchange) as a theoretical physics answerer, and I'm one of 70 Top Answerers in physics among 400 million users. Some 代表作 have been translated into English on my blog ([link](...)).
+I'm most active on Zhihu (China's StackExchange) as a theoretical physics answerer, and I'm one of 70 "Top Answerers in physics" among 420,000,000 users. I‘ve gained 50k+ favorates, 46k+ agrees, 16k+ followers, and 12k+ shares. 300+ blogs \& answers have been published, covering various topics in theoretical physics. 
 
-kind of scientifc outrearch
+
+It's kind of scientifc outrearch. Because of my distinctive undergraduate experience of lacking tutorial guidance and collegues, I believe that nurturing young scholars is just as important as doing scientific research, so I am always eager to share my insights and knowledge. 
 
 
 
