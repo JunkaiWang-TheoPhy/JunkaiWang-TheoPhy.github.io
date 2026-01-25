@@ -23,8 +23,8 @@ main:
   - title: "News"
     url: /news/
     
-  - title: "Portfolio"
-    url: /portfolio/
+  - title: "Teaching"
+    url: /teaching/
 
   - title: "Narrative"
     url: /narrative/

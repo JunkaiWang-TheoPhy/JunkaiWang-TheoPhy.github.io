@@ -81,11 +81,19 @@ Conference Attending
   </li>
 {% endfor %}</ul>
 
-Teaching
+Talks on Learning Seminar
 ======
-  <ul>{% for post in site.teaching reversed %}
-    {% include archive-single-cv.html %}
-  {% endfor %}</ul>
+- **AdS/CFT Reading Seminar** — 2024–2026  
+  Peking University
+
+- **Black Hole Learning Seminar** — 2024–2025  
+  Tsinghua University & Yanqi Lake Beijing Institute of Mathematical Sciences and Applications (BIMSA)
+
+- **Lie Group & Lie Algebra Learning Seminar** — 2024–2024  
+  Yau Center, Southeast University
+
+- **General Relativity Learning Seminar** — 2023–2024  
+  Yau Center, Southeast University
   
 Leadership
 ======
