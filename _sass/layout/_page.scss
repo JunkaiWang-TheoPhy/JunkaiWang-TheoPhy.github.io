@@ -48,6 +48,12 @@
   font-size: $type-size-4;
 }
 
+.page__author,
+.page__summary {
+  margin: 0 0 $indent-var;
+  font-size: $type-size-5;
+}
+
 .page__content {
 
   h2 {

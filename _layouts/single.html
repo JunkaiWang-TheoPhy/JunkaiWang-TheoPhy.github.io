@@ -35,7 +35,7 @@ layout: default
         {% endif %}
         
         {% if page.collection == 'publications' and page.author %}
-          <p>{{ page.author }}</p>
+          <p class="page__author"><strong>Author:</strong> {{ page.author }}</p>
         {% endif %}
 
         {% if page.collection == 'teaching' %}
@@ -47,7 +47,7 @@ layout: default
         {% endif %}    
 
         {% if page.collection == 'publications' and page.summary %}
-          <p>{{ page.summary | markdownify | remove: '<p>' | remove: '</p>' }}</p>
+          <p class="page__summary"><strong>Summary:</strong> {{ page.summary | markdownify | remove: '<p>' | remove: '</p>' }}</p>
         {% endif %}
         </header>
       {% endunless %}
