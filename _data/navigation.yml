@@ -25,6 +25,9 @@ main:
     
   - title: "Portfolio"
     url: /portfolio/
+
+  - title: "Narrative"
+    url: /narrative/
         
   - title: "Blog Posts"
     url: /year-archive/
