@@ -45,6 +45,14 @@ layout: default
       {% endunless %}
 
       <section class="page__content" itemprop="text">
+        {% if page.collection == 'publications' %}
+          {% if page.author %}
+            <p class="page__meta"><strong>Authors:</strong> {{ page.author }}</p>
+          {% endif %}
+          {% if page.summary %}
+            <p class="page__summary">{{ page.summary | markdownify | remove: "<p>" | remove: "</p>" }}</p>
+          {% endif %}
+        {% endif %}
         {{ content }}
 
         {% if page.citation and page.paperurl and page.slidesurl and page.bibtexurl %}
