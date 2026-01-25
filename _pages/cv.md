@@ -26,14 +26,10 @@ Education Experience
 
   
   
-Skills
+SKILLS
 ======
-* Skill 1
-* Skill 2
-  * Sub-skill 2.1
-  * Sub-skill 2.2
-  * Sub-skill 2.3
-* Skill 3
+* Languages: Mandarin (native), English (fluent), Japanese (basic)
+* Code: Python, Mathematica, Matlab, Lean
 
 Publications
 ======
@@ -77,12 +73,31 @@ Talks
   *Form & Function: A Linguistic-Semiotic Investigation on Modern Physics*  
   University of Science and Technology of China
   
+Conference Attending
+======
+<ul>{% for post in site.conference_attending reversed %}
+  <li>
+    <a href="{{ base_path }}{{ post.url }}">{{ post.title }}</a>{% if post.location %} — {{ post.location }}{% endif %}{% if post.date %} ({{ post.date | date: "%Y" }}){% endif %}
+  </li>
+{% endfor %}</ul>
+
 Teaching
 ======
   <ul>{% for post in site.teaching reversed %}
     {% include archive-single-cv.html %}
   {% endfor %}</ul>
   
-Service and leadership
+Leadership
 ======
-* Currently signed in to 43 different slack teams
+{% assign leadership_sections = "Organizer Experience|Leadership and Activities|Social Engagement" | split: "|" %}
+{% for section in leadership_sections %}
+**{{ section }}**
+<ul>
+  {% assign items = site.activities | where: "category", section | sort: "order" %}
+  {% for item in items %}
+    <li>
+      <a href="{{ base_path }}{{ item.url }}">{{ item.title }}</a>{% if item.organization %} — {{ item.organization }}{% endif %}{% if item.role %} — {{ item.role }}{% endif %}{% if item.dates %} ({{ item.dates }}){% endif %}
+    </li>
+  {% endfor %}
+</ul>
+{% endfor %}
