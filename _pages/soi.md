@@ -39,7 +39,7 @@ Out of passion for research, I continued to pursue scholarly study as a visiting
 2. **Quantum Gravity**  
    **Keywords:** Low-dimensional gravity; QI aspects like entanglement and complexity; observers.
    - Timelike entanglement for low-dimensional quantum gravity (e.g., JT) and quantum matter (e.g., DSSYK), especially including applications to de Sitter-like settings.
-   - Low-dimensional gravity: 3D gravity and its relations to LQG and TQFT; AdS/RMT; 2D gravity (e.g., JT).
+   - Low-dimensional gravity: 3D gravity and its relations to LQG and TQFT (recently there're inspirational progress in this area); AdS/RMT; 2D gravity (e.g., JT).
    - Late-time cosmology: dynamical dark energy and the swampland.
    - Using entanglement to study scattering amplitudes and related observables; recently there are many works on it.
    - Quantum--classical distinction in gravity (classical gravity coupled to quantum matter; post-quantum classical gravity frameworks).
