@@ -18,6 +18,7 @@ author_profile: true
   Departmental selection: 10/200 students per year.
 
 ## Social Honors
-- **Best Answerers in physics, Zhihu, 70/420,000,000 users**
-- **优秀抗疫志愿者**
-- **优秀中国文化传播者**
+- **Best Answerers in physics, Zhihu**
+ 70/420,000,000 users
+- **Outstanding COVID-19 Response Volunteer**
+- **Outstanding Promoter of Chinese Culture**
