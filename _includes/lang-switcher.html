@@ -45,9 +45,9 @@
 {% if alt_doc and alt_doc.url %}
   <p class="page__lang-switch">
     {% if is_cn %}
-      This Page has a <a href="{{ alt_doc.url | relative_url }}">English</a> version.
+      This page has a <a href="{{ alt_doc.url | relative_url }}">English</a> version.
     {% else %}
-      This Page has a <a href="{{ alt_doc.url | relative_url }}">Chinese</a> version.
+      This page has a <a href="{{ alt_doc.url | relative_url }}">Chinese</a> version.
     {% endif %}
   </p>
 {% endif %}
