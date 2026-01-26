@@ -86,10 +86,10 @@ I'm a theoretical physics student researching fundamental aspects of our univers
 Let's unite to make human science brighter and stride bravely into tomorrow! ✨
 
 ## How to know me better!
-I'm most active on Zhihu (China's StackExchange) as a theoretical physics answerer, and I'm one of 70 "Top Answerers in physics" among 420,000,000 users. I‘ve gained 50k+ favorates, 46k+ agrees, 16k+ followers, and 12k+ shares. 300+ blogs \& answers have been published, covering various topics in theoretical physics. 
+I'm most active on Zhihu (China's StackExchange & Quora) as a theoretical physics answerer, and I'm one of 70 "Top Answerers in physics" among 420,000,000 users. I‘ve gained 50k+ favorates, 46k+ agrees, 16k+ followers, and 12k+ shares. 300+ blogs & answers have been published, covering various topics in theoretical physics. 
 
 
-It's kind of scientifc outrearch. Because of my distinctive undergraduate experience of lacking tutorial guidance and collegues, I believe that nurturing young scholars is just as important as doing scientific research, so I am always eager to share my insights and knowledge. 
+It's kind of scientifc outreach. Because of my distinctive undergraduate experience of lacking tutorial guidance and collegues, I believe that **nurturing young scholars is just as important as doing scientific research**, so I am always eager to share my insights and knowledge. 
 
 
 
