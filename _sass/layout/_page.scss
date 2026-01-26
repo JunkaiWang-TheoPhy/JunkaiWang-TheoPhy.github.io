@@ -113,6 +113,21 @@
   }
 }
 
+.page__lang-switch {
+  margin: 0 0 1.25rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-left: 4px solid var(--global-link-color);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: saturate(120%) blur(6px);
+}
+
+html[data-theme="dark"] .page__lang-switch {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(24, 26, 30, 0.6);
+}
+
 .page__hero {
   position: relative;
   margin-bottom: 2em;
