@@ -3,7 +3,6 @@ title: "Quantum Gravity Meets DESI: Dynamical Dark Energy in Light of the Trans-
 collection: publications
 category: manuscripts
 permalink: /publication/2025-04-10-quantum-gravity-meets-desi-dynamical-dark-energy-in-light-of-the-trans-planckian-censorship-conjecture
-excerpt: 'Journal article, 2025-04-10.'
 date: 2025-04-10
 venue: 'Journal of Cosmology and Astroparticle Physics'
 paperurl: 'https://arxiv.org/abs/2504.07791'
