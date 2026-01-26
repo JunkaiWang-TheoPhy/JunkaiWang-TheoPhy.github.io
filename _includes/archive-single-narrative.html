@@ -24,11 +24,7 @@
     {% endif %}
 
     <div class="archive__item-excerpt" itemprop="description">
-      {% if post.output and post.output != "" %}
-        {{ post.output }}
-      {% else %}
-        {{ post.content | markdownify }}
-      {% endif %}
+      {{ post.content }}
     </div>
   </article>
 </div>
