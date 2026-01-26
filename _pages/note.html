@@ -1,0 +1,42 @@
+---
+layout: archive
+title: "Note"
+permalink: /note/
+author_profile: true
+noindex: true
+pagination:
+  enabled: true
+  collection: notes
+  per_page: 20
+  sort_field: "date"
+  sort_reverse: true
+  permalink: /note/page:num/
+---
+
+{% include base_path %}
+
+{% assign note_items = paginator.posts | default: paginator.docs | default: site.notes %}
+<ul>
+  {% for post in note_items %}
+    <li>
+      <a href="{{ base_path }}{{ post.url }}">{{ post.title }}</a>{% if post.date %} ({{ post.date | date: "%Y-%m-%d" }}){% endif %}
+    </li>
+  {% endfor %}
+</ul>
+
+{% if paginator.total_pages > 1 %}
+  <nav class="pagination">
+    <ul>
+      {% if paginator.previous_page %}
+        <li><a href="{{ paginator.previous_page_path | prepend: base_path }}">{{ site.data.ui-text[site.locale].pagination_previous | default: "Previous" }}</a></li>
+      {% else %}
+        <li><a href="#" class="disabled"><span aria-hidden="true">{{ site.data.ui-text[site.locale].pagination_previous | default: "Previous" }}</span></a></li>
+      {% endif %}
+      {% if paginator.next_page %}
+        <li><a href="{{ paginator.next_page_path | prepend: base_path }}">{{ site.data.ui-text[site.locale].pagination_next | default: "Next" }}</a></li>
+      {% else %}
+        <li><a href="#" class="disabled"><span aria-hidden="true">{{ site.data.ui-text[site.locale].pagination_next | default: "Next" }}</span></a></li>
+      {% endif %}
+    </ul>
+  </nav>
+{% endif %}

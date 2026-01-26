@@ -4,6 +4,10 @@
 
 <meta name="google-site-verification" content="TQYdzqceWiEgBpe0XR9f0V8DwSSkdq5mQ6pkKZTOWJw" />
 
+{% if page.noindex %}
+<meta name="robots" content="noindex" />
+{% endif %}
+
 {% include seo.html %}
 
 <link href="{% if site.atom_feed.path %}{{ site.atom_feed.path }}{% else %}{{ base_path }}/feed.xml{% endif %}" type="application/atom+xml" rel="alternate" title="{{ site.title }} Feed">
