@@ -6,18 +6,29 @@
   {% assign title = post.title %}
 {% endif %}
 
+{% assign show_title = true %}
+{% if page.title and post.title and page.title == post.title and site.narrative.size == 1 %}
+  {% assign show_title = false %}
+{% endif %}
+
 <div class="{{ include.type | default: "list" }}__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    <h2 class="archive__item-title" itemprop="headline">
-      {% if post.link %}
-        <a href="{{ post.link }}">{{ title }}</a> <a href="{{ base_path }}{{ post.url }}" rel="permalink"><i class="fa fa-link" aria-hidden="true" title="permalink"></i><span class="sr-only">Permalink</span></a>
-      {% else %}
-        <a href="{{ base_path }}{{ post.url }}" rel="permalink">{{ title }}</a>
-      {% endif %}
-    </h2>
+    {% if show_title %}
+      <h2 class="archive__item-title" itemprop="headline">
+        {% if post.link %}
+          <a href="{{ post.link }}">{{ title }}</a> <a href="{{ base_path }}{{ post.url }}" rel="permalink"><i class="fa fa-link" aria-hidden="true" title="permalink"></i><span class="sr-only">Permalink</span></a>
+        {% else %}
+          <a href="{{ base_path }}{{ post.url }}" rel="permalink">{{ title }}</a>
+        {% endif %}
+      </h2>
+    {% endif %}
 
     <div class="archive__item-excerpt" itemprop="description">
-      {{ post.content }}
+      {% if post.output and post.output != "" %}
+        {{ post.output }}
+      {% else %}
+        {{ post.content | markdownify }}
+      {% endif %}
     </div>
   </article>
 </div>
