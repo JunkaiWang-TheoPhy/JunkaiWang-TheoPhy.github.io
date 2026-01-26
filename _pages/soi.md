@@ -1,5 +1,5 @@
 ---
-title: "SoI"
+title: "Statement of Interest"
 permalink: /soi/
 author_profile: true
 ---
