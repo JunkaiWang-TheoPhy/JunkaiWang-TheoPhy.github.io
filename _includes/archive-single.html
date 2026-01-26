@@ -1,3 +1,9 @@
+{% assign is_cn = false %}
+{% if post.path contains "-CN." %}
+  {% assign is_cn = true %}
+{% endif %}
+
+{% unless is_cn %}
 {% include base_path %}
 
 {% if post.header.teaser %}
@@ -94,3 +100,4 @@
 
   </article>
 </div>
+{% endunless %}
