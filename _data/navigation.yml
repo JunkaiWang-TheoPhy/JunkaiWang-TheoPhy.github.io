@@ -35,6 +35,9 @@ main:
   - title: "CV"
     url: /cv/
 
+  - title: "Award"
+    url: /award/
+
   - title: "SoI"
     url: /soi/
     
