@@ -4,7 +4,7 @@ permalink: /award/
 author_profile: true
 ---
 
-## Competitions and Awards
+## Competitions
 - **National First Prize, 12th China Undergraduate Physics Tournament (CUPT), Team Nanjing University** (2021)  
   IYPT-style national competition in physics problem solving and debate.
 - **First Prize, 24th Forum of Sciences & Arts of Nanjing University** (2021)
@@ -16,3 +16,8 @@ author_profile: true
   Awarded twice; department quota: 20/200 students per year.
 - **People's Scholarship --- Science & Technology Innovation Award** (2023)  
   Departmental selection: 10/200 students per year.
+
+## Social Honors
+- **Best Answerers in physics, Zhihu, 70/420,000,000 users**
+- **优秀抗疫志愿者**
+- **优秀中国文化传播者**
