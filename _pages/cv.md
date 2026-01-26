@@ -44,6 +44,9 @@ Talks
   *On recent progress of generalised symmetries, mixed states, and SSB*  
   *On recent progress of Quantizing 3d Gravity and its relation with LQG and TQFT*  
   Fudan University
+- **Seminar of Quantum Scientific Computation and Quantum Artificial Intelligence** - 2025  
+  *Introduction to 'A theory of quantum differential equation solvers'*  
+  Tsinghua University
 - **3rd SUSTech Mathematical Physics Workshop** - 2025  
   *An Introduction to String Phenomenology and Recent Progress in the Swampland Program*  
   Southern University of Science and Technology (SUSTech)
@@ -56,13 +59,19 @@ Talks
 - **International Symposium on Cosmology and Particle Astrophysics (CosPA 2025)** - 2025  
   *Quantum Gravity Meets DESI: Dynamical Dark Energy in Light of Swampland Trans-Planckian Censorship Conjecture*  
   Institute for Basic Science (IBS) & Korea Institute for Advanced Study (KIAS)
+- **Seminar of Quantum Scientific Computation and Quantum Artificial Intelligence** - 2024  
+  *An Invitation to Topological Data Analysis*  
+  Tsinghua University
 - **2nd SUSTech Mathematical Physics Workshop** - 2024  
   *(1) Recent Developments in Black Hole Thermodynamics and the Information Paradox*  
   *(2) The Art of Estimation and Dimensional Analysis in Zee's _Fly by Night Physics_*  
   Southern University of Science and Technology (SUSTech)
-- **Quantum Many-Body Grain Pecking Seminar Seminar** - 2023  
-  *A Comparative Study of Quantum Field Theory Mathematics in Condensed Matter Physics and High-Energy Physics*  
-  Online seminar
+- **Quantum Many-Body Grain Pecking Seminar** - 2024  
+  *A Comparative Study of Mathematical structure of QFT in Condensed Matter and High Energy Physics*  
+  Online Webinar
+- **KAHF Seminar of Theoretical Physics** - 2023  
+  *An Introduction to JT Gravity as a Matrix Integral*  
+  Online Webinar
 - **1st SUSTech Mathematical Physics Workshop** - 2023  
   *Monopoles in Classical Field Theory, Supersymmetric Field Theory, and Topological Defect Theory*  
   Southern University of Science and Technology (SUSTech)
