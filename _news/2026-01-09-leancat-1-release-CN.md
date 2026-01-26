@@ -6,8 +6,11 @@ date: 2026-01-09
  大家新年好~新年伊始，我想向大家介绍我们最近发布的LeanCat-1（arXiv: 2512.24796）：据我们所知，这是首个专门面向范畴论（category theory）的 Lean 4 形式化证明 benchmark（基准测试集）。LeanCat 包含100 道statement-level 任务，覆盖 adjunctions / limits–colimits / abelian categories / monads 等 8 个主题簇，专门压力测试“抽象接口层推理 + mathlib 库导航（library-mediated reasoning）”。基线结果非常硬核：最强模型仅8.25% pass@1 / 12% pass@4 ，Medium/High 基本清零，直接暴露 natural-to-formal bottleneck。我们还评估了LeanBridge：结合LeanExplore 检索 + Lean 编译/验证反馈的 retrieve–generate–verify loop，在部分任务上带来稳定提升。
 
 LeanCat: A Benchmark Suite for Formal Category Theory in Lean (Part I: 1-Categories)
+
 https://www.alphaxiv.org/abs/2512.24796
+
 以及 Github 仓库
+
 https://github.com/sciencraft/LeanCat
 
 因为我几乎不认识 AI for math 的老师和同学，AI for Science 也认识得极少，因此大家的任何转发和评论都是极富帮助和受欢迎的
