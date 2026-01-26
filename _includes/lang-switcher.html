@@ -1,0 +1,53 @@
+{% comment %}
+  Language switcher between EN and CN versions.
+  Convention: Chinese page filename ends with "-CN" before extension,
+  stored in the same directory as the English page.
+{% endcomment %}
+
+{% assign all_docs = site.pages | concat: site.documents %}
+
+{% assign path_parts = page.path | split: "/" %}
+{% assign file_name = path_parts | last %}
+{% assign dir_parts_count = path_parts.size | minus: 1 %}
+{% assign dir_parts = path_parts | slice: 0, dir_parts_count %}
+{% assign dir_path = dir_parts | join: "/" %}
+
+{% assign name_parts = file_name | split: "." %}
+{% assign ext = name_parts | last %}
+{% assign base_size = name_parts.size | minus: 1 %}
+{% assign base_parts = name_parts | slice: 0, base_size %}
+{% assign base = base_parts | join: "." %}
+
+{% assign base_suffix = base | slice: -3, 3 %}
+{% assign is_cn = false %}
+{% if base_suffix == "-CN" %}
+  {% assign is_cn = true %}
+{% endif %}
+
+{% if is_cn %}
+  {% assign base_len = base | size %}
+  {% assign en_base_len = base_len | minus: 3 %}
+  {% assign alt_base = base | slice: 0, en_base_len %}
+  {% assign alt_name = alt_base | append: "." | append: ext %}
+{% else %}
+  {% assign alt_base = base | append: "-CN" %}
+  {% assign alt_name = alt_base | append: "." | append: ext %}
+{% endif %}
+
+{% if dir_path == "" %}
+  {% assign alt_path = alt_name %}
+{% else %}
+  {% assign alt_path = dir_path | append: "/" | append: alt_name %}
+{% endif %}
+
+{% assign alt_doc = all_docs | where: "path", alt_path | first %}
+
+{% if alt_doc and alt_doc.url %}
+  <p class="page__lang-switch">
+    {% if is_cn %}
+      This Page has a <a href="{{ alt_doc.url | relative_url }}">English</a> version
+    {% else %}
+      This Page has a <a href="{{ alt_doc.url | relative_url }}">Chinese</a> version
+    {% endif %}
+  </p>
+{% endif %}

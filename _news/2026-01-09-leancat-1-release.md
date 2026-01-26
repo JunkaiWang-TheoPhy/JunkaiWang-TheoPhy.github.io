@@ -1,9 +1,9 @@
 ---
-title: "Happy New Year, everyone!"
+title: "New preprint about LeanCat"
 date: 2026-01-09
 ---
 
-Happy New Year  everyone! 😉 At the very start of the new year, I’d like to share our recent release **LeanCat-1 (arXiv:2512.24796)**. To the best of our knowledge, this is the **first Lean 4 formal-proof benchmark suite dedicated specifically to category theory**.
+Happy New Year  everyone! 😉 At the very start of the new year, I’d like to share our recent release **LeanCat-1 (arXiv:2512.24796)**. To the best of our knowledge, this is the **first benchmark suite dedicated specifically to formal proof and category theory**.
 
 **LeanCat** contains **100 statement-level tasks**, covering **8 topic clusters** such as **adjunctions / limits–colimits / abelian categories / monads**, and is designed to pressure-test **“abstract interface-layer reasoning + mathlib navigation (library-mediated reasoning)”**. The baseline results are quite brutal: even the strongest model only reaches **8.25% pass@1 / 12% pass@4**; **Medium/High** are essentially near-zero, directly exposing the **natural-to-formal bottleneck**. We also evaluated **LeanBridge**: a **retrieve–generate–verify loop** that combines **LeanExplore retrieval** with **Lean compilation/verification feedback**, bringing stable improvements on a subset of tasks.
 

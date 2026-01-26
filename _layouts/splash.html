@@ -16,6 +16,7 @@ layout: default
     {% if page.modified %}<meta itemprop="dateModified" content="{{ page.modified | date: "%B %d, %Y" }}">{% endif %}
 
     <section class="page__content" itemprop="text">
+      {% include lang-switcher.html %}
       {{ content }}
     </section>
   </article>
