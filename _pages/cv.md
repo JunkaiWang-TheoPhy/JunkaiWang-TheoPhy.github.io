@@ -77,7 +77,7 @@ Conference Attending
 ======
 <ul>{% for post in site.conference_attending reversed %}
   <li>
-    {{ post.title }}{% if post.location %} — {{ post.location }}{% endif %}{% if post.date %} ({{ post.date | date: "%Y" }}){% endif %}
+    {{ post.title }}{% if post.date %} ({{ post.date | date: "%Y" }}){% endif %}{% if post.location %}<br/>{{ post.location }}{% endif %}
   </li>
 {% endfor %}</ul>
 
