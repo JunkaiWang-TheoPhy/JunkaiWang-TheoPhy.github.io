@@ -32,11 +32,11 @@ main:
   - title: "Blog Posts"
     url: /year-archive/
     
-  - title: "CV"
-    url: /cv/
-
   - title: "Award"
     url: /award/
+
+  - title: "CV"
+    url: /cv/
 
   - title: "SoI"
     url: /soi/
