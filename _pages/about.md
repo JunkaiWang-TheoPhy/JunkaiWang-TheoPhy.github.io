@@ -94,6 +94,6 @@ It's kind of scientifc outreach. Because of my distinctive undergraduate experie
 
 
 ## How to memorize me?
-My first name, "Jun-Kai," means "talented" and "triumph" in Chinese, and my last name "Wang" means "king." 
+My first name, "Jun-Kai," means "talented" and "triumph" in Chinese, and my last name "Wang" means "king".
 
 Call me "Julian K. Wang" if you'd like!😉 I revere Caesar and Schwinger.
