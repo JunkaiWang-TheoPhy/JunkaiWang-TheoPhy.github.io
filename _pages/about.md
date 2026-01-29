@@ -99,7 +99,7 @@ My first name, "Jun-Kai," means "talented" and "triumph" in Chinese, and my last
 Call me "Julian K. Wang" if you'd like!😉 I revere Caesar and Schwinger.
 
 ## What am I interested in now?
-Up to now, I'm mostly interested in the following topics:
+Up to now (Jan 29th, 2026), I'm mostly interested in the following topics:
 
 - Quantum Matter
   - Intersection between new frontiers of quantum gravity, quantum information, symmetries, and numerical methods
