@@ -95,16 +95,18 @@ body::before {
 如果你愿意，可以叫我 “Julian K. Wang”！😉 我仰慕凯撒与施温格。
 
 ## 我现在对什么感兴趣？
-截至目前（2026年1月29日），我主要关注以下主题：
+目前（2026年1月29日），我主要关注以下主题：
 （详见 SoI 栏目）
 
 - 量子物质
+
   Keywords: 量子引力、量子信息、对称性与数值方法等前沿交叉
   - mixed states；strong symmetries；strong-to-weak SSB；AdS/CFT；低维量子引力
   - tensor networks；quantum chaos；quantum complexity；matrix models；low-dimensional holography；SYK；DSSYK
   - 跨越量子引力 / 量子物质 / CFT 的广义对称性
   - 强关联系统；fuzzy-sphere；基于球面的 3D CFT / 临界性诊断
 - 量子引力
+
   Keywords: 低维引力；纠缠；复杂度；观察者
   - JT；DSSYK；de Sitter gravity and holography
   - 3D gravity；LQG；TQFT；AdS/RMT；2D gravity（JT）
@@ -113,12 +115,14 @@ body::before {
   - 量子–经典区分；后量子经典引力框架
   - 观察者与代数；量子参考系
 - 量子信息
+
   Keywords: 量子人工智能；高能 & 凝聚态理论交叉
   - 量子自动化学习
   - Quantum for AI；Quantum Machine Learning
   - 全息量子信息
 - 基础科学的 AI
+
   Keywords: Physics for AI；AI for Physics；Physics of AI
   - 标度律；复杂度；纠缠
   - 科学智能体；用于 HEP/CMP 模型的神经网络
-  - 支撑 LLM 的物理原理
+  -  LLM 的独特物理原理——我相信它很大程度上不同于我们宇宙的物理学，尽管相似于统计物理！
