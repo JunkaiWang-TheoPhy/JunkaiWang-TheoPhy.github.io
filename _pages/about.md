@@ -100,28 +100,29 @@ Call me "Julian K. Wang" if you'd like!😉 I revere Caesar and Schwinger.
 
 ## What am I interested in now?
 Up to now (Jan 29th, 2026), I'm mostly interested in the following topics:
+(see details in SoI channel)
 
 - Quantum Matter
-  * Keywords: intersection between new frontiers of quantum gravity, quantum information, symmetries, and numerical methods
+  Keywords: intersection between new frontiers of quantum gravity, quantum information, symmetries, and numerical methods
   - mixed states; strong symmetries; strong-to-weak SSB; AdS/CFT; low-dimensional quantum gravity
   - tensor networks; quantum chaos; quantum complexity; matrix models; low-dimensional holography; SYK; DSSYK
   - generalized symmetries across quantum gravity / quantum matter / CFTs
   - strongly correlated systems; fuzzy-sphere; sphere-based diagnostics; 3D CFT / criticality
 - Quantum Gravity
-  * Keywords: low-dimensional gravity; entanglement; complexity; observers
-  - JT; DSSYK; de Sitter-like settings
+  Keywords: low-dimensional gravity; entanglement; complexity; observers
+  - JT; DSSYK; de Sitter gravity and holography
   - 3D gravity; LQG; TQFT; AdS/RMT; 2D gravity (JT)
   - dynamical dark energy; swampland
   - entanglement in scattering amplitudes / observables
   - quantum–classical distinction; post-quantum classical gravity
   - observers and algebras; quantum reference frames
 - Quantum Information
-  * Keywords: quantum artificial intelligence; HEP & CMP theoretical physics intersection
+  Keywords: quantum artificial intelligence; HEP & CMP theoretical physics intersection
   - Quantum Automated Learning
   - Quantum for AI; Quantum Machine Learning
   - holographic quantum information
 - AI for Fundamental Science
-  * Keywords: physics for AI; AI for physics; physics of AI
+  Keywords: physics for AI; AI for physics; physics of AI
   - scaling laws; complexity; entanglement
   - scientific agents; neural networks for HEP/CMP models
   - physical principles underlying LLMs
