@@ -12,7 +12,6 @@ redirect_from:
 Education Experience
 ======
 * Tsinghua University - Sep 2024 - Present
-  * Visiting Scholar
   * Co-advised by Quantum Information Group and Mathematical Physics Group
 * University of California, Santa Barbara - Jun 2023 - Aug 2023
   * Visiting Student in summer

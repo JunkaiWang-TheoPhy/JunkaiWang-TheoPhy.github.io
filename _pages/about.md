@@ -97,3 +97,31 @@ It's kind of scientifc outreach. Because of my distinctive undergraduate experie
 My first name, "Jun-Kai," means "talented" and "triumph" in Chinese, and my last name "Wang" means "king".
 
 Call me "Julian K. Wang" if you'd like!😉 I revere Caesar and Schwinger.
+
+## What am I interested in now?
+Up to now, I'm mostly interested in the following topics:
+
+- Quantum Matter
+  - Intersection between new frontiers of quantum gravity, quantum information, symmetries, and numerical methods
+  - mixed states; strong symmetries; strong-to-weak SSB; AdS/CFT; low-dimensional quantum gravity
+  - tensor networks; quantum chaos; quantum complexity; matrix models; low-dimensional holography; SYK; DSSYK
+  - generalized symmetries across quantum gravity / quantum matter / CFTs
+  - strongly correlated systems; fuzzy-sphere; sphere-based diagnostics; 3D CFT / criticality
+- Quantum Gravity
+  - low-dimensional gravity; entanglement; complexity; observers
+  - JT; DSSYK; de Sitter-like settings
+  - 3D gravity; LQG; TQFT; AdS/RMT; 2D gravity (JT)
+  - dynamical dark energy; swampland
+  - entanglement in scattering amplitudes / observables
+  - quantum–classical distinction; post-quantum classical gravity
+  - observers and algebras; quantum reference frames
+- Quantum Information
+  - Quantum Artificial Intelligence; HEP & CMP Theoretical Physics intersection
+  - Quantum Automated Learning
+  - Quantum for AI; Quantum Machine Learning
+  - holographic quantum information
+- AI for Fundamental Science
+  - Physics for AI; AI for Physics; Physics of AI
+  - scaling laws; complexity; entanglement
+  - scientific agents; neural networks for HEP/CMP models
+  - physical principles underlying LLMs
