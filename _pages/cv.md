@@ -13,6 +13,9 @@ Education Experience
 ======
 * Tsinghua University - Sep 2024 - Present
   * Co-advised by Quantum Information Group and Mathematical Physics Group
+* University of Science and Technology in China (USTC) - Mar 2025 - Jul 2025
+  * Invited Visiting Student for Collaboration
+  * In Particle Cosmology Group
 * University of California, Santa Barbara - Jun 2023 - Aug 2023
   * Visiting Student in summer
   * In High Energy Theory Group
