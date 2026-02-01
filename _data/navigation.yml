@@ -40,6 +40,9 @@ main:
 
   - title: "SoI"
     url: /soi/
+
+  - title: "SoP"
+    url: /sop/
     
   # - title: "CV"
   #   url: /cv-json/

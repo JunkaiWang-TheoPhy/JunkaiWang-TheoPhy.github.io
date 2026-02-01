@@ -1,0 +1,23 @@
+---
+title: "Statement of Purpose"
+permalink: /sop/
+author_profile: true
+---
+
+
+I am applying to PSI and PSI Start program because I want the kind of high-density, research-adjacent training environment that forces a young theorist to integrate breadth with depth--across quantum field theory, gravity, quantum matter physics, quantum information, and AI for Science -- while being mentored inside a world-leading community. That would be really important for my future study of PhD and Postdoc, thus contributing better to the academy and society. Especially studies in Perimeter's PhD program if possible.
+
+Born in a small historic city known as the hometown of Confucius, I grew up in an environment respecting knowledge. I've been determined to devote my life to humanity, from primary school to now. I have therefore been determined to become a fundamental scientist for more than 15 years, and hopefully lasting for my whole life according to Bayesian inference (LoL). I've promised I'll dedicated all my life to it.
+
+I'm an enthusiast of (i) Quantum Matter (ii) Quantum Gravity (iii) Quantum Information (iv) AI for Fundamental Science. For more infomation please see my Statement of Interest:
+junkaiwang-theophy.github.io/soi
+
+While my interests are wide-ranging, in my deepest heart I am a fundamental theorist. My primary goal is to understand the structures of fundamental physics, especially in quantum gravity, and I spent the past four years dedicated to the study of them. Yet current trends in theoretical physics naturally draw me toward quantum matter physics, quantum information, symmetries, and topological phases. For example, many new insights into fundamental physical structures are entering the field through recent advances in quantum matter, which today plays a role comparable to what string theory did 30 years ago, quantum field theory 50 years ago, and QM & GR 100 years ago. As a youngster I think Ishould not ignore these developments, pretending they do not exist.
+
+I believe mastering these tools is meaningful in its own right and also essential for uncovering the basic structure of nature. Insights from quantum matter and symmetry significantly reshaped my understanding of the fundamental physics of our universe. Also, I believe the physical principles underlying LLM are largely different from the physics of our universe, although it resembles statistical physics!
+
+I have to mention that because of the Neurodiversity traits and the lack of formal theoretical physics groups in my undergraduate school, my transcript shows grade frictions and lack of advanced coursework, and therefore does not accurately reflect my true academic performance. However, I actively responded by building a rigorous self-study routine, seeking advanced lectures when available, and developing strategies to manage attention and communication. I seek peer discussion whenever possible and work productively in structured environments. Out of passion for fundamental science, I chose to become a visiting scholar after completing my undergraduate degree, and after 1 year co-advised in the Quantum Information Group & Mathematical Physics Group of Tsinghua University, now I am ready to contribute to graduate study and research projects.
+
+In sum, my academic trajectory reflects the same principles I hope to crystallize strengths at PSI: the attitude towards academic excellence through understanding and self-motivation, an inclusion-minded way of working shaped by deliberate routines and communication, and a habit of collaboration and mentorship built through peer discussion and sustained outreach. I learn by producing various outputs, and I benefited a lot when surrounded by people who challenge assumptions and refine ideas into research-grade understanding. PSI is the environment where these traits translate most directly into impact, and my goal is to use the program to converge on a focused, PhD-ready research direction--ideally continuing into Perimeter's PhD program and contributing to the institute's research community over the long term.
+
+Because of my distinctive undergraduate experience of lacking guidance, I believe that nurturing young scholars is just as important as doing scientific research, so I am always eager to share my insights and knowledge. Since undergrad, I have maintained a science outreach blog on theoretical physics: zhihu.com/people/Junkai-Wang (Chinese). It has attracted over 5,000,000+ views and has been awarded as "Best answerer in Physics" in 70/420,000,000 users, helping thousands of Chinese physics students and even faculty members in the past few years.
