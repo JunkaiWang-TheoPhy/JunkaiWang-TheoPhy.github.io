@@ -4,6 +4,8 @@ permalink: /soi/
 author_profile: true
 ---
 
+<div class="statement-page">
+
 ## A Theoretical Physics Enthusiast's Apologia
 _Pastiche of Hardy's A Mathematician's Apology._
 
@@ -71,3 +73,5 @@ Thank you for your time and consideration. I would be grateful for the opportuni
 Sincerely,  
 **Junkai Wang**  
 18 January 2026
+
+</div>

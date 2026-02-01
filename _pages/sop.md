@@ -4,6 +4,8 @@ permalink: /sop/
 author_profile: true
 ---
 
+<div class="statement-page">
+
 I am applying to PSI and PSI Start program because I want the kind of high-density, research-adjacent training environment that forces a young theorist to integrate breadth with depth--across quantum field theory, gravity, quantum matter physics, quantum information, and AI for Science -- while being mentored inside a world-leading community. That would be really important for my future study of PhD and Postdoc, thus contributing better to the academy and society. Especially studies in Perimeter's PhD program if possible.
 
 Born in a small historic city known as the hometown of Confucius, I grew up in an environment respecting knowledge. I've been determined to devote my life to humanity, from primary school to now. I have therefore been determined to become a fundamental scientist for more than 15 years, and hopefully lasting for my whole life according to Bayesian inference (LoL). I've promised I'll dedicated all my life to it.
@@ -38,3 +40,5 @@ The PSI values resonate with my lived experience. **Academic excellence**: I am 
 Looking ahead, PSI is not an endpoint for me but a launchpad. I want to use PSI to (i) consolidate mastery of core graduate theory at speed, (ii) identify the most promising research "interfaces" where conceptual advances are currently happening, and (iii) produce a focused research project that can naturally transition into PhD-level work. If my research direction aligns well with Perimeter Institute for Theoretical Physics faculty and culture, I would be eager to continue into Perimeter's PhD path after PSI. PSI's structure--coursework integrated into an active research institute, in partnership with the University of Waterloo--is precisely the environment in which I can convert intensity and preparation into durable, publishable research progress.
 
 Thank you for considering my application.
+
+</div>
