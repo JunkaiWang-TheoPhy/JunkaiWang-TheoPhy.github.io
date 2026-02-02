@@ -132,7 +132,7 @@ staticman:
         format           : "iso8601" # "iso8601" (default), "timestamp-seconds", "timestamp-milliseconds"
 atom_feed:
   hide                   : false     # change to true to hide the RSS feed in the footer
-  path                   : /weekly.xml
+  path                   : # blank (default) uses feed.xml
 
 
 # SEO Related
@@ -227,6 +227,9 @@ kramdown:
 
 # These settings control the types of collections used by the template
 collections:
+  blogs:
+    output: true
+    permalink: /blogs/:path/
   teaching:
     output: true
     permalink: /:collection/:path/
@@ -257,9 +260,6 @@ collections:
   news:
     output: true
     permalink: /news/:path/
-  weekly:
-    output: true
-    permalink: /weekly/:path/
 
 
 # These settings control how pages and collections are included in the site
@@ -268,6 +268,17 @@ defaults:
   - scope:
       path: ""
       type: posts
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: true
+      share: true
+      related: true
+  # _blogs
+  - scope:
+      path: ""
+      type: blogs
     values:
       layout: single
       author_profile: true
@@ -365,13 +376,6 @@ defaults:
   - scope:
       path: ""
       type: news
-    values:
-      layout: single
-      author_profile: true
-  # _weekly
-  - scope:
-      path: ""
-      type: weekly
     values:
       layout: single
       author_profile: true

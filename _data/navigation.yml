@@ -30,7 +30,7 @@ main:
     url: /narrative/
         
   - title: "Blogs"
-    url: /year-archive/
+    url: /blogs/
     
   - title: "Award"
     url: /award/
