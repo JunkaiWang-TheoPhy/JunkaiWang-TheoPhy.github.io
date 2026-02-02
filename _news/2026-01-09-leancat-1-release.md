@@ -1,5 +1,5 @@
 ---
-title: "New preprint about LeanCat"
+title: "We Released the First Benchmark Dedicated to Category Theory and Formal Proof!"
 date: 2026-01-09
 ---
 

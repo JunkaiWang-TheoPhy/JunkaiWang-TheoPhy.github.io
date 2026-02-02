@@ -1,5 +1,5 @@
 ---
-title: "Quantum Gravity meets DESI"
+title: "New Print on ‘Quantum Gravity meets DESI’"
 date: 2025-04-15
 layout: single
 collection: news
