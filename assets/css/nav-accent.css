@@ -11,9 +11,8 @@ html[data-theme="dark"] {
 #site-nav a[href$="/soi/"],
 #site-nav a[href$="/sop/"] {
   color: var(--nav-accent-color);
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
-  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+  text-decoration: none;
+  font-family: "Segoe Script", "Apple Chancery", "Zapfino", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 }
 
 #site-nav a[href$="/cv/"]:hover,
