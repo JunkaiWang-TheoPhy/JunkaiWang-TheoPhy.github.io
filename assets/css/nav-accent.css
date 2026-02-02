@@ -25,5 +25,5 @@ html[data-theme="dark"] {
 #site-nav a[href$="/cv/"]::before,
 #site-nav a[href$="/soi/"]::before,
 #site-nav a[href$="/sop/"]::before {
-  display: none;
+  background: var(--nav-accent-color);
 }
