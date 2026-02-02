@@ -64,6 +64,21 @@ I have ADHD and mild Asperger's traits, and my undergraduate program lacks a for
 
 Instead, I responded by building a rigorous self-study routine, seeking advanced lectures when available, and developing strategies to manage attention and communication. I seek peer discussion whenever possible and work productively in structured environments, and I am ready to contribute to collaborative research teams.
 
+## How do I learn them
+
+Since my love and dedication for fundamental physics, sustained diligence and curiosity:
+
+By self-teaching, peer study, and writing lecture notes, I learnt AdS/CFT and Holography, Quantum Blackhole Physics, Generalised Symmetry in Modern Physics, AI for Science, etc; you can see them at my personal blog: zhihu.com/people/junkai-wang
+
+By faculty-guided advanced learning seminars, I learnt various Advanced mathematical topics in physics (Lie theory, topology, algebrabics in field theory, ......);
+
+By auditing graduate-level courses during my visit at UC Berkeley, I learnt String Theory (by Geoff Penington), Advanced Quantum Field Theory (by Petr Hořava), and the Standard Model* (by Yasunori Nomura);
+
+By auditing advanced courses during my visit in Beijing, I learnt String Theory (by Chi-ming Chang), Quantum Information (by Jin-peng Liu), Quantum Machine Learning (by Dong-Ling Deng), Gauge Field Theory (by Haipeng An), Particle Cosmology (by Zhong-zhi Xianyu), and Advanced General Relativity (by Lars Anderson).
+
+
+
+
 ---
 
 Thank you for your time and consideration. I would be grateful for the opportunity to join PSI Start, learn within Perimeter's research community, and contribute through focused, reproducible research outputs.
