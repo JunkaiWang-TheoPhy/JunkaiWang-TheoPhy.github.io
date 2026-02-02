@@ -130,9 +130,13 @@ staticman:
       type               : "date"
       options:
         format           : "iso8601" # "iso8601" (default), "timestamp-seconds", "timestamp-milliseconds"
-atom_feed:
-  hide                   : false     # change to true to hide the RSS feed in the footer
-  path                   : # blank (default) uses feed.xml
+# atom_feed:
+#   hide                   : false     # change to true to hide the RSS feed in the footer
+#   path                   : # blank (default) uses feed.xml
+
+# Footer
+footer:
+  show_sitemap            : false     # set to true to show the Sitemap link in the footer
 
 
 # SEO Related
@@ -396,7 +400,7 @@ timezone: Etc/UTC # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 # Plugins
 plugins:
-  - jekyll-feed
+  # - jekyll-feed
   - jekyll-gist
   - jekyll-paginate
   - jekyll-paginate-v2
@@ -406,7 +410,7 @@ plugins:
 
 # Mimic GitHub Pages with --safe
 whitelist:
-  - jekyll-feed
+  # - jekyll-feed
   - jekyll-gist
   - jekyll-paginate
   - jekyll-paginate-v2
