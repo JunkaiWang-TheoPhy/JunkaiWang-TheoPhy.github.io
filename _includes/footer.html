@@ -9,8 +9,11 @@
     {% if site.author.github %}
       <li><a href="https://github.com/{{ site.author.github }}"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a></li>
     {% endif %}
+    {% if site.author.xiaohongshu %}
+      <li><a href="{{ site.author.xiaohongshu }}"><img class="footer-icon footer-icon--xhs" src="https://cdn.simpleicons.org/xiaohongshu/ffffff" alt="" aria-hidden="true"> <span class="footer-label--mixed">Xiaohongshu</span></a></li>
+    {% endif %}
     {% if site.author.zhihu %}
-      <li><a href="https://www.zhihu.com/people/{{ site.author.zhihu }}"><i class="fab fa-zhihu" aria-hidden="true"></i> Zhihu</a></li>
+      <li><a href="https://www.zhihu.com/people/{{ site.author.zhihu }}"><i class="fab fa-zhihu" aria-hidden="true"></i> <span class="footer-label--mixed">Zhihu</span></a></li>
     {% endif %}
     {% if site.author.bitbucket %}
       <li><a href="https://bitbucket.org/{{ site.author.bitbucket }}"><i class="fab fa-bitbucket" aria-hidden="true"></i> Bitbucket</a></li>

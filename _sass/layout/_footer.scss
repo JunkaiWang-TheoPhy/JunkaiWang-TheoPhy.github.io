@@ -93,4 +93,16 @@
       white-space: nowrap;
     }
   }
+
+  .footer-icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.125em;
+    margin-right: 0.35em;
+    display: inline-block;
+  }
+
+  .footer-label--mixed {
+    text-transform: none;
+  }
 }
