@@ -2,6 +2,7 @@
 permalink: /cn/
 title: "PSI & PSI Start（中文）"
 author_profile: true
+sitemap: false
 ---
 
 <style>

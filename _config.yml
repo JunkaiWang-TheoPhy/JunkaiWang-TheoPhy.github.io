@@ -386,7 +386,6 @@ plugins:
   - jekyll-gist
   - jekyll-paginate
   - jekyll-paginate-v2
-  - jekyll-sitemap
   - jekyll-redirect-from
   - jemoji
 
@@ -396,7 +395,6 @@ whitelist:
   - jekyll-gist
   - jekyll-paginate
   - jekyll-paginate-v2
-  - jekyll-sitemap
   - jekyll-redirect-from
   - jemoji
 

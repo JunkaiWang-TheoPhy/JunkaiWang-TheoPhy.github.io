@@ -13,6 +13,7 @@ html[data-theme="dark"] {
   color: var(--nav-accent-color);
   text-decoration: underline;
   text-underline-offset: 0.2em;
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
 }
 
 #site-nav a[href$="/cv/"]:hover,
