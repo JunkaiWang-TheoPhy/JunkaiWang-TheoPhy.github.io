@@ -70,13 +70,20 @@ body::before {
     transform: none;
   }
 }
+
+.motto-script {
+  font-family: "Georgia", "Times New Roman", serif;
+  font-style: italic;
+  font-size: 1.02em;
+  color: var(--global-text-color);
+}
 </style>
 
 Welcome to my AcademicPage! 🤓 Now it's my Online CV.
 
 
 ## Motto
-Man must live it so as to feel no torturing regrets for wasted years, never know the burning shame of a mean and petty past; so live that, dying, he might say: all my life, all my strength were given to the finest cause in all the humanity —— the fight for the (Intellectual) Liberation of Mankind.
+<p class="motto-script">Man must live it so as to feel no torturing regrets for wasted years, never know the burning shame of a mean and petty past; so live that, dying, he might say: all my life, all my strength were given to the finest cause in all the humanity —— the fight for the (Intellectual) Liberation of Mankind.</p>
 
 —— Nikolai Ostrovsky, *How the Steel Was Tempered*.
 
