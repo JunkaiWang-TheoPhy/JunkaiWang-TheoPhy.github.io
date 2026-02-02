@@ -132,7 +132,7 @@ staticman:
         format           : "iso8601" # "iso8601" (default), "timestamp-seconds", "timestamp-milliseconds"
 atom_feed:
   hide                   : false     # change to true to hide the RSS feed in the footer
-  path                   : # blank (default) uses feed.xml
+  path                   : /weekly.xml
 
 
 # SEO Related
@@ -257,6 +257,9 @@ collections:
   news:
     output: true
     permalink: /news/:path/
+  weekly:
+    output: true
+    permalink: /weekly/:path/
 
 
 # These settings control how pages and collections are included in the site
@@ -362,6 +365,13 @@ defaults:
   - scope:
       path: ""
       type: news
+    values:
+      layout: single
+      author_profile: true
+  # _weekly
+  - scope:
+      path: ""
+      type: weekly
     values:
       layout: single
       author_profile: true
