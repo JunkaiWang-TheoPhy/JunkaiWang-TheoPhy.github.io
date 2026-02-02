@@ -1,0 +1,27 @@
+/* Custom nav colors for CV/SoI/SoP links (method B: href selectors). */
+:root {
+  --nav-accent-color: #1f7a8c;
+}
+
+html[data-theme="dark"] {
+  --nav-accent-color: #7fd3e6;
+}
+
+#site-nav a[href$="/cv/"],
+#site-nav a[href$="/soi/"],
+#site-nav a[href$="/sop/"] {
+  color: var(--nav-accent-color);
+  font-weight: 600;
+}
+
+#site-nav a[href$="/cv/"]:hover,
+#site-nav a[href$="/soi/"]:hover,
+#site-nav a[href$="/sop/"]:hover {
+  color: var(--nav-accent-color);
+}
+
+#site-nav a[href$="/cv/"]::before,
+#site-nav a[href$="/soi/"]::before,
+#site-nav a[href$="/sop/"]::before {
+  background: var(--nav-accent-color);
+}

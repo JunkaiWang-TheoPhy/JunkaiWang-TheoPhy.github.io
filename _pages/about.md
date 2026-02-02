@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "PSI Start"
+title: "PSI & PSI START"
 author_profile: true
 redirect_from:
   - /about/

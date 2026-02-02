@@ -1,5 +1,5 @@
 ---
-title: "We Released the First Benchmark Dedicated to Category Theory and Formal Proof!"
+title: "We Released the First Benchmark Dedicated to Category Theory and Formal Verification!"
 date: 2026-01-09
 ---
 

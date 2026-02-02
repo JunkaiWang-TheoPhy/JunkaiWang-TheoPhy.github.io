@@ -1,6 +1,6 @@
 ---
 permalink: /cn/
-title: "PSI Start（中文）"
+title: "PSI & PSI Start（中文）"
 author_profile: true
 ---
 

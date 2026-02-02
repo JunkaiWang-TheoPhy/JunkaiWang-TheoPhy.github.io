@@ -21,7 +21,7 @@ I'm an enthusiast of:
 ## What kind of topics am I interested in?
 My four undergraduate years gave me a solid foundation in mathematics, physics, and the core disciplines of fundamental physics. This helps me engage more confidently with quantum information, quantum matter, and AI for physics.
 
-While my interests are wide-ranging, I am a fundamental theorist at heart. My primary goal is to understand the structures of fundamental physics, especially in quantum gravity, and I spent the past four years dedicated to the study of fundamental theoretical physics. Yet current trends in theoretical physics naturally draw me toward quantum many-body physics, quantum information, symmetries, and topological phases.
+While my interests are wide-ranging, I am a fundamental theorist at heart, a fundamental theoretical physicist from the deepest heart. My primary goal is to understand the structures of fundamental physics, especially in quantum gravity, and I spent the past four years dedicated to the study of fundamental theoretical physics. Yet current trends in theoretical physics naturally draw me toward quantum many-body physics, quantum information, symmetries, and topological phases.
 
 For example, many new insights into fundamental physical structures are entering the field through recent advances in quantum matter, which today plays a role comparable to what string theory did 30 years ago, quantum field theory 50 years ago, and quantum mechanics and general relativity 100 years ago. As a young researcher, I should not ignore these developments, pretending they do not exist.
 
@@ -31,38 +31,38 @@ Out of passion for research, I continued to pursue scholarly study as a visiting
 
 1. **Quantum Matter**  
    **Keywords:** Intersection between new frontiers of quantum gravity, quantum information, symmetries, and numerical methods.
-   - New frontiers crossing Quantum Gravity: for example, recently there has been impressive progress in the understanding of mixed states, strong symmetries, and strong-to-weak SSB, yet their potential and application in high energy physics is undiscovered and should be explored, e.g., in AdS/CFT and low-dimensional quantum gravity.
+   - New frontiers crossing Quantum Gravity: recently there has been impressive progress in the understanding of mixed states, strong symmetries, and strong-to-weak SSB, and I appreciate recent progress made at Perimeter. After long-term study I believe advances in quantum matter can be naturally transferred to the high-energy community, because fundamental field theory and quantum gravity inherently involve symmetry- and information-theoretic structures. Their potential and application in high-energy physics is still underexplored, e.g., in AdS/CFT and low-dimensional quantum gravity, and I am committed to this topic.
    - New frontiers crossing Quantum Information in High Energy Theory: tensor networks, quantum chaos, and quantum complexity in matrix models and low-dimensional holography, including SYK and DSSYK.
-   - New frontiers crossing Symmetries: generalized symmetries across quantum gravity, quantum matter, and CFTs.
-   - New frontiers crossing Strongly Coupled Systems: development of efficient numerical methods for strongly correlated systems, e.g., fuzzy-sphere and sphere-based diagnostics of 3D CFT/criticality.
+   - New frontiers crossing Symmetries: on-site or spacetime symmetry and its breaking for mixed-state physics; generalized symmetries across quantum gravity, quantum matter, and CFTs.
+   - New frontiers crossing Strongly Coupled Systems: development of efficient numerical methods for strongly correlated systems, e.g., fuzzy-sphere and sphere-based diagnostics of 3D CFT/criticality, plus entanglement bootstrap for field theories and gravity theories.
 
 2. **Quantum Gravity**  
    **Keywords:** Low-dimensional gravity; QI aspects like entanglement and complexity; observers.
-   - Timelike entanglement for low-dimensional quantum gravity (e.g., JT) and quantum matter (e.g., DSSYK), especially including applications to de Sitter-like settings.
-   - Low-dimensional gravity: 3D gravity and its relations to LQG and TQFT (recently there're inspirational progress in this area); AdS/RMT; 2D gravity (e.g., JT).
-   - Late-time cosmology: dynamical dark energy and the swampland.
-   - Using entanglement to study scattering amplitudes and related observables; recently there are many works on it.
-   - Quantum--classical distinction in gravity (classical gravity coupled to quantum matter; post-quantum classical gravity frameworks).
-   - Observers and algebras in Quantum Gravity, and quantum reference frames.
+   - Timelike entanglement: investigating timelike entanglement structures for low-dimensional quantum gravity (e.g., JT) and quantum matter (e.g., DSSYK), especially including applications to de Sitter-like settings, following recent work by Sergio Aguilar-Gutierrez.
+   - Low-dimensional gravity: 3D gravity with its relations to LQG and TQFT; after the great progress in understanding 2D quantum gravity in the past 10 years, there are inspirational developments on quantizing 3D gravities (e.g., Lorenz, Ling-yan Hung, Hartman, Jafferis, Jan de Boer, and others); AdS/RMT; 2D gravity (e.g., JT).
+   - Late-time cosmology: understanding the dynamical behavior of dark energy, e.g., the realization of phantom crossing scenarios, and the interplay between cosmology and the string swampland. Although I am not in favor of field theory models and modified gravity model-building for dark energy compared with top-down constructions, I believe they are powerful effective theories under reasonable assumptions.
+   - Entanglement in scattering amplitudes and observables: works by Yin & Low, White, Clifford, and others; I believe new scales like entanglement and other quantum properties (scrambling, randomness, magic, Renyi correlators, orders) will be an important trend in particle physics, collider physics, particle cosmology, gravitational waves, and black hole physics in the next decade.
+   - Quantum--classical distinction in gravity: classical gravity coupled to quantum matter; post-quantum classical gravity frameworks; the dispute between Aziz & Howl's Nature article and proposals by Oppenheim, Vedral, Marletto, and others (including some Perimeter researchers).
+   - Observers and algebras in quantum gravity and quantum reference frames: beyond recent papers motivated by CLPW, there is a deep QRF literature with implications for the time problem in canonically quantized gravity (see Zixia's recent review-type paper).
 
 3. **Quantum Information**
 
    **Keywords:** Intersection with Quantum Artificial Intelligence and HEP & CMP Theoretical Physics.
-   - Quantum Automated Learning: it is a recently proposed framework, and I will have a preprint on improving it in collaboration with Prof. Dong-Ling Deng.
-   - Quantum for AI (Quantum Artificial Intelligence) and Quantum Machine Learning.
-   - Quantum information and quantum complexity related to physics, especially holographic quantum information and related topics.
+   - Quantum information and complexity in quantum matter and quantum gravity, especially holographic quantum information and related topics.
+   - Quantum for AI: Quantum Artificial Intelligence and Quantum Machine Learning.
+   - Quantum Automated Learning: a recently proposed framework (arXiv:2502.05264) submitted to Nature Portfolio, as a Schrodinger-picture version of quantum machine learning that can avoid classical gradients; I will have a preprint on improving it in collaboration with Prof. Dong-Ling Deng.
 
 4. **AI for Fundamental Science**
 
    **Keywords:** Physics for AI; AI for Physics; Physics of AI.
    - **Physics for AI:** constructing smart physics models to characterize large models (scaling laws, complexity, entanglement).
    - **AI for Physics:** using deep learning to understand physics, discover new physics (recently there have been impressive developments in using large models to understand physics), and developing scientific agents. Using neural networks for HEP/CMP models.
-   - **Physics of AI:** investigating the physical principles underlying large models, where I believe large language models (LLMs) should have their own interesting physical structure, which is different from conventional physical laws in our universe.
+   - **Physics of AI:** investigating the physical principles underlying large models, developing physics-inspired new frameworks for AI; I believe large language models (LLMs) should have their own physical laws, which are different from conventional physical laws in our universe. :-P
 
 ## Fight with Neurodiversity and Overcome It
-I have ADHD and mild Asperger's traits, and my undergraduate program lacks a formal theoretical physics group. When I was in primary school and middle school, I did not dare to answer questions in class and found it hard to focus and communicate with peers. This explains why my transcript shows grade frictions and lack of advanced coursework, and therefore does not accurately reflect my true academic performance.
+I have ADHD and mild Asperger's traits, and my undergraduate program lacked a formal theoretical physics group. When I was in primary school and middle school, I did not dare to answer questions in class and found it hard to focus and communicate with peers. This explains why my transcript shows grade frictions and lack of advanced coursework, and therefore does not accurately reflect my true academic performance.
 
-Instead, I responded by building a rigorous self-study routine, seeking advanced lectures when available, and developing strategies to manage attention and communication. I seek peer discussion whenever possible and work productively in structured environments, and I am ready to contribute to collaborative research teams.
+Instead, I responded by building a rigorous self-study routine, seeking advanced lectures when available, and developing strategies to manage attention and communication. I seek peer discussion whenever possible and work productively in structured environments, and I am ready to contribute to collaborative research projects.
 
 ## How do I learn them
 
@@ -81,6 +81,7 @@ By auditing advanced courses during my visit in Beijing, I learnt String Theory 
 
 ---
 
+Thank you for reading and consideration! :-P  
 Thank you for your time and consideration. I would be grateful for the opportunity to join PSI Start, learn within Perimeter's research community, and contribute through focused, reproducible research outputs.
 
 Sincerely,  
