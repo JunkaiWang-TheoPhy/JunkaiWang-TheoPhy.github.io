@@ -86,8 +86,12 @@ body::before {
 }
 
 .motto-attrib .motto-author {
-  font-variant: small-caps;
-  letter-spacing: 0.02em;
+  font-variant: normal;
+  letter-spacing: normal;
+}
+
+.motto-attrib .motto-title {
+  font-style: italic;
 }
 </style>
 
@@ -97,7 +101,7 @@ Welcome to my AcademicPage! 🤓 Now it's my Online CV.
 ## Motto
 <p class="motto-script">Man must live it so as to feel no torturing regrets for wasted years, never know the burning shame of a mean and petty past; so live that, dying, he might say: all my life, all my strength were given to the finest cause in all the humanity —— the fight for the (Intellectual) Liberation of Mankind.</p>
 
-<p class="motto-attrib">—— <span class="motto-author">Nikolai Ostrovsky</span>, *How the Steel Was Tempered*.</p>
+<p class="motto-attrib">—— <span class="motto-author">Nikolai Ostrovsky</span>, <span class="motto-title"><em>How the Steel Was Tempered</em></span>.</p>
 
 ## About me
 I'm a theoretical physics student researching fundamental aspects of our universe. I am deeply passionate about theoretical physics, and out of passion for research, I continued to pursue scholarly study as a visiting scholar after completing my undergraduate degree, and now I believe I am qualified to be a   graduate candidate in theoretical physics.
