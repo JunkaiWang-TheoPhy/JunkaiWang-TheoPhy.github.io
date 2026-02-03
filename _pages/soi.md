@@ -7,9 +7,6 @@ author_profile: true
 ## A Theoretical Physics Enthusiast's Apologia
 _Pastiche of Hardy's A Mathematician's Apology._
 
-**Junkai Wang**  
-[WangTheoPhys@outlook.com](mailto:WangTheoPhys@outlook.com) | [junkaiwang-theophy.github.io](https://junkaiwang-theophy.github.io) | Tsinghua University
-
 ---
 
 I'm an enthusiast of:
