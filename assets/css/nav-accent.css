@@ -15,6 +15,10 @@ html[data-theme="dark"] {
   font-family: "Segoe Script", "Apple Chancery", "Zapfino", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 }
 
+.page__title.fancy-title {
+  font-family: "Segoe Script", "Apple Chancery", "Zapfino", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
 #site-nav a[href$="/cv/"]:hover,
 #site-nav a[href$="/soi/"]:hover,
 #site-nav a[href$="/sop/"]:hover {

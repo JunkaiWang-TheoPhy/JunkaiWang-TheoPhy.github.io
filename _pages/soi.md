@@ -1,5 +1,6 @@
 ---
 title: "Statement of Interest"
+title_class: fancy-title
 permalink: /soi/
 author_profile: true
 ---

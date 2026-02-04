@@ -1,5 +1,6 @@
 ---
 title: "Statement of Purpose"
+title_class: fancy-title
 permalink: /sop/
 author_profile: true
 ---
