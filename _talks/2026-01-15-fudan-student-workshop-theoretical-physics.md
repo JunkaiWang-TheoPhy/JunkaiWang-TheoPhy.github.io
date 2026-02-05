@@ -8,6 +8,9 @@ date: 2026-01-15
 location: "Fudan University"
 ---
 
+<div class="talk-titles" markdown="1">
 Talk titles:
+
 - *On recent progress of generalised symmetries, mixed states, and SSB*
 - *On recent progress of Quantizing 3d Gravity and its relation with LQG and TQFT*
+</div>

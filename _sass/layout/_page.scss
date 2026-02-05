@@ -111,6 +111,35 @@
     margin-top: -1.5em;
     padding-left: 1.25rem;
   }
+
+  .talk-titles {
+    position: relative;
+    margin: 1.5rem 0;
+    padding: 0.35rem 0 0.35rem 1.35rem;
+  }
+
+  .talk-titles::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.25rem;
+    bottom: 0.25rem;
+    width: 3px;
+    border-radius: 999px;
+    background: var(--global-link-color);
+    opacity: 0.85;
+  }
+
+  .talk-titles > p:first-child {
+    margin-top: 0;
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+  }
+
+  .talk-titles > ul {
+    margin: 0;
+    padding-left: 1.2rem;
+  }
 }
 
 .page__lang-switch {
