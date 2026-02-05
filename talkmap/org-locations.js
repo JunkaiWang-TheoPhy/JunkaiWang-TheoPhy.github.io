@@ -6,7 +6,7 @@ var addressPoints = [
   ],
   [
     "5th National Symposium on Philosophy of Physics<br />5th National Symposium on Philosophy of Physics; University of Science and Technology of China",
-    31.8403891,
-    117.2501941
+    31.8413821,
+    117.2574533
   ]
 ];
