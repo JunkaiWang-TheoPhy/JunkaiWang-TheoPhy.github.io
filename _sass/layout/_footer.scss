@@ -105,4 +105,22 @@
   .footer-label--mixed {
     text-transform: none;
   }
+
+  .footer-icon--xhs,
+  .footer-icon--bilibili {
+    width: 1.25em;
+    height: 1.25em;
+    vertical-align: -0.2em;
+  }
+
+  .fa-zhihu {
+    font-size: 1.15em;
+    vertical-align: -0.1em;
+  }
+}
+
+html[data-theme="dark"] {
+  .page__footer .footer-icon--bilibili {
+    filter: invert(1) brightness(1.05);
+  }
 }
