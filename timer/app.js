@@ -37,6 +37,7 @@ const lineOptionsEl = document.getElementById("line-options");
 
 let tasks = loadTasks();
 let runLog = loadRuns();
+syncRunningSegments();
 let activeRange = "today";
 let activeChart = "bar";
 let selectedLineCategories = new Set();
@@ -96,13 +97,30 @@ function loadRuns() {
     const parsed = JSON.parse(raw);
     if (!Array.isArray(parsed)) return [];
     return parsed
-      .filter((run) => run && run.timestamp)
-      .map((run) => ({
-        id: run.id || `run-${run.timestamp}`,
-        taskId: run.taskId || "",
-        category: run.category || DEFAULT_CATEGORY,
-        timestamp: Number(run.timestamp)
-      }));
+      .map((run) => {
+        if (!run) return null;
+        if (run.start) {
+          return {
+            id: run.id || `seg-${run.start}`,
+            taskId: run.taskId || "",
+            category: run.category || DEFAULT_CATEGORY,
+            start: Number(run.start),
+            end: run.end ? Number(run.end) : null
+          };
+        }
+        if (run.timestamp) {
+          const stamp = Number(run.timestamp);
+          return {
+            id: run.id || `seg-${stamp}`,
+            taskId: run.taskId || "",
+            category: run.category || DEFAULT_CATEGORY,
+            start: stamp,
+            end: stamp
+          };
+        }
+        return null;
+      })
+      .filter(Boolean);
   } catch {
     return [];
   }
@@ -110,6 +128,56 @@ function loadRuns() {
 
 function saveRuns() {
   localStorage.setItem(RUN_LOG_KEY, JSON.stringify(runLog));
+}
+
+function getActiveSegment(taskId) {
+  for (let i = runLog.length - 1; i >= 0; i -= 1) {
+    const segment = runLog[i];
+    if (segment.taskId === taskId && !segment.end) return segment;
+  }
+  return null;
+}
+
+function startSegment(task, startTime = Date.now()) {
+  if (getActiveSegment(task.id)) return;
+  runLog.push({
+    id: `seg-${startTime}-${Math.random().toString(16).slice(2, 8)}`,
+    taskId: task.id,
+    category: task.category || DEFAULT_CATEGORY,
+    start: startTime,
+    end: null
+  });
+  saveRuns();
+}
+
+function stopSegment(task, endTime = Date.now()) {
+  const active = getActiveSegment(task.id);
+  if (!active) return;
+  active.end = Math.max(active.start, endTime);
+  saveRuns();
+}
+
+function syncRunningSegments() {
+  let changed = false;
+  tasks.forEach((task) => {
+    const active = getActiveSegment(task.id);
+    if (task.running) {
+      if (!active) {
+        runLog.push({
+          id: `seg-${task.startAt || Date.now()}-${Math.random().toString(16).slice(2, 8)}`,
+          taskId: task.id,
+          category: task.category || DEFAULT_CATEGORY,
+          start: task.startAt || Date.now(),
+          end: null
+        });
+        changed = true;
+      }
+    } else if (active) {
+      active.end = Math.max(active.start, task.updatedAt || Date.now());
+      changed = true;
+    }
+  });
+  if (changed) saveRuns();
 }
 
 function clampMinutes(value) {
@@ -156,17 +224,6 @@ function updateClock() {
   clockEl.textContent = formatClock(Date.now());
 }
 
-function logRun(task) {
-  const now = Date.now();
-  runLog.push({
-    id: `run-${now}-${Math.random().toString(16).slice(2, 8)}`,
-    taskId: task.id,
-    category: task.category || DEFAULT_CATEGORY,
-    timestamp: now
-  });
-  saveRuns();
-}
-
 function addTask(title, category, minutes, autoStart) {
   const now = Date.now();
   const task = {
@@ -182,7 +239,7 @@ function addTask(title, category, minutes, autoStart) {
     updatedAt: now
   };
   if (task.running) {
-    logRun(task);
+    startSegment(task, now);
   }
   tasks.unshift(task);
   saveTasks();
@@ -202,11 +259,28 @@ function updateTask(id, updates) {
 
   if (typeof updates.durationMs === "number") {
     next.durationMs = Math.max(60000, updates.durationMs);
-    if (next.elapsedMs > next.durationMs) {
+    if (current.running) {
+      const elapsedNow = computeElapsed(current, now);
+      if (elapsedNow > next.durationMs) {
+        next.elapsedMs = next.durationMs;
+        next.running = false;
+        next.startAt = null;
+      }
+    } else if (next.elapsedMs > next.durationMs) {
       next.elapsedMs = next.durationMs;
-      next.running = false;
-      next.startAt = null;
     }
+  }
+
+  if (current.running && !next.running) {
+    stopSegment(current, now);
+  }
+
+  if (current.running && next.running && current.category !== next.category) {
+    const elapsedNow = computeElapsed(current, now);
+    next.elapsedMs = elapsedNow;
+    stopSegment(current, now);
+    next.startAt = now;
+    startSegment(next, now);
   }
 
   tasks[index] = next;
@@ -226,10 +300,11 @@ function toggleTask(id) {
     task.elapsedMs = computeElapsed(task, now);
     task.running = false;
     task.startAt = null;
+    stopSegment(task, now);
   } else {
     task.startAt = now;
     task.running = true;
-    logRun(task);
+    startSegment(task, now);
   }
   task.updatedAt = now;
   saveTasks();
@@ -239,6 +314,9 @@ function toggleTask(id) {
 function resetTask(id) {
   const task = tasks.find((item) => item.id === id);
   if (!task) return;
+  if (task.running) {
+    stopSegment(task, Date.now());
+  }
   task.elapsedMs = 0;
   task.running = false;
   task.startAt = null;
@@ -250,11 +328,12 @@ function resetTask(id) {
 function restartTask(id) {
   const task = tasks.find((item) => item.id === id);
   if (!task) return;
+  stopSegment(task, Date.now());
   task.elapsedMs = 0;
   task.running = true;
   task.startAt = Date.now();
   task.updatedAt = Date.now();
-  logRun(task);
+  startSegment(task, task.startAt);
   saveTasks();
   renderTasks();
 }
@@ -262,17 +341,22 @@ function restartTask(id) {
 function quickSetTask(id, minutes) {
   const task = tasks.find((item) => item.id === id);
   if (!task) return;
+  stopSegment(task, Date.now());
   task.durationMs = clampMinutes(minutes) * 60 * 1000;
   task.elapsedMs = 0;
   task.running = true;
   task.startAt = Date.now();
   task.updatedAt = Date.now();
-  logRun(task);
+  startSegment(task, task.startAt);
   saveTasks();
   renderTasks();
 }
 
 function deleteTask(id) {
+  const task = tasks.find((item) => item.id === id);
+  if (task && task.running) {
+    stopSegment(task, Date.now());
+  }
   tasks = tasks.filter((task) => task.id !== id);
   saveTasks();
   renderTasks();
@@ -405,12 +489,16 @@ function tick() {
       task.running = false;
       task.startAt = null;
       task.updatedAt = now;
+      stopSegment(task, now);
       changed = true;
     }
   });
   if (changed) saveTasks();
   refreshTaskDisplay();
   updateClock();
+  if (viewStats.classList.contains("active")) {
+    updateStats(true);
+  }
 }
 
 function closeAllMenus() {
@@ -476,18 +564,29 @@ function getRangeStart(range) {
   return now.getTime();
 }
 
-function getFilteredRuns(range) {
-  const start = getRangeStart(range);
-  return runLog.filter((run) => run.timestamp >= start);
+function getRangeBounds(range) {
+  return {
+    start: getRangeStart(range),
+    end: Date.now()
+  };
 }
 
-function getCountsByCategory(range) {
-  const counts = {};
-  getFilteredRuns(range).forEach((run) => {
-    const category = run.category || DEFAULT_CATEGORY;
-    counts[category] = (counts[category] || 0) + 1;
+function getDurationsByCategory(range) {
+  const { start, end } = getRangeBounds(range);
+  const now = Date.now();
+  const totals = {};
+  runLog.forEach((segment) => {
+    if (!segment?.start) return;
+    const segStart = Number(segment.start);
+    const segEnd = segment.end ? Number(segment.end) : now;
+    const overlapStart = Math.max(segStart, start);
+    const overlapEnd = Math.min(segEnd, end);
+    if (overlapEnd <= overlapStart) return;
+    const duration = overlapEnd - overlapStart;
+    const category = segment.category || DEFAULT_CATEGORY;
+    totals[category] = (totals[category] || 0) + duration;
   });
-  return counts;
+  return totals;
 }
 
 function getAllCategories() {
@@ -529,22 +628,31 @@ function renderLineOptions(categories) {
 function renderStatsList(counts) {
   const entries = Object.entries(counts).sort((a, b) => b[1] - a[1]);
   if (entries.length === 0) {
-    statsListEl.innerHTML = "<p class=\"hint\">暂无执行记录</p>";
+    statsListEl.innerHTML = "<p class=\"hint\">暂无统计时长</p>";
     return;
   }
   statsListEl.innerHTML = entries
-    .map(([category, count]) => {
+    .map(([category, duration]) => {
       const color = colorForKey(category);
       return `
         <div class="stats-row">
           <span><span class="legend-swatch" style="background:${color}"></span>${escapeHtml(
             category
           )}</span>
-          <span>${count} 次</span>
+          <span>${formatDuration(duration)}</span>
         </div>
       `;
     })
     .join("");
+}
+
+function formatDuration(ms) {
+  const totalMinutes = Math.round(ms / 60000);
+  if (totalMinutes <= 0) return "0分钟";
+  if (totalMinutes < 60) return `${totalMinutes}分钟`;
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = totalMinutes % 60;
+  return minutes ? `${hours}小时${minutes}分钟` : `${hours}小时`;
 }
 
 function getChartContext() {
@@ -699,13 +807,13 @@ function renderLegend(items) {
 }
 
 function buildLineSeries(range, categories) {
-  const filteredRuns = getFilteredRuns(range);
-  const start = getRangeStart(range);
+  const { start, end } = getRangeBounds(range);
   const labels = range === "today"
     ? Array.from({ length: 24 }, (_, i) => `${i}`)
     : ["周一", "周二", "周三", "周四", "周五", "周六", "周日"];
   const bucketCount = labels.length;
   const seriesMap = new Map();
+  const bucketMs = range === "today" ? 60 * 60 * 1000 : 24 * 60 * 60 * 1000;
 
   categories.forEach((category) => {
     seriesMap.set(category, {
@@ -715,18 +823,27 @@ function buildLineSeries(range, categories) {
     });
   });
 
-  filteredRuns.forEach((run) => {
-    if (!seriesMap.has(run.category)) return;
-    if (range === "today") {
-      const hour = new Date(run.timestamp).getHours();
-      if (hour >= 0 && hour < bucketCount) {
-        seriesMap.get(run.category).values[hour] += 1;
-      }
-    } else {
-      const index = Math.floor((run.timestamp - start) / (24 * 60 * 60 * 1000));
-      if (index >= 0 && index < bucketCount) {
-        seriesMap.get(run.category).values[index] += 1;
-      }
+  const now = Date.now();
+  runLog.forEach((segment) => {
+    if (!segment?.start) return;
+    if (!seriesMap.has(segment.category)) return;
+    const segStart = Number(segment.start);
+    const segEnd = segment.end ? Number(segment.end) : now;
+    const overlapStart = Math.max(segStart, start);
+    const overlapEnd = Math.min(segEnd, end);
+    if (overlapEnd <= overlapStart) return;
+
+    let cursor = overlapStart;
+    while (cursor < overlapEnd) {
+      const bucketIndex = Math.floor((cursor - start) / bucketMs);
+      if (bucketIndex < 0 || bucketIndex >= bucketCount) break;
+      const bucketStart = start + bucketIndex * bucketMs;
+      const bucketEnd = bucketStart + bucketMs;
+      const sliceEnd = Math.min(bucketEnd, overlapEnd);
+      const duration = sliceEnd - cursor;
+      const series = seriesMap.get(segment.category);
+      series.values[bucketIndex] += duration / 60000;
+      cursor = sliceEnd;
     }
   });
 
@@ -738,8 +855,8 @@ function updateStats(forceDraw = false) {
   renderLineOptions(categories);
 
   lineFilterEl.classList.toggle("show", activeChart === "line");
-  const counts = getCountsByCategory(activeRange);
-  renderStatsList(counts);
+  const durations = getDurationsByCategory(activeRange);
+  renderStatsList(durations);
 
   if (!viewStats.classList.contains("active") && !forceDraw) return;
 
@@ -757,7 +874,7 @@ function updateStats(forceDraw = false) {
     return;
   }
 
-  const entries = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+  const entries = Object.entries(durations).sort((a, b) => b[1] - a[1]);
   if (entries.length === 0) {
     const { ctx, width, height } = getChartContext();
     drawEmptyChart(ctx, width, height, "暂无数据");
@@ -765,7 +882,7 @@ function updateStats(forceDraw = false) {
     return;
   }
   const labels = entries.map(([label]) => label);
-  const values = entries.map(([, value]) => value);
+  const values = entries.map(([, value]) => value / 60000);
   const colors = labels.map((label) => colorForKey(label));
 
   if (activeChart === "bar") {

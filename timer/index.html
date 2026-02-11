@@ -14,46 +14,25 @@
       <span></span>
     </div>
 
-    <div class="star-nav">
-      <button id="star-toggle" class="star-toggle" aria-expanded="false" aria-controls="star-menu">
-        <span class="sr-only">打开导航</span>
-        <svg class="star-icon" viewBox="0 0 120 120" aria-hidden="true">
-          <defs>
-            <linearGradient id="starFill" x1="0" x2="1" y1="0" y2="1">
-              <stop offset="0" stop-color="#20113f" />
-              <stop offset="1" stop-color="#45208f" />
-            </linearGradient>
-          </defs>
-          <path
-            d="M60 10 L74 42 L108 46 L82 68 L90 102 L60 84 L30 102 L38 68 L12 46 L46 42 Z"
-            fill="url(#starFill)"
-            stroke="#120826"
-            stroke-width="6"
-            stroke-linejoin="round"
-          />
-        </svg>
-      </button>
-      <div id="star-menu" class="star-menu" role="menu">
-        <button class="nav-item active" data-view="timer" role="menuitem">
-          <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+    <main class="page">
+      <nav class="subnav" aria-label="页面切换">
+        <button class="tab active" data-view="timer">
+          <svg class="tab-icon" viewBox="0 0 24 24" aria-hidden="true">
             <circle cx="12" cy="12" r="9" fill="#ffffff" stroke="#2d1a57" stroke-width="2" />
             <line x1="12" y1="12" x2="12" y2="7" stroke="#2d1a57" stroke-width="2" stroke-linecap="round" />
             <line x1="12" y1="12" x2="16" y2="14" stroke="#2d1a57" stroke-width="2" stroke-linecap="round" />
           </svg>
-          计时
+          <span>计时</span>
         </button>
-        <button class="nav-item" data-view="stats" role="menuitem">
-          <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <button class="tab" data-view="stats">
+          <svg class="tab-icon" viewBox="0 0 24 24" aria-hidden="true">
             <rect x="4" y="11" width="4" height="8" rx="2" fill="#ff85d6" />
             <rect x="10" y="7" width="4" height="12" rx="2" fill="#8d6bff" />
             <rect x="16" y="5" width="4" height="14" rx="2" fill="#6dd3ff" />
           </svg>
-          统计
+          <span>统计</span>
         </button>
-      </div>
-    </div>
-
-    <main class="page">
+      </nav>
       <section id="view-timer" class="view active">
         <header class="hero">
           <div class="mascot" aria-hidden="true">
@@ -140,7 +119,7 @@
         <section class="panel stats-panel">
           <div class="panel-head">
             <h2>统计中心</h2>
-            <p>按栏目统计每个任务执行了多少次。</p>
+            <p>按栏目统计累计时长，正在计时的任务也会实时统计。</p>
           </div>
           <div class="stats-controls">
             <div class="toggle-group" data-group="range">
@@ -159,7 +138,7 @@
               <div id="chart-legend" class="chart-legend"></div>
             </div>
             <div class="summary-card">
-              <h3>执行次数</h3>
+              <h3>累计时长</h3>
               <div id="stats-list" class="stats-list"></div>
             </div>
           </div>
