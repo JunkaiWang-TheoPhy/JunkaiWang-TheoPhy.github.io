@@ -22,7 +22,9 @@ const categoryInput = document.getElementById("task-category");
 const minutesInput = document.getElementById("task-minutes");
 const autoStartInput = document.getElementById("task-autostart");
 const quickCreate = document.getElementById("quick-create");
-const viewButtons = document.querySelectorAll(".tab");
+const viewButtons = document.querySelectorAll(".nav-item");
+const starToggle = document.getElementById("star-toggle");
+const starMenu = document.getElementById("star-menu");
 const viewTimer = document.getElementById("view-timer");
 const viewStats = document.getElementById("view-stats");
 const rangeButtons = document.querySelectorAll("[data-range]");
@@ -418,6 +420,17 @@ function closeAllMenus() {
     .forEach((button) => button.setAttribute("aria-expanded", "false"));
 }
 
+function setStarMenu(open) {
+  if (!starMenu || !starToggle) return;
+  starMenu.classList.toggle("show", open);
+  starToggle.setAttribute("aria-expanded", open ? "true" : "false");
+}
+
+function toggleStarMenu() {
+  const isOpen = starMenu?.classList.contains("show");
+  setStarMenu(!isOpen);
+}
+
 function openEditPanel(card, focusRole) {
   card.classList.add("editing");
   closeAllMenus();
@@ -434,6 +447,7 @@ function setActiveView(view) {
   viewTimer.classList.toggle("active", view === "timer");
   viewStats.classList.toggle("active", view === "stats");
   localStorage.setItem(VIEW_KEY, view);
+  setStarMenu(false);
   if (view === "stats") {
     requestAnimationFrame(() => updateStats(true));
   }
@@ -845,6 +859,14 @@ document.addEventListener("click", (event) => {
   if (!event.target.closest(".task-menu")) {
     closeAllMenus();
   }
+  if (!event.target.closest(".star-nav")) {
+    setStarMenu(false);
+  }
+});
+
+starToggle?.addEventListener("click", (event) => {
+  event.stopPropagation();
+  toggleStarMenu();
 });
 
 lineOptionsEl.addEventListener("change", (event) => {
