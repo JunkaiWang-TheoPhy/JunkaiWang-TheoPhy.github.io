@@ -1,7 +1,12 @@
 const STORAGE_KEY = "timerTasksV1";
 const RUN_LOG_KEY = "timerRunLogV1";
+const TAG_KEY = "timerTagsV1";
+const GROUP_KEY = "timerGroupsV1";
 const VIEW_KEY = "timerViewV1";
-const DEFAULT_CATEGORY = "默认";
+const UNTAGGED_ID = "tag-untagged";
+const UNTAGGED_NAME = "未标记";
+const UNTAGGED_COLOR = "#b7a6d8";
+const GROUP_DEFAULT_NAME = "新建分组";
 const COLOR_PALETTE = [
   "#8d6bff",
   "#ff85d6",
@@ -18,13 +23,17 @@ const emptyStateEl = document.getElementById("empty-state");
 const clockEl = document.getElementById("clock");
 const createForm = document.getElementById("create-form");
 const titleInput = document.getElementById("task-title");
-const categoryInput = document.getElementById("task-category");
+const tagPickerEl = document.getElementById("tag-picker");
+const tagManagerEl = document.getElementById("tag-manager");
+const tagManagerToggle = document.getElementById("toggle-tag-manager");
+const tagListEl = document.getElementById("tag-list");
+const newTagNameInput = document.getElementById("new-tag-name");
+const newTagColorInput = document.getElementById("new-tag-color");
+const addTagButton = document.getElementById("add-tag");
 const minutesInput = document.getElementById("task-minutes");
 const autoStartInput = document.getElementById("task-autostart");
 const quickCreate = document.getElementById("quick-create");
-const viewButtons = document.querySelectorAll(".nav-item");
-const starToggle = document.getElementById("star-toggle");
-const starMenu = document.getElementById("star-menu");
+const viewButtons = document.querySelectorAll(".tab");
 const viewTimer = document.getElementById("view-timer");
 const viewStats = document.getElementById("view-stats");
 const rangeButtons = document.querySelectorAll("[data-range]");
@@ -35,12 +44,17 @@ const chartLegend = document.getElementById("chart-legend");
 const lineFilterEl = document.getElementById("line-filter");
 const lineOptionsEl = document.getElementById("line-options");
 
+let tags = loadTags();
+let groups = loadGroups();
 let tasks = loadTasks();
 let runLog = loadRuns();
 syncRunningSegments();
 let activeRange = "today";
 let activeChart = "bar";
-let selectedLineCategories = new Set();
+let selectedLineTags = new Set();
+let selectedCreateTags = new Set();
+let pressState = null;
+let dragState = null;
 
 function escapeHtml(value) {
   return String(value ?? "")
@@ -49,6 +63,166 @@ function escapeHtml(value) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
+}
+
+function loadTags() {
+  try {
+    const raw = localStorage.getItem(TAG_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return [];
+    return parsed.map((tag) => normalizeTag(tag)).filter(Boolean);
+  } catch {
+    return [];
+  }
+}
+
+function loadGroups() {
+  try {
+    const raw = localStorage.getItem(GROUP_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return [];
+    return parsed
+      .map((group) => {
+        if (!group || !group.id) return null;
+        return {
+          id: group.id,
+          name: typeof group.name === "string" && group.name.trim() ? group.name.trim() : GROUP_DEFAULT_NAME,
+          color: isColor(group.color) ? group.color : pickTagColor()
+        };
+      })
+      .filter(Boolean);
+  } catch {
+    return [];
+  }
+}
+
+function saveGroups() {
+  localStorage.setItem(GROUP_KEY, JSON.stringify(groups));
+}
+
+function generateGroupId() {
+  return `group-${Date.now()}-${Math.random().toString(16).slice(2, 8)}`;
+}
+
+function getGroupById(id) {
+  return groups.find((group) => group.id === id) || null;
+}
+
+function createGroup(taskIds) {
+  const group = {
+    id: generateGroupId(),
+    name: GROUP_DEFAULT_NAME,
+    color: pickTagColor()
+  };
+  groups.push(group);
+  taskIds.forEach((taskId) => {
+    const task = tasks.find((item) => item.id === taskId);
+    if (task) task.groupId = group.id;
+  });
+  saveGroups();
+  saveTasks();
+  return group;
+}
+
+function updateGroup(groupId, updates) {
+  const group = getGroupById(groupId);
+  if (!group) return;
+  if (typeof updates.name === "string" && updates.name.trim()) {
+    group.name = updates.name.trim();
+  }
+  if (isColor(updates.color)) {
+    group.color = updates.color;
+  }
+  saveGroups();
+  renderTasks();
+}
+
+function cleanupGroups() {
+  const used = new Set(tasks.map((task) => task.groupId).filter(Boolean));
+  const before = groups.length;
+  groups = groups.filter((group) => used.has(group.id));
+  if (groups.length !== before) {
+    saveGroups();
+  }
+}
+
+function normalizeTag(tag) {
+  if (!tag) return null;
+  const name = typeof tag.name === "string" ? tag.name.trim() : "";
+  if (!name) return null;
+  return {
+    id: tag.id || generateTagId(),
+    name,
+    color: isColor(tag.color) ? tag.color : pickTagColor()
+  };
+}
+
+function saveTags() {
+  localStorage.setItem(TAG_KEY, JSON.stringify(tags));
+}
+
+function generateTagId() {
+  return `tag-${Date.now()}-${Math.random().toString(16).slice(2, 8)}`;
+}
+
+function isColor(value) {
+  return typeof value === "string" && value.startsWith("#") && value.length >= 4;
+}
+
+function pickTagColor() {
+  const index = tags.length % COLOR_PALETTE.length;
+  return COLOR_PALETTE[index];
+}
+
+function getTagById(id) {
+  return tags.find((tag) => tag.id === id) || null;
+}
+
+function ensureTagByName(name, color) {
+  const trimmed = String(name || "").trim();
+  if (!trimmed) return null;
+  const existing = tags.find((tag) => tag.name === trimmed);
+  if (existing) return existing.id;
+  const tag = {
+    id: generateTagId(),
+    name: trimmed,
+    color: isColor(color) ? color : pickTagColor()
+  };
+  tags.push(tag);
+  saveTags();
+  return tag.id;
+}
+
+function normalizeTagIds(rawTags) {
+  if (!Array.isArray(rawTags)) return [];
+  const ids = [];
+  rawTags.forEach((item) => {
+    if (typeof item !== "string") return;
+    const byId = getTagById(item);
+    if (byId) {
+      ids.push(byId.id);
+      return;
+    }
+    if (item.startsWith("tag-")) {
+      ids.push(item);
+      return;
+    }
+    const id = ensureTagByName(item);
+    if (id) ids.push(id);
+  });
+  return Array.from(new Set(ids));
+}
+
+function ensureTagIds(tagIds) {
+  return Array.from(new Set(tagIds));
+}
+
+function areTagSetsEqual(left = [], right = []) {
+  if (left.length !== right.length) return false;
+  const set = new Set(left);
+  return right.every((id) => set.has(id));
 }
 
 function loadTasks() {
@@ -70,12 +244,19 @@ function normalizeTask(task) {
   const running = Boolean(task.running) && Number(task.startAt);
   const title = typeof task.title === "string" ? task.title.trim() : "";
   const category = typeof task.category === "string" ? task.category.trim() : "";
+  const groupId = typeof task.groupId === "string" ? task.groupId : null;
+  let tagIds = normalizeTagIds(task.tags);
+  if (tagIds.length === 0 && category) {
+    tagIds = [ensureTagByName(category)];
+  }
+  tagIds = ensureTagIds(tagIds);
   const note = typeof task.note === "string" ? task.note : "";
 
   return {
     id: task.id || `task-${now}-${Math.random().toString(16).slice(2, 8)}`,
     title: title || "新任务",
-    category: category || DEFAULT_CATEGORY,
+    tags: tagIds,
+    groupId: groupId && getGroupById(groupId) ? groupId : null,
     note,
     durationMs,
     elapsedMs,
@@ -99,11 +280,15 @@ function loadRuns() {
     return parsed
       .map((run) => {
         if (!run) return null;
+        const legacyCategory = typeof run.category === "string" ? run.category.trim() : "";
+        const legacyTags = normalizeTagIds(run.tagIds);
+        const legacyId = legacyCategory ? ensureTagByName(legacyCategory) : null;
+        const tagIds = legacyTags.length ? legacyTags : legacyId ? [legacyId] : [];
         if (run.start) {
           return {
             id: run.id || `seg-${run.start}`,
             taskId: run.taskId || "",
-            category: run.category || DEFAULT_CATEGORY,
+            tagIds,
             start: Number(run.start),
             end: run.end ? Number(run.end) : null
           };
@@ -113,7 +298,7 @@ function loadRuns() {
           return {
             id: run.id || `seg-${stamp}`,
             taskId: run.taskId || "",
-            category: run.category || DEFAULT_CATEGORY,
+            tagIds,
             start: stamp,
             end: stamp
           };
@@ -143,7 +328,7 @@ function startSegment(task, startTime = Date.now()) {
   runLog.push({
     id: `seg-${startTime}-${Math.random().toString(16).slice(2, 8)}`,
     taskId: task.id,
-    category: task.category || DEFAULT_CATEGORY,
+    tagIds: ensureTagIds(normalizeTagIds(task.tags)),
     start: startTime,
     end: null
   });
@@ -166,7 +351,7 @@ function syncRunningSegments() {
         runLog.push({
           id: `seg-${task.startAt || Date.now()}-${Math.random().toString(16).slice(2, 8)}`,
           taskId: task.id,
-          category: task.category || DEFAULT_CATEGORY,
+          tagIds: ensureTagIds(normalizeTagIds(task.tags)),
           start: task.startAt || Date.now(),
           end: null
         });
@@ -184,11 +369,6 @@ function clampMinutes(value) {
   const num = Number.parseInt(value, 10);
   if (Number.isNaN(num)) return 1;
   return Math.min(Math.max(num, 1), 1440);
-}
-
-function getCategory(value) {
-  const text = value?.trim();
-  return text ? text : DEFAULT_CATEGORY;
 }
 
 function formatTime(ms) {
@@ -224,12 +404,13 @@ function updateClock() {
   clockEl.textContent = formatClock(Date.now());
 }
 
-function addTask(title, category, minutes, autoStart) {
+function addTask(title, tagIds, minutes, autoStart) {
   const now = Date.now();
+  const normalizedTags = ensureTagIds(Array.from(tagIds || []));
   const task = {
     id: `task-${now}-${Math.random().toString(16).slice(2, 8)}`,
     title: title?.trim() || "新任务",
-    category: getCategory(category),
+    tags: normalizedTags,
     note: "",
     durationMs: clampMinutes(minutes) * 60 * 1000,
     elapsedMs: 0,
@@ -254,7 +435,7 @@ function updateTask(id, updates) {
   const next = { ...current, ...updates, updatedAt: now };
 
   next.title = next.title?.trim() || "新任务";
-  next.category = getCategory(next.category);
+  next.tags = ensureTagIds(normalizeTagIds(next.tags));
   next.note = typeof next.note === "string" ? next.note : "";
 
   if (typeof updates.durationMs === "number") {
@@ -275,7 +456,7 @@ function updateTask(id, updates) {
     stopSegment(current, now);
   }
 
-  if (current.running && next.running && current.category !== next.category) {
+  if (current.running && next.running && !areTagSetsEqual(current.tags, next.tags)) {
     const elapsedNow = computeElapsed(current, now);
     next.elapsedMs = elapsedNow;
     stopSegment(current, now);
@@ -358,11 +539,14 @@ function deleteTask(id) {
     stopSegment(task, Date.now());
   }
   tasks = tasks.filter((task) => task.id !== id);
+  cleanupGroups();
   saveTasks();
   renderTasks();
 }
 
 function renderTasks() {
+  renderCreateTagPicker();
+  renderTagManagerList();
   if (tasks.length === 0) {
     taskListEl.innerHTML = "";
     emptyStateEl.classList.add("show");
@@ -370,72 +554,21 @@ function renderTasks() {
     return;
   }
   emptyStateEl.classList.remove("show");
+  const renderedGroups = new Set();
   taskListEl.innerHTML = tasks
     .map((task) => {
-      const minutes = Math.round(task.durationMs / 60000);
-      const noteText = task.note?.trim();
-      const noteClass = noteText ? "note" : "note empty";
-      const noteDisplay = noteText || "暂无备注";
-      return `
-        <article class="task-card" data-id="${task.id}">
-          <div class="task-top">
-            <div>
-              <div class="task-title" data-role="title">${escapeHtml(task.title)}</div>
-              <div class="task-meta">栏目：<span data-role="category">${escapeHtml(task.category)}</span></div>
-              <div class="status-pill" data-role="status">准备中</div>
-            </div>
-          </div>
-          <div class="time-big" data-role="remaining">00:00</div>
-          <div class="time-sub" data-role="sub">已用 00:00 / 总计 00:00</div>
-          <div class="progress">
-            <div class="progress-bar" data-role="progress"></div>
-          </div>
-          <div class="controls">
-            <button class="btn primary" data-action="toggle" data-role="toggle">开始</button>
-            <button class="btn secondary" data-action="reset">重置</button>
-            <button class="btn ghost" data-action="restart">重新开始</button>
-          </div>
-          <div class="task-footer">
-            <div class="quick-sets">
-              <button data-action="quick" data-minutes="30">30m</button>
-              <button data-action="quick" data-minutes="45">45m</button>
-              <button data-action="quick" data-minutes="60">1h</button>
-              <button data-action="quick" data-minutes="90">1h30m</button>
-            </div>
-            <div class="task-menu">
-              <button class="icon-btn more" data-action="menu" aria-label="更多选项" aria-expanded="false">⋯</button>
-              <div class="menu" data-role="menu">
-                <button data-action="rename">重命名</button>
-                <button data-action="note">备注</button>
-                <button data-action="delete">删除</button>
-              </div>
-            </div>
-          </div>
-          <div class="${noteClass}" data-role="note">${escapeHtml(noteDisplay)}</div>
-          <div class="edit-panel" data-role="edit-panel">
-            <label>
-              <span>任务名称</span>
-              <input type="text" data-role="edit-title" value="${escapeHtml(task.title)}" maxlength="60" />
-            </label>
-            <label>
-              <span>栏目</span>
-              <input type="text" data-role="edit-category" value="${escapeHtml(task.category)}" maxlength="30" />
-            </label>
-            <label>
-              <span>时长（分钟）</span>
-              <input type="number" min="1" max="1440" data-role="edit-minutes" value="${minutes}" />
-            </label>
-            <label>
-              <span>备注</span>
-              <textarea data-role="edit-note">${escapeHtml(task.note || "")}</textarea>
-            </label>
-            <div class="edit-actions">
-              <button class="btn secondary" data-action="save">保存</button>
-              <button class="btn ghost" data-action="cancel">取消</button>
-            </div>
-          </div>
-        </article>
-      `;
+      if (task.groupId) {
+        if (renderedGroups.has(task.groupId)) return "";
+        renderedGroups.add(task.groupId);
+        const group = getGroupById(task.groupId) || {
+          id: task.groupId,
+          name: GROUP_DEFAULT_NAME,
+          color: pickTagColor()
+        };
+        const groupTasks = tasks.filter((item) => item.groupId === task.groupId);
+        return renderGroupCard(group, groupTasks);
+      }
+      return renderTaskCard(task);
     })
     .join("");
 
@@ -508,17 +641,6 @@ function closeAllMenus() {
     .forEach((button) => button.setAttribute("aria-expanded", "false"));
 }
 
-function setStarMenu(open) {
-  if (!starMenu || !starToggle) return;
-  starMenu.classList.toggle("show", open);
-  starToggle.setAttribute("aria-expanded", open ? "true" : "false");
-}
-
-function toggleStarMenu() {
-  const isOpen = starMenu?.classList.contains("show");
-  setStarMenu(!isOpen);
-}
-
 function openEditPanel(card, focusRole) {
   card.classList.add("editing");
   closeAllMenus();
@@ -535,20 +657,9 @@ function setActiveView(view) {
   viewTimer.classList.toggle("active", view === "timer");
   viewStats.classList.toggle("active", view === "stats");
   localStorage.setItem(VIEW_KEY, view);
-  setStarMenu(false);
   if (view === "stats") {
     requestAnimationFrame(() => updateStats(true));
   }
-}
-
-function colorForKey(key) {
-  let hash = 0;
-  for (let i = 0; i < key.length; i += 1) {
-    hash = (hash << 5) - hash + key.charCodeAt(i);
-    hash |= 0;
-  }
-  const index = Math.abs(hash) % COLOR_PALETTE.length;
-  return COLOR_PALETTE[index];
 }
 
 function getRangeStart(range) {
@@ -571,7 +682,19 @@ function getRangeBounds(range) {
   };
 }
 
-function getDurationsByCategory(range) {
+function getTagName(tagId) {
+  if (tagId === UNTAGGED_ID) return UNTAGGED_NAME;
+  const tag = getTagById(tagId);
+  return tag ? tag.name : "已删除标签";
+}
+
+function getTagColor(tagId) {
+  if (tagId === UNTAGGED_ID) return UNTAGGED_COLOR;
+  const tag = getTagById(tagId);
+  return tag ? tag.color : "#c0b2e3";
+}
+
+function getDurationsByTag(range) {
   const { start, end } = getRangeBounds(range);
   const now = Date.now();
   const totals = {};
@@ -583,42 +706,55 @@ function getDurationsByCategory(range) {
     const overlapEnd = Math.min(segEnd, end);
     if (overlapEnd <= overlapStart) return;
     const duration = overlapEnd - overlapStart;
-    const category = segment.category || DEFAULT_CATEGORY;
-    totals[category] = (totals[category] || 0) + duration;
+    const tagIds = Array.isArray(segment.tagIds) && segment.tagIds.length ? segment.tagIds : [UNTAGGED_ID];
+    tagIds.forEach((tagId) => {
+      totals[tagId] = (totals[tagId] || 0) + duration;
+    });
   });
   return totals;
 }
 
-function getAllCategories() {
-  const set = new Set();
-  tasks.forEach((task) => set.add(task.category || DEFAULT_CATEGORY));
-  runLog.forEach((run) => set.add(run.category || DEFAULT_CATEGORY));
+function getAllTagIds() {
+  const set = new Set(tags.map((tag) => tag.id));
+  const hasUntagged =
+    tasks.some((task) => !task.tags || task.tags.length === 0) ||
+    runLog.some((segment) => !segment.tagIds || segment.tagIds.length === 0);
+  if (hasUntagged) {
+    set.add(UNTAGGED_ID);
+  }
+  runLog.forEach((segment) => {
+    (segment.tagIds || []).forEach((tagId) => {
+      if (tagId && !set.has(tagId)) {
+        set.add(tagId);
+      }
+    });
+  });
   return Array.from(set);
 }
 
-function syncSelectedCategories(categories) {
-  if (selectedLineCategories.size === 0) {
-    selectedLineCategories = new Set(categories);
+function syncSelectedTags(tagIds) {
+  if (selectedLineTags.size === 0) {
+    selectedLineTags = new Set(tagIds);
     return;
   }
   const next = new Set();
-  categories.forEach((category) => {
-    if (selectedLineCategories.has(category)) {
-      next.add(category);
+  tagIds.forEach((tagId) => {
+    if (selectedLineTags.has(tagId)) {
+      next.add(tagId);
     }
   });
-  selectedLineCategories = next.size ? next : new Set(categories);
+  selectedLineTags = next.size ? next : new Set(tagIds);
 }
 
-function renderLineOptions(categories) {
-  syncSelectedCategories(categories);
-  lineOptionsEl.innerHTML = categories
-    .map((category) => {
-      const checked = selectedLineCategories.has(category);
+function renderLineOptions(tagIds) {
+  syncSelectedTags(tagIds);
+  lineOptionsEl.innerHTML = tagIds
+    .map((tagId) => {
+      const checked = selectedLineTags.has(tagId);
       return `
         <label class="line-option">
-          <input type="checkbox" data-category="${escapeHtml(category)}" ${checked ? "checked" : ""} />
-          <span>${escapeHtml(category)}</span>
+          <input type="checkbox" data-tag-id="${escapeHtml(tagId)}" ${checked ? "checked" : ""} />
+          <span>${escapeHtml(getTagName(tagId))}</span>
         </label>
       `;
     })
@@ -632,12 +768,12 @@ function renderStatsList(counts) {
     return;
   }
   statsListEl.innerHTML = entries
-    .map(([category, duration]) => {
-      const color = colorForKey(category);
+    .map(([tagId, duration]) => {
+      const color = getTagColor(tagId);
       return `
         <div class="stats-row">
           <span><span class="legend-swatch" style="background:${color}"></span>${escapeHtml(
-            category
+            getTagName(tagId)
           )}</span>
           <span>${formatDuration(duration)}</span>
         </div>
@@ -653,6 +789,183 @@ function formatDuration(ms) {
   const hours = Math.floor(totalMinutes / 60);
   const minutes = totalMinutes % 60;
   return minutes ? `${hours}小时${minutes}分钟` : `${hours}小时`;
+}
+
+function renderSelectedTagChips(tagIds) {
+  const chips = (tagIds || [])
+    .map((id) => {
+      const label = getTagName(id);
+      const color = getTagColor(id);
+      return `
+        <span class="tag-chip static" style="--tag-color:${color}">
+          <span class="dot"></span>${escapeHtml(label)}
+        </span>
+      `;
+    })
+    .filter(Boolean)
+    .join("");
+  return (
+    chips ||
+    `<span class="tag-chip static" style="--tag-color:${UNTAGGED_COLOR}"><span class="dot"></span>${UNTAGGED_NAME}</span>`
+  );
+}
+
+function renderTagPickerHtml(selectedIds = [], role = "edit-tag") {
+  const selectedSet = new Set(selectedIds);
+  return tags
+    .map((tag) => {
+      const selected = selectedSet.has(tag.id);
+      return `
+        <button type="button" class="tag-chip ${selected ? "selected" : ""}" data-role="${role}" data-tag-id="${
+          tag.id
+        }" style="--tag-color:${tag.color}">
+          <span class="dot"></span>${escapeHtml(tag.name)}
+        </button>
+      `;
+    })
+    .join("");
+}
+
+function syncSelectedCreateTags() {
+  const available = new Set(tags.map((tag) => tag.id));
+  selectedCreateTags = new Set([...selectedCreateTags].filter((id) => available.has(id)));
+}
+
+function renderCreateTagPicker() {
+  if (!tagPickerEl) return;
+  syncSelectedCreateTags();
+  tagPickerEl.innerHTML = renderTagPickerHtml(Array.from(selectedCreateTags), "create-tag");
+}
+
+function renderTagManagerList() {
+  if (!tagListEl) return;
+  tagListEl.innerHTML = tags
+    .map((tag) => {
+      return `
+        <div class="tag-manager-row" data-tag-id="${tag.id}">
+          <input type="text" data-field="name" value="${escapeHtml(tag.name)}" maxlength="20" />
+          <input type="color" data-field="color" value="${tag.color}" />
+          <button class="icon-btn" type="button" data-action="delete-tag">删除</button>
+        </div>
+      `;
+    })
+    .join("");
+}
+
+function renderTaskCard(task) {
+  const minutes = Math.round(task.durationMs / 60000);
+  const noteText = task.note?.trim();
+  const noteClass = noteText ? "note" : "note empty";
+  const noteDisplay = noteText || "暂无备注";
+  return `
+    <article class="task-card" data-id="${task.id}">
+      <div class="task-top">
+        <div>
+          <div class="task-title" data-role="title">${escapeHtml(task.title)}</div>
+          <div class="tag-row">${renderSelectedTagChips(task.tags)}</div>
+          <div class="status-pill" data-role="status">准备中</div>
+        </div>
+      </div>
+      <div class="time-big" data-role="remaining">00:00</div>
+      <div class="time-sub" data-role="sub">已用 00:00 / 总计 00:00</div>
+      <div class="progress">
+        <div class="progress-bar" data-role="progress"></div>
+      </div>
+      <div class="controls">
+        <button class="btn primary" data-action="toggle" data-role="toggle">开始</button>
+        <button class="btn secondary" data-action="reset">重置</button>
+        <button class="btn ghost" data-action="restart">重新开始</button>
+      </div>
+      <div class="task-footer">
+        <div class="quick-sets">
+          <button data-action="quick" data-minutes="30">30m</button>
+          <button data-action="quick" data-minutes="45">45m</button>
+          <button data-action="quick" data-minutes="60">1h</button>
+          <button data-action="quick" data-minutes="90">1h30m</button>
+        </div>
+        <div class="task-menu">
+          <button class="icon-btn more" data-action="menu" aria-label="更多选项" aria-expanded="false">⋯</button>
+              <div class="menu" data-role="menu">
+                <button data-action="rename">重命名</button>
+                <button data-action="edit">编辑</button>
+                <button data-action="delete">删除</button>
+              </div>
+        </div>
+      </div>
+          <div class="${noteClass}" data-role="note">${escapeHtml(noteDisplay)}</div>
+      <div class="edit-panel" data-role="edit-panel">
+        <label>
+          <span>任务名称</span>
+          <input type="text" data-role="edit-title" value="${escapeHtml(task.title)}" maxlength="60" />
+        </label>
+        <div class="tag-field">
+          <span>标签</span>
+          <div class="tag-picker" data-role="edit-tags">
+            ${renderTagPickerHtml(task.tags, "edit-tag")}
+          </div>
+        </div>
+        <label>
+          <span>时长（分钟）</span>
+          <input type="number" min="1" max="1440" data-role="edit-minutes" value="${minutes}" />
+        </label>
+        <label>
+          <span>备注</span>
+          <textarea data-role="edit-note">${escapeHtml(task.note || "")}</textarea>
+        </label>
+        <div class="edit-actions">
+          <button class="btn secondary" data-action="save">保存</button>
+          <button class="btn ghost" data-action="cancel">取消</button>
+        </div>
+      </div>
+    </article>
+  `;
+}
+
+function renderGroupCard(group, groupTasks) {
+  return `
+    <div class="group-card" data-group-id="${group.id}" style="--group-color:${group.color}">
+      <div class="group-head">
+        <span class="group-dot"></span>
+        <input type="text" data-role="group-name" value="${escapeHtml(group.name)}" maxlength="30" />
+        <input type="color" data-role="group-color" value="${group.color}" />
+      </div>
+      <div class="group-body">
+        ${groupTasks.map((task) => renderTaskCard(task)).join("")}
+      </div>
+    </div>
+  `;
+}
+
+
+function updateTag(tagId, updates) {
+  const tag = tags.find((item) => item.id === tagId);
+  if (!tag) return;
+  if (typeof updates.name === "string" && updates.name.trim()) {
+    tag.name = updates.name.trim();
+  }
+  if (isColor(updates.color)) {
+    tag.color = updates.color;
+  }
+  saveTags();
+  renderTasks();
+  updateStats(true);
+}
+
+function deleteTag(tagId) {
+  tags = tags.filter((tag) => tag.id !== tagId);
+  tasks = tasks.map((task) => ({
+    ...task,
+    tags: Array.isArray(task.tags) ? task.tags.filter((id) => id !== tagId) : []
+  }));
+  runLog = runLog.map((segment) => ({
+    ...segment,
+    tagIds: Array.isArray(segment.tagIds) ? segment.tagIds.filter((id) => id !== tagId) : []
+  }));
+  saveTags();
+  saveTasks();
+  saveRuns();
+  renderTasks();
+  updateStats(true);
 }
 
 function getChartContext() {
@@ -806,7 +1119,7 @@ function renderLegend(items) {
     .join("");
 }
 
-function buildLineSeries(range, categories) {
+function buildLineSeries(range, tagIds) {
   const { start, end } = getRangeBounds(range);
   const labels = range === "today"
     ? Array.from({ length: 24 }, (_, i) => `${i}`)
@@ -815,10 +1128,10 @@ function buildLineSeries(range, categories) {
   const seriesMap = new Map();
   const bucketMs = range === "today" ? 60 * 60 * 1000 : 24 * 60 * 60 * 1000;
 
-  categories.forEach((category) => {
-    seriesMap.set(category, {
-      label: category,
-      color: colorForKey(category),
+  tagIds.forEach((tagId) => {
+    seriesMap.set(tagId, {
+      label: getTagName(tagId),
+      color: getTagColor(tagId),
       values: new Array(bucketCount).fill(0)
     });
   });
@@ -826,12 +1139,13 @@ function buildLineSeries(range, categories) {
   const now = Date.now();
   runLog.forEach((segment) => {
     if (!segment?.start) return;
-    if (!seriesMap.has(segment.category)) return;
     const segStart = Number(segment.start);
     const segEnd = segment.end ? Number(segment.end) : now;
     const overlapStart = Math.max(segStart, start);
     const overlapEnd = Math.min(segEnd, end);
     if (overlapEnd <= overlapStart) return;
+    const segmentTags =
+      Array.isArray(segment.tagIds) && segment.tagIds.length ? segment.tagIds : [UNTAGGED_ID];
 
     let cursor = overlapStart;
     while (cursor < overlapEnd) {
@@ -841,8 +1155,11 @@ function buildLineSeries(range, categories) {
       const bucketEnd = bucketStart + bucketMs;
       const sliceEnd = Math.min(bucketEnd, overlapEnd);
       const duration = sliceEnd - cursor;
-      const series = seriesMap.get(segment.category);
-      series.values[bucketIndex] += duration / 60000;
+      segmentTags.forEach((tagId) => {
+        if (!seriesMap.has(tagId)) return;
+        const series = seriesMap.get(tagId);
+        series.values[bucketIndex] += duration / 60000;
+      });
       cursor = sliceEnd;
     }
   });
@@ -851,17 +1168,17 @@ function buildLineSeries(range, categories) {
 }
 
 function updateStats(forceDraw = false) {
-  const categories = getAllCategories();
-  renderLineOptions(categories);
+  const tagIds = getAllTagIds();
+  renderLineOptions(tagIds);
 
   lineFilterEl.classList.toggle("show", activeChart === "line");
-  const durations = getDurationsByCategory(activeRange);
+  const durations = getDurationsByTag(activeRange);
   renderStatsList(durations);
 
   if (!viewStats.classList.contains("active") && !forceDraw) return;
 
   if (activeChart === "line") {
-    const selected = Array.from(selectedLineCategories);
+    const selected = Array.from(selectedLineTags);
     const { labels, series } = buildLineSeries(activeRange, selected);
     if (series.length === 0 || series.every((item) => item.values.every((value) => value === 0))) {
       const { ctx, width, height } = getChartContext();
@@ -881,9 +1198,9 @@ function updateStats(forceDraw = false) {
     renderLegend([]);
     return;
   }
-  const labels = entries.map(([label]) => label);
+  const labels = entries.map(([tagId]) => getTagName(tagId));
   const values = entries.map(([, value]) => value / 60000);
-  const colors = labels.map((label) => colorForKey(label));
+  const colors = entries.map(([tagId]) => getTagColor(tagId));
 
   if (activeChart === "bar") {
     drawBarChart(labels, values, colors);
@@ -895,11 +1212,12 @@ function updateStats(forceDraw = false) {
 
 createForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  addTask(titleInput.value, categoryInput.value, minutesInput.value, autoStartInput.checked);
+  addTask(titleInput.value, Array.from(selectedCreateTags), minutesInput.value, autoStartInput.checked);
   titleInput.value = "";
-  categoryInput.value = "";
   minutesInput.value = "30";
   autoStartInput.checked = false;
+  selectedCreateTags = new Set();
+  renderCreateTagPicker();
 });
 
 quickCreate.addEventListener("click", (event) => {
@@ -910,7 +1228,123 @@ quickCreate.addEventListener("click", (event) => {
   minutesInput.focus();
 });
 
+tagPickerEl?.addEventListener("click", (event) => {
+  const button = event.target.closest('button[data-role="create-tag"]');
+  if (!button) return;
+  const tagId = button.dataset.tagId;
+  if (!tagId) return;
+  if (selectedCreateTags.has(tagId)) {
+    selectedCreateTags.delete(tagId);
+    button.classList.remove("selected");
+  } else {
+    selectedCreateTags.add(tagId);
+    button.classList.add("selected");
+  }
+});
+
+tagManagerToggle?.addEventListener("click", () => {
+  if (!tagManagerEl) return;
+  const isOpen = tagManagerEl.classList.toggle("open");
+  if (tagManagerToggle) {
+    tagManagerToggle.textContent = isOpen ? "收起" : "展开";
+  }
+});
+
+addTagButton?.addEventListener("click", () => {
+  const name = newTagNameInput.value.trim();
+  if (!name) return;
+  const color = newTagColorInput.value;
+  const newId = ensureTagByName(name, color);
+  selectedCreateTags.add(newId);
+  newTagNameInput.value = "";
+  renderTasks();
+  updateStats(true);
+});
+
+tagListEl?.addEventListener("change", (event) => {
+  const row = event.target.closest(".tag-manager-row");
+  if (!row) return;
+  const tagId = row.dataset.tagId;
+  if (!tagId) return;
+  if (event.target.matches('input[data-field="name"]')) {
+    const value = event.target.value.trim();
+    if (!value) return;
+    updateTag(tagId, { name: value });
+  }
+  if (event.target.matches('input[data-field="color"]')) {
+    updateTag(tagId, { color: event.target.value });
+  }
+});
+
+tagListEl?.addEventListener("click", (event) => {
+  const button = event.target.closest('button[data-action="delete-tag"]');
+  if (!button) return;
+  const row = button.closest(".tag-manager-row");
+  if (!row) return;
+  const tagId = row.dataset.tagId;
+  if (!tagId) return;
+  deleteTag(tagId);
+});
+
+taskListEl.addEventListener("change", (event) => {
+  const groupEl = event.target.closest(".group-card");
+  if (!groupEl) return;
+  const groupId = groupEl.dataset.groupId;
+  if (!groupId) return;
+  if (event.target.matches('[data-role="group-name"]')) {
+    updateGroup(groupId, { name: event.target.value });
+  }
+  if (event.target.matches('[data-role="group-color"]')) {
+    updateGroup(groupId, { color: event.target.value });
+  }
+});
+
+taskListEl.addEventListener("pointerdown", (event) => {
+  const card = event.target.closest(".task-card");
+  if (!card) return;
+  if (event.target.closest("button, input, textarea, label, .task-menu, .edit-panel")) return;
+  if (dragState) return;
+
+  const startX = event.clientX;
+  const startY = event.clientY;
+  const pointerId = event.pointerId;
+
+  const onPressMove = (moveEvent) => {
+    if (!pressState) return;
+    const distance = Math.hypot(moveEvent.clientX - startX, moveEvent.clientY - startY);
+    if (distance > 6) {
+      clearPressState();
+    }
+  };
+
+  const timer = window.setTimeout(() => {
+    clearPressState();
+    startDrag(card, pointerId, startX, startY);
+  }, 350);
+
+  pressState = { card, startX, startY, pointerId, timer, moveHandler: onPressMove };
+
+  window.addEventListener("pointermove", onPressMove);
+  window.addEventListener("pointerup", clearPressState, { once: true });
+  window.addEventListener("pointercancel", clearPressState, { once: true });
+});
+
 taskListEl.addEventListener("click", (event) => {
+  const tagButton = event.target.closest('button[data-role="edit-tag"]');
+  if (tagButton) {
+    tagButton.classList.toggle("selected");
+    return;
+  }
+
+  const noteDisplay = event.target.closest('[data-role="note"]');
+  if (noteDisplay) {
+    const card = noteDisplay.closest(".task-card");
+    if (card) {
+      openEditPanel(card, "edit-note");
+    }
+    return;
+  }
+
   const button = event.target.closest("button");
   if (!button) return;
   const action = button.dataset.action;
@@ -947,7 +1381,7 @@ taskListEl.addEventListener("click", (event) => {
     case "rename":
       openEditPanel(card, "edit-title");
       break;
-    case "note":
+    case "edit":
       openEditPanel(card, "edit-note");
       break;
     case "cancel":
@@ -955,12 +1389,13 @@ taskListEl.addEventListener("click", (event) => {
       break;
     case "save": {
       const titleField = card.querySelector('[data-role="edit-title"]');
-      const categoryField = card.querySelector('[data-role="edit-category"]');
       const minutesField = card.querySelector('[data-role="edit-minutes"]');
       const noteField = card.querySelector('[data-role="edit-note"]');
+      const tagButtons = card.querySelectorAll('button[data-role="edit-tag"].selected');
+      const selectedTags = Array.from(tagButtons).map((btn) => btn.dataset.tagId).filter(Boolean);
       updateTask(id, {
         title: titleField.value.trim() || "新任务",
-        category: categoryField.value.trim() || DEFAULT_CATEGORY,
+        tags: selectedTags,
         durationMs: clampMinutes(minutesField.value) * 60 * 1000,
         note: noteField.value
       });
@@ -972,29 +1407,186 @@ taskListEl.addEventListener("click", (event) => {
   }
 });
 
+function startDrag(card, pointerId, startX, startY) {
+  const rect = card.getBoundingClientRect();
+  card.classList.add("dragging");
+  card.style.width = `${rect.width}px`;
+  card.style.height = `${rect.height}px`;
+  card.style.position = "fixed";
+  card.style.left = `${rect.left}px`;
+  card.style.top = `${rect.top}px`;
+  card.style.zIndex = "50";
+  card.style.pointerEvents = "none";
+  card.style.transition = "none";
+
+  dragState = {
+    id: card.dataset.id,
+    element: card,
+    startX,
+    startY,
+    offsetX: startX - rect.left,
+    offsetY: startY - rect.top,
+    lastX: startX,
+    lastY: startY,
+    overId: null
+  };
+
+  window.addEventListener("pointermove", onDragMove);
+  window.addEventListener("pointerup", onDragEnd, { once: true });
+  window.addEventListener("pointercancel", onDragEnd, { once: true });
+}
+
+function onDragMove(event) {
+  if (!dragState) return;
+  dragState.lastX = event.clientX;
+  dragState.lastY = event.clientY;
+  const dx = event.clientX - dragState.startX;
+  const dy = event.clientY - dragState.startY;
+  dragState.element.style.transform = `translate(${dx}px, ${dy}px) scale(0.94)`;
+
+  const target = getCardUnderPointer(event.clientX, event.clientY);
+  setDropTarget(target);
+  dragState.overId = target ? target.dataset.id : null;
+}
+
+function onDragEnd(event) {
+  if (!dragState) return;
+  window.removeEventListener("pointermove", onDragMove);
+
+  const dragId = dragState.id;
+  const target = getCardUnderPointer(dragState.lastX, dragState.lastY);
+  const targetId = target ? target.dataset.id : null;
+
+  if (targetId && targetId !== dragId) {
+    handleGrouping(dragId, targetId);
+  } else {
+    const reorderTarget = findReorderTarget(dragState.lastY, dragId);
+    if (reorderTarget) {
+      moveTask(dragId, reorderTarget.targetId, reorderTarget.insertAfter);
+    }
+  }
+
+  cleanupDragState();
+  renderTasks();
+}
+
+function cleanupDragState() {
+  if (!dragState) return;
+  if (dragState.element) {
+    dragState.element.classList.remove("dragging");
+    dragState.element.style.position = "";
+    dragState.element.style.left = "";
+    dragState.element.style.top = "";
+    dragState.element.style.width = "";
+    dragState.element.style.height = "";
+    dragState.element.style.zIndex = "";
+    dragState.element.style.pointerEvents = "";
+    dragState.element.style.transition = "";
+    dragState.element.style.transform = "";
+  }
+  clearDropTargets();
+  dragState = null;
+}
+
+function getCardUnderPointer(x, y) {
+  const el = document.elementFromPoint(x, y);
+  if (!el) return null;
+  const card = el.closest(".task-card");
+  if (!card || card.classList.contains("dragging")) return null;
+  return card;
+}
+
+function setDropTarget(card) {
+  clearDropTargets();
+  if (card) {
+    card.classList.add("drop-target");
+  }
+}
+
+function clearDropTargets() {
+  document.querySelectorAll(".task-card.drop-target").forEach((item) => {
+    item.classList.remove("drop-target");
+  });
+}
+
+function findReorderTarget(pointerY, dragId) {
+  const cards = Array.from(document.querySelectorAll(".task-card")).filter(
+    (card) => card.dataset.id !== dragId
+  );
+  if (cards.length === 0) return null;
+  for (const card of cards) {
+    const rect = card.getBoundingClientRect();
+    const mid = rect.top + rect.height / 2;
+    if (pointerY < mid) {
+      return { targetId: card.dataset.id, insertAfter: false };
+    }
+  }
+  return { targetId: cards[cards.length - 1].dataset.id, insertAfter: true };
+}
+
+function moveTask(dragId, targetId, insertAfter) {
+  const fromIndex = tasks.findIndex((task) => task.id === dragId);
+  const toIndex = tasks.findIndex((task) => task.id === targetId);
+  if (fromIndex === -1 || toIndex === -1 || fromIndex === toIndex) return;
+  const [item] = tasks.splice(fromIndex, 1);
+  let insertIndex = toIndex;
+  if (fromIndex < toIndex && !insertAfter) {
+    insertIndex = toIndex - 1;
+  } else if (fromIndex < toIndex && insertAfter) {
+    insertIndex = toIndex;
+  } else if (fromIndex > toIndex && insertAfter) {
+    insertIndex = toIndex + 1;
+  }
+  tasks.splice(insertIndex, 0, item);
+  saveTasks();
+}
+
+function handleGrouping(dragId, targetId) {
+  if (dragId === targetId) return;
+  const dragTask = tasks.find((task) => task.id === dragId);
+  const targetTask = tasks.find((task) => task.id === targetId);
+  if (!dragTask || !targetTask) return;
+
+  const previousGroupId = dragTask.groupId;
+  if (targetTask.groupId) {
+    dragTask.groupId = targetTask.groupId;
+  } else {
+    const group = createGroup([dragId, targetId]);
+    dragTask.groupId = group.id;
+    targetTask.groupId = group.id;
+  }
+  if (previousGroupId && previousGroupId !== dragTask.groupId) {
+    cleanupGroups();
+  }
+  cleanupGroups();
+  saveTasks();
+  saveGroups();
+}
+
+function clearPressState() {
+  if (!pressState) return;
+  clearTimeout(pressState.timer);
+  if (pressState.moveHandler) {
+    window.removeEventListener("pointermove", pressState.moveHandler);
+  }
+  pressState = null;
+}
+
 document.addEventListener("click", (event) => {
   if (!event.target.closest(".task-menu")) {
     closeAllMenus();
   }
-  if (!event.target.closest(".star-nav")) {
-    setStarMenu(false);
-  }
-});
-
-starToggle?.addEventListener("click", (event) => {
-  event.stopPropagation();
-  toggleStarMenu();
 });
 
 lineOptionsEl.addEventListener("change", (event) => {
   const input = event.target;
   if (!input.matches("input[type=checkbox]")) return;
-  const category = input.dataset.category;
-  if (!category) return;
+  const tagId = input.dataset.tagId;
+  if (!tagId) return;
   if (input.checked) {
-    selectedLineCategories.add(category);
+    selectedLineTags.add(tagId);
   } else {
-    selectedLineCategories.delete(category);
+    selectedLineTags.delete(tagId);
   }
   updateStats(true);
 });

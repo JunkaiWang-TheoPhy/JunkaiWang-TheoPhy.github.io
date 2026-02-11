@@ -14,46 +14,25 @@
       <span></span>
     </div>
 
-    <div class="star-nav">
-      <button id="star-toggle" class="star-toggle" aria-expanded="false" aria-controls="star-menu">
-        <span class="sr-only">打开导航</span>
-        <svg class="star-icon" viewBox="0 0 120 120" aria-hidden="true">
-          <defs>
-            <linearGradient id="starFill" x1="0" x2="1" y1="0" y2="1">
-              <stop offset="0" stop-color="#20113f" />
-              <stop offset="1" stop-color="#45208f" />
-            </linearGradient>
-          </defs>
-          <path
-            d="M60 10 L74 42 L108 46 L82 68 L90 102 L60 84 L30 102 L38 68 L12 46 L46 42 Z"
-            fill="url(#starFill)"
-            stroke="#120826"
-            stroke-width="6"
-            stroke-linejoin="round"
-          />
-        </svg>
-      </button>
-      <div id="star-menu" class="star-menu" role="menu">
-        <button class="nav-item active" data-view="timer" role="menuitem">
-          <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+    <main class="page">
+      <nav class="subnav" aria-label="页面切换">
+        <button class="tab active" data-view="timer">
+          <svg class="tab-icon" viewBox="0 0 24 24" aria-hidden="true">
             <circle cx="12" cy="12" r="9" fill="#ffffff" stroke="#2d1a57" stroke-width="2" />
             <line x1="12" y1="12" x2="12" y2="7" stroke="#2d1a57" stroke-width="2" stroke-linecap="round" />
             <line x1="12" y1="12" x2="16" y2="14" stroke="#2d1a57" stroke-width="2" stroke-linecap="round" />
           </svg>
-          计时
+          <span>计时</span>
         </button>
-        <button class="nav-item" data-view="stats" role="menuitem">
-          <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <button class="tab" data-view="stats">
+          <svg class="tab-icon" viewBox="0 0 24 24" aria-hidden="true">
             <rect x="4" y="11" width="4" height="8" rx="2" fill="#ff85d6" />
             <rect x="10" y="7" width="4" height="12" rx="2" fill="#8d6bff" />
             <rect x="16" y="5" width="4" height="14" rx="2" fill="#6dd3ff" />
           </svg>
-          统计
+          <span>统计</span>
         </button>
-      </div>
-    </div>
-
-    <main class="page">
+      </nav>
       <section id="view-timer" class="view active">
         <header class="hero">
           <div class="mascot" aria-hidden="true">
@@ -96,10 +75,10 @@
               <span>任务名称</span>
               <input id="task-title" type="text" placeholder="比如：写论文、健身、学法语" maxlength="60" />
             </label>
-            <label>
-              <span>栏目</span>
-              <input id="task-category" type="text" placeholder="默认" maxlength="30" />
-            </label>
+            <div class="tag-field">
+              <span>标签</span>
+              <div id="tag-picker" class="tag-picker"></div>
+            </div>
             <label class="duration-field">
               <span>时长（分钟）</span>
               <div class="duration-input">
@@ -122,6 +101,20 @@
             </div>
             <button class="btn primary" type="submit">添加任务</button>
           </form>
+          <div id="tag-manager" class="tag-manager">
+            <div class="tag-manager-head">
+              <h3>标签管理</h3>
+              <button class="btn ghost small" type="button" id="toggle-tag-manager">展开</button>
+            </div>
+            <div id="tag-manager-body" class="tag-manager-body">
+              <div id="tag-list" class="tag-list"></div>
+              <div class="tag-create">
+                <input id="new-tag-name" type="text" placeholder="新标签名称" maxlength="20" />
+                <input id="new-tag-color" type="color" value="#8d6bff" />
+                <button class="btn secondary" type="button" id="add-tag">添加</button>
+              </div>
+            </div>
+          </div>
         </section>
 
         <section class="task-board">
@@ -140,7 +133,7 @@
         <section class="panel stats-panel">
           <div class="panel-head">
             <h2>统计中心</h2>
-            <p>按栏目统计累计时长，正在计时的任务也会实时统计。</p>
+            <p>按标签统计累计时长，正在计时的任务也会实时统计。</p>
           </div>
           <div class="stats-controls">
             <div class="toggle-group" data-group="range">
@@ -166,7 +159,7 @@
           <div id="line-filter" class="line-filter">
             <div class="line-filter-head">
               <h3>折线图项目</h3>
-              <p>选择要对比的栏目</p>
+              <p>选择要对比的标签</p>
             </div>
             <div id="line-options" class="line-options"></div>
           </div>
