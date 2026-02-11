@@ -89,7 +89,8 @@ function loadGroups() {
         return {
           id: group.id,
           name: typeof group.name === "string" && group.name.trim() ? group.name.trim() : GROUP_DEFAULT_NAME,
-          color: isColor(group.color) ? group.color : pickTagColor()
+          color: isColor(group.color) ? group.color : pickTagColor(),
+          collapsed: Boolean(group.collapsed)
         };
       })
       .filter(Boolean);
@@ -134,6 +135,9 @@ function updateGroup(groupId, updates) {
   }
   if (isColor(updates.color)) {
     group.color = updates.color;
+  }
+  if (typeof updates.collapsed === "boolean") {
+    group.collapsed = updates.collapsed;
   }
   saveGroups();
   renderTasks();
@@ -892,7 +896,14 @@ function renderTaskCard(task) {
               </div>
         </div>
       </div>
-          <div class="${noteClass}" data-role="note">${escapeHtml(noteDisplay)}</div>
+      <div
+        class="${noteClass}"
+        data-role="note-editor"
+        contenteditable="true"
+        spellcheck="false"
+        data-placeholder="点击添加备注"
+        aria-label="备注"
+      >${escapeHtml(noteText || "")}</div>
       <div class="edit-panel" data-role="edit-panel">
         <label>
           <span>任务名称</span>
@@ -922,12 +933,16 @@ function renderTaskCard(task) {
 }
 
 function renderGroupCard(group, groupTasks) {
+  const isCollapsed = Boolean(group.collapsed);
   return `
-    <div class="group-card" data-group-id="${group.id}" style="--group-color:${group.color}">
+    <div class="group-card ${isCollapsed ? "collapsed" : ""}" data-group-id="${group.id}" style="--group-color:${group.color}">
       <div class="group-head">
         <span class="group-dot"></span>
         <input type="text" data-role="group-name" value="${escapeHtml(group.name)}" maxlength="30" />
         <input type="color" data-role="group-color" value="${group.color}" />
+        <button class="icon-btn group-toggle" type="button" data-action="toggle-group" aria-label="收起或展开">
+          ${isCollapsed ? "展开" : "收起"}
+        </button>
       </div>
       <div class="group-body">
         ${groupTasks.map((task) => renderTaskCard(task)).join("")}
@@ -1336,19 +1351,21 @@ taskListEl.addEventListener("click", (event) => {
     return;
   }
 
-  const noteDisplay = event.target.closest('[data-role="note"]');
-  if (noteDisplay) {
-    const card = noteDisplay.closest(".task-card");
-    if (card) {
-      openEditPanel(card, "edit-note");
-    }
-    return;
-  }
-
   const button = event.target.closest("button");
   if (!button) return;
   const action = button.dataset.action;
   if (!action) return;
+
+  if (action === "toggle-group") {
+    const groupEl = button.closest(".group-card");
+    if (!groupEl) return;
+    const groupId = groupEl.dataset.groupId;
+    if (!groupId) return;
+    const group = getGroupById(groupId);
+    if (!group) return;
+    updateGroup(groupId, { collapsed: !group.collapsed });
+    return;
+  }
 
   const card = button.closest(".task-card");
   if (!card) return;
@@ -1576,6 +1593,17 @@ document.addEventListener("click", (event) => {
   if (!event.target.closest(".task-menu")) {
     closeAllMenus();
   }
+});
+
+taskListEl.addEventListener("focusout", (event) => {
+  const noteEl = event.target.closest('[data-role="note-editor"]');
+  if (!noteEl) return;
+  const card = noteEl.closest(".task-card");
+  if (!card) return;
+  const id = card.dataset.id;
+  if (!id) return;
+  const noteValue = (noteEl.textContent || "").trim();
+  updateTask(id, { note: noteValue });
 });
 
 lineOptionsEl.addEventListener("change", (event) => {

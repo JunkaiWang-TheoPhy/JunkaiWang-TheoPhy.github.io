@@ -648,6 +648,12 @@ textarea:focus {
   cursor: pointer;
 }
 
+.group-toggle {
+  border-radius: 999px;
+  padding: 6px 12px;
+  background: #ffffff;
+}
+
 .group-dot {
   width: 14px;
   height: 14px;
@@ -659,6 +665,10 @@ textarea:focus {
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+.group-card.collapsed .group-body {
+  display: none;
 }
 
 .quick-sets {
@@ -732,6 +742,22 @@ textarea:focus {
 
 .note.empty {
   opacity: 0.6;
+}
+
+.note[contenteditable="true"] {
+  cursor: text;
+  min-height: 36px;
+}
+
+.note[contenteditable="true"]:focus {
+  outline: 2px solid #e7d8ff;
+  background: #ffffff;
+}
+
+.note[contenteditable="true"].empty:empty::before {
+  content: attr(data-placeholder);
+  color: var(--ink-soft);
+  opacity: 0.7;
 }
 
 .edit-panel {
