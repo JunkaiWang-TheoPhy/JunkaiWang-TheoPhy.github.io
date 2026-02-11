@@ -17,6 +17,9 @@ const COLOR_PALETTE = [
   "#7bd389",
   "#ffb3f5"
 ];
+const UNKNOWN_TASK_ID = "task-unknown";
+const UNKNOWN_TASK_NAME = "未识别任务";
+const UNKNOWN_TASK_COLOR = "#b7a6d8";
 
 const taskListEl = document.getElementById("task-list");
 const emptyStateEl = document.getElementById("empty-state");
@@ -51,7 +54,7 @@ let runLog = loadRuns();
 syncRunningSegments();
 let activeRange = "today";
 let activeChart = "bar";
-let selectedLineTags = new Set();
+let selectedLineTasks = new Set();
 let selectedCreateTags = new Set();
 let pressState = null;
 let dragState = null;
@@ -288,11 +291,13 @@ function loadRuns() {
         const legacyTags = normalizeTagIds(run.tagIds);
         const legacyId = legacyCategory ? ensureTagByName(legacyCategory) : null;
         const tagIds = legacyTags.length ? legacyTags : legacyId ? [legacyId] : [];
+        const taskTitle = typeof run.taskTitle === "string" ? run.taskTitle.trim() : "";
         if (run.start) {
           return {
             id: run.id || `seg-${run.start}`,
             taskId: run.taskId || "",
             tagIds,
+            taskTitle,
             start: Number(run.start),
             end: run.end ? Number(run.end) : null
           };
@@ -303,6 +308,7 @@ function loadRuns() {
             id: run.id || `seg-${stamp}`,
             taskId: run.taskId || "",
             tagIds,
+            taskTitle,
             start: stamp,
             end: stamp
           };
@@ -333,6 +339,7 @@ function startSegment(task, startTime = Date.now()) {
     id: `seg-${startTime}-${Math.random().toString(16).slice(2, 8)}`,
     taskId: task.id,
     tagIds: ensureTagIds(normalizeTagIds(task.tags)),
+    taskTitle: task.title,
     start: startTime,
     end: null
   });
@@ -356,6 +363,7 @@ function syncRunningSegments() {
           id: `seg-${task.startAt || Date.now()}-${Math.random().toString(16).slice(2, 8)}`,
           taskId: task.id,
           tagIds: ensureTagIds(normalizeTagIds(task.tags)),
+          taskTitle: task.title,
           start: task.startAt || Date.now(),
           end: null
         });
@@ -542,6 +550,14 @@ function deleteTask(id) {
   if (task && task.running) {
     stopSegment(task, Date.now());
   }
+  if (task) {
+    runLog = runLog.map((segment) => {
+      if (segment.taskId !== task.id) return segment;
+      if (segment.taskTitle) return segment;
+      return { ...segment, taskTitle: task.title };
+    });
+    saveRuns();
+  }
   tasks = tasks.filter((task) => task.id !== id);
   cleanupGroups();
   saveTasks();
@@ -698,7 +714,35 @@ function getTagColor(tagId) {
   return tag ? tag.color : "#c0b2e3";
 }
 
-function getDurationsByTag(range) {
+function getTaskById(id) {
+  return tasks.find((task) => task.id === id) || null;
+}
+
+function getTaskName(taskId) {
+  if (!taskId || taskId === UNKNOWN_TASK_ID) return UNKNOWN_TASK_NAME;
+  const task = getTaskById(taskId);
+  if (task) return task.title;
+  for (let i = runLog.length - 1; i >= 0; i -= 1) {
+    const segment = runLog[i];
+    if (segment.taskId === taskId && segment.taskTitle) {
+      return segment.taskTitle;
+    }
+  }
+  return "已删除任务";
+}
+
+function getTaskColor(taskId) {
+  if (!taskId || taskId === UNKNOWN_TASK_ID) return UNKNOWN_TASK_COLOR;
+  let hash = 0;
+  for (let i = 0; i < taskId.length; i += 1) {
+    hash = (hash << 5) - hash + taskId.charCodeAt(i);
+    hash |= 0;
+  }
+  const index = Math.abs(hash) % COLOR_PALETTE.length;
+  return COLOR_PALETTE[index];
+}
+
+function getDurationsByTask(range) {
   const { start, end } = getRangeBounds(range);
   const now = Date.now();
   const totals = {};
@@ -710,55 +754,53 @@ function getDurationsByTag(range) {
     const overlapEnd = Math.min(segEnd, end);
     if (overlapEnd <= overlapStart) return;
     const duration = overlapEnd - overlapStart;
-    const tagIds = Array.isArray(segment.tagIds) && segment.tagIds.length ? segment.tagIds : [UNTAGGED_ID];
-    tagIds.forEach((tagId) => {
-      totals[tagId] = (totals[tagId] || 0) + duration;
-    });
+    const taskId = segment.taskId || UNKNOWN_TASK_ID;
+    totals[taskId] = (totals[taskId] || 0) + duration;
   });
   return totals;
 }
 
-function getAllTagIds() {
-  const set = new Set(tags.map((tag) => tag.id));
-  const hasUntagged =
-    tasks.some((task) => !task.tags || task.tags.length === 0) ||
-    runLog.some((segment) => !segment.tagIds || segment.tagIds.length === 0);
-  if (hasUntagged) {
-    set.add(UNTAGGED_ID);
-  }
+function getAllTaskIds() {
+  const set = new Set(tasks.map((task) => task.id));
+  let hasUnknown = false;
   runLog.forEach((segment) => {
-    (segment.tagIds || []).forEach((tagId) => {
-      if (tagId && !set.has(tagId)) {
-        set.add(tagId);
-      }
-    });
+    if (!segment.taskId) {
+      hasUnknown = true;
+      return;
+    }
+    if (!set.has(segment.taskId)) {
+      set.add(segment.taskId);
+    }
   });
+  if (hasUnknown) {
+    set.add(UNKNOWN_TASK_ID);
+  }
   return Array.from(set);
 }
 
-function syncSelectedTags(tagIds) {
-  if (selectedLineTags.size === 0) {
-    selectedLineTags = new Set(tagIds);
+function syncSelectedTasks(taskIds) {
+  if (selectedLineTasks.size === 0) {
+    selectedLineTasks = new Set(taskIds);
     return;
   }
   const next = new Set();
-  tagIds.forEach((tagId) => {
-    if (selectedLineTags.has(tagId)) {
-      next.add(tagId);
+  taskIds.forEach((taskId) => {
+    if (selectedLineTasks.has(taskId)) {
+      next.add(taskId);
     }
   });
-  selectedLineTags = next.size ? next : new Set(tagIds);
+  selectedLineTasks = next.size ? next : new Set(taskIds);
 }
 
-function renderLineOptions(tagIds) {
-  syncSelectedTags(tagIds);
-  lineOptionsEl.innerHTML = tagIds
-    .map((tagId) => {
-      const checked = selectedLineTags.has(tagId);
+function renderLineOptions(taskIds) {
+  syncSelectedTasks(taskIds);
+  lineOptionsEl.innerHTML = taskIds
+    .map((taskId) => {
+      const checked = selectedLineTasks.has(taskId);
       return `
         <label class="line-option">
-          <input type="checkbox" data-tag-id="${escapeHtml(tagId)}" ${checked ? "checked" : ""} />
-          <span>${escapeHtml(getTagName(tagId))}</span>
+          <input type="checkbox" data-task-id="${escapeHtml(taskId)}" ${checked ? "checked" : ""} />
+          <span>${escapeHtml(getTaskName(taskId))}</span>
         </label>
       `;
     })
@@ -772,12 +814,12 @@ function renderStatsList(counts) {
     return;
   }
   statsListEl.innerHTML = entries
-    .map(([tagId, duration]) => {
-      const color = getTagColor(tagId);
+    .map(([taskId, duration]) => {
+      const color = getTaskColor(taskId);
       return `
         <div class="stats-row">
           <span><span class="legend-swatch" style="background:${color}"></span>${escapeHtml(
-            getTagName(tagId)
+            getTaskName(taskId)
           )}</span>
           <span>${formatDuration(duration)}</span>
         </div>
@@ -1134,7 +1176,7 @@ function renderLegend(items) {
     .join("");
 }
 
-function buildLineSeries(range, tagIds) {
+function buildLineSeries(range, taskIds) {
   const { start, end } = getRangeBounds(range);
   const labels = range === "today"
     ? Array.from({ length: 24 }, (_, i) => `${i}`)
@@ -1143,10 +1185,10 @@ function buildLineSeries(range, tagIds) {
   const seriesMap = new Map();
   const bucketMs = range === "today" ? 60 * 60 * 1000 : 24 * 60 * 60 * 1000;
 
-  tagIds.forEach((tagId) => {
-    seriesMap.set(tagId, {
-      label: getTagName(tagId),
-      color: getTagColor(tagId),
+  taskIds.forEach((taskId) => {
+    seriesMap.set(taskId, {
+      label: getTaskName(taskId),
+      color: getTaskColor(taskId),
       values: new Array(bucketCount).fill(0)
     });
   });
@@ -1159,8 +1201,7 @@ function buildLineSeries(range, tagIds) {
     const overlapStart = Math.max(segStart, start);
     const overlapEnd = Math.min(segEnd, end);
     if (overlapEnd <= overlapStart) return;
-    const segmentTags =
-      Array.isArray(segment.tagIds) && segment.tagIds.length ? segment.tagIds : [UNTAGGED_ID];
+    const segmentTaskId = segment.taskId || UNKNOWN_TASK_ID;
 
     let cursor = overlapStart;
     while (cursor < overlapEnd) {
@@ -1170,11 +1211,10 @@ function buildLineSeries(range, tagIds) {
       const bucketEnd = bucketStart + bucketMs;
       const sliceEnd = Math.min(bucketEnd, overlapEnd);
       const duration = sliceEnd - cursor;
-      segmentTags.forEach((tagId) => {
-        if (!seriesMap.has(tagId)) return;
-        const series = seriesMap.get(tagId);
+      if (seriesMap.has(segmentTaskId)) {
+        const series = seriesMap.get(segmentTaskId);
         series.values[bucketIndex] += duration / 60000;
-      });
+      }
       cursor = sliceEnd;
     }
   });
@@ -1183,17 +1223,17 @@ function buildLineSeries(range, tagIds) {
 }
 
 function updateStats(forceDraw = false) {
-  const tagIds = getAllTagIds();
-  renderLineOptions(tagIds);
+  const taskIds = getAllTaskIds();
+  renderLineOptions(taskIds);
 
   lineFilterEl.classList.toggle("show", activeChart === "line");
-  const durations = getDurationsByTag(activeRange);
+  const durations = getDurationsByTask(activeRange);
   renderStatsList(durations);
 
   if (!viewStats.classList.contains("active") && !forceDraw) return;
 
   if (activeChart === "line") {
-    const selected = Array.from(selectedLineTags);
+    const selected = Array.from(selectedLineTasks);
     const { labels, series } = buildLineSeries(activeRange, selected);
     if (series.length === 0 || series.every((item) => item.values.every((value) => value === 0))) {
       const { ctx, width, height } = getChartContext();
@@ -1213,9 +1253,9 @@ function updateStats(forceDraw = false) {
     renderLegend([]);
     return;
   }
-  const labels = entries.map(([tagId]) => getTagName(tagId));
+  const labels = entries.map(([taskId]) => getTaskName(taskId));
   const values = entries.map(([, value]) => value / 60000);
-  const colors = entries.map(([tagId]) => getTagColor(tagId));
+  const colors = entries.map(([taskId]) => getTaskColor(taskId));
 
   if (activeChart === "bar") {
     drawBarChart(labels, values, colors);
@@ -1609,12 +1649,12 @@ taskListEl.addEventListener("focusout", (event) => {
 lineOptionsEl.addEventListener("change", (event) => {
   const input = event.target;
   if (!input.matches("input[type=checkbox]")) return;
-  const tagId = input.dataset.tagId;
-  if (!tagId) return;
+  const taskId = input.dataset.taskId;
+  if (!taskId) return;
   if (input.checked) {
-    selectedLineTags.add(tagId);
+    selectedLineTasks.add(taskId);
   } else {
-    selectedLineTags.delete(tagId);
+    selectedLineTasks.delete(taskId);
   }
   updateStats(true);
 });
