@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Timer Lab</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="bg-blobs" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <main class="page">
+      <header class="hero">
+        <div class="mascot" aria-hidden="true">
+          <svg viewBox="0 0 160 160" role="img">
+            <defs>
+              <linearGradient id="face" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0" stop-color="#ffe8ff" />
+                <stop offset="1" stop-color="#f3d1ff" />
+              </linearGradient>
+            </defs>
+            <circle cx="80" cy="80" r="62" fill="url(#face)" stroke="#2f195a" stroke-width="4" />
+            <circle cx="80" cy="80" r="50" fill="#ffffff" stroke="#2f195a" stroke-width="3" />
+            <line x1="80" y1="80" x2="80" y2="48" stroke="#2f195a" stroke-linecap="round" stroke-width="6" />
+            <line x1="80" y1="80" x2="105" y2="95" stroke="#2f195a" stroke-linecap="round" stroke-width="6" />
+            <circle cx="60" cy="78" r="6" fill="#2f195a" />
+            <circle cx="100" cy="78" r="6" fill="#2f195a" />
+            <path d="M65 100 Q80 112 95 100" fill="none" stroke="#2f195a" stroke-linecap="round" stroke-width="5" />
+            <circle cx="40" cy="42" r="10" fill="#7a66ff" />
+            <circle cx="120" cy="42" r="10" fill="#7a66ff" />
+          </svg>
+        </div>
+        <div class="hero-text">
+          <p class="eyebrow">浏览器时间同步中</p>
+          <h1>Timer Lab</h1>
+          <p class="subtitle">并列管理多个任务，随时添加、编辑、重启你的计时卡。</p>
+          <div class="time-chip">
+            <span class="dot"></span>
+            <span id="clock">--:--:--</span>
+          </div>
+        </div>
+      </header>
+
+      <section class="panel create-panel">
+        <div class="panel-head">
+          <h2>快速新建任务</h2>
+          <p>所有任务保存在当前浏览器里。</p>
+        </div>
+        <form id="create-form" autocomplete="off">
+          <label>
+            <span>任务名称</span>
+            <input id="task-title" type="text" placeholder="比如：写论文、健身、学法语" maxlength="60" />
+          </label>
+          <label class="duration-field">
+            <span>时长（分钟）</span>
+            <div class="duration-input">
+              <input id="task-minutes" type="number" min="1" max="1440" value="25" />
+              <span>min</span>
+            </div>
+          </label>
+          <div class="quick-choices" id="quick-create">
+            <button type="button" data-minutes="5">5m</button>
+            <button type="button" data-minutes="10">10m</button>
+            <button type="button" data-minutes="25">25m</button>
+            <button type="button" data-minutes="45">45m</button>
+            <button type="button" data-minutes="60">60m</button>
+          </div>
+          <button class="btn primary" type="submit">添加任务</button>
+        </form>
+      </section>
+
+      <section class="task-board">
+        <div class="board-head">
+          <h2>任务卡片</h2>
+          <p class="hint">关掉网页后计时会继续，回来后自动按浏览器时间同步。</p>
+        </div>
+        <div id="task-list" class="task-grid"></div>
+        <div id="empty-state" class="empty-state">
+          <p>还没有任务，先添加一个吧！</p>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
