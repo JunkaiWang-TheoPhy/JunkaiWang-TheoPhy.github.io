@@ -97,42 +97,101 @@ body {
   gap: 28px;
 }
 
-.subnav {
-  display: inline-flex;
+.star-nav {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
   gap: 10px;
-  padding: 10px;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.75);
-  box-shadow: var(--shadow);
-  align-self: flex-start;
 }
 
-.tab {
-  width: 74px;
-  height: 74px;
-  border: 2px solid #d9ccff;
-  border-radius: 14px;
-  background: #f7f2ff;
-  font-weight: 700;
+.star-toggle {
+  width: 64px;
+  height: 64px;
+  border-radius: 24px;
+  border: none;
+  background: #f6f2ff;
+  box-shadow: var(--shadow);
   cursor: pointer;
-  color: var(--ink);
   display: inline-flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  padding: 0;
+}
+
+.star-toggle[aria-expanded="true"] {
+  transform: translateY(1px);
+  box-shadow: 0 12px 24px rgba(46, 24, 92, 0.25);
+}
+
+.star-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.star-menu {
+  display: none;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: var(--shadow);
+  border: 2px solid #f0e5ff;
+  animation: pop 0.2s ease;
+}
+
+.star-menu.show {
+  display: inline-flex;
+}
+
+@keyframes pop {
+  from {
+    transform: translateY(-6px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.nav-item {
+  border: none;
+  border-radius: 16px;
+  padding: 10px 16px;
+  font-weight: 700;
+  cursor: pointer;
+  background: #f4edff;
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.tab.active {
-  background: #ffffff;
-  border-color: #bfa5ff;
-  box-shadow: 0 12px 20px rgba(88, 66, 160, 0.18);
+.nav-item.active {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #ffffff;
+  box-shadow: 0 10px 18px rgba(88, 66, 160, 0.25);
 }
 
-.tab-icon {
-  width: 26px;
-  height: 26px;
+.nav-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
 
 .view {
@@ -755,15 +814,23 @@ textarea:focus {
 }
 
 @media (max-width: 600px) {
-  .subnav {
-    padding: 8px;
-    gap: 8px;
+  .star-nav {
+    top: 12px;
+    right: 12px;
   }
 
-  .tab {
-    width: 64px;
-    height: 64px;
-    border-radius: 12px;
-    font-size: 0.95rem;
+  .star-toggle {
+    width: 54px;
+    height: 54px;
+    border-radius: 20px;
+  }
+
+  .star-menu {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .nav-item {
+    justify-content: center;
   }
 }
