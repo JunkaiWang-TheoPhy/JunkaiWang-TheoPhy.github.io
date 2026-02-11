@@ -15,74 +15,128 @@
     </div>
 
     <main class="page">
-      <header class="hero">
-        <div class="mascot" aria-hidden="true">
-          <svg viewBox="0 0 160 160" role="img">
-            <defs>
-              <linearGradient id="face" x1="0" x2="1" y1="0" y2="1">
-                <stop offset="0" stop-color="#ffe8ff" />
-                <stop offset="1" stop-color="#f3d1ff" />
-              </linearGradient>
-            </defs>
-            <circle cx="80" cy="80" r="62" fill="url(#face)" stroke="#2f195a" stroke-width="4" />
-            <circle cx="80" cy="80" r="50" fill="#ffffff" stroke="#2f195a" stroke-width="3" />
-            <line x1="80" y1="80" x2="80" y2="48" stroke="#2f195a" stroke-linecap="round" stroke-width="6" />
-            <line x1="80" y1="80" x2="105" y2="95" stroke="#2f195a" stroke-linecap="round" stroke-width="6" />
-            <circle cx="60" cy="78" r="6" fill="#2f195a" />
-            <circle cx="100" cy="78" r="6" fill="#2f195a" />
-            <path d="M65 100 Q80 112 95 100" fill="none" stroke="#2f195a" stroke-linecap="round" stroke-width="5" />
-            <circle cx="40" cy="42" r="10" fill="#7a66ff" />
-            <circle cx="120" cy="42" r="10" fill="#7a66ff" />
-          </svg>
-        </div>
-        <div class="hero-text">
-          <p class="eyebrow">浏览器时间同步中</p>
-          <h1>Timer Lab</h1>
-          <p class="subtitle">并列管理多个任务，随时添加、编辑、重启你的计时卡。</p>
-          <div class="time-chip">
-            <span class="dot"></span>
-            <span id="clock">--:--:--</span>
-          </div>
-        </div>
-      </header>
+      <nav class="subnav" aria-label="子站导航">
+        <button class="tab active" data-view="timer">计时</button>
+        <button class="tab" data-view="stats">统计</button>
+      </nav>
 
-      <section class="panel create-panel">
-        <div class="panel-head">
-          <h2>快速新建任务</h2>
-          <p>所有任务保存在当前浏览器里。</p>
-        </div>
-        <form id="create-form" autocomplete="off">
-          <label>
-            <span>任务名称</span>
-            <input id="task-title" type="text" placeholder="比如：写论文、健身、学法语" maxlength="60" />
-          </label>
-          <label class="duration-field">
-            <span>时长（分钟）</span>
-            <div class="duration-input">
-              <input id="task-minutes" type="number" min="1" max="1440" value="25" />
-              <span>min</span>
-            </div>
-          </label>
-          <div class="quick-choices" id="quick-create">
-            <button type="button" data-minutes="5">5m</button>
-            <button type="button" data-minutes="10">10m</button>
-            <button type="button" data-minutes="25">25m</button>
-            <button type="button" data-minutes="45">45m</button>
-            <button type="button" data-minutes="60">60m</button>
+      <section id="view-timer" class="view active">
+        <header class="hero">
+          <div class="mascot" aria-hidden="true">
+            <svg viewBox="0 0 160 160" role="img">
+              <defs>
+                <linearGradient id="face" x1="0" x2="1" y1="0" y2="1">
+                  <stop offset="0" stop-color="#ffe8ff" />
+                  <stop offset="1" stop-color="#f3d1ff" />
+                </linearGradient>
+              </defs>
+              <circle cx="80" cy="80" r="62" fill="url(#face)" stroke="#2f195a" stroke-width="4" />
+              <circle cx="80" cy="80" r="50" fill="#ffffff" stroke="#2f195a" stroke-width="3" />
+              <line x1="80" y1="80" x2="80" y2="48" stroke="#2f195a" stroke-linecap="round" stroke-width="6" />
+              <line x1="80" y1="80" x2="105" y2="95" stroke="#2f195a" stroke-linecap="round" stroke-width="6" />
+              <circle cx="60" cy="78" r="6" fill="#2f195a" />
+              <circle cx="100" cy="78" r="6" fill="#2f195a" />
+              <path d="M65 100 Q80 112 95 100" fill="none" stroke="#2f195a" stroke-linecap="round" stroke-width="5" />
+              <circle cx="40" cy="42" r="10" fill="#7a66ff" />
+              <circle cx="120" cy="42" r="10" fill="#7a66ff" />
+            </svg>
           </div>
-          <button class="btn primary" type="submit">添加任务</button>
-        </form>
+          <div class="hero-text">
+            <p class="eyebrow">浏览器时间同步中</p>
+            <h1>Timer Lab</h1>
+            <p class="subtitle">并列管理多个任务，随时添加、编辑、重启你的计时卡。</p>
+            <div class="time-chip">
+              <span class="dot"></span>
+              <span id="clock">--:--:--</span>
+            </div>
+          </div>
+        </header>
+
+        <section class="panel create-panel">
+          <div class="panel-head">
+            <h2>快速新建任务</h2>
+            <p>所有任务保存在当前浏览器里。</p>
+          </div>
+          <form id="create-form" autocomplete="off">
+            <label>
+              <span>任务名称</span>
+              <input id="task-title" type="text" placeholder="比如：写论文、健身、学法语" maxlength="60" />
+            </label>
+            <label>
+              <span>栏目</span>
+              <input id="task-category" type="text" placeholder="默认" maxlength="30" />
+            </label>
+            <label class="duration-field">
+              <span>时长（分钟）</span>
+              <div class="duration-input">
+                <input id="task-minutes" type="number" min="1" max="1440" value="30" />
+                <span>min</span>
+              </div>
+            </label>
+            <div class="toggle-field">
+              <span>创建后立即开始</span>
+              <label class="toggle">
+                <input id="task-autostart" type="checkbox" />
+                <span class="toggle-ui"></span>
+              </label>
+            </div>
+            <div class="quick-choices" id="quick-create">
+              <button type="button" data-minutes="30">30m</button>
+              <button type="button" data-minutes="45">45m</button>
+              <button type="button" data-minutes="60">1h</button>
+              <button type="button" data-minutes="90">1h30m</button>
+            </div>
+            <button class="btn primary" type="submit">添加任务</button>
+          </form>
+        </section>
+
+        <section class="task-board">
+          <div class="board-head">
+            <h2>任务卡片</h2>
+            <p class="hint">关掉网页后计时会继续，回来后自动按浏览器时间同步。</p>
+          </div>
+          <div id="task-list" class="task-grid"></div>
+          <div id="empty-state" class="empty-state">
+            <p>还没有任务，先添加一个吧！</p>
+          </div>
+        </section>
       </section>
 
-      <section class="task-board">
-        <div class="board-head">
-          <h2>任务卡片</h2>
-          <p class="hint">关掉网页后计时会继续，回来后自动按浏览器时间同步。</p>
-        </div>
-        <div id="task-list" class="task-grid"></div>
-        <div id="empty-state" class="empty-state">
-          <p>还没有任务，先添加一个吧！</p>
-        </div>
+      <section id="view-stats" class="view">
+        <section class="panel stats-panel">
+          <div class="panel-head">
+            <h2>统计中心</h2>
+            <p>按栏目统计每个任务执行了多少次。</p>
+          </div>
+          <div class="stats-controls">
+            <div class="toggle-group" data-group="range">
+              <button class="toggle-btn active" data-range="today">今天</button>
+              <button class="toggle-btn" data-range="week">本周</button>
+            </div>
+            <div class="toggle-group" data-group="chart">
+              <button class="toggle-btn active" data-chart="bar">柱状图</button>
+              <button class="toggle-btn" data-chart="pie">饼图</button>
+              <button class="toggle-btn" data-chart="line">折线图</button>
+            </div>
+          </div>
+          <div class="stats-body">
+            <div class="chart-card">
+              <canvas id="chart-canvas" width="640" height="360"></canvas>
+              <div id="chart-legend" class="chart-legend"></div>
+            </div>
+            <div class="summary-card">
+              <h3>执行次数</h3>
+              <div id="stats-list" class="stats-list"></div>
+            </div>
+          </div>
+          <div id="line-filter" class="line-filter">
+            <div class="line-filter-head">
+              <h3>折线图项目</h3>
+              <p>选择要对比的栏目</p>
+            </div>
+            <div id="line-options" class="line-options"></div>
+          </div>
+        </section>
       </section>
     </main>
 
