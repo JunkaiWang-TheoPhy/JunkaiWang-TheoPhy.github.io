@@ -1,0 +1,159 @@
+name: arXiv Reader Sync
+
+on:
+  schedule:
+    - cron: "20 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: arxiv-reader-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    env:
+      ARXIV_CATEGORIES: "hepth,cmt,gr-qc,hepex,math-ph"
+      LANGUAGE: "Chinese"
+      MODEL_NAME: "gpt-4o-mini"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          cd arxiv-reader
+          uv sync
+
+      - name: Crawl arXiv papers
+        id: crawl_step
+        run: |
+          source arxiv-reader/.venv/bin/activate
+          today=$(date -u "+%Y-%m-%d")
+          echo "Start crawling arXiv papers for ${today} (UTC)."
+
+          if [ -f "arxiv-reader/data/${today}.jsonl" ]; then
+            rm "arxiv-reader/data/${today}.jsonl"
+          fi
+
+          cd arxiv-reader/daily_arxiv
+          export CATEGORIES="${ARXIV_CATEGORIES}"
+          scrapy crawl arxiv -o ../data/${today}.jsonl
+
+          if [ ! -f "../data/${today}.jsonl" ]; then
+            echo "Crawling failed: data file was not generated."
+            exit 1
+          fi
+
+          echo "crawl_date=${today}" >> "$GITHUB_OUTPUT"
+
+      - name: Check for duplicates
+        id: dedup_check
+        run: |
+          source arxiv-reader/.venv/bin/activate
+          cd arxiv-reader/daily_arxiv
+
+          set +e
+          python daily_arxiv/check_stats.py
+          dedup_exit_code=$?
+          set -e
+
+          echo "dedup_exit_code=${dedup_exit_code}" >> "$GITHUB_OUTPUT"
+
+          case "$dedup_exit_code" in
+            0)
+              echo "has_new_content=true" >> "$GITHUB_OUTPUT"
+              ;;
+            1)
+              echo "has_new_content=false" >> "$GITHUB_OUTPUT"
+              echo "skip_reason=no_new_content" >> "$GITHUB_OUTPUT"
+              ;;
+            2)
+              echo "has_new_content=false" >> "$GITHUB_OUTPUT"
+              echo "skip_reason=processing_error" >> "$GITHUB_OUTPUT"
+              exit 1
+              ;;
+            *)
+              echo "has_new_content=false" >> "$GITHUB_OUTPUT"
+              echo "skip_reason=unknown_error" >> "$GITHUB_OUTPUT"
+              exit 1
+              ;;
+          esac
+
+      - name: AI Enhancement Processing
+        if: steps.dedup_check.outputs.has_new_content == 'true'
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+        run: |
+          if [ -z "$OPENAI_API_KEY" ]; then
+            echo "Missing required secret: OPENAI_API_KEY"
+            exit 1
+          fi
+
+          source arxiv-reader/.venv/bin/activate
+          today=${{ steps.crawl_step.outputs.crawl_date }}
+
+          export OPENAI_BASE_URL="${OPENAI_BASE_URL:-https://api.openai.com/v1}"
+          export LANGUAGE="${LANGUAGE}"
+          export MODEL_NAME="${MODEL_NAME}"
+
+          cd arxiv-reader/ai
+          python enhance.py --data ../data/${today}.jsonl
+
+      - name: Convert to Markdown
+        if: steps.dedup_check.outputs.has_new_content == 'true'
+        run: |
+          source arxiv-reader/.venv/bin/activate
+          today=${{ steps.crawl_step.outputs.crawl_date }}
+          export LANGUAGE="${LANGUAGE}"
+
+          cd arxiv-reader/to_md
+          AI_FILE="../data/${today}_AI_enhanced_${LANGUAGE}.jsonl"
+
+          if [ ! -f "$AI_FILE" ]; then
+            echo "Missing AI enhanced file: $AI_FILE"
+            exit 1
+          fi
+
+          python convert.py --data "$AI_FILE"
+
+      - name: Update file list
+        if: steps.dedup_check.outputs.has_new_content == 'true'
+        run: |
+          cd arxiv-reader
+          ls data/*.jsonl 2>/dev/null | sed 's|data/||' | sort > assets/file-list.txt
+
+      - name: Commit and push changes
+        if: steps.dedup_check.outputs.has_new_content == 'true'
+        run: |
+          today=${{ steps.crawl_step.outputs.crawl_date }}
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add arxiv-reader/data arxiv-reader/assets/file-list.txt
+
+          if git diff --staged --quiet; then
+            echo "No archive changes to commit."
+            exit 0
+          fi
+
+          git commit -m "chore(arxiv-reader): archive ${today} arXiv papers"
+
+          for i in 1 2 3; do
+            echo "Push attempt ${i}"
+            git pull --rebase origin "${GITHUB_REF_NAME}" || true
+            if git push origin "HEAD:${GITHUB_REF_NAME}"; then
+              echo "Push successful"
+              exit 0
+            fi
+            sleep 5
+          done
+
+          echo "Failed to push after 3 attempts."
+          exit 1

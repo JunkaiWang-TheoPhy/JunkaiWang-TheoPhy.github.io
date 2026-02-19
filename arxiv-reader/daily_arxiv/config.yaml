@@ -1,0 +1,10 @@
+arxiv:
+  categories:  # 文章类型
+    - hep-th
+    - cond-mat
+    - gr-qc
+    - hep-ex
+    - math-ph
+
+llm:
+  model_name: 'gpt-4o-mini'  # 使用的LLM模型

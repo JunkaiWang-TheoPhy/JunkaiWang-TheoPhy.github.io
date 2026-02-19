@@ -1,0 +1,19 @@
+[project]
+name = "daily-arxiv"
+version = "0.1.0"
+description = "Daily crawl arXiv papers and use LLMs to summarize them"
+authors = [
+    {name = "Wei Deng", email = "dw-dengwei@outlook.com"},
+    {name = "Jian Guan", email = "jianguanthu@gmail.com"},
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "arxiv>=2.1.3",
+    "dotenv>=0.9.9",
+    "langchain>=0.3.20",
+    "langchain-openai>=0.3.9",
+    "scrapy>=2.12.0",
+    "tqdm>=4.67.1",
+]
+license = "Apache-2.0"
