@@ -18,7 +18,7 @@ jobs:
     env:
       ARXIV_CATEGORIES: "hepth,cmt,gr-qc,hepex,math-ph"
       LANGUAGE: "Chinese"
-      MODEL_NAME: "gpt-4o-mini"
+      MODEL_NAME: "deepseek-chat"
 
     steps:
       - uses: actions/checkout@v4
@@ -88,19 +88,30 @@ jobs:
         if: steps.dedup_check.outputs.has_new_content == 'true'
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          API_KEY: ${{ secrets.API_KEY }}
           OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+          BASE_URL_SECRET: ${{ secrets.BASE_URL }}
+          BASE_URL: ${{ vars.BASE_URL }}
+          OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
+          MODEL: ${{ vars.MODEL }}
         run: |
-          if [ -z "$OPENAI_API_KEY" ]; then
-            echo "Missing required secret: OPENAI_API_KEY"
+          if [ -n "${OPENAI_API_KEY:-}" ]; then
+            export OPENAI_API_KEY="$OPENAI_API_KEY"
+          elif [ -n "${API_KEY:-}" ]; then
+            export OPENAI_API_KEY="$API_KEY"
+          fi
+
+          if [ -z "${OPENAI_API_KEY:-}" ]; then
+            echo "Missing required secret: OPENAI_API_KEY or API_KEY"
             exit 1
           fi
 
           source arxiv-reader/.venv/bin/activate
           today=${{ steps.crawl_step.outputs.crawl_date }}
 
-          export OPENAI_BASE_URL="${OPENAI_BASE_URL:-https://api.openai.com/v1}"
+          export OPENAI_BASE_URL="${OPENAI_BASE_URL:-${BASE_URL:-${BASE_URL_SECRET:-https://api.openai.com/v1}}}"
           export LANGUAGE="${LANGUAGE}"
-          export MODEL_NAME="${MODEL_NAME}"
+          export MODEL_NAME="${MODEL_NAME:-${MODEL:-${OPENAI_MODEL:-deepseek-chat}}}"
 
           cd arxiv-reader/ai
           python enhance.py --data ../data/${today}.jsonl
