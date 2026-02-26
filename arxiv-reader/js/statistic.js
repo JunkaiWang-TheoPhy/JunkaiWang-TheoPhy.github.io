@@ -679,6 +679,30 @@ function parseJsonlData(jsonlText, date) {
   
   const lines = jsonlText.trim().split('\n');
   
+  function normalizeDisplayCategories(rawCategories) {
+    const source = Array.isArray(rawCategories) ? rawCategories : [rawCategories];
+    const expanded = [];
+    
+    source.forEach(item => {
+      if (typeof item !== 'string') {
+        return;
+      }
+      item.split(',').forEach(part => {
+        const category = part.trim();
+        if (!category) {
+          return;
+        }
+        if (category === 'cond-mat' || category.startsWith('cond-mat.')) {
+          expanded.push('cond-mat');
+        } else {
+          expanded.push(category);
+        }
+      });
+    });
+    
+    return [...new Set(expanded)];
+  }
+  
   lines.forEach(line => {
     try {
       const paper = JSON.parse(line);
@@ -687,7 +711,10 @@ function parseJsonlData(jsonlText, date) {
         return;
       }
       
-      let allCategories = Array.isArray(paper.categories) ? paper.categories : [paper.categories];
+      const allCategories = normalizeDisplayCategories(paper.categories);
+      if (allCategories.length === 0) {
+        return;
+      }
       
       const primaryCategory = allCategories[0];
       

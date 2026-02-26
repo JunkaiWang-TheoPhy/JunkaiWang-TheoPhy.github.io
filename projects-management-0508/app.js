@@ -1,8 +1,47 @@
 const DATA_URL = "./data/tasks.json";
+const PROFILE_URL = "./config/journal_profiles.json";
 const STORAGE_KEY = "projects-management-0508-local-draft-v1";
 const GITHUB_TARGET_KEY = "projects-management-0508-github-target-v1";
 const SOURCE_FILE_HINT = "projects-management-0508/data/tasks.json";
 const GITHUB_API_VERSION = "2022-11-28";
+const DEFAULT_JOURNAL = "PRD";
+const DONE_FORMULA = "DONE(PR)=G_eng ∧ G_journal ∧ G_science ∧ G_packaging";
+const DONE_GROUP_ORDER = ["eng", "journal", "science", "packaging"];
+
+const FALLBACK_PROFILES = {
+  version: 1,
+  groups: {
+    eng: "G_eng",
+    journal: "G_journal",
+    science: "G_science",
+    packaging: "G_packaging"
+  },
+  journals: {
+    PRD: {
+      displayName: "Physical Review D",
+      skeleton: ["Introduction", "Methods", "Results", "Discussion", "Conclusions"],
+      artifacts: ["main.pdf", "source.tar.gz", "figures", "data_availability.md"],
+      gates: {
+        eng: [
+          { key: "compile", label: "latexmk -pdf passes" },
+          { key: "refs_clean", label: "No undefined references" }
+        ],
+        journal: [
+          { key: "title_sentence_case", label: "Title uses sentence case" },
+          { key: "abstract_lt_500_words", label: "Abstract < 500 words" }
+        ],
+        science: [
+          { key: "claims_evidence_trace", label: "Claims map to explicit evidence" },
+          { key: "scope_limits", label: "Applicability domain and limits stated" }
+        ],
+        packaging: [
+          { key: "main_pdf", label: "main.pdf generated" },
+          { key: "source_tarball", label: "source.tar.gz generated" }
+        ]
+      }
+    }
+  }
+};
 
 const tasksBoard = document.getElementById("tasksBoard");
 const emptyState = document.getElementById("emptyState");
@@ -34,6 +73,7 @@ let tasks = [];
 let repoSnapshot = null;
 let usingLocalDraft = false;
 let githubStatusText = "not saved";
+let profileData = FALLBACK_PROFILES;
 
 function nowIso() {
   return new Date().toISOString();
@@ -92,6 +132,139 @@ function parseMaterialsText(text) {
     });
 }
 
+function statusClass(status) {
+  return String(status || "").toLowerCase().replace(/\s+/g, "-");
+}
+
+function statusCountSummary() {
+  const counter = new Map();
+  tasks.forEach((task) => {
+    const key = task.status || "Unknown";
+    counter.set(key, (counter.get(key) || 0) + 1);
+  });
+
+  return Array.from(counter.entries())
+    .map(([key, value]) => `${key}:${value}`)
+    .join(" | ");
+}
+
+function journalCodes() {
+  return Object.keys(profileData.journals || {});
+}
+
+function getGroupAlias(group) {
+  return (profileData.groups && profileData.groups[group]) || `G_${group}`;
+}
+
+function isKnownJournal(code) {
+  return Boolean(profileData.journals && profileData.journals[code]);
+}
+
+function getJournalCode(code) {
+  if (isKnownJournal(code)) return code;
+  if (isKnownJournal(DEFAULT_JOURNAL)) return DEFAULT_JOURNAL;
+  const codes = journalCodes();
+  return codes.length > 0 ? codes[0] : DEFAULT_JOURNAL;
+}
+
+function getProfile(code) {
+  return profileData.journals[getJournalCode(code)] || null;
+}
+
+function gateItemsFor(journalCode, group) {
+  const profile = getProfile(journalCode);
+  if (!profile || !profile.gates || !Array.isArray(profile.gates[group])) {
+    return [];
+  }
+  return profile.gates[group];
+}
+
+function createDoneTemplate(journalCode) {
+  const template = {
+    eng: {},
+    journal: {},
+    science: {},
+    packaging: {}
+  };
+
+  DONE_GROUP_ORDER.forEach((group) => {
+    gateItemsFor(journalCode, group).forEach((item) => {
+      template[group][item.key] = false;
+    });
+  });
+
+  return template;
+}
+
+function normalizeDone(done, journalCode) {
+  const template = createDoneTemplate(journalCode);
+  const source = done && typeof done === "object" ? done : {};
+
+  DONE_GROUP_ORDER.forEach((group) => {
+    const sourceGroup = source[group] && typeof source[group] === "object" ? source[group] : {};
+    const normalizedGroup = {};
+
+    Object.keys(template[group]).forEach((key) => {
+      normalizedGroup[key] = Boolean(sourceGroup[key]);
+    });
+
+    Object.entries(sourceGroup).forEach(([key, value]) => {
+      if (!(key in normalizedGroup)) {
+        normalizedGroup[key] = Boolean(value);
+      }
+    });
+
+    template[group] = normalizedGroup;
+  });
+
+  return template;
+}
+
+function normalizeTask(task) {
+  const journal = getJournalCode(task.targetJournal);
+  return {
+    ...task,
+    targetJournal: journal,
+    materials: Array.isArray(task.materials) ? task.materials : [],
+    tags: Array.isArray(task.tags) ? task.tags : [],
+    done: normalizeDone(task.done, journal)
+  };
+}
+
+function normalizeTasks(inputTasks) {
+  return (Array.isArray(inputTasks) ? inputTasks : []).map((task) => normalizeTask(task));
+}
+
+function computeGroupProgress(task, group) {
+  const items = gateItemsFor(task.targetJournal, group);
+  const total = items.length;
+  const completed = items.filter((item) => Boolean(task.done && task.done[group] && task.done[group][item.key])).length;
+  return {
+    total,
+    completed,
+    ratio: total === 0 ? 1 : completed / total
+  };
+}
+
+function computeDoneProgress(task) {
+  const summary = {
+    total: 0,
+    completed: 0,
+    ratio: 0,
+    byGroup: {}
+  };
+
+  DONE_GROUP_ORDER.forEach((group) => {
+    const stats = computeGroupProgress(task, group);
+    summary.byGroup[group] = stats;
+    summary.total += stats.total;
+    summary.completed += stats.completed;
+  });
+
+  summary.ratio = summary.total === 0 ? 1 : summary.completed / summary.total;
+  return summary;
+}
+
 function materialsToHtml(materials) {
   if (!Array.isArray(materials) || materials.length === 0) {
     return `<span class="placeholder">—</span>`;
@@ -116,20 +289,77 @@ function materialsToHtml(materials) {
     .join("");
 }
 
-function statusClass(status) {
-  return String(status || "").toLowerCase().replace(/\s+/g, "-");
+function renderJournalOptions(selected) {
+  return journalCodes()
+    .map((code) => {
+      const profile = getProfile(code);
+      const isSelected = code === selected ? "selected" : "";
+      return `<option value="${escapeHtml(code)}" ${isSelected}>${escapeHtml(code)} · ${escapeHtml(profile.displayName || code)}</option>`;
+    })
+    .join("");
 }
 
-function statusCountSummary() {
-  const counter = new Map();
-  tasks.forEach((task) => {
-    const key = task.status || "Unknown";
-    counter.set(key, (counter.get(key) || 0) + 1);
-  });
+function renderGateGroup(task, group, stats) {
+  const alias = getGroupAlias(group);
+  const items = gateItemsFor(task.targetJournal, group);
+  const itemsHtml = items
+    .map((item) => {
+      const checked = Boolean(task.done && task.done[group] && task.done[group][item.key]);
+      return `
+        <label class="gate-item">
+          <input
+            type="checkbox"
+            data-action="toggle-gate"
+            data-id="${escapeHtml(task.id || "")}" 
+            data-group="${escapeHtml(group)}"
+            data-key="${escapeHtml(item.key)}"
+            ${checked ? "checked" : ""}
+          >
+          <span>${escapeHtml(item.label)}</span>
+        </label>
+      `;
+    })
+    .join("");
 
-  return Array.from(counter.entries())
-    .map(([key, value]) => `${key}:${value}`)
-    .join(" | ");
+  return `
+    <section class="gate-group">
+      <div class="gate-head">
+        <span class="gate-title">${escapeHtml(alias)}</span>
+        <span class="gate-count">${stats.completed}/${stats.total}</span>
+      </div>
+      <div class="gate-list">
+        ${itemsHtml || `<span class="placeholder">No gate configured.</span>`}
+      </div>
+    </section>
+  `;
+}
+
+function renderJournalGuidance(task) {
+  const profile = getProfile(task.targetJournal);
+  if (!profile) return "";
+
+  const skeletonHtml = (Array.isArray(profile.skeleton) ? profile.skeleton : [])
+    .map((item) => `<li>${escapeHtml(item)}</li>`)
+    .join("");
+  const artifactsHtml = (Array.isArray(profile.artifacts) ? profile.artifacts : [])
+    .map((item) => `<li>${escapeHtml(item)}</li>`)
+    .join("");
+
+  return `
+    <details class="journal-details">
+      <summary>Journal profile: ${escapeHtml(task.targetJournal)} · ${escapeHtml(profile.displayName || "")}</summary>
+      <div class="journal-hints">
+        <div>
+          <strong>Structure skeleton</strong>
+          <ul>${skeletonHtml || "<li>—</li>"}</ul>
+        </div>
+        <div>
+          <strong>Submission artifacts</strong>
+          <ul>${artifactsHtml || "<li>—</li>"}</ul>
+        </div>
+      </div>
+    </details>
+  `;
 }
 
 function render() {
@@ -144,10 +374,12 @@ function render() {
         const tagsHtml = tags.length
           ? tags.map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("")
           : `<span class="tag">untagged</span>`;
-        const statusToken = statusClass(task.status || "backlog");
-        const assigned = task.assignedResearcher ? escapeHtml(task.assignedResearcher) : "Unassigned";
+
+        const done = computeDoneProgress(task);
+        const donePct = Math.round(done.ratio * 100);
+        const doneState = done.total > 0 && done.completed === done.total ? "submission-ready" : "in-progress";
         const discovery = task.discoveryDate ? escapeHtml(task.discoveryDate) : "Not set";
-        const lastUpdate = task.updatedAt ? formatIsoForDisplay(task.updatedAt) : "-";
+        const assigned = task.assignedResearcher ? escapeHtml(task.assignedResearcher) : "Unassigned";
 
         return `
           <article class="project-card" data-id="${escapeHtml(task.id || "")}">
@@ -157,7 +389,7 @@ function render() {
                 <p class="project-id">${escapeHtml(task.id || "-")}</p>
               </div>
               <div class="card-actions">
-                <span class="chip status ${statusToken}">${escapeHtml(task.status || "Backlog")}</span>
+                <span class="chip status ${statusClass(task.status)}">${escapeHtml(task.status || "Backlog")}</span>
                 <span class="chip person">${assigned}</span>
                 <button class="btn delete-btn" type="button" data-action="delete" data-id="${escapeHtml(task.id || "")}">Delete</button>
               </div>
@@ -189,11 +421,36 @@ function render() {
               </section>
             </div>
 
+            <section class="done-contract">
+              <div class="done-head">
+                <div>
+                  <div class="done-title">DONE Contract</div>
+                  <div class="done-formula">${escapeHtml(DONE_FORMULA)}</div>
+                </div>
+                <div class="done-stats ${doneState}">${done.completed}/${done.total} · ${donePct}%</div>
+              </div>
+              <div class="done-bar"><span style="width:${donePct}%"></span></div>
+
+              <div class="journal-picker">
+                <label>
+                  <span>target_journal</span>
+                  <select data-action="set-journal" data-id="${escapeHtml(task.id || "")}">
+                    ${renderJournalOptions(task.targetJournal)}
+                  </select>
+                </label>
+              </div>
+
+              <div class="gate-grid">
+                ${DONE_GROUP_ORDER.map((group) => renderGateGroup(task, group, done.byGroup[group])).join("")}
+              </div>
+              ${renderJournalGuidance(task)}
+            </section>
+
             <div class="tag-group">${tagsHtml}</div>
 
             <div class="card-footer">
               <span>Created: ${formatIsoForDisplay(task.createdAt || "")}</span>
-              <span>Updated: ${lastUpdate}</span>
+              <span>Updated: ${formatIsoForDisplay(task.updatedAt || "")}</span>
             </div>
           </article>
         `;
@@ -212,6 +469,11 @@ function render() {
   if (githubSaveStatus) {
     githubSaveStatus.textContent = `github: ${githubStatusText}`;
   }
+}
+
+function setTaskUpdated(task) {
+  task.updatedAt = nowIso();
+  meta.updatedAt = nowIso();
 }
 
 function persistDraft() {
@@ -236,12 +498,31 @@ function loadLocalDraft() {
       return false;
     }
     meta = parsed.meta || {};
-    tasks = parsed.tasks;
+    tasks = normalizeTasks(parsed.tasks);
     usingLocalDraft = true;
     return true;
   } catch (error) {
     console.error("Failed to parse local draft:", error);
     return false;
+  }
+}
+
+async function loadJournalProfiles() {
+  try {
+    const response = await fetch(PROFILE_URL, { cache: "no-store" });
+    if (!response.ok) {
+      throw new Error(`Failed to load ${PROFILE_URL}: ${response.status}`);
+    }
+
+    const parsed = await response.json();
+    if (!parsed || !parsed.journals || typeof parsed.journals !== "object") {
+      throw new Error("Invalid journal profile file.");
+    }
+
+    profileData = parsed;
+  } catch (error) {
+    console.warn("Using fallback journal profiles:", error);
+    profileData = FALLBACK_PROFILES;
   }
 }
 
@@ -256,10 +537,14 @@ async function loadRepoData() {
     throw new Error("Invalid data file: tasks array is required.");
   }
 
-  repoSnapshot = parsed;
+  repoSnapshot = {
+    meta: parsed.meta || {},
+    tasks: normalizeTasks(parsed.tasks)
+  };
+
   if (!loadLocalDraft()) {
-    meta = parsed.meta || {};
-    tasks = parsed.tasks;
+    meta = deepClone(repoSnapshot.meta || {});
+    tasks = deepClone(repoSnapshot.tasks || []);
     usingLocalDraft = false;
   }
 }
@@ -281,7 +566,7 @@ function parseImportedPayload(text) {
   }
   return {
     meta: parsed.meta || {},
-    tasks: parsed.tasks
+    tasks: normalizeTasks(parsed.tasks)
   };
 }
 
@@ -302,6 +587,7 @@ function createTaskFromForm() {
     throw new Error("Project name is required.");
   }
 
+  const targetJournal = getJournalCode(String(formData.get("targetJournal") || DEFAULT_JOURNAL).trim());
   const timestamp = Date.now().toString(36);
   const id = `${slugify(projectName)}-${timestamp}`;
   const now = nowIso();
@@ -320,6 +606,8 @@ function createTaskFromForm() {
       .split(",")
       .map((tag) => tag.trim())
       .filter(Boolean),
+    targetJournal,
+    done: createDoneTemplate(targetJournal),
     createdAt: now,
     updatedAt: now
   };
@@ -396,9 +684,10 @@ function buildRepoPayload() {
     meta: {
       ...meta,
       sourceFile: SOURCE_FILE_HINT,
+      doneContract: meta.doneContract || DONE_FORMULA,
       updatedAt: nowIso()
     },
-    tasks: deepClone(tasks)
+    tasks: deepClone(normalizeTasks(tasks))
   };
 }
 
@@ -523,6 +812,33 @@ function openGitHubSaveDialog() {
   }
 }
 
+function changeTargetJournal(taskId, targetJournal) {
+  const nextJournal = getJournalCode(targetJournal);
+  const task = tasks.find((item) => item.id === taskId);
+  if (!task) return;
+
+  task.targetJournal = nextJournal;
+  task.done = normalizeDone(task.done, nextJournal);
+  setTaskUpdated(task);
+  persistDraft();
+}
+
+function toggleGate(taskId, group, key, checked) {
+  const task = tasks.find((item) => item.id === taskId);
+  if (!task) return;
+
+  if (!task.done || typeof task.done !== "object") {
+    task.done = createDoneTemplate(task.targetJournal);
+  }
+  if (!task.done[group] || typeof task.done[group] !== "object") {
+    task.done[group] = {};
+  }
+
+  task.done[group][key] = Boolean(checked);
+  setTaskUpdated(task);
+  persistDraft();
+}
+
 function attachEvents() {
   newTaskBtn.addEventListener("click", () => {
     if (typeof taskDialog.showModal === "function") {
@@ -542,6 +858,7 @@ function attachEvents() {
       persistDraft();
       taskDialog.close();
       taskForm.reset();
+      taskForm.elements.targetJournal.value = DEFAULT_JOURNAL;
     } catch (error) {
       alert(error.message);
     }
@@ -559,7 +876,28 @@ function attachEvents() {
       if (!confirmed) return;
 
       tasks = tasks.filter((task) => task.id !== id);
+      meta.updatedAt = nowIso();
       persistDraft();
+    }
+  });
+
+  tasksBoard.addEventListener("change", (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLElement)) return;
+
+    if (target.dataset.action === "set-journal" && target instanceof HTMLSelectElement) {
+      const id = target.dataset.id;
+      if (!id) return;
+      changeTargetJournal(id, target.value);
+      return;
+    }
+
+    if (target.dataset.action === "toggle-gate" && target instanceof HTMLInputElement) {
+      const id = target.dataset.id;
+      const group = target.dataset.group;
+      const key = target.dataset.key;
+      if (!id || !group || !key) return;
+      toggleGate(id, group, key, target.checked);
     }
   });
 
@@ -662,7 +1000,11 @@ function attachEvents() {
 
 async function init() {
   try {
+    await loadJournalProfiles();
     await loadRepoData();
+    if (!meta.doneContract) {
+      meta.doneContract = DONE_FORMULA;
+    }
     attachEvents();
     render();
   } catch (error) {

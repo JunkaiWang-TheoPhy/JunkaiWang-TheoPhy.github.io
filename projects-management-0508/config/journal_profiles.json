@@ -1,0 +1,273 @@
+{
+  "version": 1,
+  "groups": {
+    "eng": "G_eng",
+    "journal": "G_journal",
+    "science": "G_science",
+    "packaging": "G_packaging"
+  },
+  "journals": {
+    "PRL": {
+      "displayName": "Physical Review Letters",
+      "skeleton": [
+        "Minimal main text",
+        "Run-in headings when needed",
+        "Supplemental Material for long derivations"
+      ],
+      "artifacts": [
+        "main.pdf",
+        "supplement.pdf or supplement.tex",
+        "vector figures",
+        "metadata.json"
+      ],
+      "gates": {
+        "eng": [
+          { "key": "compile", "label": "latexmk -pdf passes" },
+          { "key": "refs_clean", "label": "No undefined references" },
+          { "key": "lint_clean", "label": "Lint/format checks pass" },
+          { "key": "repro_scripts", "label": "Repro scripts executable" }
+        ],
+        "journal": [
+          { "key": "title_case", "label": "Title uses APS title case" },
+          { "key": "abstract_char_600", "label": "Abstract <= 600 chars" },
+          { "key": "word_limit_3750", "label": "Main text <= 3750 words" },
+          { "key": "das_runin", "label": "Data availability run-in heading used" },
+          { "key": "appendix_after_refs", "label": "Appendix is in end matter after references" },
+          { "key": "sm_referenced", "label": "Supplemental Material referenced in main text" }
+        ],
+        "science": [
+          { "key": "claims_evidence_trace", "label": "Claims map to explicit evidence" },
+          { "key": "error_budget", "label": "Uncertainties and error budget documented" },
+          { "key": "controls_or_baselines", "label": "Controls/baselines included" },
+          { "key": "scope_limits", "label": "Applicability domain and limits stated" }
+        ],
+        "packaging": [
+          { "key": "main_pdf", "label": "main.pdf generated" },
+          { "key": "supplement_pdf_or_tex", "label": "Supplement artifact ready" },
+          { "key": "figures_vector", "label": "Figure assets packaged" },
+          { "key": "metadata_json", "label": "metadata.json contains counts and checks" }
+        ]
+      }
+    },
+    "PRX": {
+      "displayName": "Physical Review X",
+      "skeleton": [
+        "Full-structure manuscript",
+        "Popular summary for non-specialists",
+        "Data availability section"
+      ],
+      "artifacts": [
+        "main.pdf",
+        "popular_summary.md",
+        "figures",
+        "data/code links"
+      ],
+      "gates": {
+        "eng": [
+          { "key": "compile", "label": "latexmk -pdf passes" },
+          { "key": "refs_clean", "label": "No undefined references" },
+          { "key": "lint_clean", "label": "Lint/format checks pass" },
+          { "key": "repro_scripts", "label": "Repro scripts executable" }
+        ],
+        "journal": [
+          { "key": "title_case", "label": "Title uses APS title case" },
+          { "key": "popular_summary_150", "label": "Popular Summary <= 150 words" },
+          { "key": "das_present", "label": "Data availability statement present" }
+        ],
+        "science": [
+          { "key": "claims_evidence_trace", "label": "Claims map to explicit evidence" },
+          { "key": "error_budget", "label": "Uncertainties and error budget documented" },
+          { "key": "controls_or_baselines", "label": "Controls/baselines included" },
+          { "key": "scope_limits", "label": "Applicability domain and limits stated" }
+        ],
+        "packaging": [
+          { "key": "main_pdf", "label": "main.pdf generated" },
+          { "key": "popular_summary_md", "label": "popular_summary.md ready" },
+          { "key": "figures_ready", "label": "Figure assets packaged" },
+          { "key": "data_links", "label": "Code/data links included" }
+        ]
+      }
+    },
+    "PRD": {
+      "displayName": "Physical Review D",
+      "skeleton": [
+        "Introduction",
+        "Setup/Conventions",
+        "Methods/Formalism",
+        "Results",
+        "Discussion",
+        "Conclusions",
+        "Acknowledgments",
+        "Data availability",
+        "Appendices",
+        "References"
+      ],
+      "artifacts": [
+        "main.pdf",
+        "source.tar.gz",
+        "figures with PRD constraints",
+        "data_availability.md"
+      ],
+      "gates": {
+        "eng": [
+          { "key": "compile", "label": "latexmk -pdf passes" },
+          { "key": "refs_clean", "label": "No undefined references" },
+          { "key": "lint_clean", "label": "Lint/format checks pass" },
+          { "key": "python_tests", "label": "Python tests pass" },
+          { "key": "repro_scripts", "label": "Repro scripts executable" }
+        ],
+        "journal": [
+          { "key": "title_sentence_case", "label": "Title uses sentence case" },
+          { "key": "abstract_lt_500_words", "label": "Abstract < 500 words" },
+          { "key": "figure_rules_prd", "label": "Figure width/font/line/dpi checks pass" },
+          { "key": "das_principal_heading", "label": "Data availability as principal heading" }
+        ],
+        "science": [
+          { "key": "claims_evidence_trace", "label": "Claims map to explicit evidence" },
+          { "key": "error_budget", "label": "Uncertainties and error budget documented" },
+          { "key": "controls_or_baselines", "label": "Controls/baselines included" },
+          { "key": "scope_limits", "label": "Applicability domain and limits stated" }
+        ],
+        "packaging": [
+          { "key": "main_pdf", "label": "main.pdf generated" },
+          { "key": "source_tarball", "label": "source.tar.gz generated" },
+          { "key": "figures_ready", "label": "Figure assets packaged" },
+          { "key": "das_text_with_data_refs", "label": "DAS text includes data references" }
+        ]
+      }
+    },
+    "JHEP": {
+      "displayName": "Journal of High Energy Physics",
+      "skeleton": [
+        "Introduction with roadmap",
+        "Setup & conventions",
+        "Main derivations",
+        "Results and checks",
+        "Discussion/Outlook",
+        "Appendix",
+        "References"
+      ],
+      "artifacts": [
+        "main.pdf",
+        "source.zip or source.tar.gz",
+        "figures"
+      ],
+      "gates": {
+        "eng": [
+          { "key": "compile", "label": "latexmk -pdf passes" },
+          { "key": "refs_clean", "label": "No undefined references" },
+          { "key": "lint_clean", "label": "Lint/format checks pass" },
+          { "key": "repro_scripts", "label": "Repro scripts executable" }
+        ],
+        "journal": [
+          { "key": "jheppub_class", "label": "jheppub class/package configured" },
+          { "key": "title_case_jhep", "label": "JHEP title capitalization policy followed" },
+          { "key": "title_page_macros", "label": "Required title-page macros present" },
+          { "key": "toc_present", "label": "Table of contents included (unless short note)" },
+          { "key": "appendix_descriptive", "label": "Appendix has descriptive titles" },
+          { "key": "figures_tables_referenced", "label": "All figures/tables referenced in text" }
+        ],
+        "science": [
+          { "key": "claims_evidence_trace", "label": "Claims map to explicit evidence" },
+          { "key": "error_budget", "label": "Uncertainties and error budget documented" },
+          { "key": "controls_or_baselines", "label": "Controls/baselines included" },
+          { "key": "scope_limits", "label": "Applicability domain and limits stated" }
+        ],
+        "packaging": [
+          { "key": "main_pdf", "label": "main.pdf generated" },
+          { "key": "source_bundle", "label": "Submission source bundle generated" },
+          { "key": "figures_embedded_fonts", "label": "Figures are publication-ready" }
+        ]
+      }
+    },
+    "SciPost": {
+      "displayName": "SciPost Physics",
+      "skeleton": [
+        "Title/Authors/Abstract",
+        "Main sections",
+        "Acknowledgements",
+        "Funding information",
+        "Competing interests",
+        "Appendices",
+        "References with DOI"
+      ],
+      "artifacts": [
+        "main.pdf",
+        "source.tar.gz",
+        "funding.yaml",
+        "supplement_links.md"
+      ],
+      "gates": {
+        "eng": [
+          { "key": "compile", "label": "latexmk -pdf passes" },
+          { "key": "refs_clean", "label": "No undefined references" },
+          { "key": "lint_clean", "label": "Lint/format checks pass" },
+          { "key": "repro_scripts", "label": "Repro scripts executable" }
+        ],
+        "journal": [
+          { "key": "scipost_style", "label": "SciPost style/template used" },
+          { "key": "doi_in_refs", "label": "All external refs include DOI" },
+          { "key": "hyperref_links", "label": "Equation and reference hyperlinks enabled" },
+          { "key": "title_len_150", "label": "Title length <= 150 characters" },
+          { "key": "abstract_200_words", "label": "Abstract around 200 words" },
+          { "key": "funding_info_required", "label": "Funding information block exists" },
+          { "key": "supplement_links_public", "label": "Supplement links point to public repos" }
+        ],
+        "science": [
+          { "key": "claims_evidence_trace", "label": "Claims map to explicit evidence" },
+          { "key": "error_budget", "label": "Uncertainties and error budget documented" },
+          { "key": "controls_or_baselines", "label": "Controls/baselines included" },
+          { "key": "scope_limits", "label": "Applicability domain and limits stated" }
+        ],
+        "packaging": [
+          { "key": "main_pdf", "label": "main.pdf generated" },
+          { "key": "source_tarball_with_cls", "label": "source.tar.gz includes class/style files" },
+          { "key": "funding_yaml", "label": "funding.yaml prepared" },
+          { "key": "supplement_links_md", "label": "supplement_links.md prepared" }
+        ]
+      }
+    },
+    "CQG": {
+      "displayName": "Classical and Quantum Gravity",
+      "skeleton": [
+        "Introduction",
+        "Methods",
+        "Results",
+        "Discussion",
+        "Conclusion",
+        "Acknowledgements",
+        "References"
+      ],
+      "artifacts": [
+        "single submission PDF",
+        "supplementary data links",
+        "optional iopart source bundle"
+      ],
+      "gates": {
+        "eng": [
+          { "key": "compile", "label": "latexmk -pdf passes" },
+          { "key": "refs_clean", "label": "No undefined references" },
+          { "key": "lint_clean", "label": "Lint/format checks pass" },
+          { "key": "repro_scripts", "label": "Repro scripts executable" }
+        ],
+        "journal": [
+          { "key": "imrd_structure", "label": "IMRD structure is present" },
+          { "key": "acronym_expanded", "label": "Acronyms expanded on first use" },
+          { "key": "broad_readability", "label": "Readable to broad CQG audience" },
+          { "key": "conclusion_novelty", "label": "Conclusion states novelty and significance" }
+        ],
+        "science": [
+          { "key": "claims_evidence_trace", "label": "Claims map to explicit evidence" },
+          { "key": "error_budget", "label": "Uncertainties and error budget documented" },
+          { "key": "controls_or_baselines", "label": "Controls/baselines included" },
+          { "key": "scope_limits", "label": "Applicability domain and limits stated" }
+        ],
+        "packaging": [
+          { "key": "single_pdf_submission", "label": "Single submission PDF generated" },
+          { "key": "supplementary_data_links", "label": "Supplementary data links attached" },
+          { "key": "optional_iop_template_bundle", "label": "Optional iopart source bundle prepared" }
+        ]
+      }
+    }
+  }
+}

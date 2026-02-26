@@ -3,8 +3,9 @@
     "title": "Research Projects",
     "description": "Project management board for /projects-management-0508",
     "sourceFile": "projects-management-0508/data/tasks.json",
-    "version": 1,
-    "updatedAt": "2026-02-26T00:00:00Z"
+    "version": 2,
+    "doneContract": "DONE(PR)=G_eng AND G_journal AND G_science AND G_packaging",
+    "updatedAt": "2026-02-26T06:46:21Z"
   },
   "tasks": [
     {
@@ -27,8 +28,36 @@
         "cosmology",
         "DESI"
       ],
+      "targetJournal": "PRD",
+      "done": {
+        "eng": {
+          "compile": false,
+          "refs_clean": false,
+          "lint_clean": false,
+          "python_tests": false,
+          "repro_scripts": false
+        },
+        "journal": {
+          "title_sentence_case": false,
+          "abstract_lt_500_words": false,
+          "figure_rules_prd": false,
+          "das_principal_heading": false
+        },
+        "science": {
+          "claims_evidence_trace": true,
+          "error_budget": false,
+          "controls_or_baselines": false,
+          "scope_limits": false
+        },
+        "packaging": {
+          "main_pdf": false,
+          "source_tarball": false,
+          "figures_ready": false,
+          "das_text_with_data_refs": false
+        }
+      },
       "createdAt": "2026-02-20T10:00:00Z",
-      "updatedAt": "2026-02-20T10:00:00Z"
+      "updatedAt": "2026-02-26T06:46:21Z"
     },
     {
       "id": "weak-symmetry-ads-cft",
@@ -44,6 +73,34 @@
         "AdS/CFT",
         "weak symmetry"
       ],
+      "targetJournal": "JHEP",
+      "done": {
+        "eng": {
+          "compile": false,
+          "refs_clean": false,
+          "lint_clean": false,
+          "repro_scripts": false
+        },
+        "journal": {
+          "jheppub_class": false,
+          "title_case_jhep": false,
+          "title_page_macros": false,
+          "toc_present": false,
+          "appendix_descriptive": false,
+          "figures_tables_referenced": false
+        },
+        "science": {
+          "claims_evidence_trace": false,
+          "error_budget": false,
+          "controls_or_baselines": false,
+          "scope_limits": false
+        },
+        "packaging": {
+          "main_pdf": false,
+          "source_bundle": false,
+          "figures_embedded_fonts": false
+        }
+      },
       "createdAt": "2026-02-20T10:00:00Z",
       "updatedAt": "2026-02-20T10:00:00Z"
     },
@@ -62,6 +119,36 @@
         "black hole",
         "EFT"
       ],
+      "targetJournal": "SciPost",
+      "done": {
+        "eng": {
+          "compile": false,
+          "refs_clean": false,
+          "lint_clean": false,
+          "repro_scripts": false
+        },
+        "journal": {
+          "scipost_style": false,
+          "doi_in_refs": false,
+          "hyperref_links": false,
+          "title_len_150": false,
+          "abstract_200_words": false,
+          "funding_info_required": false,
+          "supplement_links_public": false
+        },
+        "science": {
+          "claims_evidence_trace": false,
+          "error_budget": false,
+          "controls_or_baselines": false,
+          "scope_limits": false
+        },
+        "packaging": {
+          "main_pdf": false,
+          "source_tarball_with_cls": false,
+          "funding_yaml": false,
+          "supplement_links_md": false
+        }
+      },
       "createdAt": "2026-02-20T10:00:00Z",
       "updatedAt": "2026-02-20T10:00:00Z"
     }

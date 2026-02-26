@@ -85,22 +85,28 @@ class ArxivSpider(scrapy.Spider):
                 continue
             
             # 提取论文分类信息 - 在subjects部分
-            subjects_text = paper_dd.css(".list-subjects .primary-subject::text").get()
-            if not subjects_text:
-                # 如果找不到主分类，尝试其他方式获取分类
-                subjects_text = paper_dd.css(".list-subjects::text").get()
+            subject_text_parts = paper_dd.css(".list-subjects *::text").getall()
+            subjects_text = " ".join(
+                part.strip() for part in subject_text_parts if part and part.strip()
+            )
             
             if subjects_text:
                 # 解析分类信息，通常格式如 "Computer Vision and Pattern Recognition (cs.CV)"
                 # 提取括号中的分类代码
                 categories_in_paper = re.findall(r'\(([^)]+)\)', subjects_text)
+                expanded_categories = []
+                for category_group in categories_in_paper:
+                    for category in category_group.split(","):
+                        code = category.strip()
+                        if code:
+                            expanded_categories.append(code)
                 
                 # 检查论文分类是否与目标分类有交集
-                paper_categories = set(categories_in_paper)
+                paper_categories = set(expanded_categories)
                 if self.matches_target_categories(paper_categories):
                     yield {
                         "id": arxiv_id,
-                        "categories": list(paper_categories),  # 添加分类信息用于调试
+                        "categories": sorted(paper_categories),  # 添加分类信息用于调试
                     }
                     self.logger.info(f"Found paper {arxiv_id} with categories {paper_categories}")
                 else:

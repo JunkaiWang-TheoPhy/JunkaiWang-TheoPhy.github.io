@@ -1,4 +1,6 @@
-Please analyze the following abstract of papers. 
+请基于以下论文摘要生成结构化分析。
+要求：中文为主，关键英文术语在首次出现时用括号标注英文原词（例如“统计力学（statistical mechanics）”）。
+请仅依据摘要内容，不要编造未出现的信息。
 
-Content:
+摘要内容：
 {content}

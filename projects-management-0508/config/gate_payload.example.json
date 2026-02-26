@@ -1,0 +1,27 @@
+{
+  "eng": {
+    "compile": true,
+    "refs_clean": true,
+    "lint_clean": true,
+    "python_tests": true,
+    "repro_scripts": true
+  },
+  "journal": {
+    "title_sentence_case": true,
+    "abstract_lt_500_words": true,
+    "figure_rules_prd": false,
+    "das_principal_heading": true
+  },
+  "science": {
+    "claims_evidence_trace": true,
+    "error_budget": false,
+    "controls_or_baselines": false,
+    "scope_limits": true
+  },
+  "packaging": {
+    "main_pdf": true,
+    "source_tarball": true,
+    "figures_ready": false,
+    "das_text_with_data_refs": false
+  }
+}
