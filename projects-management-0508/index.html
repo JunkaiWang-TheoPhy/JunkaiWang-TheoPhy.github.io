@@ -1,23 +1,29 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-Hans">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Projects Management 0508</title>
+  <link rel="icon" type="image/svg+xml" href="../timer/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=Fredoka:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-  <div class="ambient ambient-a"></div>
-  <div class="ambient ambient-b"></div>
+  <div class="bg-blobs" aria-hidden="true">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 
   <main class="pm-shell">
-    <header class="hero">
-      <div>
+    <header class="hero panel">
+      <div class="hero-text">
+        <p class="eyebrow">Projects Management 0508</p>
         <h1>Research Projects</h1>
-        <p class="subtitle">projects-management-0508 · agent-ready task board</p>
+        <p class="subtitle">每个项目一张卡片，便于网页编辑和 agent 自动化增删改。</p>
       </div>
       <div class="hero-meta">
         <p id="dataSourceHint"></p>
@@ -25,45 +31,38 @@
       </div>
     </header>
 
-    <nav class="view-tabs" aria-label="project views">
+    <nav class="view-tabs panel" aria-label="project views">
       <button class="tab is-active" type="button">All Projects</button>
       <button class="tab" type="button" disabled>Status Board</button>
       <button class="tab" type="button" disabled>Timeline</button>
     </nav>
 
-    <section class="toolbar" aria-label="task controls">
+    <section class="toolbar panel" aria-label="task controls">
       <button id="newTaskBtn" class="btn btn-primary" type="button">+ New Task</button>
       <button id="restoreBtn" class="btn" type="button">Restore Repo Version</button>
       <button id="exportBtn" class="btn" type="button">Export JSON</button>
       <label class="btn import-label" for="importInput">Import JSON</label>
       <input id="importInput" class="visually-hidden" type="file" accept="application/json,.json">
+      <button id="saveGithubBtn" class="btn btn-primary" type="button">Save to GitHub</button>
       <button id="clearDraftBtn" class="btn" type="button">Clear Local Draft</button>
     </section>
 
-    <section class="status-strip" aria-live="polite">
+    <section class="status-strip panel" aria-live="polite">
       <span id="taskCount">0 tasks</span>
       <span id="lastUpdated">updated: -</span>
       <span id="statusSummary">status: -</span>
+      <span id="githubSaveStatus">github: not saved</span>
     </section>
 
-    <section class="table-shell">
-      <table>
-        <thead>
-          <tr>
-            <th>Project Name</th>
-            <th>Discovery Date</th>
-            <th>Status</th>
-            <th>Status Reason</th>
-            <th>Ideas</th>
-            <th>Notes</th>
-            <th>Materials</th>
-            <th>Assigned Researcher</th>
-            <th>Tags</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody id="tasksBody"></tbody>
-      </table>
+    <section class="board-shell panel">
+      <div class="board-head">
+        <h2>Project Cards</h2>
+        <p>每个项目独立板块，可单独删除、批量导入导出和推送 GitHub。</p>
+      </div>
+      <div id="tasksBoard" class="project-grid"></div>
+      <div id="emptyState" class="empty-state" hidden>
+        <p>还没有项目任务，点击 <strong>+ New Task</strong> 新建第一张卡片。</p>
+      </div>
     </section>
   </main>
 
@@ -130,6 +129,56 @@
         <button class="btn btn-primary" type="submit">Create Task</button>
         <button id="cancelDialogBtn" class="btn" type="button">Cancel</button>
       </footer>
+    </form>
+  </dialog>
+
+  <dialog id="githubSaveDialog" class="task-dialog">
+    <form id="githubSaveForm" method="dialog">
+      <header class="dialog-header">
+        <h2>Save to GitHub</h2>
+        <button id="closeSaveDialogBtn" class="icon-btn" type="button" aria-label="close save dialog">x</button>
+      </header>
+
+      <p class="dialog-note">Token is used only for this save request. Required token scope: repository contents write.</p>
+
+      <div class="form-grid">
+        <label>
+          Owner*
+          <input type="text" name="owner" required>
+        </label>
+
+        <label>
+          Repository*
+          <input type="text" name="repo" required>
+        </label>
+
+        <label>
+          Branch*
+          <input type="text" name="branch" value="main" required>
+        </label>
+
+        <label>
+          File Path*
+          <input type="text" name="path" value="projects-management-0508/data/tasks.json" required>
+        </label>
+
+        <label class="full-width">
+          Commit Message*
+          <input type="text" name="message" value="chore(projects-management-0508): update tasks board" required>
+        </label>
+
+        <label class="full-width">
+          Personal Access Token*
+          <input type="password" name="token" autocomplete="off" required>
+        </label>
+      </div>
+
+      <footer class="dialog-actions">
+        <button id="pushGithubBtn" class="btn btn-primary" type="submit">Push tasks.json</button>
+        <button id="cancelSaveDialogBtn" class="btn" type="button">Cancel</button>
+      </footer>
+
+      <p id="githubSaveResult" class="save-result" aria-live="polite"></p>
     </form>
   </dialog>
 

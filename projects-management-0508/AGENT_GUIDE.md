@@ -59,6 +59,12 @@ python3 projects-management-0508/scripts/manage_tasks.py delete --id "ai-for-phy
 - `Delete`: remove task
 - `Export JSON`: download current board state
 - `Import JSON`: load batch updates
+- `Save to GitHub`: push current board state to target repo/path via GitHub API
 - `Restore Repo Version`: discard browser draft and reload `data/tasks.json`
 
-Note: browser edits are stored in local draft only. To publish permanently, update `data/tasks.json` in git.
+`Save to GitHub` details:
+- Provide `owner`, `repo`, `branch`, `path` and a PAT with `contents: write`.
+- The UI fetches current file SHA then commits updated JSON via `PUT /repos/{owner}/{repo}/contents/{path}`.
+- Token is not saved to repository files.
+
+Note: browser edits are stored in local draft unless you explicitly save to GitHub or update `data/tasks.json` in git.
