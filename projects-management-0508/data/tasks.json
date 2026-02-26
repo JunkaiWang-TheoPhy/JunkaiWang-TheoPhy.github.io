@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "title": "Research Projects",
+    "description": "Project management board for /projects-management-0508",
+    "sourceFile": "projects-management-0508/data/tasks.json",
+    "version": 1,
+    "updatedAt": "2026-02-26T00:00:00Z"
+  },
+  "tasks": [
+    {
+      "id": "desi-swampland",
+      "projectName": "DESI and Swampland",
+      "discoveryDate": "2025-03-09",
+      "status": "Blocked",
+      "statusReason": "Existing related claim appeared in September 2024.",
+      "ideas": "Connect swampland constraints with w0-waCDM and the coincidence tension.",
+      "notes": "Lead author is early-career but the paper framing is strong.",
+      "materials": [
+        {
+          "label": "2409.14990",
+          "url": "https://arxiv.org/abs/2409.14990"
+        }
+      ],
+      "assignedResearcher": "Thomas",
+      "tags": [
+        "swampland",
+        "cosmology",
+        "DESI"
+      ],
+      "createdAt": "2026-02-20T10:00:00Z",
+      "updatedAt": "2026-02-20T10:00:00Z"
+    },
+    {
+      "id": "weak-symmetry-ads-cft",
+      "projectName": "Weak Symmetry and AdS/CFT",
+      "discoveryDate": "2025-01-12",
+      "status": "In Progress",
+      "statusReason": "Need a cleaner bridge between weak symmetry and mixed states.",
+      "ideas": "Use weak symmetry as the organizing principle for mixed-state factorization.",
+      "notes": "Collect examples from Zhi-da's lectures.",
+      "materials": [],
+      "assignedResearcher": "Thomas",
+      "tags": [
+        "AdS/CFT",
+        "weak symmetry"
+      ],
+      "createdAt": "2026-02-20T10:00:00Z",
+      "updatedAt": "2026-02-20T10:00:00Z"
+    },
+    {
+      "id": "double-copy-hypersurface-bh",
+      "projectName": "Double Copy for Hypersurface of BH",
+      "discoveryDate": "2024-12-08",
+      "status": "In Progress",
+      "statusReason": "Conceptual path exists but UV completion and EFT matching remain open.",
+      "ideas": "Search for a robust notion of double copy in extended object cases.",
+      "notes": "Potentially high payoff; requires careful EFT control.",
+      "materials": [],
+      "assignedResearcher": "Thomas",
+      "tags": [
+        "double copy",
+        "black hole",
+        "EFT"
+      ],
+      "createdAt": "2026-02-20T10:00:00Z",
+      "updatedAt": "2026-02-20T10:00:00Z"
+    }
+  ]
+}

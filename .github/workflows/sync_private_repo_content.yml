@@ -1,0 +1,73 @@
+name: Sync Private Repo Content
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 */6 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-private-repo-content
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    env:
+      # ===== Configure these values =====
+      PRIVATE_REPO: "thomasjwang/YOUR_PRIVATE_REPO"
+      PRIVATE_REPO_REF: "main"
+      PRIVATE_REPO_SUBDIR: "path/in/private/repo"
+      DEST_SUBDIR: "files/private-sync"
+      # ================================
+
+    steps:
+      - name: Checkout current repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Checkout private source repository
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.PRIVATE_REPO }}
+          ref: ${{ env.PRIVATE_REPO_REF }}
+          token: ${{ secrets.PRIVATE_REPO_PAT }}
+          path: .tmp/private-source
+          fetch-depth: 1
+
+      - name: Validate source directory exists
+        run: |
+          set -euo pipefail
+          src=".tmp/private-source/${PRIVATE_REPO_SUBDIR}"
+          if [ ! -d "$src" ]; then
+            echo "Source directory does not exist: $src"
+            exit 1
+          fi
+
+      - name: Sync files
+        run: |
+          set -euo pipefail
+          src=".tmp/private-source/${PRIVATE_REPO_SUBDIR}/"
+          dst="${DEST_SUBDIR}/"
+
+          mkdir -p "$dst"
+          rsync -a --delete "$src" "$dst"
+
+      - name: Commit and push if changed
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add "${DEST_SUBDIR}"
+
+          if git diff --staged --quiet; then
+            echo "No changes detected."
+            exit 0
+          fi
+
+          git commit -m "chore(sync): update content from ${PRIVATE_REPO}:${PRIVATE_REPO_SUBDIR}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"

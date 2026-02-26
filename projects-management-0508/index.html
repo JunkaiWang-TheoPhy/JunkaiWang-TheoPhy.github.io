@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projects Management 0508</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="ambient ambient-a"></div>
+  <div class="ambient ambient-b"></div>
+
+  <main class="pm-shell">
+    <header class="hero">
+      <div>
+        <h1>Research Projects</h1>
+        <p class="subtitle">projects-management-0508 · agent-ready task board</p>
+      </div>
+      <div class="hero-meta">
+        <p id="dataSourceHint"></p>
+        <p id="draftHint"></p>
+      </div>
+    </header>
+
+    <nav class="view-tabs" aria-label="project views">
+      <button class="tab is-active" type="button">All Projects</button>
+      <button class="tab" type="button" disabled>Status Board</button>
+      <button class="tab" type="button" disabled>Timeline</button>
+    </nav>
+
+    <section class="toolbar" aria-label="task controls">
+      <button id="newTaskBtn" class="btn btn-primary" type="button">+ New Task</button>
+      <button id="restoreBtn" class="btn" type="button">Restore Repo Version</button>
+      <button id="exportBtn" class="btn" type="button">Export JSON</button>
+      <label class="btn import-label" for="importInput">Import JSON</label>
+      <input id="importInput" class="visually-hidden" type="file" accept="application/json,.json">
+      <button id="clearDraftBtn" class="btn" type="button">Clear Local Draft</button>
+    </section>
+
+    <section class="status-strip" aria-live="polite">
+      <span id="taskCount">0 tasks</span>
+      <span id="lastUpdated">updated: -</span>
+      <span id="statusSummary">status: -</span>
+    </section>
+
+    <section class="table-shell">
+      <table>
+        <thead>
+          <tr>
+            <th>Project Name</th>
+            <th>Discovery Date</th>
+            <th>Status</th>
+            <th>Status Reason</th>
+            <th>Ideas</th>
+            <th>Notes</th>
+            <th>Materials</th>
+            <th>Assigned Researcher</th>
+            <th>Tags</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="tasksBody"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <dialog id="taskDialog" class="task-dialog">
+    <form id="taskForm" method="dialog">
+      <header class="dialog-header">
+        <h2>New Task</h2>
+        <button id="closeDialogBtn" class="icon-btn" type="button" aria-label="close dialog">x</button>
+      </header>
+
+      <div class="form-grid">
+        <label>
+          Project Name*
+          <input type="text" name="projectName" required>
+        </label>
+
+        <label>
+          Discovery Date
+          <input type="date" name="discoveryDate">
+        </label>
+
+        <label>
+          Status
+          <select name="status">
+            <option>Backlog</option>
+            <option selected>In Progress</option>
+            <option>Blocked</option>
+            <option>Done</option>
+          </select>
+        </label>
+
+        <label>
+          Assigned Researcher
+          <input type="text" name="assignedResearcher" placeholder="Thomas">
+        </label>
+
+        <label class="full-width">
+          Status Reason
+          <textarea name="statusReason" rows="2" placeholder="Why this status?"></textarea>
+        </label>
+
+        <label class="full-width">
+          Ideas
+          <textarea name="ideas" rows="4" placeholder="Core idea / direction"></textarea>
+        </label>
+
+        <label class="full-width">
+          Notes
+          <textarea name="notes" rows="3" placeholder="Comments, warnings, next step"></textarea>
+        </label>
+
+        <label class="full-width">
+          Materials (one per line, format: label|url)
+          <textarea name="materialsText" rows="3" placeholder="2409.14990|https://arxiv.org/abs/2409.14990"></textarea>
+        </label>
+
+        <label class="full-width">
+          Tags (comma separated)
+          <input type="text" name="tags" placeholder="swampland, cosmology">
+        </label>
+      </div>
+
+      <footer class="dialog-actions">
+        <button class="btn btn-primary" type="submit">Create Task</button>
+        <button id="cancelDialogBtn" class="btn" type="button">Cancel</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <script src="./app.js"></script>
+</body>
+</html>
