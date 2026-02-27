@@ -1,0 +1,237 @@
+{
+  "ok": true,
+  "mode": "demo",
+  "generated_at": "2026-02-27T02:30:00Z",
+  "llm_enabled": false,
+  "llm_model": "deepseek-chat",
+  "selected_id": "2602.22124",
+  "digest": {
+    "date": "2026-02-26",
+    "hot_count": 3,
+    "focus_count": 6,
+    "read_later_count": 12,
+    "topic_tags": ["Agent", "RLVR", "CoT", "SFT", "Benchmark", "Distillation", "Code"],
+    "summary_blocks": [
+      {
+        "title": "今天有什么值得看？",
+        "content": "Agent + RL 的组合在今天非常密集，GUI Agent 和 SWE 任务成为主战场。优先读带火焰标记条目，先抓方法共性。"
+      },
+      {
+        "title": "建议工作流",
+        "content": "上午速览 3 篇热点，下午只精读 1 篇并写复现实验 TODO，晚上补 related work。"
+      }
+    ],
+    "highlight_cards": [
+      {
+        "arxiv_id": "2602.22124",
+        "title": "GUI-Libra: Training Native GUI Agents to Reason and Act with Action-aware Supervision and Partially Verifiable RL",
+        "score": 9.1,
+        "reason": "混合路线：Agent 任务编排 + 强化学习反馈"
+      },
+      {
+        "arxiv_id": "2602.25711",
+        "title": "DySCO: Dynamic Attention-Scaling Decoding for Long-Context LMs",
+        "score": 8.4,
+        "reason": "工程优化路线：围绕效率、稳定性和可部署性推进"
+      },
+      {
+        "arxiv_id": "2602.25714",
+        "title": "SWE-Protégé: Learning to Selectively Collaborate With an Expert Unlocks Small Language Models as Software Engineering Agents",
+        "score": 8.0,
+        "reason": "基准驱动路线：以 benchmark 迭代为主轴"
+      }
+    ]
+  },
+  "ideas": [
+    {
+      "id": 101,
+      "content": "把 GUI-Agent 的 action-aware 监督迁移到实验室自动化流程，看看可验证奖励是否能稳住长程任务。",
+      "created_at": "2026-02-26T23:10:00Z"
+    },
+    {
+      "id": 102,
+      "content": "做一个‘失败轨迹库’，把 Agent 的错误步骤也纳入蒸馏数据。",
+      "created_at": "2026-02-26T23:45:00Z"
+    }
+  ],
+  "papers": [
+    {
+      "arxiv_id": "2602.22124",
+      "version": 1,
+      "title": "GUI-Libra: Training Native GUI Agents to Reason and Act with Action-aware Supervision and Partially Verifiable RL",
+      "summary": "GUI-Libra proposes an action-aware supervision pipeline for native GUI agents and introduces partially verifiable reinforcement learning rewards to stabilize long-horizon action planning in desktop environments.",
+      "authors": ["Anonymous"],
+      "categories": ["cs.CL", "cs.AI", "cs.SE"],
+      "primary_category": "cs.CL",
+      "published": "2026-02-26T13:47:00Z",
+      "updated": "2026-02-26T13:47:00Z",
+      "link_abs": "https://arxiv.org/abs/2602.22124",
+      "link_pdf": "https://arxiv.org/pdf/2602.22124",
+      "score": 9.1,
+      "llm_ready": false,
+      "analysis": {
+        "source": "heuristic",
+        "one_line_summary": "把 GUI 交互轨迹和部分可验证奖励结合，目的是提升 Agent 在真实软件任务中的稳定执行率。",
+        "research_features": [
+          "问题定义：如何让 GUI Agent 在长流程任务里不漂移。",
+          "方法设计：Action-aware 监督 + 部分可验证 RL 奖励。",
+          "实验侧重点：强调对真实软件环境的任务成功率。"
+        ],
+        "research_direction": "Agent + 软件工程自动化方向，偏向可验证反馈驱动。",
+        "research_route": "混合路线：Agent 任务编排 + 强化学习反馈",
+        "related_work": [
+          {"work": "SWE-bench", "relation": "软件工程代理评测基准"},
+          {"work": "SWE-agent", "relation": "以工具调用和 issue 修复为核心的基线"}
+        ],
+        "opportunities": [
+          "把 action-level 监督模板迁移到你自己的任务域",
+          "结合失败轨迹做针对性重加权训练"
+        ],
+        "risks": [
+          "奖励可验证部分覆盖率不足时，策略可能过拟合可验证子任务",
+          "如果环境接口不稳定，训练信号会被噪声放大"
+        ],
+        "topic_tags": ["Agent", "GUI Agent", "RLVR", "SWE-bench", "Code"],
+        "confidence": 0.46,
+        "score": 9.1
+      }
+    },
+    {
+      "arxiv_id": "2602.25711",
+      "version": 1,
+      "title": "DySCO: Dynamic Attention-Scaling Decoding for Long-Context LMs",
+      "summary": "DySCO introduces a dynamic attention scaling strategy during decoding to improve long-context utilization while preserving latency for deployment settings.",
+      "authors": ["Anonymous"],
+      "categories": ["cs.CL", "cs.LG"],
+      "primary_category": "cs.CL",
+      "published": "2026-02-26T11:35:00Z",
+      "updated": "2026-02-26T11:35:00Z",
+      "link_abs": "https://arxiv.org/abs/2602.25711",
+      "link_pdf": "https://arxiv.org/pdf/2602.25711",
+      "score": 8.4,
+      "llm_ready": false,
+      "analysis": {
+        "source": "heuristic",
+        "one_line_summary": "在解码阶段动态调整 attention 缩放，目标是在长上下文任务里提升信息利用率并控制延迟。",
+        "research_features": [
+          "问题定义：长上下文推理中注意力分配失衡。",
+          "方法设计：解码时的动态 attention scaling。",
+          "应用点：推理时延敏感场景。"
+        ],
+        "research_direction": "长上下文推理优化，偏部署与效率。",
+        "research_route": "工程优化路线：围绕效率、稳定性和可部署性推进",
+        "related_work": [
+          {"work": "Long Context LMs", "relation": "长序列建模主线"},
+          {"work": "Benchmark", "relation": "需核验在公开 benchmark 上的稳定收益"}
+        ],
+        "opportunities": ["在你现有 RAG 管线中替换解码策略做 A/B"],
+        "risks": ["不同模型规模下收益可能不一致"],
+        "topic_tags": ["Long Context", "Reasoning", "NLP"],
+        "confidence": 0.43,
+        "score": 8.4
+      }
+    },
+    {
+      "arxiv_id": "2602.25714",
+      "version": 1,
+      "title": "SWE-Protégé: Learning to Selectively Collaborate With an Expert Unlocks Small Language Models as Software Engineering Agents",
+      "summary": "SWE-Protégé studies selective expert collaboration for small language models and reports strong gains on software engineering benchmarks through staged delegation.",
+      "authors": ["Anonymous"],
+      "categories": ["cs.SE", "cs.AI", "cs.CL"],
+      "primary_category": "cs.SE",
+      "published": "2026-02-26T09:18:00Z",
+      "updated": "2026-02-26T09:18:00Z",
+      "link_abs": "https://arxiv.org/abs/2602.25714",
+      "link_pdf": "https://arxiv.org/pdf/2602.25714",
+      "score": 8.0,
+      "llm_ready": false,
+      "analysis": {
+        "source": "heuristic",
+        "one_line_summary": "让小模型按条件调用专家模型，在软件工程任务中实现成本与性能平衡。",
+        "research_features": [
+          "问题定义：小模型单独做 SWE 任务能力不足。",
+          "方法设计：选择性专家协作与阶段式委托。",
+          "评测目标：在 SWE benchmark 上提升问题修复成功率。"
+        ],
+        "research_direction": "低成本软件工程 Agent 方向。",
+        "research_route": "基准驱动路线：以 benchmark 迭代为主轴",
+        "related_work": [
+          {"work": "SWE-bench", "relation": "软件工程任务主评测集"},
+          {"work": "SWE-agent", "relation": "常用对照基线"}
+        ],
+        "opportunities": ["可在私有代码仓任务上验证专家协作触发策略"],
+        "risks": ["专家调用策略可能引入额外路由成本"],
+        "topic_tags": ["Agent", "Code", "Benchmark", "Distillation"],
+        "confidence": 0.42,
+        "score": 8.0
+      }
+    },
+    {
+      "arxiv_id": "2602.25717",
+      "version": 1,
+      "title": "SigmaQuant: Hardware-Aware Heterogeneous Quantization Method for Edge DNN Inference",
+      "summary": "SigmaQuant introduces heterogeneous quantization with hardware-aware constraints for edge inference, balancing memory footprint and target latency.",
+      "authors": ["Anonymous"],
+      "categories": ["cs.LG", "cs.AR"],
+      "primary_category": "cs.LG",
+      "published": "2026-02-26T07:14:00Z",
+      "updated": "2026-02-26T07:14:00Z",
+      "link_abs": "https://arxiv.org/abs/2602.25717",
+      "link_pdf": "https://arxiv.org/pdf/2602.25717",
+      "score": 7.2,
+      "llm_ready": false,
+      "analysis": {
+        "source": "heuristic",
+        "one_line_summary": "考虑硬件约束的异构量化方案，目标是边缘推理速度和精度折中。",
+        "research_features": [
+          "关注边缘设备上的推理部署问题",
+          "引入硬件感知约束做量化策略选择"
+        ],
+        "research_direction": "模型压缩与边缘部署方向。",
+        "research_route": "工程优化路线：围绕效率、稳定性和可部署性推进",
+        "related_work": [
+          {"work": "Post-training Quantization", "relation": "常见轻量化技术线"}
+        ],
+        "opportunities": ["可在 ARM 端做真实时延复现"],
+        "risks": ["不同硬件平台迁移成本较高"],
+        "topic_tags": ["ML", "Benchmark"],
+        "confidence": 0.36,
+        "score": 7.2
+      }
+    },
+    {
+      "arxiv_id": "2602.25775",
+      "version": 1,
+      "title": "Provable Last-Iterate Convergence for Multi-Objective Safe LLM Alignment via Optimistic Primal-Dual",
+      "summary": "This paper studies a multi-objective safe alignment formulation and proves last-iterate convergence properties for an optimistic primal-dual algorithm.",
+      "authors": ["Anonymous"],
+      "categories": ["cs.LG", "cs.AI"],
+      "primary_category": "cs.LG",
+      "published": "2026-02-26T05:20:00Z",
+      "updated": "2026-02-26T05:20:00Z",
+      "link_abs": "https://arxiv.org/abs/2602.25775",
+      "link_pdf": "https://arxiv.org/pdf/2602.25775",
+      "score": 7.7,
+      "llm_ready": false,
+      "analysis": {
+        "source": "heuristic",
+        "one_line_summary": "把安全对齐建模为多目标优化问题，并给出 optimistic primal-dual 的 last-iterate 收敛保证。",
+        "research_features": [
+          "问题定义：多目标安全对齐",
+          "方法设计：optimistic primal-dual"
+        ],
+        "research_direction": "对齐理论与优化。",
+        "research_route": "理论分析路线：从可证性质约束方法设计",
+        "related_work": [
+          {"work": "RLHF", "relation": "常见对齐范式"},
+          {"work": "Constrained Optimization", "relation": "安全约束建模工具"}
+        ],
+        "opportunities": ["把理论条件映射到可执行训练超参"],
+        "risks": ["证明条件和工程设置可能存在 gap"],
+        "topic_tags": ["Alignment", "RLHF", "Reasoning"],
+        "confidence": 0.41,
+        "score": 7.7
+      }
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="arxiv-digest 本地研究小助理">
+  <title>arxiv-digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-background"></div>
+  <main class="digest-layout">
+    <aside class="panel panel-left">
+      <header class="panel-header">
+        <div class="logo-row">
+          <span class="logo-dot"></span>
+          <h1>arxiv-digest</h1>
+        </div>
+        <p class="subtitle">本地实时论文雷达 + 研究笔记</p>
+        <div class="header-stats">
+          <span id="paperCountBadge">0 篇论文</span>
+          <span id="llmBadge">LLM 未启用</span>
+        </div>
+      </header>
+
+      <div class="toolbar">
+        <input id="searchInput" type="search" placeholder="搜索标题/摘要关键词...">
+        <div class="toolbar-row">
+          <select id="categoryFilter">
+            <option value="all">全部类别</option>
+          </select>
+          <button id="refreshBtn" class="btn btn-primary" type="button">实时更新</button>
+        </div>
+      </div>
+
+      <div class="paper-list" id="paperList"></div>
+    </aside>
+
+    <section class="panel panel-center">
+      <header class="center-topbar">
+        <div class="tab active">日报</div>
+        <div class="tab">图谱</div>
+        <div class="tab">统计</div>
+      </header>
+
+      <section class="digest-card">
+        <div class="digest-header">
+          <h2 id="digestDate">--</h2>
+          <div class="digest-badges">
+            <span class="badge hot" id="hotCount">🔥 0</span>
+            <span class="badge focus" id="focusCount">👀 0</span>
+            <span class="badge later" id="laterCount">🗂 0</span>
+          </div>
+        </div>
+        <div class="topic-tags" id="topicTags"></div>
+        <div class="summary-blocks" id="summaryBlocks"></div>
+      </section>
+
+      <section class="highlight-card">
+        <div class="section-title-row">
+          <h3>🔥 焦点论文</h3>
+        </div>
+        <div id="highlightList" class="highlight-list"></div>
+      </section>
+
+      <section class="idea-card">
+        <div class="section-title-row">
+          <h3>🧠 零散 idea 流</h3>
+          <span id="ideaHint" class="hint-text"></span>
+        </div>
+        <form id="ideaForm" class="idea-form">
+          <input id="ideaInput" type="text" maxlength="240" placeholder="随手记一句：想到什么就写什么...">
+          <button class="btn" type="submit">记录</button>
+        </form>
+        <ul id="ideaList" class="idea-list"></ul>
+      </section>
+    </section>
+
+    <aside class="panel panel-right">
+      <header class="detail-header">
+        <h2 id="detailArxivId">未选论文</h2>
+        <button id="analyzeBtn" class="btn btn-ghost" type="button">LLM 深度解析</button>
+      </header>
+
+      <div class="detail-meta" id="detailMeta"></div>
+      <h3 id="detailTitle" class="detail-title">请从左侧选择一篇论文</h3>
+      <p id="detailSummary" class="detail-summary"></p>
+
+      <section class="detail-section">
+        <h4>1. 研究特点</h4>
+        <ul id="featureList" class="bullet-list"></ul>
+      </section>
+
+      <section class="detail-section">
+        <h4>2. 研究方向</h4>
+        <p id="directionText"></p>
+      </section>
+
+      <section class="detail-section">
+        <h4>3. 研究路线</h4>
+        <p id="routeText"></p>
+      </section>
+
+      <section class="detail-section">
+        <h4>4. 相关工作（浅层）</h4>
+        <div class="related-table-wrap">
+          <table class="related-table">
+            <thead>
+              <tr><th>相关工作</th><th>关系</th></tr>
+            </thead>
+            <tbody id="relatedWorkBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="detail-section notes-section">
+        <h4>参考文献（你自己的）</h4>
+        <textarea id="notesReferences" placeholder="补充你想追的 references 或引用线索"></textarea>
+
+        <h4>零散想法</h4>
+        <textarea id="notesIdeas" placeholder="写下你对这个工作的联想、可复现计划或可攻击点"></textarea>
+
+        <h4>疑问</h4>
+        <textarea id="notesQuestions" placeholder="记录你还没想通的问题"></textarea>
+
+        <div class="notes-actions">
+          <button id="saveNotesBtn" class="btn btn-primary" type="button">保存笔记</button>
+          <a id="paperLink" class="btn btn-link" href="#" target="_blank" rel="noopener noreferrer">打开 arXiv</a>
+          <a id="paperPdfLink" class="btn btn-link" href="#" target="_blank" rel="noopener noreferrer">打开 PDF</a>
+        </div>
+      </section>
+    </aside>
+  </main>
+
+  <template id="paperItemTemplate">
+    <button type="button" class="paper-item">
+      <div class="paper-item-top">
+        <span class="paper-score"></span>
+        <span class="paper-id"></span>
+      </div>
+      <h3 class="paper-title"></h3>
+      <p class="paper-meta"></p>
+    </button>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
