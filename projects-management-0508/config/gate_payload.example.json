@@ -1,6 +1,8 @@
 {
   "eng": {
     "compile": true,
+    "chinese_requires_ctex": true,
+    "no_raw_tex_in_chat": true,
     "refs_clean": true,
     "lint_clean": true,
     "python_tests": true,
@@ -10,6 +12,8 @@
     "title_sentence_case": true,
     "abstract_lt_500_words": true,
     "figure_rules_prd": false,
+    "zh_journal_quality": true,
+    "english_on_request": true,
     "das_principal_heading": true
   },
   "science": {

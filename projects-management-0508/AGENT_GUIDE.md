@@ -26,6 +26,55 @@ Each task must declare `targetJournal` in:
 - `CQG`
 
 Gate keys are journal-specific and are defined in `config/journal_profiles.json`.
+Prompt constraints for auto-agents are also stored per journal in:
+
+- `journals.<code>.promptPolicy.judge`
+- `journals.<code>.promptPolicy.writer`
+- `journals.<code>.metrics`
+
+Chinese LaTeX policy (global):
+
+- If Chinese text is present in manuscript sources, use `\usepackage{ctex}`.
+- `xeCJK`, `CJK`, and `CJKutf8` are forbidden in this workflow.
+- Track this with gate key: `done.eng.chinese_requires_ctex`.
+
+Chat output policy (global):
+
+- Do not paste raw `.tex` source in chat replies.
+- Agents should edit or generate `.tex` files directly in repository paths, then report file paths and change summaries.
+- Track this with gate key: `done.eng.no_raw_tex_in_chat`.
+
+Language policy (journal + review):
+
+- Default drafting/review language is Chinese (`zh`) across journal profiles.
+- Chinese is allowed, but writing quality must still meet target-journal scholarly standards (topic framing, structure, terminology, and tone).
+- Switch to English only when explicitly requested by user/task.
+- Track with journal gates:
+  - `done.journal.zh_journal_quality`
+  - `done.journal.english_on_request`
+- Shared review-level language policy is stored in `config/journal_profiles.json` under `reviewProfile`.
+- Shared prompt-injection contract is under `reviewProfile.promptInjectionPlaceholder` and `reviewProfile.judgeRequiredOutputs` / `writerRequiredOutputs`.
+
+PRL strengthening highlights:
+
+- Added hard-style gates for abstract/body/headings/DAS formatting:
+  - `done.journal.abstract_one_paragraph`
+  - `done.journal.abstract_no_numbered_refs`
+  - `done.journal.abstract_no_display_eq_or_tables`
+  - `done.journal.runin_or_none_headings`
+  - `done.journal.das_runin_format`
+- Added positioning and literature gates:
+  - `done.journal.positioning_known_gap_increment`
+  - `done.journal.core_claims_priorwork_anchor`
+  - `done.journal.recent_research_refs_min`
+  - `done.journal.research_refs_ratio`
+- Added derivation-closure gates:
+  - `done.science.derivation_conditions_stated`
+  - `done.science.new_criteria_defined_scoped`
+  - `done.science.symbol_definition_coverage`
+  - `done.science.assumptions_and_omitted_terms`
+- Added presentation blacklist gate:
+  - `done.journal.banned_process_language_main_text`
 
 ## Data contract
 

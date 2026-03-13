@@ -6,6 +6,40 @@
     "science": "G_science",
     "packaging": "G_packaging"
   },
+  "reviewProfile": {
+    "defaultLanguage": "zh",
+    "allowedLanguages": ["zh", "en"],
+    "switchToEnglishOnRequest": true,
+    "promptInjectionPlaceholder": "{{JOURNAL_RULES}}",
+    "judgeRequiredOutputs": [
+      "positioning_gaps",
+      "banned_phrase_hits",
+      "derivation_missing_items",
+      "allowed_next_actions"
+    ],
+    "writerRequiredOutputs": [
+      "positioning_paragraph_update",
+      "contribution_bullets_update",
+      "approximation_validity_sentences",
+      "das_runin_block_update"
+    ],
+    "languageQualityPolicy": {
+      "zh": [
+        "Topic framing matches target-journal scholarly scope and contribution level.",
+        "Section structure, paragraph logic, and argument flow meet journal-style expectations.",
+        "Terminology, notation narration, and academic tone are precise and consistent.",
+        "Claims remain evidence-backed; no colloquial or promotional wording."
+      ],
+      "en": [
+        "Use English only when explicitly requested by user/task policy.",
+        "When switched, preserve technical meaning and citation consistency."
+      ]
+    },
+    "reviewHardChecks": [
+      "zh_journal_quality",
+      "english_on_request"
+    ]
+  },
   "journals": {
     "PRL": {
       "displayName": "Physical Review Letters",
@@ -14,6 +48,72 @@
         "Run-in headings when needed",
         "Supplemental Material for long derivations"
       ],
+      "metrics": {
+        "positioning": {
+          "minReferencesTotal": 15,
+          "minRecentResearchRefs15y": 6,
+          "recentRefRatioMin": 0.3,
+          "researchRefRatioMin": 0.7,
+          "coreClaimsPriorworkAnchorMin": 0.8
+        },
+        "presentation": {
+          "bannedPhrasesInMainText": [
+            "round-",
+            "ledger",
+            "ablation",
+            "adversarial",
+            "machine precision",
+            "MAE",
+            "slope spread",
+            "stress test"
+          ]
+        },
+        "derivationClosure": {
+          "symbolDefinitionCoverageMin": 0.95,
+          "newCriteriaMustDefineScope": true,
+          "approximationsNeedDimensionlessConditions": true
+        }
+      },
+      "promptPolicy": {
+        "judge": {
+          "mustCheck": [
+            "Count total/recent/research references and map core claims to prior-work anchors",
+            "Scan banned process words in main text only and mark exact hit locations",
+            "Check approximation validity sentences: condition + omitted term + applicability range",
+            "If positioning fails, cap novelty/science confidence and force repair-only next actions"
+          ],
+          "mustOutput": [
+            "positioning_gaps",
+            "banned_phrase_hits",
+            "derivation_missing_items",
+            "allowed_next_actions"
+          ]
+        },
+        "writer": {
+          "mustDo": [
+            "Add or repair one <=120-word Known-Gap-Increment positioning paragraph in Introduction",
+            "Provide 2-3 verifiable contribution bullets without hype adjectives",
+            "For each approximation, add one sentence with validity condition and neglected term",
+            "Keep Data availability as PRL run-in heading and move process/audit wording to SM or repo docs"
+          ],
+          "forbiddenInMainText": [
+            "round-",
+            "ledger",
+            "ablation",
+            "adversarial",
+            "machine precision",
+            "MAE",
+            "slope spread",
+            "stress test"
+          ]
+        }
+      },
+      "languagePolicy": {
+        "defaultLanguage": "zh",
+        "allowedLanguages": ["zh", "en"],
+        "switchToEnglishOnRequest": true,
+        "zhQualityBar": "Chinese manuscripts must keep PRL-grade information density, concise argument flow, and formal academic tone."
+      },
       "artifacts": [
         "main.pdf",
         "supplement.pdf or supplement.tex",
@@ -23,6 +123,8 @@
       "gates": {
         "eng": [
           { "key": "compile", "label": "latexmk -pdf passes" },
+          { "key": "chinese_requires_ctex", "label": "If Chinese appears: use ctex package (forbid xeCJK/CJK)" },
+          { "key": "no_raw_tex_in_chat", "label": "Do not output raw .tex in chat; write files directly" },
           { "key": "refs_clean", "label": "No undefined references" },
           { "key": "lint_clean", "label": "Lint/format checks pass" },
           { "key": "repro_scripts", "label": "Repro scripts executable" }
@@ -30,22 +132,39 @@
         "journal": [
           { "key": "title_case", "label": "Title uses APS title case" },
           { "key": "abstract_char_600", "label": "Abstract <= 600 chars" },
+          { "key": "abstract_one_paragraph", "label": "Abstract is a single paragraph and self-contained" },
+          { "key": "abstract_no_numbered_refs", "label": "Abstract has no numbered references/citation labels" },
+          { "key": "abstract_no_display_eq_or_tables", "label": "Abstract contains no display equations or tables" },
           { "key": "word_limit_3750", "label": "Main text <= 3750 words" },
+          { "key": "runin_or_none_headings", "label": "Main text uses run-in headings or no headings (no freestanding section heads)" },
+          { "key": "zh_journal_quality", "label": "If Chinese is used, topic/format/style meet PRL scholarly standards" },
+          { "key": "english_on_request", "label": "Switch to English only when explicitly requested" },
           { "key": "das_runin", "label": "Data availability run-in heading used" },
+          { "key": "das_runin_format", "label": "Data availability follows run-in format \"Data availability— ...\"" },
           { "key": "appendix_after_refs", "label": "Appendix is in end matter after references" },
+          { "key": "positioning_known_gap_increment", "label": "Introduction states Known -> Gap -> Increment with explicit prior-work comparison" },
+          { "key": "core_claims_priorwork_anchor", "label": "Core claims are anchored to equations/figures and prior-work citations" },
+          { "key": "recent_research_refs_min", "label": "Recent research references (<=15y) reach profile minimum" },
+          { "key": "research_refs_ratio", "label": "Research-paper references dominate over textbook/monograph references" },
+          { "key": "banned_process_language_main_text", "label": "Main text avoids process/audit ML wording (move to SM/repo)" },
           { "key": "sm_referenced", "label": "Supplemental Material referenced in main text" }
         ],
         "science": [
           { "key": "claims_evidence_trace", "label": "Claims map to explicit evidence" },
           { "key": "error_budget", "label": "Uncertainties and error budget documented" },
           { "key": "controls_or_baselines", "label": "Controls/baselines included" },
-          { "key": "scope_limits", "label": "Applicability domain and limits stated" }
+          { "key": "scope_limits", "label": "Applicability domain and limits stated" },
+          { "key": "derivation_conditions_stated", "label": "Key approximations include explicit dimensionless validity conditions" },
+          { "key": "new_criteria_defined_scoped", "label": "Any new criterion has parameter definitions and scope/regime statement" },
+          { "key": "symbol_definition_coverage", "label": "New symbols are defined at first use with near-complete coverage" },
+          { "key": "assumptions_and_omitted_terms", "label": "Derivations identify assumptions and omitted terms explicitly" }
         ],
         "packaging": [
           { "key": "main_pdf", "label": "main.pdf generated" },
           { "key": "supplement_pdf_or_tex", "label": "Supplement artifact ready" },
           { "key": "figures_vector", "label": "Figure assets packaged" },
-          { "key": "metadata_json", "label": "metadata.json contains counts and checks" }
+          { "key": "metadata_json", "label": "metadata.json contains counts and checks" },
+          { "key": "supplement_derivation_pointers", "label": "Supplement contains explicit pointers for long derivations referenced in main text" }
         ]
       }
     },
@@ -56,6 +175,45 @@
         "Popular summary for non-specialists",
         "Data availability section"
       ],
+      "metrics": {
+        "positioning": {
+          "minReferencesTotal": 20,
+          "minRecentResearchRefs15y": 8,
+          "recentRefRatioMin": 0.35,
+          "researchRefRatioMin": 0.75
+        },
+        "presentation": {
+          "bannedPhrasesInMainText": [
+            "round-",
+            "ledger",
+            "ablation",
+            "adversarial",
+            "stress test"
+          ]
+        }
+      },
+      "promptPolicy": {
+        "judge": {
+          "mustCheck": [
+            "Popular summary quality and <=150 words",
+            "Positioning with explicit related-work comparison for broad-interest narrative",
+            "Process-language spillover in main text"
+          ]
+        },
+        "writer": {
+          "mustDo": [
+            "Maintain nontechnical popular summary while preserving scientific fidelity",
+            "Include a concise Known-Gap-Increment positioning paragraph with recent references",
+            "Move audit/process wording to supplement or repository docs"
+          ]
+        }
+      },
+      "languagePolicy": {
+        "defaultLanguage": "zh",
+        "allowedLanguages": ["zh", "en"],
+        "switchToEnglishOnRequest": true,
+        "zhQualityBar": "Chinese manuscripts must keep PRX-level clarity for broad physics readers and retain formal technical rigor."
+      },
       "artifacts": [
         "main.pdf",
         "popular_summary.md",
@@ -65,20 +223,29 @@
       "gates": {
         "eng": [
           { "key": "compile", "label": "latexmk -pdf passes" },
+          { "key": "chinese_requires_ctex", "label": "If Chinese appears: use ctex package (forbid xeCJK/CJK)" },
+          { "key": "no_raw_tex_in_chat", "label": "Do not output raw .tex in chat; write files directly" },
           { "key": "refs_clean", "label": "No undefined references" },
           { "key": "lint_clean", "label": "Lint/format checks pass" },
           { "key": "repro_scripts", "label": "Repro scripts executable" }
         ],
         "journal": [
           { "key": "title_case", "label": "Title uses APS title case" },
+          { "key": "abstract_lt_500_words", "label": "Abstract < 500 words" },
           { "key": "popular_summary_150", "label": "Popular Summary <= 150 words" },
-          { "key": "das_present", "label": "Data availability statement present" }
+          { "key": "zh_journal_quality", "label": "If Chinese is used, topic/format/style meet PRX scholarly standards" },
+          { "key": "english_on_request", "label": "Switch to English only when explicitly requested" },
+          { "key": "das_present", "label": "Data availability statement present" },
+          { "key": "references_titles_present", "label": "Reference titles included for journal compliance" },
+          { "key": "positioning_known_gap_increment", "label": "Introduction states Known -> Gap -> Increment with recent related-work comparison" },
+          { "key": "banned_process_language_main_text", "label": "Main text avoids process/audit wording" }
         ],
         "science": [
           { "key": "claims_evidence_trace", "label": "Claims map to explicit evidence" },
           { "key": "error_budget", "label": "Uncertainties and error budget documented" },
           { "key": "controls_or_baselines", "label": "Controls/baselines included" },
-          { "key": "scope_limits", "label": "Applicability domain and limits stated" }
+          { "key": "scope_limits", "label": "Applicability domain and limits stated" },
+          { "key": "derivation_closure", "label": "Key derivations/criteria include assumptions and validity scope" }
         ],
         "packaging": [
           { "key": "main_pdf", "label": "main.pdf generated" },
@@ -102,6 +269,43 @@
         "Appendices",
         "References"
       ],
+      "metrics": {
+        "positioning": {
+          "minReferencesTotal": 18,
+          "minRecentResearchRefs15y": 7,
+          "recentRefRatioMin": 0.32
+        },
+        "presentation": {
+          "bannedPhrasesInMainText": [
+            "round-",
+            "ledger",
+            "ablation",
+            "adversarial"
+          ]
+        }
+      },
+      "promptPolicy": {
+        "judge": {
+          "mustCheck": [
+            "Figure compliance with PRD constraints",
+            "Related-work positioning and non-marginal increment clarity",
+            "Derivation closure for approximations and regime statements"
+          ]
+        },
+        "writer": {
+          "mustDo": [
+            "Repair low-score sections by adding explicit assumptions, parameter definitions, and scope limits",
+            "Keep discussion technical and concise; avoid process/audit wording",
+            "Strengthen prior-work comparison where novelty claims appear"
+          ]
+        }
+      },
+      "languagePolicy": {
+        "defaultLanguage": "zh",
+        "allowedLanguages": ["zh", "en"],
+        "switchToEnglishOnRequest": true,
+        "zhQualityBar": "Chinese manuscripts must keep PRD-level technical completeness, notation precision, and reproducible exposition."
+      },
       "artifacts": [
         "main.pdf",
         "source.tar.gz",
@@ -111,6 +315,8 @@
       "gates": {
         "eng": [
           { "key": "compile", "label": "latexmk -pdf passes" },
+          { "key": "chinese_requires_ctex", "label": "If Chinese appears: use ctex package (forbid xeCJK/CJK)" },
+          { "key": "no_raw_tex_in_chat", "label": "Do not output raw .tex in chat; write files directly" },
           { "key": "refs_clean", "label": "No undefined references" },
           { "key": "lint_clean", "label": "Lint/format checks pass" },
           { "key": "python_tests", "label": "Python tests pass" },
@@ -120,13 +326,19 @@
           { "key": "title_sentence_case", "label": "Title uses sentence case" },
           { "key": "abstract_lt_500_words", "label": "Abstract < 500 words" },
           { "key": "figure_rules_prd", "label": "Figure width/font/line/dpi checks pass" },
-          { "key": "das_principal_heading", "label": "Data availability as principal heading" }
+          { "key": "zh_journal_quality", "label": "If Chinese is used, topic/format/style meet PRD scholarly standards" },
+          { "key": "english_on_request", "label": "Switch to English only when explicitly requested" },
+          { "key": "das_principal_heading", "label": "Data availability as principal heading" },
+          { "key": "positioning_known_gap_increment", "label": "Introduction includes clear Known -> Gap -> Increment positioning" },
+          { "key": "banned_process_language_main_text", "label": "Main text avoids process/audit wording" }
         ],
         "science": [
           { "key": "claims_evidence_trace", "label": "Claims map to explicit evidence" },
           { "key": "error_budget", "label": "Uncertainties and error budget documented" },
           { "key": "controls_or_baselines", "label": "Controls/baselines included" },
-          { "key": "scope_limits", "label": "Applicability domain and limits stated" }
+          { "key": "scope_limits", "label": "Applicability domain and limits stated" },
+          { "key": "derivation_closure", "label": "Approximations and new criteria include definitions, assumptions, and validity regime" },
+          { "key": "symbol_definition_coverage", "label": "Symbols are defined consistently at first use" }
         ],
         "packaging": [
           { "key": "main_pdf", "label": "main.pdf generated" },
@@ -147,6 +359,42 @@
         "Appendix",
         "References"
       ],
+      "metrics": {
+        "positioning": {
+          "minReferencesTotal": 18,
+          "minRecentResearchRefs15y": 6
+        },
+        "presentation": {
+          "bannedPhrasesInMainText": [
+            "round-",
+            "ledger",
+            "ablation",
+            "stress test"
+          ]
+        }
+      },
+      "promptPolicy": {
+        "judge": {
+          "mustCheck": [
+            "Conventions/setup completeness and consistency",
+            "Related-work subsection precision for theorem-level claims",
+            "Derivation closure and appendix pointers for long proofs"
+          ]
+        },
+        "writer": {
+          "mustDo": [
+            "Strengthen conventions and notation definitions before deep derivations",
+            "Add precise literature comparison sentences for each major claim",
+            "Move process/audit wording out of main text"
+          ]
+        }
+      },
+      "languagePolicy": {
+        "defaultLanguage": "zh",
+        "allowedLanguages": ["zh", "en"],
+        "switchToEnglishOnRequest": true,
+        "zhQualityBar": "Chinese manuscripts must keep JHEP-grade derivation rigor, conventions clarity, and theorem-proof style discipline."
+      },
       "artifacts": [
         "main.pdf",
         "source.zip or source.tar.gz",
@@ -155,6 +403,8 @@
       "gates": {
         "eng": [
           { "key": "compile", "label": "latexmk -pdf passes" },
+          { "key": "chinese_requires_ctex", "label": "If Chinese appears: use ctex package (forbid xeCJK/CJK)" },
+          { "key": "no_raw_tex_in_chat", "label": "Do not output raw .tex in chat; write files directly" },
           { "key": "refs_clean", "label": "No undefined references" },
           { "key": "lint_clean", "label": "Lint/format checks pass" },
           { "key": "repro_scripts", "label": "Repro scripts executable" }
@@ -162,16 +412,21 @@
         "journal": [
           { "key": "jheppub_class", "label": "jheppub class/package configured" },
           { "key": "title_case_jhep", "label": "JHEP title capitalization policy followed" },
+          { "key": "zh_journal_quality", "label": "If Chinese is used, topic/format/style meet JHEP scholarly standards" },
+          { "key": "english_on_request", "label": "Switch to English only when explicitly requested" },
           { "key": "title_page_macros", "label": "Required title-page macros present" },
           { "key": "toc_present", "label": "Table of contents included (unless short note)" },
           { "key": "appendix_descriptive", "label": "Appendix has descriptive titles" },
-          { "key": "figures_tables_referenced", "label": "All figures/tables referenced in text" }
+          { "key": "figures_tables_referenced", "label": "All figures/tables referenced in text" },
+          { "key": "positioning_related_work", "label": "Related-work positioning is explicit for each main theorem/result" },
+          { "key": "banned_process_language_main_text", "label": "Main text avoids process/audit wording" }
         ],
         "science": [
           { "key": "claims_evidence_trace", "label": "Claims map to explicit evidence" },
           { "key": "error_budget", "label": "Uncertainties and error budget documented" },
           { "key": "controls_or_baselines", "label": "Controls/baselines included" },
-          { "key": "scope_limits", "label": "Applicability domain and limits stated" }
+          { "key": "scope_limits", "label": "Applicability domain and limits stated" },
+          { "key": "derivation_closure", "label": "Proof chain is closed or has explicit appendix derivation pointers" }
         ],
         "packaging": [
           { "key": "main_pdf", "label": "main.pdf generated" },
@@ -191,6 +446,43 @@
         "Appendices",
         "References with DOI"
       ],
+      "metrics": {
+        "positioning": {
+          "minReferencesTotal": 16,
+          "minRecentResearchRefs15y": 6
+        },
+        "presentation": {
+          "bannedPhrasesInMainText": [
+            "round-",
+            "ledger",
+            "ablation",
+            "adversarial",
+            "stress test"
+          ]
+        }
+      },
+      "promptPolicy": {
+        "judge": {
+          "mustCheck": [
+            "DOI/link completeness and hyperlink integrity",
+            "Reproducibility narrative sufficiency (minimal sufficient detail)",
+            "Funding/supplement links plus positioning clarity"
+          ]
+        },
+        "writer": {
+          "mustDo": [
+            "Improve reproducibility-oriented exposition and direct readers to public materials",
+            "Add concise related-work positioning with explicit increment claim",
+            "Keep main text technical; move process/audit wording to supplementary docs"
+          ]
+        }
+      },
+      "languagePolicy": {
+        "defaultLanguage": "zh",
+        "allowedLanguages": ["zh", "en"],
+        "switchToEnglishOnRequest": true,
+        "zhQualityBar": "Chinese manuscripts must keep SciPost-grade transparency, reproducibility detail, and concise scholarly phrasing."
+      },
       "artifacts": [
         "main.pdf",
         "source.tar.gz",
@@ -200,6 +492,8 @@
       "gates": {
         "eng": [
           { "key": "compile", "label": "latexmk -pdf passes" },
+          { "key": "chinese_requires_ctex", "label": "If Chinese appears: use ctex package (forbid xeCJK/CJK)" },
+          { "key": "no_raw_tex_in_chat", "label": "Do not output raw .tex in chat; write files directly" },
           { "key": "refs_clean", "label": "No undefined references" },
           { "key": "lint_clean", "label": "Lint/format checks pass" },
           { "key": "repro_scripts", "label": "Repro scripts executable" }
@@ -208,16 +502,21 @@
           { "key": "scipost_style", "label": "SciPost style/template used" },
           { "key": "doi_in_refs", "label": "All external refs include DOI" },
           { "key": "hyperref_links", "label": "Equation and reference hyperlinks enabled" },
+          { "key": "zh_journal_quality", "label": "If Chinese is used, topic/format/style meet SciPost scholarly standards" },
+          { "key": "english_on_request", "label": "Switch to English only when explicitly requested" },
           { "key": "title_len_150", "label": "Title length <= 150 characters" },
           { "key": "abstract_200_words", "label": "Abstract around 200 words" },
           { "key": "funding_info_required", "label": "Funding information block exists" },
-          { "key": "supplement_links_public", "label": "Supplement links point to public repos" }
+          { "key": "supplement_links_public", "label": "Supplement links point to public repos" },
+          { "key": "positioning_known_gap_increment", "label": "Introduction states Known -> Gap -> Increment with related-work comparison" },
+          { "key": "banned_process_language_main_text", "label": "Main text avoids process/audit wording" }
         ],
         "science": [
           { "key": "claims_evidence_trace", "label": "Claims map to explicit evidence" },
           { "key": "error_budget", "label": "Uncertainties and error budget documented" },
           { "key": "controls_or_baselines", "label": "Controls/baselines included" },
-          { "key": "scope_limits", "label": "Applicability domain and limits stated" }
+          { "key": "scope_limits", "label": "Applicability domain and limits stated" },
+          { "key": "derivation_closure", "label": "Methods/criteria include assumptions and validity regime for reproducibility" }
         ],
         "packaging": [
           { "key": "main_pdf", "label": "main.pdf generated" },
@@ -238,6 +537,42 @@
         "Acknowledgements",
         "References"
       ],
+      "metrics": {
+        "positioning": {
+          "minReferencesTotal": 16,
+          "minRecentResearchRefs15y": 6
+        },
+        "presentation": {
+          "bannedPhrasesInMainText": [
+            "round-",
+            "ledger",
+            "ablation",
+            "adversarial"
+          ]
+        }
+      },
+      "promptPolicy": {
+        "judge": {
+          "mustCheck": [
+            "Abstract <=300 words and no references/equations/figure labels in abstract",
+            "IMRD+Conclusion readability for broad gravity audience",
+            "Positioning and derivation closure with reproducible method details"
+          ]
+        },
+        "writer": {
+          "mustDo": [
+            "Ensure CQG abstract constraints and broad-audience readability",
+            "Add concise Known-Gap-Increment positioning with gravity-context references",
+            "Remove process/audit wording from main text and keep method reproducible"
+          ]
+        }
+      },
+      "languagePolicy": {
+        "defaultLanguage": "zh",
+        "allowedLanguages": ["zh", "en"],
+        "switchToEnglishOnRequest": true,
+        "zhQualityBar": "Chinese manuscripts must keep CQG-grade readability for broad gravity audience with rigorous technical argumentation."
+      },
       "artifacts": [
         "single submission PDF",
         "supplementary data links",
@@ -246,21 +581,30 @@
       "gates": {
         "eng": [
           { "key": "compile", "label": "latexmk -pdf passes" },
+          { "key": "chinese_requires_ctex", "label": "If Chinese appears: use ctex package (forbid xeCJK/CJK)" },
+          { "key": "no_raw_tex_in_chat", "label": "Do not output raw .tex in chat; write files directly" },
           { "key": "refs_clean", "label": "No undefined references" },
           { "key": "lint_clean", "label": "Lint/format checks pass" },
           { "key": "repro_scripts", "label": "Repro scripts executable" }
         ],
         "journal": [
+          { "key": "abstract_300_words_max", "label": "Abstract <= 300 words" },
+          { "key": "abstract_no_refs_eq_figlabels", "label": "Abstract has no refs, equations, or figure/table labels" },
           { "key": "imrd_structure", "label": "IMRD structure is present" },
           { "key": "acronym_expanded", "label": "Acronyms expanded on first use" },
+          { "key": "zh_journal_quality", "label": "If Chinese is used, topic/format/style meet CQG scholarly standards" },
+          { "key": "english_on_request", "label": "Switch to English only when explicitly requested" },
           { "key": "broad_readability", "label": "Readable to broad CQG audience" },
-          { "key": "conclusion_novelty", "label": "Conclusion states novelty and significance" }
+          { "key": "conclusion_novelty", "label": "Conclusion states novelty and significance" },
+          { "key": "positioning_known_gap_increment", "label": "Introduction states Known -> Gap -> Increment with related-work comparison" },
+          { "key": "banned_process_language_main_text", "label": "Main text avoids process/audit wording" }
         ],
         "science": [
           { "key": "claims_evidence_trace", "label": "Claims map to explicit evidence" },
           { "key": "error_budget", "label": "Uncertainties and error budget documented" },
           { "key": "controls_or_baselines", "label": "Controls/baselines included" },
-          { "key": "scope_limits", "label": "Applicability domain and limits stated" }
+          { "key": "scope_limits", "label": "Applicability domain and limits stated" },
+          { "key": "derivation_closure", "label": "Methods and approximations include assumptions and validity regime" }
         ],
         "packaging": [
           { "key": "single_pdf_submission", "label": "Single submission PDF generated" },

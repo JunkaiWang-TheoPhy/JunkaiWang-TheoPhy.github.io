@@ -20,15 +20,26 @@ const FALLBACK_PROFILES = {
     PRD: {
       displayName: "Physical Review D",
       skeleton: ["Introduction", "Methods", "Results", "Discussion", "Conclusions"],
+      languagePolicy: {
+        defaultLanguage: "zh",
+        allowedLanguages: ["zh", "en"],
+        switchToEnglishOnRequest: true,
+        zhQualityBar:
+          "Chinese manuscripts must keep PRD-level technical completeness, notation precision, and reproducible exposition."
+      },
       artifacts: ["main.pdf", "source.tar.gz", "figures", "data_availability.md"],
       gates: {
         eng: [
           { key: "compile", label: "latexmk -pdf passes" },
+          { key: "chinese_requires_ctex", label: "If Chinese appears: use ctex package (forbid xeCJK/CJK)" },
+          { key: "no_raw_tex_in_chat", label: "Do not output raw .tex in chat; write files directly" },
           { key: "refs_clean", label: "No undefined references" }
         ],
         journal: [
           { key: "title_sentence_case", label: "Title uses sentence case" },
-          { key: "abstract_lt_500_words", label: "Abstract < 500 words" }
+          { key: "abstract_lt_500_words", label: "Abstract < 500 words" },
+          { key: "zh_journal_quality", label: "If Chinese is used, topic/format/style meet PRD scholarly standards" },
+          { key: "english_on_request", label: "Switch to English only when explicitly requested" }
         ],
         science: [
           { key: "claims_evidence_trace", label: "Claims map to explicit evidence" },
@@ -344,6 +355,25 @@ function renderJournalGuidance(task) {
   const artifactsHtml = (Array.isArray(profile.artifacts) ? profile.artifacts : [])
     .map((item) => `<li>${escapeHtml(item)}</li>`)
     .join("");
+  const languagePolicy = profile.languagePolicy && typeof profile.languagePolicy === "object" ? profile.languagePolicy : {};
+  const languageItems = [];
+  if (languagePolicy.defaultLanguage) {
+    languageItems.push(`Default language: ${languagePolicy.defaultLanguage}`);
+  }
+  if (Array.isArray(languagePolicy.allowedLanguages) && languagePolicy.allowedLanguages.length > 0) {
+    languageItems.push(`Allowed: ${languagePolicy.allowedLanguages.join(", ")}`);
+  }
+  if (typeof languagePolicy.switchToEnglishOnRequest === "boolean") {
+    languageItems.push(
+      languagePolicy.switchToEnglishOnRequest
+        ? "Switch to English only when explicitly requested"
+        : "No automatic language switching"
+    );
+  }
+  if (languagePolicy.zhQualityBar) {
+    languageItems.push(String(languagePolicy.zhQualityBar));
+  }
+  const languageHtml = languageItems.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
 
   return `
     <details class="journal-details">
@@ -356,6 +386,10 @@ function renderJournalGuidance(task) {
         <div>
           <strong>Submission artifacts</strong>
           <ul>${artifactsHtml || "<li>—</li>"}</ul>
+        </div>
+        <div>
+          <strong>Language policy</strong>
+          <ul>${languageHtml || "<li>—</li>"}</ul>
         </div>
       </div>
     </details>
