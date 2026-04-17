@@ -1,6 +1,7 @@
 ---
 permalink: /
-title: "PSI & PSI START"
+# title: "PSI & PSI START"
+title: "Personal Website"
 author_profile: true
 redirect_from:
   - /about/
