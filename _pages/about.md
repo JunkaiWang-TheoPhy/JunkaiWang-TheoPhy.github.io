@@ -1,7 +1,7 @@
 ---
 permalink: /
 # title: "PSI & PSI START"
-title: "Personal Website"
+title: "An Apprentice of Nature"
 author_profile: true
 redirect_from:
   - /about/
