@@ -13,12 +13,17 @@ redirect_from:
 Education Experience
 ======
 * Tsinghua University - Sep 2024 - Present
+  * Visiting Scholar
+  * Yau Mathematical Sciences Center (YMSC)
   * Co-advised by Quantum Information Group and Mathematical Physics Group
+* Westlake University - Dec 2025 - Jan 2026
+  * Invited Visiting Student for Collaboration
+  * In Physics Department
 * University of Science and Technology in China (USTC) - Mar 2025 - Jul 2025
   * Invited Visiting Student for Collaboration
   * In Particle Cosmology Group
 * University of California, Santa Barbara - Jun 2023 - Aug 2023
-  * Visiting Student in summer
+  * Summer Visiting Student
   * In High Energy Theory Group
 * University of California, Berkeley - Jan 2023 - Jun 2023
   * International Student 
@@ -26,6 +31,34 @@ Education Experience
 * Nanjing University - Sep 2020 - Jul 2024
   * Bachelor in Physics 
   * National Top-notch Student Education Program for Fundamental Sciences (5‰ in students of basic science)
+
+Entrepreneurial Ventures
+======
+* **Mira (Cofounder)** - Mar 2026 - Present
+  * Co-founder of Mira, an OpenClaw-native proactive AI companion built around real-time sensing, long-term memory, low-disturbance decision-making, and action in the physical world
+  * Responsible for software and algorithm engineering, including scientific-data workflows, information extraction, structured memory, and product-facing automation
+  * Built **Mira Light** as an embodied AI companion in the form of a Pixar-style desk lamp that senses user state via camera and microphone and responds through light, posture, and smart-home orchestration
+  * Led product definition and end-to-end prototyping from interaction concept to embodied demo, completing a functional hardware prototype within 48 hours
+  * **Mira Light** is expected to enter pilot production and fundraising in May 2026
+  * Project documents: [Mira Light 项目说明书](https://my.feishu.cn/wiki/Twj5wEssgiHmP7kjrXkczLHenve), [Mira 项目说明书](https://saoi3t9hyeh.feishu.cn/wiki/Vs4nwZ61ziPb85kPtYscmKWanRf?renamingWikiNode=false)
+  * Awards and recognition:
+    * RMB 120,000+ in prize money, broad media exposure, and extensive opportunities for investor access and community building
+    * Top 1 in the Hardware Track at the Attrax Tsinghua OpenClaw Hackathon
+    * Top 1 in the OpenClaw Track at the Zhongguancun Forum AI Innovation Competition
+    * Top 1 in the Life Track at the Zhongguancun Academy Lobster Competition
+    * Top 5 in the Hardware Track at the Xiaohongshu Hackathon Summit
+    * Top 2 at the AI Shrimpathon Industry-Level Agent Evaluation Competition
+  * Media and public exposure:
+    * Featured by CCTV, Haidian Daily, National Business Daily, and other media
+    * Invited to a dedicated two-hour 36Kr live interview with 10,000+ viewers
+    * Represented Tsinghua contestants at Yuandian Academy for reporting and award presentation
+
+Internship
+======
+* **[Tsingyu AI (清屿科技)](https://tsingyuai.com/)** - Mar 2026 - Jun 2026
+  * A Tsinghua-based AI startup focused on using AI agents to improve knowledge acquisition and scientific research efficiency
+  * Responsible for **[Scientify](https://scientify.tech/)**, an open-source AI scientist that integrates literature ingestion, private knowledge, persistent research memory, self-evolution, hypothesis generation, and multi-agent validation from survey and planning to code implementation and experiments
+  * Helped turn research content into structured, reusable product data and evaluation workflows, aligning scientific usefulness with product quality and user-facing delivery
 
 Awards
 ======
@@ -48,6 +81,10 @@ Awards
 - **Outstanding COVID-19 Response Volunteer**
 - **Outstanding Promoter of Chinese Culture**
 
+Scientific Outreach
+======
+I am always eager to share my insights and knowledge. Since undergrad, I have maintained a science outreach blog on theoretical and mathematical physics: [zhihu.com/people/Junkai-Wang](https://zhihu.com/people/Junkai-Wang) (Chinese). It has 46k+ agrees, 50k+ favorites, 16k+ followers, and 12k+ shares. More than 300 blogs and answers have been published, covering various topics in theoretical physics. The blog has attracted over 5,000,000+ views, and I was awarded as a "Best answerer in Physics" (70/420,000,000 users), helping thousands of Chinese physics students and even faculty members in the past few years.
+
 SKILLS
 ======
 * Languages: Mandarin (native), English (fluent), Japanese (basic)
@@ -62,6 +99,12 @@ Publications
 Talks
 ======
 **Academic Talks**
+- **Seminar of Quantum Scientific Computation and Quantum Artificial Intelligence** - Apr 1, 2026  
+  *From Quantum Artificial Intelligence to Improved Quantum Automated Learning*  
+  Yau Mathematical Sciences Center (YMSC), Tsinghua University
+- **Seminar of Quantum Scientific Computation and Quantum Artificial Intelligence** - Mar 18, 2026  
+  *Verified Open-System Quantum Simulation with Mixed-State Diagnostics*  
+  Yau Mathematical Sciences Center (YMSC), Tsinghua University
 - **Fudan Student Workshop on Theoretical Physics (in Preparation)** - 2026  
   *On recent progress of generalised symmetries, mixed states, and SSB*  
   *On recent progress of Quantizing 3d Gravity and its relation with LQG and TQFT*  
@@ -103,7 +146,16 @@ Talks
 - **5th National Symposium on Philosophy of Physics** - 2021  
   *Form & Function: A Linguistic-Semiotic Investigation on Modern Physics*  
   University of Science and Technology of China
-  
+
+Posters
+======
+- **Frontiers of Quantum Machine Learning International Symposium (Scheduled)** - May 10, 2026  
+  co-organized by IOP Publishing and Tsinghua University / Beijing, China
+- **International Congress of Basic Science (ICBS 2025)** - 2025  
+  Tsinghua University / Yau Mathematical Sciences Center (YMSC) / co-organized with Beijing Municipal Government and Beijing Institute of Mathematical Sciences and Applications (BIMSA)
+- **The 16th Asia Pacific Physics Conference (APPC16)** - 2025  
+  Association of Asia Pacific Physical Societies (AAPPS) & Chinese Physical Society (CPS) / hosted by Hainan University
+
 Conference Attending
 ======
 <ul>{% for post in site.conference_attending reversed %}
@@ -114,6 +166,9 @@ Conference Attending
 
 Talks on Learning Seminar
 ======
+- **Von Neumann Algebra in Physics Learning Seminar** — 2025–2026  
+  Peking University
+
 - **AdS/CFT Reading Seminar** — 2024–2026  
   Peking University
 
