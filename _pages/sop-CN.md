@@ -1,7 +1,11 @@
 ---
 title: "Statement of Purpose（中文）"
 title_class: fancy-title
-permalink: /sop-cn/
+permalink: /sop/cn/
+redirect_from:
+  - /sop-cn/
+  - /sop-cn
+  - /sop/cn
 author_profile: true
 ---
 
