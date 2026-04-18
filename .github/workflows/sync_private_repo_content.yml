@@ -29,7 +29,30 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Validate sync configuration
+        id: validate_config
+        env:
+          PRIVATE_REPO_PAT: ${{ secrets.PRIVATE_REPO_PAT }}
+        run: |
+          set -euo pipefail
+
+          configured=true
+
+          if [ "${PRIVATE_REPO}" = "thomasjwang/YOUR_PRIVATE_REPO" ]; then
+            echo "::notice::Skipping private repo sync: PRIVATE_REPO is still set to the placeholder value."
+            configured=false
+          elif [ "${PRIVATE_REPO_SUBDIR}" = "path/in/private/repo" ]; then
+            echo "::notice::Skipping private repo sync: PRIVATE_REPO_SUBDIR is still set to the placeholder value."
+            configured=false
+          elif [ -z "${PRIVATE_REPO_PAT:-}" ]; then
+            echo "::notice::Skipping private repo sync: PRIVATE_REPO_PAT secret is not configured."
+            configured=false
+          fi
+
+          echo "configured=${configured}" >> "$GITHUB_OUTPUT"
+
       - name: Checkout private source repository
+        if: steps.validate_config.outputs.configured == 'true'
         uses: actions/checkout@v4
         with:
           repository: ${{ env.PRIVATE_REPO }}
@@ -39,6 +62,7 @@ jobs:
           fetch-depth: 1
 
       - name: Validate source directory exists
+        if: steps.validate_config.outputs.configured == 'true'
         run: |
           set -euo pipefail
           src=".tmp/private-source/${PRIVATE_REPO_SUBDIR}"
@@ -48,6 +72,7 @@ jobs:
           fi
 
       - name: Sync files
+        if: steps.validate_config.outputs.configured == 'true'
         run: |
           set -euo pipefail
           src=".tmp/private-source/${PRIVATE_REPO_SUBDIR}/"
@@ -57,6 +82,7 @@ jobs:
           rsync -a --delete "$src" "$dst"
 
       - name: Commit and push if changed
+        if: steps.validate_config.outputs.configured == 'true'
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
