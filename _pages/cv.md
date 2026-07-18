@@ -39,19 +39,22 @@ Entrepreneurial Ventures
   * Responsible for software and algorithm engineering, including scientific-data workflows, information extraction, structured memory, and product-facing automation
   * Built **Mira Light** as an embodied AI companion in the form of a Pixar-style desk lamp that senses user state via camera and microphone and responds through light, posture, and smart-home orchestration
   * Led product definition and end-to-end prototyping from interaction concept to embodied demo, completing a functional hardware prototype within 48 hours
-  * **Mira Light** is expected to enter pilot production and fundraising in May 2026
+  * Completed rapid commercial validation within two months; Mira reached an estimated valuation of **RMB 50 million**
   * Project documents: [Mira Light 项目说明书](https://my.feishu.cn/wiki/Twj5wEssgiHmP7kjrXkczLHenve), [Mira 项目说明书](https://saoi3t9hyeh.feishu.cn/wiki/Vs4nwZ61ziPb85kPtYscmKWanRf?renamingWikiNode=false)
   * Awards and recognition:
-    * RMB 120,000+ in prize money, broad media exposure, and extensive opportunities for investor access and community building
+    * RMB 200,000+ in prize money, broad media exposure, and extensive opportunities for investor access and community building
     * Top 1 in the Hardware Track at the Attrax Tsinghua OpenClaw Hackathon
     * Top 1 in the OpenClaw Track at the Zhongguancun Forum AI Innovation Competition
     * Top 1 in the Life Track at the Zhongguancun Academy Lobster Competition
-    * Top 5 in the Hardware Track at the Xiaohongshu Hackathon Summit
+    * First Place in the Digua Robot Track at the Xiaohongshu Hackathon Summit
     * Top 2 at the AI Shrimpathon Industry-Level Agent Evaluation Competition
+    * Top 3 at the Global OPC Co-Creation Festival
+    * Landing-to-Reality Award and Top 3 at the Beijing Geek Contest
   * Media and public exposure:
-    * Featured by CCTV, Haidian Daily, National Business Daily, and other media
-    * Invited to a dedicated two-hour 36Kr live interview with 10,000+ viewers
-    * Represented Tsinghua contestants at Yuandian Academy for reporting and award presentation
+    * Featured by CCTV, Haidian Daily, Phoenix News, National Business Daily, and other national or local media
+    * Interviewed by CCTV Finance Channel (CCTV-2)
+    * Invited to dedicated two-hour 36Kr and JLC live interviews with large public audiences
+    * Presented as a young AI innovation representative in Haidian at Yuandian AI Community
 
 Internship
 ======
@@ -62,6 +65,23 @@ Internship
 
 Awards
 ======
+**AI Startup Awards and Recognition**
+- **Mira / Mira Light, AI startup and embodied AI hardware project** (2026)
+  Co-founder, CTO/CSO, and software/algorithm lead. The project received more than **RMB 200,000** in prize money, broad media exposure, investor access, and community-building opportunities within two months. Mira has reached an estimated valuation of **RMB 50 million**.
+- **First Place, Hardware Track, Attrax Tsinghua OpenClaw Hackathon** (2026)
+- **First Place, OpenClaw Track, Zhongguancun Forum AI Innovation Competition** (2026)
+- **First Place, Life Track, Zhongguancun Academy Lobster Competition** (2026)
+- **First Place, Digua Robot Track, Xiaohongshu Hackathon Summit** (2026)
+- **Second Place, AI Shrimpathon Industry-Level Agent Evaluation Competition** (2026)
+- **Top 3, Global OPC Co-Creation Festival** (2026)
+- **Landing-to-Reality Award and Top 3, Beijing Geek Contest** (2026)
+- **Media and public recognition** (2026)
+  Featured by CCTV, Haidian Daily, Phoenix News, and National Business Daily; interviewed by CCTV Finance Channel (CCTV-2); invited to dedicated two-hour 36Kr and JLC live interviews.
+
+**Research Recognition**
+- **Best Poster Award, Frontiers of Quantum Machine Learning International Symposium** (2026)
+  Hosted by IOP Publishing and Tsinghua University.
+
 **Competitions**
 - **National First Prize, 12th China Undergraduate Physics Tournament (CUPT), Team Nanjing University** (2021)  
   IYPT-style national competition in physics problem solving and debate.
@@ -70,7 +90,7 @@ Awards
 **Scholarships**
 - **National Scholarship (Nanjing University)** (2021)  
   Departmental selection: 2/200 students per year.
-- **Special Scholarship for Outstanding Science Students (Top-Notch Program), twices** (2021, 2022)  
+- **Special Scholarship for Outstanding Science Students (Top-Notch Program), twice** (2021, 2022)
   Awarded twice; department quota: 20/200 students per year.
 - **People's Scholarship --- Science & Technology Innovation Award** (2023)  
   Departmental selection: 10/200 students per year.

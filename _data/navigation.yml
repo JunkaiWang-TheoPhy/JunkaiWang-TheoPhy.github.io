@@ -26,8 +26,8 @@ main:
   - title: "Teaching"
     url: /teaching/
 
-  - title: "Narrative"
-    url: /narrative/
+  # - title: "Narrative"
+  #   url: /narrative/
         
   - title: "Blogs"
     url: /blogs/
@@ -38,8 +38,8 @@ main:
   - title: "CV"
     url: /cv/
 
-  - title: "SoP"
-    url: /sop/
+  # - title: "SoP"
+  #   url: /sop/
     
   # - title: "CV"
   #   url: /cv-json/
