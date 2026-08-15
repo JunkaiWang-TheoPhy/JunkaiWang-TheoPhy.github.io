@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="严格筛选 AI 适合度高于 8.8 的数学物理与理论物理问题，区分完整原题和可发表忠实子题。">
+  <title>数学物理 × AI：适合度高于 8.8 的研究问题</title>
+  <style>
+    :root {
+      --paper: #f6f7f2;
+      --paper-warm: #fbf8f1;
+      --card: rgba(255, 255, 255, .82);
+      --ink: #132c3f;
+      --muted: #617689;
+      --line: #d7e1de;
+      --teal: #087f76;
+      --teal-soft: #dff3ee;
+      --blue: #2f67a4;
+      --blue-soft: #e6eff9;
+      --violet: #6554a4;
+      --violet-soft: #eeeafa;
+      --orange: #c95f27;
+      --orange-soft: #fae9dc;
+      --gold: #9a7014;
+      --shadow: 0 18px 48px rgba(28, 56, 67, .09);
+      --serif: "Iowan Old Style", "Noto Serif SC", "Songti SC", Georgia, serif;
+      --sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 4%, rgba(13, 138, 126, .12), transparent 25rem),
+        radial-gradient(circle at 94% 22%, rgba(222, 130, 72, .1), transparent 27rem),
+        var(--paper);
+      font-family: var(--sans);
+      line-height: 1.68;
+    }
+    a { color: inherit; }
+    button, input, select { font: inherit; }
+    button, select { cursor: pointer; }
+    :focus-visible { outline: 3px solid rgba(8, 127, 118, .32); outline-offset: 3px; }
+
+    .shell { width: min(1180px, calc(100% - 36px)); margin: 0 auto; }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: rgba(246, 247, 242, .84);
+      border-bottom: 1px solid rgba(178, 197, 193, .7);
+    }
+    .topbar-inner {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .brand { display: flex; align-items: center; gap: 11px; text-decoration: none; font-weight: 800; letter-spacing: -.02em; }
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 11px;
+      color: white;
+      background: linear-gradient(135deg, var(--teal), #39a594);
+      box-shadow: 0 8px 20px rgba(8, 127, 118, .2);
+      font-size: 13px;
+      letter-spacing: .04em;
+    }
+    nav { display: flex; align-items: center; gap: 18px; font-size: 14px; color: var(--muted); }
+    nav a { text-decoration: none; }
+    nav a:hover { color: var(--teal); }
+    .atlas-link { padding: 8px 13px; border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,.65); }
+
+    .hero { padding: 86px 0 72px; }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(320px, .75fr); gap: 56px; align-items: center; }
+    .eyebrow, .kicker {
+      margin: 0 0 18px;
+      color: var(--teal);
+      font-size: 13px;
+      font-weight: 850;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+    h1, h2 { font-family: var(--serif); letter-spacing: -.045em; }
+    h1 { margin: 0; max-width: 820px; font-size: clamp(48px, 7.2vw, 92px); line-height: .98; font-weight: 760; }
+    h1 em { color: var(--teal); font-style: normal; }
+    .hero-copy { max-width: 730px; margin: 28px 0 0; color: var(--muted); font-size: clamp(17px, 2vw, 21px); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 46px;
+      padding: 0 18px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 760;
+      font-size: 14px;
+    }
+    .button.primary { background: var(--ink); color: white; box-shadow: 0 10px 24px rgba(19,44,63,.16); }
+    .button.secondary { border-color: var(--line); background: rgba(255,255,255,.7); color: var(--ink); }
+
+    .funnel {
+      position: relative;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      background: rgba(255,255,255,.68);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .funnel::before { content: ""; position: absolute; inset: 0 0 auto auto; width: 130px; height: 130px; border-radius: 0 0 0 130px; background: var(--teal-soft); opacity: .85; }
+    .funnel h2 { position: relative; margin: 0 0 22px; font-family: var(--sans); font-size: 20px; letter-spacing: -.02em; }
+    .funnel-step { display: grid; grid-template-columns: 62px 1fr; gap: 15px; align-items: center; padding: 14px 0; border-top: 1px solid var(--line); }
+    .funnel-step:first-of-type { border-top: 0; }
+    .funnel-step strong { font-family: var(--serif); font-size: 34px; line-height: 1; color: var(--teal); }
+    .funnel-step span { color: var(--muted); font-size: 14px; }
+    .funnel-note { margin: 18px 0 0; padding: 13px 15px; border-radius: 16px; background: var(--orange-soft); color: #74411f; font-size: 13px; }
+
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 48px; }
+    .stat { padding: 20px; border-top: 2px solid var(--teal); background: rgba(255,255,255,.42); }
+    .stat strong { display: block; font-family: var(--serif); font-size: 38px; line-height: 1; }
+    .stat span { display: block; margin-top: 8px; color: var(--muted); font-size: 13px; }
+
+    main section { padding: 76px 0; border-top: 1px solid rgba(199, 214, 211, .8); }
+    .section-head { display: grid; grid-template-columns: minmax(0, .8fr) minmax(330px, 1.2fr); gap: 50px; align-items: end; margin-bottom: 34px; }
+    .section-head h2 { margin: 0; font-size: clamp(38px, 5vw, 62px); line-height: 1.04; }
+    .section-intro { margin: 0; color: var(--muted); font-size: 17px; }
+
+    .method-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .method-card, .rank-panel, .explainer, .frontier-card {
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: var(--card);
+      box-shadow: 0 12px 32px rgba(34, 68, 78, .055);
+    }
+    .method-card { padding: 26px; }
+    .method-card .number { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--teal-soft); color: var(--teal); font-weight: 850; }
+    .method-card h3 { margin: 18px 0 9px; font-size: 19px; }
+    .method-card p { margin: 0; color: var(--muted); font-size: 14px; }
+    .threshold-note { margin-top: 18px; padding: 20px 24px; border-left: 4px solid var(--orange); border-radius: 0 20px 20px 0; background: var(--orange-soft); color: #70411f; }
+
+    .ranking-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(300px, .65fr); gap: 18px; }
+    .rank-panel { overflow: hidden; }
+    .rank-panel h3, .explainer h3 { margin: 0; padding: 22px 24px; font-size: 18px; border-bottom: 1px solid var(--line); }
+    .rank-row { display: grid; grid-template-columns: 42px 1fr 60px; gap: 12px; align-items: center; padding: 14px 24px; border-bottom: 1px solid #e7edeb; }
+    .rank-row:last-child { border-bottom: 0; }
+    .rank-no { color: var(--muted); font-family: var(--serif); font-size: 20px; }
+    .rank-name { font-weight: 720; }
+    .rank-name small { display: block; color: var(--muted); font-weight: 500; }
+    .rank-score { color: var(--teal); font-family: var(--serif); font-size: 25px; text-align: right; }
+    .explainer { padding-bottom: 20px; }
+    .legend-item { display: grid; grid-template-columns: 66px 1fr; gap: 13px; margin: 18px 22px 0; }
+    .legend-score { padding: 5px 8px; border-radius: 10px; text-align: center; font-weight: 850; font-size: 13px; }
+    .legend-score.robust { background: var(--teal-soft); color: var(--teal); }
+    .legend-score.strong { background: var(--blue-soft); color: var(--blue); }
+    .legend-score.edge { background: var(--violet-soft); color: var(--violet); }
+    .legend-item p { margin: 0; color: var(--muted); font-size: 13px; }
+
+    .controls {
+      position: sticky;
+      top: 68px;
+      z-index: 15;
+      display: grid;
+      grid-template-columns: minmax(260px, 1.35fr) repeat(3, minmax(150px, .55fr));
+      gap: 10px;
+      padding: 14px;
+      margin-bottom: 22px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: rgba(246, 247, 242, .94);
+      box-shadow: 0 12px 30px rgba(30, 58, 69, .08);
+      backdrop-filter: blur(16px);
+    }
+    .control { position: relative; }
+    .control label { position: absolute; left: 14px; top: 7px; color: var(--muted); font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; pointer-events: none; }
+    .control input, .control select {
+      width: 100%;
+      min-height: 52px;
+      padding: 21px 13px 7px;
+      color: var(--ink);
+      border: 1px solid #cedbd8;
+      border-radius: 13px;
+      background: white;
+      appearance: none;
+    }
+    .catalog-meta { display: flex; justify-content: space-between; align-items: center; gap: 15px; margin: 12px 2px 18px; color: var(--muted); font-size: 13px; }
+    .reset-button { border: 0; background: transparent; color: var(--teal); font-weight: 750; }
+    .problem-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .problem-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 430px;
+      padding: 25px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: rgba(255,255,255,.78);
+      box-shadow: 0 9px 24px rgba(32, 61, 73, .045);
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .problem-card:hover { transform: translateY(-3px); border-color: #b8cfca; box-shadow: var(--shadow); }
+    .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .tag { padding: 4px 9px; border-radius: 999px; background: #eef2f1; color: var(--muted); font-size: 11px; font-weight: 750; }
+    .tag.icm { background: var(--blue-soft); color: var(--blue); }
+    .tag.frontier { background: var(--orange-soft); color: var(--orange); }
+    .score-block { flex: 0 0 auto; text-align: right; }
+    .score-block strong { display: block; color: var(--teal); font-family: var(--serif); font-size: 36px; line-height: .95; }
+    .score-block span { color: var(--muted); font-size: 10px; font-weight: 800; text-transform: uppercase; }
+    .problem-card h3 { margin: 18px 0 5px; font-family: var(--serif); font-size: 27px; line-height: 1.15; letter-spacing: -.025em; }
+    .complete-score { margin: 0 0 16px; color: var(--muted); font-size: 12px; }
+    .project { margin: 0 0 18px; color: #405a6c; font-size: 14px; }
+    .mechanism { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: auto; }
+    .mechanism div { min-height: 102px; padding: 13px; border-radius: 15px; background: var(--paper); }
+    .mechanism b { display: block; margin-bottom: 5px; color: var(--teal); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+    .mechanism span { color: var(--muted); font-size: 12px; line-height: 1.5; }
+    .risk { margin: 13px 0 0; padding-top: 13px; border-top: 1px solid #e5ecea; color: var(--muted); font-size: 12px; }
+    .card-links { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 17px; }
+    .card-links a { padding: 7px 11px; border: 1px solid var(--line); border-radius: 999px; text-decoration: none; color: var(--teal); font-size: 12px; font-weight: 760; }
+    .card-links a:hover { background: var(--teal-soft); }
+    .empty { grid-column: 1 / -1; padding: 48px; border: 1px dashed var(--line); border-radius: 24px; text-align: center; color: var(--muted); }
+
+    .frontier-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .frontier-card { padding: 22px; }
+    .frontier-card strong { color: var(--orange); font-family: var(--serif); font-size: 30px; }
+    .frontier-card h3 { margin: 12px 0 7px; font-size: 17px; }
+    .frontier-card p { margin: 0; color: var(--muted); font-size: 13px; }
+
+    .three-body-callout { display: grid; grid-template-columns: 170px 1fr; gap: 28px; align-items: center; margin-top: 20px; padding: 28px; border-radius: 26px; background: var(--ink); color: white; }
+    .three-body-score { text-align: center; }
+    .three-body-score strong { display: block; color: #73d7ca; font-family: var(--serif); font-size: 62px; line-height: 1; }
+    .three-body-score span { color: #aec1cb; font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .three-body-callout h3 { margin: 0 0 8px; font-family: var(--serif); font-size: 28px; }
+    .three-body-callout p { margin: 0; color: #c4d1d7; font-size: 14px; }
+    .three-body-callout a { color: #8ee5da; }
+
+    footer { padding: 44px 0 60px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+    .footer-grid { display: flex; justify-content: space-between; gap: 30px; }
+    .footer-grid p { margin: 0; max-width: 760px; }
+
+    @media (max-width: 960px) {
+      .hero-grid, .section-head, .ranking-grid { grid-template-columns: 1fr; }
+      .hero { padding-top: 62px; }
+      .stats, .frontier-grid { grid-template-columns: repeat(2, 1fr); }
+      .controls { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 720px) {
+      .shell { width: min(100% - 24px, 1180px); }
+      nav a:not(.atlas-link) { display: none; }
+      h1 { font-size: 49px; }
+      .hero-grid { gap: 34px; }
+      .stats, .method-grid, .problem-grid, .frontier-grid { grid-template-columns: 1fr; }
+      .controls { position: static; grid-template-columns: 1fr; }
+      .section-head { gap: 18px; }
+      main section { padding: 58px 0; }
+      .mechanism { grid-template-columns: 1fr; }
+      .three-body-callout { grid-template-columns: 1fr; }
+      .three-body-score { text-align: left; }
+      .footer-grid { display: block; }
+      .footer-grid p + p { margin-top: 12px; }
+    }
+    @media print {
+      :root { --paper: white; }
+      .topbar, .controls, .hero-actions, .reset-button { display: none !important; }
+      body { background: white; color: black; }
+      .hero, main section { padding: 30px 0; }
+      .problem-grid { display: block; }
+      .problem-card { min-height: 0; margin-bottom: 16px; break-inside: avoid; box-shadow: none; }
+      .frontier-grid { grid-template-columns: repeat(2, 1fr); }
+      a { text-decoration: none; }
+    }
+  /* DIRECTIONAL-VERIFIABILITY:SHORTLIST */
+    .verification-guide{margin:0 0 18px;padding:18px 20px;border:1px solid #acd7cf;border-radius:18px;background:#e6f6f2;color:#2b5a66}.verification-guide strong{color:#0d7b70}.verification-argument{padding:15px;border:1px solid #c5dfda;border-radius:15px;background:#f0f9f7}.verification-argument .verification-head{display:flex;align-items:center;gap:9px;margin-bottom:7px}.verification-argument .verification-head strong{font-size:1.22rem;color:#0d7b70}.verification-argument .verification-head span{padding:4px 8px;border-radius:999px;background:#d9efea;color:#27665f;font-size:12px;font-weight:800}.verification-argument p{margin:0;color:#45616e;font-size:14px;line-height:1.62}.verification-argument small{display:block;margin-top:7px;color:#73838b}
+  </style>
+<link rel="icon" href="../icon.svg" type="image/svg+xml">
+</head>
+<body>
+
+<a class="atlas-hub-link" href="../" aria-label="返回数学物理 AI 研究图谱总入口">← 返回总入口</a>
+<style>
+  .atlas-hub-link{position:fixed;right:18px;bottom:18px;z-index:9999;display:inline-flex;align-items:center;padding:10px 15px;border:1px solid rgba(15,54,78,.16);border-radius:999px;color:#123047!important;background:rgba(255,255,255,.94);box-shadow:0 10px 30px rgba(15,54,78,.16);font:700 13px/1.2 ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;text-decoration:none!important;backdrop-filter:blur(12px)}
+  .atlas-hub-link:hover{transform:translateY(-1px);box-shadow:0 13px 34px rgba(15,54,78,.22)}
+  @media(max-width:640px){.atlas-hub-link{right:10px;bottom:10px;padding:9px 12px}}
+  @media print{.atlas-hub-link{display:none!important}}
+</style>
+
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <a class="brand" href="#top"><span class="brand-mark">8.8+</span><span>MathPhys × AI</span></a>
+      <nav aria-label="页面导航">
+        <a href="#method">口径</a>
+        <a href="#rankings">排序</a>
+        <a href="#catalog">全部问题</a>
+        <a href="#frontier">前沿证据</a>
+        <a class="atlas-link" href="../icm-atlas/">返回完整图谱</a>
+      </nav>
+    </div>
+  </header>
+
+  <div id="top" class="hero">
+    <div class="shell">
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow">Research shortlist · verified 2026-08-13</p>
+          <h1>把能做的物理问题，<br>从<em>宏大猜想</em>里切出来</h1>
+          <p class="hero-copy">只保留 AI 适合度严格高于 8.8 的数学物理与理论物理方向。这里评价的是“人类定题＋AI 搜索＋独立核验器”攻克忠实、可发表子题的闭环，不是模型独立解决完整猜想的概率。</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#catalog">浏览 35 个方向 ↓</a>
+            <a class="button secondary" href="../icm-atlas/">查看原有 113 项总表</a>
+          </div>
+        </div>
+        <aside class="funnel" aria-label="筛选过程">
+          <h2>严格筛选漏斗</h2>
+          <div class="funnel-step"><strong>113</strong><span>完整交互图谱中的合并问题簇</span></div>
+          <div class="funnel-step"><strong>29</strong><span>原评分中超过 88/100 的候选</span></div>
+          <div class="funnel-step"><strong>26</strong><span>逐项复核后仍能过线的 ICM 子题</span></div>
+          <div class="funnel-step"><strong>+9</strong><span>三体上调一项，加八个表外前沿方向</span></div>
+          <p class="funnel-note">原题与子题分别评分；凡跨越任意模型、任意秩或全局分类的纲领，完整原题分数均显著下降。</p>
+        </aside>
+      </div>
+      <div class="stats" aria-label="页面统计">
+        <div class="stat"><strong>35</strong><span>最终收录的问题方向</span></div>
+        <div class="stat"><strong>27</strong><span>来自 ICM 问题网页</span></div>
+        <div class="stat"><strong>8</strong><span>最新实证支持的表外方向</span></div>
+        <div class="stat"><strong>±0.4</strong><span>评分的合理横向误差</span></div>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <section id="method">
+      <div class="shell">
+        <div class="section-head">
+          <div><p class="kicker">Scoring contract</p><h2>8.8 分到底意味着什么</h2></div>
+          <p class="section-intro">高分不奖励“题目著名”，只奖励可形成机器闭环的研究结构：候选可以批量生成，失败能迅速反馈，成功能交给另一个程序或形式系统独立检查。</p>
+        </div>
+        <div class="method-grid">
+          <article class="method-card"><span class="number">1</span><h3>忠实切片</h3><p>必须保留原问题的核心机制，但把维数、秩、图族、圈数、势或参数区间固定下来。只算几个例子而没有一般命题，不计入高分。</p></article>
+          <article class="method-card"><span class="number">2</span><h3>候选生成器</h3><p>LLM、强化学习、符号回归、有限域采样、Gröbner、SDP、谱搜索或高精度数值负责探索巨大候选空间。</p></article>
+          <article class="method-card"><span class="number">3</span><h3>独立核验器</h3><p>最终结果交给精确代数、SAT/SMT、区间算术、形式证明、守恒律、对偶证书或独立数值程序检查。</p></article>
+        </div>
+        <div class="threshold-note"><strong>不可跨越的边界：</strong>“找到一条三体周期轨道”可以有严格存在证书；“证明它在所有竞争路径中全局作用量最小”仍是无限维全局问题。前者 9.3，后者约 7.5。</div>
+      </div>
+    </section>
+
+    <section id="rankings">
+      <div class="shell">
+        <div class="section-head">
+          <div><p class="kicker">Horizontal comparison</p><h2>最强机器闭环</h2></div>
+          <p class="section-intro">最高分集中在四种结构：有限代数恒等式、可执行程序、有限图/码、以及能用区间算术封口的动力系统。完整理论纲领通常并不在最高档。</p>
+        </div>
+        <div class="ranking-grid">
+          <div class="rank-panel">
+            <h3>综合前十：按忠实子题 AI 适合度</h3>
+            <div class="rank-row"><span class="rank-no">01</span><span class="rank-name">Yang–Baxter / 可积 Hamiltonian<small>代数搜索＋YBE 精确代入</small></span><span class="rank-score">9.5</span></div>
+            <div class="rank-row"><span class="rank-no">02</span><span class="rank-name">受限散射振幅公式发现<small>有限域数据＋因子化/软极限</small></span><span class="rank-score">9.5</span></div>
+            <div class="rank-row"><span class="rank-no">03</span><span class="rank-name">半经典 Schrödinger 数值法<small>算法生成＋uniform-in-ℏ 误差证书</small></span><span class="rank-score">9.4</span></div>
+            <div class="rank-row"><span class="rank-no">04</span><span class="rank-name">固定规模量子纠错码<small>RL 搜索＋Knill–Laflamme 精确检查</small></span><span class="rank-score">9.4</span></div>
+            <div class="rank-row"><span class="rank-no">05</span><span class="rank-name">固定图族 Feynman 积分<small>有限域/解析回归＋IBP/DE 残差</small></span><span class="rank-score">9.4</span></div>
+            <div class="rank-row"><span class="rank-no">06</span><span class="rank-name">量子 Forrelation 子题<small>多项式见证＋SOS/SDP 对偶证书</small></span><span class="rank-score">9.3</span></div>
+            <div class="rank-row"><span class="rank-no">07</span><span class="rank-name">WASEP → KPZ<small>生成元展开＋鞅/重整化核验</small></span><span class="rank-score">9.3</span></div>
+            <div class="rank-row"><span class="rank-no">08</span><span class="rank-name">三体新 choreography<small>谱搜索＋区间 Newton/Krawczyk</small></span><span class="rank-score">9.3</span></div>
+            <div class="rank-row"><span class="rank-no">09</span><span class="rank-name">数值 conformal bootstrap<small>crossing SDP＋极值泛函证书</small></span><span class="rank-score">9.3</span></div>
+            <div class="rank-row"><span class="rank-no">10</span><span class="rank-name">开放量子系统反馈<small>控制律搜索＋Lyapunov/SOS 证书</small></span><span class="rank-score">9.2</span></div>
+          </div>
+          <aside class="explainer">
+            <h3>如何读分数</h3>
+            <div class="legend-item"><span class="legend-score robust">9.2+</span><p>稳健高适配。已有成熟生成器和严格核验器，且近期出现过真实研究成果。</p></div>
+            <div class="legend-item"><span class="legend-score strong">9.0–9.1</span><p>机器明显加速，但最后的概率、解析或几何估计仍需专家主导。</p></div>
+            <div class="legend-item"><span class="legend-score edge">8.9</span><p>临界入选。范围稍微扩大就会跌破阈值，必须预先冻结模型和验收条件。</p></div>
+            <div class="legend-item"><span class="legend-score" style="background:#eef2f1;color:#556d7d">完整题</span><p>卡片同时显示完整原题分。它通常比忠实子题低 1–2 分，不能相互替代。</p></div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="catalog"><!-- DIRECTIONAL-VERIFIABILITY:SHORTLIST -->
+      <div class="shell">
+        <div class="section-head">
+          <div><p class="kicker">Interactive catalog</p><h2>全部 35 个方向</h2></div>
+          <p class="section-intro">可以按领域、可信档和来源筛选。每张卡片都明确列出机器负责什么、由谁核验，以及为什么不能把子题的高分外推到完整猜想。</p>
+        </div>
+        <div class="verification-guide"><strong>方向化可验证性</strong>优先寻找“给出对象即可验收”的构造题和反例题。同一问题的正证与反证分开打分；默认按最强验收方向排序，每张卡用一段话说明验收器和量词硬墙。</div><div class="controls" aria-label="问题筛选器">
+          <div class="control"><label for="search-input">关键词</label><input id="search-input" type="search" placeholder="例如：拓扑序、KPZ、三体、振幅"></div>
+          <div class="control"><label for="domain-filter">领域</label><select id="domain-filter"><option value="all">全部领域</option></select></div>
+          <div class="control"><label for="tier-filter">可信档</label><select id="tier-filter"><option value="all">全部档位</option><option value="robust">9.2 以上</option><option value="strong">9.0–9.1</option><option value="edge">8.9 临界</option></select></div>
+          <div class="control"><label for="source-filter">来源</label><select id="source-filter"><option value="all">全部来源</option><option value="ICM">ICM 问题</option><option value="Frontier">表外前沿</option></select></div><div class="control"><label for="verification-sort">排序</label><select id="verification-sort"><option value="verification" selected>按最强验收方向</option><option value="ai">按 AI 适合度</option></select></div>
+        </div>
+        <div class="catalog-meta"><span id="result-count" aria-live="polite"></span><button id="reset-filters" class="reset-button" type="button">清除筛选</button></div>
+        <div id="problem-grid" class="problem-grid"></div>
+
+        <aside class="three-body-callout">
+          <div class="three-body-score"><strong>9.3</strong><span>promoted from 8.8</span></div>
+          <div><h3>为什么三体轨道被上调</h3><p>现在的闭环已经十分明确：Fourier/射击法批量发现候选，validated ODE 校正轨道，再由区间 Newton 或 Krawczyk 证明存在和局部唯一。参见 ICM 原题 <a href="https://icmconjectures.com/2002-mathphys-124">124</a>、<a href="https://icmconjectures.com/2002-mathphys-125">125</a>。但全局作用量极小仍须对无限维竞争路径统一下界，因此不随之上调。</p></div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="frontier">
+      <div class="shell">
+        <div class="section-head">
+          <div><p class="kicker">2025–2026 evidence</p><h2>这不是纸面评分</h2></div>
+          <p class="section-intro">最近的真实案例显示，理论物理里最适合 AI 的不是无约束地“想一个理论”，而是在高度结构化的表达式空间中搜索，再用物理恒等式或精确代数封口。</p>
+        </div>
+        <div class="frontier-grid">
+          <article class="frontier-card"><strong>YBE</strong><h3>可积模型</h3><p>神经网络先找高精度 Yang–Baxter 解，再重构为有理 Hamiltonian 族。</p></article>
+          <article class="frontier-card"><strong>n≤6</strong><h3>散射振幅</h3><p>从低点数复杂表达式猜出一般公式，再核验软极限、因子化和对称恒等式。</p></article>
+          <article class="frontier-card"><strong>13q</strong><h3>量子纠错</h3><p>强化学习找到饱和线性规划上界的 13-qubit CSS code。</p></article>
+          <article class="frontier-card"><strong>6</strong><h3>宇宙弦积分</h3><p>树搜索生成六种解析方法，以 Gegenbauer 展开吸收奇点并获得精确结果。</p></article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-grid">
+      <p>评分对象：忠实、边界明确、可独立发表的子题。生成器可以犯错；最终结论必须由不共享同一失败模式的核验器复查。</p>
+      <p>更新：2026-08-13 · <a href="../icm-atlas/">返回完整 ICM 数学物理图谱</a></p>
+    </div>
+  </footer>
+
+  <script id="problem-data" type="application/json">[{"id":"fusion-products","title":"Fusion products / fermionic spectra","domain":"QFT与代数结构","ai_score":9.2,"complete_score":7.8,"source_type":"ICM","source_label":"2014-mathphys-32","problem_url":"https://icmconjectures.com/2014-mathphys-32","evidence_url":"https://arxiv.org/abs/2003.05639","project":"固定低秩 Lie 型和有限权，证明参数无关性、给出 PBW 基和 fermionic character，或找出最小反例。","generator":"非交换 Gröbner、PBW 枚举、LLM 归纳公式","verifier":"精确约化、Hilbert series 与独立计算代数程序","risk":"一般 Lie 型与任意权的统一归纳仍是完整纲领。","verification_best_direction":"受限反例／证书","verification_best_score":9.0,"verification_other_direction":"一般定理正证","verification_other_score":7.6,"verification_analysis":"对“Fusion products / fermionic spectra”，最强验收方向是受限反例／证书（9.0/10）：候选答案一旦给出，可用精确约化、Hilbert series 与独立计算代数程序检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有7.6/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是一般 Lie 型与任意权的统一归纳仍是完整纲领。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。","search_text":"fusion-products fusion products / fermionic spectra qft与代数结构 9.2 7.8 icm 2014-mathphys-32 https://icmconjectures.com/2014-mathphys-32 https://arxiv.org/abs/2003.05639 固定低秩 lie 型和有限权，证明参数无关性、给出 pbw 基和 fermionic character，或找出最小反例。 非交换 gröbner、pbw 枚举、llm 归纳公式 精确约化、hilbert series 与独立计算代数程序 一般 lie 型与任意权的统一归纳仍是完整纲领。 受限反例／证书 一般定理正证 对“fusion products / fermionic spectra”，最强验收方向是受限反例／证书（9.0/10）：候选答案一旦给出，可用精确约化、hilbert series 与独立计算代数程序检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有7.6/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是一般 lie 型与任意权的统一归纳仍是完整纲领。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。"},{"id":"semiclassical-schrodinger","title":"半经典 Schrödinger 数值法","domain":"数值PDE与动力系统","ai_score":9.4,"complete_score":8.2,"source_type":"ICM","source_label":"2010-numcs-40","problem_url":"https://icmconjectures.com/2010-numcs-40","evidence_url":"https://doi.org/10.1007/s00211-017-0913-7","project":"对明确的 1D/2D 势构造成本不随 1/ℏ 灾难增长的算法，并证明可观测量的 uniform-in-ℏ 误差。","generator":"WKB/FGA 模板、符号展开、自动微分与算法搜索","verifier":"区间算术、稳定性估计、独立 split-step/FEM 对照","risk":"任意势、焦散和长时间精度不能由有限实验自动推出。","verification_best_direction":"构造存在","verification_best_score":9.2,"verification_other_direction":"非存在证明","verification_other_score":6.8,"verification_analysis":"对“半经典 Schrödinger 数值法”，最强验收方向是构造存在（9.2/10）：候选答案一旦给出，可用区间算术、稳定性估计、独立 split-step/FEM 对照检查候选是否满足方程、约束及所需非退化条件。相对地，非存在证明只有6.8/10，因为非存在方向必须排除整个候选空间；现有硬墙是任意势、焦散和长时间精度不能由有限实验自动推出。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。","search_text":"semiclassical-schrodinger 半经典 schrödinger 数值法 数值pde与动力系统 9.4 8.2 icm 2010-numcs-40 https://icmconjectures.com/2010-numcs-40 https://doi.org/10.1007/s00211-017-0913-7 对明确的 1d/2d 势构造成本不随 1/ℏ 灾难增长的算法，并证明可观测量的 uniform-in-ℏ 误差。 wkb/fga 模板、符号展开、自动微分与算法搜索 区间算术、稳定性估计、独立 split-step/fem 对照 任意势、焦散和长时间精度不能由有限实验自动推出。 构造存在 非存在证明 对“半经典 schrödinger 数值法”，最强验收方向是构造存在（9.2/10）：候选答案一旦给出，可用区间算术、稳定性估计、独立 split-step/fem 对照检查候选是否满足方程、约束及所需非退化条件。相对地，非存在证明只有6.8/10，因为非存在方向必须排除整个候选空间；现有硬墙是任意势、焦散和长时间精度不能由有限实验自动推出。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。"},{"id":"amplituhedron","title":"Amplituhedron 三角剖分","domain":"QFT与散射振幅","ai_score":9.1,"complete_score":7.6,"source_type":"ICM","source_label":"2022-alg-178","problem_url":"https://icmconjectures.com/2022-alg-178","evidence_url":"https://arxiv.org/abs/2504.01217","project":"固定 (n,k) 枚举正几何三角剖分，计算 canonical form，并核对 BCFW 递推。","generator":"正 Grassmannian、cluster 与多面体枚举","verifier":"有理函数恒等式、正性、独立 amplitude 软件","risk":"全 n,k 的几何—物理等价远超有限搜索。","verification_best_direction":"受限反例／证书","verification_best_score":9.0,"verification_other_direction":"一般定理正证","verification_other_score":7.6,"verification_analysis":"对“Amplituhedron 三角剖分”，最强验收方向是受限反例／证书（9.0/10）：候选答案一旦给出，可用有理函数恒等式、正性、独立 amplitude 软件检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有7.6/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是全 n,k 的几何—物理等价远超有限搜索。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。","search_text":"amplituhedron amplituhedron 三角剖分 qft与散射振幅 9.1 7.6 icm 2022-alg-178 https://icmconjectures.com/2022-alg-178 https://arxiv.org/abs/2504.01217 固定 (n,k) 枚举正几何三角剖分，计算 canonical form，并核对 bcfw 递推。 正 grassmannian、cluster 与多面体枚举 有理函数恒等式、正性、独立 amplitude 软件 全 n,k 的几何—物理等价远超有限搜索。 受限反例／证书 一般定理正证 对“amplituhedron 三角剖分”，最强验收方向是受限反例／证书（9.0/10）：候选答案一旦给出，可用有理函数恒等式、正性、独立 amplitude 软件检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有7.6/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是全 n,k 的几何—物理等价远超有限搜索。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。"},{"id":"quantum-query","title":"量子 query complexity / Forrelation","domain":"量子信息与复杂度","ai_score":9.3,"complete_score":8.6,"source_type":"ICM","source_label":"2018-mathphys-40","problem_url":"https://icmconjectures.com/2018-mathphys-40","evidence_url":"https://arxiv.org/abs/1411.5729","project":"固定 k，寻找 Forrelation 的多项式逼近、随机决策树界或显式 adversary witness。","generator":"SDP/LP、多项式搜索、随机电路枚举","verifier":"有理 SOS/SDP 对偶证书、形式化下界","risk":"所有 k 的最优分离和平均模拟不是有限枚举问题。","verification_best_direction":"构造存在","verification_best_score":9.5,"verification_other_direction":"非存在证明","verification_other_score":6.8,"verification_analysis":"对“量子 query complexity / Forrelation”，最强验收方向是构造存在（9.5/10）：候选答案一旦给出，可用有理 SOS/SDP 对偶证书、形式化下界检查候选是否满足方程、约束及所需非退化条件。相对地，非存在证明只有6.8/10，因为非存在方向必须排除整个候选空间；现有硬墙是所有 k 的最优分离和平均模拟不是有限枚举问题。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。","search_text":"quantum-query 量子 query complexity / forrelation 量子信息与复杂度 9.3 8.6 icm 2018-mathphys-40 https://icmconjectures.com/2018-mathphys-40 https://arxiv.org/abs/1411.5729 固定 k，寻找 forrelation 的多项式逼近、随机决策树界或显式 adversary witness。 sdp/lp、多项式搜索、随机电路枚举 有理 sos/sdp 对偶证书、形式化下界 所有 k 的最优分离和平均模拟不是有限枚举问题。 构造存在 非存在证明 对“量子 query complexity / forrelation”，最强验收方向是构造存在（9.5/10）：候选答案一旦给出，可用有理 sos/sdp 对偶证书、形式化下界检查候选是否满足方程、约束及所需非退化条件。相对地，非存在证明只有6.8/10，因为非存在方向必须排除整个候选空间；现有硬墙是所有 k 的最优分离和平均模拟不是有限枚举问题。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。"},{"id":"nonhermitian-spectra","title":"稀疏 / 非厄米随机谱","domain":"随机谱与无序系统","ai_score":9.0,"complete_score":8.0,"source_type":"ICM","source_label":"2022-prob-146","problem_url":"https://icmconjectures.com/2022-prob-146","evidence_url":"https://arxiv.org/abs/1811.10416","project":"固定稀疏非厄米矩阵模型，证明最小奇异值、圆律或有限秩离群值中的一项。","generator":"近核向量搜索、Monte Carlo、resolvent 展开","verifier":"小球概率/浓缩证明与区间谱计算","risk":"圆律、outlier 和稀疏稳定性不能捆成一个可闭环题。","verification_best_direction":"受限反例／证书","verification_best_score":8.9,"verification_other_direction":"一般定理正证","verification_other_score":7.6,"verification_analysis":"对“稀疏 / 非厄米随机谱”，最强验收方向是受限反例／证书（8.9/10）：候选答案一旦给出，可用小球概率/浓缩证明与区间谱计算检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有7.6/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是圆律、outlier 和稀疏稳定性不能捆成一个可闭环题。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。","search_text":"nonhermitian-spectra 稀疏 / 非厄米随机谱 随机谱与无序系统 9.0 8.0 icm 2022-prob-146 https://icmconjectures.com/2022-prob-146 https://arxiv.org/abs/1811.10416 固定稀疏非厄米矩阵模型，证明最小奇异值、圆律或有限秩离群值中的一项。 近核向量搜索、monte carlo、resolvent 展开 小球概率/浓缩证明与区间谱计算 圆律、outlier 和稀疏稳定性不能捆成一个可闭环题。 受限反例／证书 一般定理正证 对“稀疏 / 非厄米随机谱”，最强验收方向是受限反例／证书（8.9/10）：候选答案一旦给出，可用小球概率/浓缩证明与区间谱计算检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有7.6/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是圆律、outlier 和稀疏稳定性不能捆成一个可闭环题。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。"},{"id":"fusion-category","title":"Fusion category / Witt 小秩分类","domain":"拓扑序与TQFT","ai_score":8.9,"complete_score":7.2,"source_type":"ICM","source_label":"2018-alg-135","problem_url":"https://icmconjectures.com/2018-alg-135","evidence_url":"https://arxiv.org/abs/math/0203060","project":"枚举秩不超过给定 N、整数 FP 维的 fusion rings，求解 pentagon/hexagon 并判定 Witt 类。","generator":"fusion-rule、6j-symbol 和代数方程枚举","verifier":"精确 pentagon/hexagon 代入与独立范畴软件","risk":"范畴存在不等于稳定局域 Hamiltonian 可实现。","verification_best_direction":"遗漏对象／反例","verification_best_score":9.5,"verification_other_direction":"完备分类","verification_other_score":7.2,"verification_analysis":"对“Fusion category / Witt 小秩分类”，最强验收方向是遗漏对象／反例（9.5/10）：候选答案一旦给出，可用精确 pentagon/hexagon 代入与独立范畴软件检查新对象是否满足定义且不等价于已列对象。相对地，完备分类只有7.2/10，因为完备性要求排除清单之外的一切对象；现有硬墙是范畴存在不等于稳定局域 Hamiltonian 可实现。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。","search_text":"fusion-category fusion category / witt 小秩分类 拓扑序与tqft 8.9 7.2 icm 2018-alg-135 https://icmconjectures.com/2018-alg-135 https://arxiv.org/abs/math/0203060 枚举秩不超过给定 n、整数 fp 维的 fusion rings，求解 pentagon/hexagon 并判定 witt 类。 fusion-rule、6j-symbol 和代数方程枚举 精确 pentagon/hexagon 代入与独立范畴软件 范畴存在不等于稳定局域 hamiltonian 可实现。 遗漏对象／反例 完备分类 对“fusion category / witt 小秩分类”，最强验收方向是遗漏对象／反例（9.5/10）：候选答案一旦给出，可用精确 pentagon/hexagon 代入与独立范畴软件检查新对象是否满足定义且不等价于已列对象。相对地，完备分类只有7.2/10，因为完备性要求排除清单之外的一切对象；现有硬墙是范畴存在不等于稳定局域 hamiltonian 可实现。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。"},{"id":"khovanov","title":"Khovanov / link homology 精炼","domain":"拓扑序与TQFT","ai_score":8.9,"complete_score":7.5,"source_type":"ICM","source_label":"2006-topo-89","problem_url":"https://icmconjectures.com/2006-topo-89","evidence_url":"https://arxiv.org/abs/math/9908171","project":"对有限结族发现链级或同伦精炼，并与 Chern–Simons/BPS 数据核对。","generator":"链复形枚举、表示论模式发现","verifier":"微分平方为零、链同伦、Euler/Poincaré 不变量","risk":"全局自然性和高阶 coherence 仍需人工结构。","verification_best_direction":"受限反例／证书","verification_best_score":7.2,"verification_other_direction":"一般定理正证","verification_other_score":6.0,"verification_analysis":"对“Khovanov / link homology 精炼”，最强验收方向是受限反例／证书（7.2/10）：候选答案一旦给出，可用微分平方为零、链同伦、Euler/Poincaré 不变量检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有6.0/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是全局自然性和高阶 coherence 仍需人工结构。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。","search_text":"khovanov khovanov / link homology 精炼 拓扑序与tqft 8.9 7.5 icm 2006-topo-89 https://icmconjectures.com/2006-topo-89 https://arxiv.org/abs/math/9908171 对有限结族发现链级或同伦精炼，并与 chern–simons/bps 数据核对。 链复形枚举、表示论模式发现 微分平方为零、链同伦、euler/poincaré 不变量 全局自然性和高阶 coherence 仍需人工结构。 受限反例／证书 一般定理正证 对“khovanov / link homology 精炼”，最强验收方向是受限反例／证书（7.2/10）：候选答案一旦给出，可用微分平方为零、链同伦、euler/poincaré 不变量检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有6.0/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是全局自然性和高阶 coherence 仍需人工结构。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。"},{"id":"patterned-random-matrix","title":"结构化随机矩阵的矩与谱律","domain":"随机谱与无序系统","ai_score":9.1,"complete_score":8.0,"source_type":"ICM","source_label":"2010-prob-76","problem_url":"https://icmconjectures.com/2010-prob-76","evidence_url":"https://arxiv.org/abs/1609.03120","project":"固定 Toeplitz、Hankel、banded 或其他 link function，枚举配对词并证明极限矩。","generator":"配对词和图回路枚举、符号矩生成","verifier":"矩法、正定性、Carleman 条件与数值谱","risk":"全部 patterned ensembles 的局部统计远比矩计算困难。","verification_best_direction":"受限反例／证书","verification_best_score":7.8,"verification_other_direction":"一般定理正证","verification_other_score":6.6,"verification_analysis":"对“结构化随机矩阵的矩与谱律”，最强验收方向是受限反例／证书（7.8/10）：候选答案一旦给出，可用矩法、正定性、Carleman 条件与数值谱检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有6.6/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是全部 patterned ensembles 的局部统计远比矩计算困难。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。","search_text":"patterned-random-matrix 结构化随机矩阵的矩与谱律 随机谱与无序系统 9.1 8.0 icm 2010-prob-76 https://icmconjectures.com/2010-prob-76 https://arxiv.org/abs/1609.03120 固定 toeplitz、hankel、banded 或其他 link function，枚举配对词并证明极限矩。 配对词和图回路枚举、符号矩生成 矩法、正定性、carleman 条件与数值谱 全部 patterned ensembles 的局部统计远比矩计算困难。 受限反例／证书 一般定理正证 对“结构化随机矩阵的矩与谱律”，最强验收方向是受限反例／证书（7.8/10）：候选答案一旦给出，可用矩法、正定性、carleman 条件与数值谱检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有6.6/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是全部 patterned ensembles 的局部统计远比矩计算困难。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。"},{"id":"tangle-tqft","title":"Tangle invariants 与 TQFT","domain":"拓扑序与TQFT","ai_score":8.9,"complete_score":7.2,"source_type":"ICM","source_label":"2022-alg-166","problem_url":"https://icmconjectures.com/2022-alg-166","evidence_url":"https://arxiv.org/abs/2401.02956","project":"在固定小型 tangle/cobordism 类中构造函子或不变量，验证 Reidemeister 与张量一致性。","generator":"tangle 图、cobordism 与函子候选枚举","verifier":"局部关系、pentagon/hexagon 和 TQFT 公理","risk":"全分类和任意子局域物相实现是另一层问题。","verification_best_direction":"构造存在","verification_best_score":9.5,"verification_other_direction":"非存在证明","verification_other_score":6.8,"verification_analysis":"对“Tangle invariants 与 TQFT”，最强验收方向是构造存在（9.5/10）：候选答案一旦给出，可用局部关系、pentagon/hexagon 和 TQFT 公理检查候选是否满足方程、约束及所需非退化条件。相对地，非存在证明只有6.8/10，因为非存在方向必须排除整个候选空间；现有硬墙是全分类和任意子局域物相实现是另一层问题。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。","search_text":"tangle-tqft tangle invariants 与 tqft 拓扑序与tqft 8.9 7.2 icm 2022-alg-166 https://icmconjectures.com/2022-alg-166 https://arxiv.org/abs/2401.02956 在固定小型 tangle/cobordism 类中构造函子或不变量，验证 reidemeister 与张量一致性。 tangle 图、cobordism 与函子候选枚举 局部关系、pentagon/hexagon 和 tqft 公理 全分类和任意子局域物相实现是另一层问题。 构造存在 非存在证明 对“tangle invariants 与 tqft”，最强验收方向是构造存在（9.5/10）：候选答案一旦给出，可用局部关系、pentagon/hexagon 和 tqft 公理检查候选是否满足方程、约束及所需非退化条件。相对地，非存在证明只有6.8/10，因为非存在方向必须排除整个候选空间；现有硬墙是全分类和任意子局域物相实现是另一层问题。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。"},{"id":"dt-wallcrossing","title":"DT / stable pairs / wall-crossing","domain":"QFT与代数结构","ai_score":9.0,"complete_score":7.0,"source_type":"ICM","source_label":"2014-ag-147","problem_url":"https://icmconjectures.com/2014-ag-147","evidence_url":"https://arxiv.org/abs/0811.2435","project":"固定有限 quiver 与势，枚举稳定 chamber，验证 KS/Joyce–Song 生成函数恒等式。","generator":"quiver mutation、chamber 与生成函数枚举","verifier":"Hall algebra/壁穿越乘积和精确系数检查","risk":"任意 CY3 的非紧性和 orientation data 不会被有限枚举消除。","verification_best_direction":"反例／失效点","verification_best_score":8.9,"verification_other_direction":"恒等式正证","verification_other_score":7.9,"verification_analysis":"对“DT / stable pairs / wall-crossing”，最强验收方向是反例／失效点（8.9/10）：候选答案一旦给出，可用Hall algebra/壁穿越乘积和精确系数检查检查代入后是否满足前提并使等式或对应失效。相对地，恒等式正证只有7.9/10，因为正证仍需处理全部参数和退化分支；现有硬墙是任意 CY3 的非紧性和 orientation data 不会被有限枚举消除。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。","search_text":"dt-wallcrossing dt / stable pairs / wall-crossing qft与代数结构 9.0 7.0 icm 2014-ag-147 https://icmconjectures.com/2014-ag-147 https://arxiv.org/abs/0811.2435 固定有限 quiver 与势，枚举稳定 chamber，验证 ks/joyce–song 生成函数恒等式。 quiver mutation、chamber 与生成函数枚举 hall algebra/壁穿越乘积和精确系数检查 任意 cy3 的非紧性和 orientation data 不会被有限枚举消除。 反例／失效点 恒等式正证 对“dt / stable pairs / wall-crossing”，最强验收方向是反例／失效点（8.9/10）：候选答案一旦给出，可用hall algebra/壁穿越乘积和精确系数检查检查代入后是否满足前提并使等式或对应失效。相对地，恒等式正证只有7.9/10，因为正证仍需处理全部参数和退化分支；现有硬墙是任意 cy3 的非紧性和 orientation data 不会被有限枚举消除。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。"},{"id":"fqhe","title":"FQHE / Chern–Simons / 整格","domain":"拓扑序与TQFT","ai_score":9.2,"complete_score":7.8,"source_type":"ICM","source_label":"1994-alg-41","problem_url":"https://icmconjectures.com/1994-alg-41","evidence_url":"https://arxiv.org/abs/1212.5121","project":"给定小秩模数据或 K 矩阵，搜索任意子理论、边界凝聚及局域模型实现条件。","generator":"模表示、整格、anyon condensation 与整数规划","verifier":"S,T、Verlinde、unitarity、pentagon/hexagon","risk":"拓扑数据不自动给出统一有隙局域 Hamiltonian。","verification_best_direction":"构造存在","verification_best_score":9.5,"verification_other_direction":"非存在证明","verification_other_score":6.8,"verification_analysis":"对“FQHE / Chern–Simons / 整格”，最强验收方向是构造存在（9.5/10）：候选答案一旦给出，可用S,T、Verlinde、unitarity、pentagon/hexagon检查候选是否满足方程、约束及所需非退化条件。相对地，非存在证明只有6.8/10，因为非存在方向必须排除整个候选空间；现有硬墙是拓扑数据不自动给出统一有隙局域 Hamiltonian。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。","search_text":"fqhe fqhe / chern–simons / 整格 拓扑序与tqft 9.2 7.8 icm 1994-alg-41 https://icmconjectures.com/1994-alg-41 https://arxiv.org/abs/1212.5121 给定小秩模数据或 k 矩阵，搜索任意子理论、边界凝聚及局域模型实现条件。 模表示、整格、anyon condensation 与整数规划 s,t、verlinde、unitarity、pentagon/hexagon 拓扑数据不自动给出统一有隙局域 hamiltonian。 构造存在 非存在证明 对“fqhe / chern–simons / 整格”，最强验收方向是构造存在（9.5/10）：候选答案一旦给出，可用s,t、verlinde、unitarity、pentagon/hexagon检查候选是否满足方程、约束及所需非退化条件。相对地，非存在证明只有6.8/10，因为非存在方向必须排除整个候选空间；现有硬墙是拓扑数据不自动给出统一有隙局域 hamiltonian。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。"},{"id":"wasep-kpz","title":"WASEP → KPZ","domain":"统计物理与随机过程","ai_score":9.3,"complete_score":8.2,"source_type":"ICM","source_label":"2010-prob-83","problem_url":"https://icmconjectures.com/2010-prob-83","evidence_url":"https://arxiv.org/abs/1106.1591","project":"固定一维 WASEP 与初值，证明缩放极限并显式控制生成元、鞅和离散误差。","generator":"生成元自动展开、martingale 模板与符号重整化","verifier":"独立概率估计、tightness 和极限识别","risk":"KPZ 普适性不是由若干可解初值自动推出。","verification_best_direction":"受限反例／证书","verification_best_score":8.5,"verification_other_direction":"一般定理正证","verification_other_score":7.3,"verification_analysis":"对“WASEP → KPZ”，最强验收方向是受限反例／证书（8.5/10）：候选答案一旦给出，可用独立概率估计、tightness 和极限识别检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有7.3/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是KPZ 普适性不是由若干可解初值自动推出。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。","search_text":"wasep-kpz wasep → kpz 统计物理与随机过程 9.3 8.2 icm 2010-prob-83 https://icmconjectures.com/2010-prob-83 https://arxiv.org/abs/1106.1591 固定一维 wasep 与初值，证明缩放极限并显式控制生成元、鞅和离散误差。 生成元自动展开、martingale 模板与符号重整化 独立概率估计、tightness 和极限识别 kpz 普适性不是由若干可解初值自动推出。 受限反例／证书 一般定理正证 对“wasep → kpz”，最强验收方向是受限反例／证书（8.5/10）：候选答案一旦给出，可用独立概率估计、tightness 和极限识别检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有7.3/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是kpz 普适性不是由若干可解初值自动推出。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。"},{"id":"sparse-graph-spectrum","title":"稀疏图上的局部谱统计","domain":"随机谱与无序系统","ai_score":9.0,"complete_score":7.8,"source_type":"ICM","source_label":"2014-prob-112","problem_url":"https://icmconjectures.com/2014-prob-112","evidence_url":"https://aimath.org/WWN/randommatrices/randommatrices.pdf","project":"固定正则度数与 bulk/edge 能区，显式展开短环修正并证明局部谱律。","generator":"短环枚举、图 Green function 与 resolvent 展开","verifier":"local law、Green-function comparison 与数值特征值","risk":"增长度数和固定度数的极限机制并不相同。","verification_best_direction":"受限反例／证书","verification_best_score":6.8,"verification_other_direction":"一般定理正证","verification_other_score":5.6,"verification_analysis":"对“稀疏图上的局部谱统计”，最强验收方向是受限反例／证书（6.8/10）：候选答案一旦给出，可用local law、Green-function comparison 与数值特征值检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有5.6/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是增长度数和固定度数的极限机制并不相同。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。","search_text":"sparse-graph-spectrum 稀疏图上的局部谱统计 随机谱与无序系统 9.0 7.8 icm 2014-prob-112 https://icmconjectures.com/2014-prob-112 https://aimath.org/wwn/randommatrices/randommatrices.pdf 固定正则度数与 bulk/edge 能区，显式展开短环修正并证明局部谱律。 短环枚举、图 green function 与 resolvent 展开 local law、green-function comparison 与数值特征值 增长度数和固定度数的极限机制并不相同。 受限反例／证书 一般定理正证 对“稀疏图上的局部谱统计”，最强验收方向是受限反例／证书（6.8/10）：候选答案一旦给出，可用local law、green-function comparison 与数值特征值检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有5.6/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是增长度数和固定度数的极限机制并不相同。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。"},{"id":"coulomb-branch","title":"3d N=4 Coulomb branch","domain":"QFT与代数结构","ai_score":8.9,"complete_score":7.6,"source_type":"ICM","source_label":"2018-alg-124","problem_url":"https://icmconjectures.com/2018-alg-124","evidence_url":"https://arxiv.org/abs/1604.03625","project":"对指定小型 quiver 计算 BFN Coulomb branch 坐标环、量子化并验证镜像对偶。","generator":"固定点公式、monopole 公式与符号代数","verifier":"Hilbert series、Poisson/量子关系和显式对偶映射","risk":"所有 quiver 对偶与物理定义不是纯计算问题。","verification_best_direction":"受限反例／证书","verification_best_score":7.2,"verification_other_direction":"一般定理正证","verification_other_score":6.0,"verification_analysis":"对“3d N=4 Coulomb branch”，最强验收方向是受限反例／证书（7.2/10）：候选答案一旦给出，可用Hilbert series、Poisson/量子关系和显式对偶映射检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有6.0/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是所有 quiver 对偶与物理定义不是纯计算问题。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。","search_text":"coulomb-branch 3d n=4 coulomb branch qft与代数结构 8.9 7.6 icm 2018-alg-124 https://icmconjectures.com/2018-alg-124 https://arxiv.org/abs/1604.03625 对指定小型 quiver 计算 bfn coulomb branch 坐标环、量子化并验证镜像对偶。 固定点公式、monopole 公式与符号代数 hilbert series、poisson/量子关系和显式对偶映射 所有 quiver 对偶与物理定义不是纯计算问题。 受限反例／证书 一般定理正证 对“3d n=4 coulomb branch”，最强验收方向是受限反例／证书（7.2/10）：候选答案一旦给出，可用hilbert series、poisson/量子关系和显式对偶映射检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有6.0/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是所有 quiver 对偶与物理定义不是纯计算问题。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。"},{"id":"quantum-feedback","title":"开放量子系统反馈","domain":"量子多体与控制","ai_score":9.2,"complete_score":8.0,"source_type":"ICM","source_label":"2014-ctrl-17","problem_url":"https://icmconjectures.com/2014-ctrl-17","evidence_url":"https://arxiv.org/abs/1210.7127","project":"固定有限维 Lindblad/Kraus 动力学和目标态，综合反馈律并证明全局或鲁棒收敛。","generator":"控制律、Lyapunov 函数、SDP/SOS 搜索","verifier":"Lyapunov 不等式、谱隙和独立动力学模拟","risk":"无限维、部分观测和测量反作用会破坏有限维闭环。","verification_best_direction":"算法构造","verification_best_score":8.5,"verification_other_direction":"统一性能正证","verification_other_score":7.0,"verification_analysis":"对“开放量子系统反馈”，最强验收方向是算法构造（8.5/10）：候选答案一旦给出，可用Lyapunov 不等式、谱隙和独立动力学模拟检查输出是否满足规格、误差和资源上界。相对地，统一性能正证只有7.0/10，因为统一性能需要控制所有输入与极限区间；现有硬墙是无限维、部分观测和测量反作用会破坏有限维闭环。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。","search_text":"quantum-feedback 开放量子系统反馈 量子多体与控制 9.2 8.0 icm 2014-ctrl-17 https://icmconjectures.com/2014-ctrl-17 https://arxiv.org/abs/1210.7127 固定有限维 lindblad/kraus 动力学和目标态，综合反馈律并证明全局或鲁棒收敛。 控制律、lyapunov 函数、sdp/sos 搜索 lyapunov 不等式、谱隙和独立动力学模拟 无限维、部分观测和测量反作用会破坏有限维闭环。 算法构造 统一性能正证 对“开放量子系统反馈”，最强验收方向是算法构造（8.5/10）：候选答案一旦给出，可用lyapunov 不等式、谱隙和独立动力学模拟检查输出是否满足规格、误差和资源上界。相对地，统一性能正证只有7.0/10，因为统一性能需要控制所有输入与极限区间；现有硬墙是无限维、部分观测和测量反作用会破坏有限维闭环。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。"},{"id":"random-band","title":"Random band matrix / Anderson 离域","domain":"随机谱与无序系统","ai_score":9.2,"complete_score":7.4,"source_type":"ICM","source_label":"2014-prob-108","problem_url":"https://icmconjectures.com/2014-prob-108","evidence_url":"https://arxiv.org/abs/1205.5669","project":"固定维度、带宽和能区，生成可封闭的 resolvent/local-law 中间引理。","generator":"谱与本征向量统计、diagrammatic/resolvent 展开","verifier":"Green-function comparison、moment flow 与独立数值","risk":"完整临界 crossover 同时涉及几何和微观谱统计。","verification_best_direction":"受限反例／证书","verification_best_score":7.8,"verification_other_direction":"一般定理正证","verification_other_score":6.6,"verification_analysis":"对“Random band matrix / Anderson 离域”，最强验收方向是受限反例／证书（7.8/10）：候选答案一旦给出，可用Green-function comparison、moment flow 与独立数值检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有6.6/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是完整临界 crossover 同时涉及几何和微观谱统计。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。","search_text":"random-band random band matrix / anderson 离域 随机谱与无序系统 9.2 7.4 icm 2014-prob-108 https://icmconjectures.com/2014-prob-108 https://arxiv.org/abs/1205.5669 固定维度、带宽和能区，生成可封闭的 resolvent/local-law 中间引理。 谱与本征向量统计、diagrammatic/resolvent 展开 green-function comparison、moment flow 与独立数值 完整临界 crossover 同时涉及几何和微观谱统计。 受限反例／证书 一般定理正证 对“random band matrix / anderson 离域”，最强验收方向是受限反例／证书（7.8/10）：候选答案一旦给出，可用green-function comparison、moment flow 与独立数值检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有6.6/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是完整临界 crossover 同时涉及几何和微观谱统计。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。"},{"id":"nekrasov-sw","title":"Nekrasov–Seiberg–Witten 极限","domain":"QFT与代数结构","ai_score":8.9,"complete_score":8.3,"source_type":"ICM","source_label":"2002-mathphys-21","problem_url":"https://icmconjectures.com/2002-mathphys-21","evidence_url":"https://arxiv.org/abs/hep-th/0306238","project":"在低秩规范群与有限 instanton 阶数中自动得到 ε→0 渐近并核对 SW 预势。","generator":"Young 图、局域化公式和符号渐近","verifier":"SW 曲线周期积分与系数逐项比对","risk":"经典主对应已有重要证明，必须寻找新的缺陷或推广才有新颖性。","verification_best_direction":"受限反例／证书","verification_best_score":7.2,"verification_other_direction":"一般定理正证","verification_other_score":6.0,"verification_analysis":"对“Nekrasov–Seiberg–Witten 极限”，最强验收方向是受限反例／证书（7.2/10）：候选答案一旦给出，可用SW 曲线周期积分与系数逐项比对检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有6.0/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是经典主对应已有重要证明，必须寻找新的缺陷或推广才有新颖性。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。","search_text":"nekrasov-sw nekrasov–seiberg–witten 极限 qft与代数结构 8.9 8.3 icm 2002-mathphys-21 https://icmconjectures.com/2002-mathphys-21 https://arxiv.org/abs/hep-th/0306238 在低秩规范群与有限 instanton 阶数中自动得到 ε→0 渐近并核对 sw 预势。 young 图、局域化公式和符号渐近 sw 曲线周期积分与系数逐项比对 经典主对应已有重要证明，必须寻找新的缺陷或推广才有新颖性。 受限反例／证书 一般定理正证 对“nekrasov–seiberg–witten 极限”，最强验收方向是受限反例／证书（7.2/10）：候选答案一旦给出，可用sw 曲线周期积分与系数逐项比对检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有6.0/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是经典主对应已有重要证明，必须寻找新的缺陷或推广才有新颖性。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。"},{"id":"bethe-hardcore","title":"Bethe 格硬约束模型","domain":"统计物理与随机过程","ai_score":9.1,"complete_score":7.8,"source_type":"ICM","source_label":"2002-mathphys-121/122","problem_url":"https://icmconjectures.com/2002-mathphys-121","related_url":"https://icmconjectures.com/2002-mathphys-122","evidence_url":"https://arxiv.org/abs/1005.5584","project":"固定 Δ-正则树或图，证明独立集/着色的 uniqueness、重构或 cavity 阈值子定理。","generator":"图枚举、belief propagation 与阈值数值搜索","verifier":"树递推、聚合函数、概率界与小图反例","risk":"局部树状性不能自动控制随机图的全局环和 RSB。","verification_best_direction":"越界反例","verification_best_score":7.2,"verification_other_direction":"统一界正证","verification_other_score":5.5,"verification_analysis":"对“Bethe 格硬约束模型”，最强验收方向是越界反例（7.2/10）：候选答案一旦给出，可用树递推、聚合函数、概率界与小图反例检查实例是否满足前提且严格越过所声称的界。相对地，统一界正证只有5.5/10，因为统一界需要覆盖无限参数或尺度；现有硬墙是局部树状性不能自动控制随机图的全局环和 RSB。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。","search_text":"bethe-hardcore bethe 格硬约束模型 统计物理与随机过程 9.1 7.8 icm 2002-mathphys-121/122 https://icmconjectures.com/2002-mathphys-121 https://icmconjectures.com/2002-mathphys-122 https://arxiv.org/abs/1005.5584 固定 δ-正则树或图，证明独立集/着色的 uniqueness、重构或 cavity 阈值子定理。 图枚举、belief propagation 与阈值数值搜索 树递推、聚合函数、概率界与小图反例 局部树状性不能自动控制随机图的全局环和 rsb。 越界反例 统一界正证 对“bethe 格硬约束模型”，最强验收方向是越界反例（7.2/10）：候选答案一旦给出，可用树递推、聚合函数、概率界与小图反例检查实例是否满足前提且严格越过所声称的界。相对地，统一界正证只有5.5/10，因为统一界需要覆盖无限参数或尺度；现有硬墙是局部树状性不能自动控制随机图的全局环和 rsb。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。"},{"id":"directed-polymer","title":"Directed polymer / KPZ 变分","domain":"统计物理与随机过程","ai_score":9.2,"complete_score":8.0,"source_type":"ICM","source_label":"2014-prob-116","problem_url":"https://icmconjectures.com/2014-prob-116","evidence_url":"https://arxiv.org/abs/1311.3016","project":"在指定 i.i.d. 或可积环境中发现并证明自由能极限形变分公式或受限涨落结果。","generator":"LPP/DP 动力规划、Monte Carlo 与变分搜索","verifier":"次可加性、集中不等式和精确可积核","risk":"一般强无序环境中的 KPZ 指数仍没有统一证明。","verification_best_direction":"反例／失效点","verification_best_score":8.9,"verification_other_direction":"恒等式正证","verification_other_score":7.9,"verification_analysis":"对“Directed polymer / KPZ 变分”，最强验收方向是反例／失效点（8.9/10）：候选答案一旦给出，可用次可加性、集中不等式和精确可积核检查代入后是否满足前提并使等式或对应失效。相对地，恒等式正证只有7.9/10，因为正证仍需处理全部参数和退化分支；现有硬墙是一般强无序环境中的 KPZ 指数仍没有统一证明。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。","search_text":"directed-polymer directed polymer / kpz 变分 统计物理与随机过程 9.2 8.0 icm 2014-prob-116 https://icmconjectures.com/2014-prob-116 https://arxiv.org/abs/1311.3016 在指定 i.i.d. 或可积环境中发现并证明自由能极限形变分公式或受限涨落结果。 lpp/dp 动力规划、monte carlo 与变分搜索 次可加性、集中不等式和精确可积核 一般强无序环境中的 kpz 指数仍没有统一证明。 反例／失效点 恒等式正证 对“directed polymer / kpz 变分”，最强验收方向是反例／失效点（8.9/10）：候选答案一旦给出，可用次可加性、集中不等式和精确可积核检查代入后是否满足前提并使等式或对应失效。相对地，恒等式正证只有7.9/10，因为正证仍需处理全部参数和退化分支；现有硬墙是一般强无序环境中的 kpz 指数仍没有统一证明。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。"},{"id":"teichmuller-tqft","title":"Teichmüller TQFT","domain":"拓扑序与TQFT","ai_score":8.9,"complete_score":7.3,"source_type":"ICM","source_label":"2018-topo-130","problem_url":"https://icmconjectures.com/2018-topo-130","evidence_url":"https://arxiv.org/abs/1104.1329","project":"对单一结或三流形族计算量子 dilogarithm 配分函数并证明半经典体积渐近。","generator":"理想三角剖分、量子 dilog 与符号驻相展开","verifier":"Pachner move、TQFT 不变性和区间驻相估计","risk":"一般 contour 选择与所有三流形的拓扑不变性仍很深。","verification_best_direction":"受限反例／证书","verification_best_score":9.0,"verification_other_direction":"一般定理正证","verification_other_score":7.6,"verification_analysis":"对“Teichmüller TQFT”，最强验收方向是受限反例／证书（9.0/10）：候选答案一旦给出，可用Pachner move、TQFT 不变性和区间驻相估计检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有7.6/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是一般 contour 选择与所有三流形的拓扑不变性仍很深。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。","search_text":"teichmuller-tqft teichmüller tqft 拓扑序与tqft 8.9 7.3 icm 2018-topo-130 https://icmconjectures.com/2018-topo-130 https://arxiv.org/abs/1104.1329 对单一结或三流形族计算量子 dilogarithm 配分函数并证明半经典体积渐近。 理想三角剖分、量子 dilog 与符号驻相展开 pachner move、tqft 不变性和区间驻相估计 一般 contour 选择与所有三流形的拓扑不变性仍很深。 受限反例／证书 一般定理正证 对“teichmüller tqft”，最强验收方向是受限反例／证书（9.0/10）：候选答案一旦给出，可用pachner move、tqft 不变性和区间驻相估计检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有7.6/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是一般 contour 选择与所有三流形的拓扑不变性仍很深。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。"},{"id":"cy3-gwdt","title":"CY3 的 GW/DT/BPS 计数","domain":"QFT与代数结构","ai_score":9.0,"complete_score":6.8,"source_type":"ICM","source_label":"2002-ag-97","problem_url":"https://icmconjectures.com/2002-ag-97","evidence_url":"https://arxiv.org/abs/math/0312059","project":"固定 toric CY3 或有限 chamber，计算 GW/DT/GV 生成函数并验证整数性与对应。","generator":"toric localization、分拆和壁穿越枚举","verifier":"vertex 计算、精确系数和已知 BPS 数据","risk":"全 CY3、全亏格的统一对应是几何纲领。","verification_best_direction":"反例／失效点","verification_best_score":8.9,"verification_other_direction":"恒等式正证","verification_other_score":7.9,"verification_analysis":"对“CY3 的 GW/DT/BPS 计数”，最强验收方向是反例／失效点（8.9/10）：候选答案一旦给出，可用vertex 计算、精确系数和已知 BPS 数据检查代入后是否满足前提并使等式或对应失效。相对地，恒等式正证只有7.9/10，因为正证仍需处理全部参数和退化分支；现有硬墙是全 CY3、全亏格的统一对应是几何纲领。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。","search_text":"cy3-gwdt cy3 的 gw/dt/bps 计数 qft与代数结构 9.0 6.8 icm 2002-ag-97 https://icmconjectures.com/2002-ag-97 https://arxiv.org/abs/math/0312059 固定 toric cy3 或有限 chamber，计算 gw/dt/gv 生成函数并验证整数性与对应。 toric localization、分拆和壁穿越枚举 vertex 计算、精确系数和已知 bps 数据 全 cy3、全亏格的统一对应是几何纲领。 反例／失效点 恒等式正证 对“cy3 的 gw/dt/bps 计数”，最强验收方向是反例／失效点（8.9/10）：候选答案一旦给出，可用vertex 计算、精确系数和已知 bps 数据检查代入后是否满足前提并使等式或对应失效。相对地，恒等式正证只有7.9/10，因为正证仍需处理全部参数和退化分支；现有硬墙是全 cy3、全亏格的统一对应是几何纲领。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。"},{"id":"fast-slow","title":"Fast–slow 输运与扩散极限","domain":"数值PDE与动力系统","ai_score":9.0,"complete_score":8.0,"source_type":"ICM","source_label":"2018-mathphys-80","problem_url":"https://icmconjectures.com/2018-mathphys-80","evidence_url":"https://arxiv.org/abs/1803.06137","project":"对给定快慢系统和显式 mixing 条件，证明慢变量扩散极限并计算输运系数。","generator":"轨道积分、Green–Kubo 数值与符号平均","verifier":"martingale CLT、Poisson 方程残差和区间误差","risk":"非均匀混合与慢变量反馈必须单独控制。","verification_best_direction":"受限反例／证书","verification_best_score":9.0,"verification_other_direction":"一般定理正证","verification_other_score":7.6,"verification_analysis":"对“Fast–slow 输运与扩散极限”，最强验收方向是受限反例／证书（9.0/10）：候选答案一旦给出，可用martingale CLT、Poisson 方程残差和区间误差检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有7.6/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是非均匀混合与慢变量反馈必须单独控制。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。","search_text":"fast-slow fast–slow 输运与扩散极限 数值pde与动力系统 9.0 8.0 icm 2018-mathphys-80 https://icmconjectures.com/2018-mathphys-80 https://arxiv.org/abs/1803.06137 对给定快慢系统和显式 mixing 条件，证明慢变量扩散极限并计算输运系数。 轨道积分、green–kubo 数值与符号平均 martingale clt、poisson 方程残差和区间误差 非均匀混合与慢变量反馈必须单独控制。 受限反例／证书 一般定理正证 对“fast–slow 输运与扩散极限”，最强验收方向是受限反例／证书（9.0/10）：候选答案一旦给出，可用martingale clt、poisson 方程残差和区间误差检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有7.6/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是非均匀混合与慢变量反馈必须单独控制。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。"},{"id":"critical-ising-dimer","title":"临界 Ising / dimer","domain":"统计物理与随机过程","ai_score":9.2,"complete_score":7.9,"source_type":"ICM","source_label":"2022-mathphys-137","problem_url":"https://icmconjectures.com/2022-mathphys-137","evidence_url":"https://arxiv.org/abs/2110.09372","project":"在特定双周期或弱非均匀晶格上证明关联、界面或高度场趋于 CFT/GFF。","generator":"Pfaffian/dimer 数值与离散解析模式发现","verifier":"determinantal 恒等式、tightness 与 Green 函数估计","risk":"离开精确可解结构后，普适性证明迅速失去廉价反馈。","verification_best_direction":"越界反例","verification_best_score":9.2,"verification_other_direction":"统一界正证","verification_other_score":7.3,"verification_analysis":"对“临界 Ising / dimer”，最强验收方向是越界反例（9.2/10）：候选答案一旦给出，可用determinantal 恒等式、tightness 与 Green 函数估计检查实例是否满足前提且严格越过所声称的界。相对地，统一界正证只有7.3/10，因为统一界需要覆盖无限参数或尺度；现有硬墙是离开精确可解结构后，普适性证明迅速失去廉价反馈。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。","search_text":"critical-ising-dimer 临界 ising / dimer 统计物理与随机过程 9.2 7.9 icm 2022-mathphys-137 https://icmconjectures.com/2022-mathphys-137 https://arxiv.org/abs/2110.09372 在特定双周期或弱非均匀晶格上证明关联、界面或高度场趋于 cft/gff。 pfaffian/dimer 数值与离散解析模式发现 determinantal 恒等式、tightness 与 green 函数估计 离开精确可解结构后，普适性证明迅速失去廉价反馈。 越界反例 统一界正证 对“临界 ising / dimer”，最强验收方向是越界反例（9.2/10）：候选答案一旦给出，可用determinantal 恒等式、tightness 与 green 函数估计检查实例是否满足前提且严格越过所声称的界。相对地，统一界正证只有7.3/10，因为统一界需要覆盖无限参数或尺度；现有硬墙是离开精确可解结构后，普适性证明迅速失去廉价反馈。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。"},{"id":"quasiperiodic-spectrum","title":"准周期算子的谱分类","domain":"随机谱与无序系统","ai_score":9.0,"complete_score":7.9,"source_type":"ICM","source_label":"2022-mathphys-83","problem_url":"https://icmconjectures.com/2022-mathphys-83","evidence_url":"https://ems.press/books/standalone/274/5423","project":"对固定解析准周期势，按 Lyapunov 指数和算术条件判定 AC/SC/PP 谱。","generator":"有理频率近似、transfer matrix 与数值 Lyapunov","verifier":"reducibility、large deviation 与谱测度计算","risk":"一般解析势的临界区域仍是全局谱论纲领。","verification_best_direction":"遗漏对象／反例","verification_best_score":7.2,"verification_other_direction":"完备分类","verification_other_score":5.3,"verification_analysis":"对“准周期算子的谱分类”，最强验收方向是遗漏对象／反例（7.2/10）：候选答案一旦给出，可用reducibility、large deviation 与谱测度计算检查新对象是否满足定义且不等价于已列对象。相对地，完备分类只有5.3/10，因为完备性要求排除清单之外的一切对象；现有硬墙是一般解析势的临界区域仍是全局谱论纲领。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。","search_text":"quasiperiodic-spectrum 准周期算子的谱分类 随机谱与无序系统 9.0 7.9 icm 2022-mathphys-83 https://icmconjectures.com/2022-mathphys-83 https://ems.press/books/standalone/274/5423 对固定解析准周期势，按 lyapunov 指数和算术条件判定 ac/sc/pp 谱。 有理频率近似、transfer matrix 与数值 lyapunov reducibility、large deviation 与谱测度计算 一般解析势的临界区域仍是全局谱论纲领。 遗漏对象／反例 完备分类 对“准周期算子的谱分类”，最强验收方向是遗漏对象／反例（7.2/10）：候选答案一旦给出，可用reducibility、large deviation 与谱测度计算检查新对象是否满足定义且不等价于已列对象。相对地，完备分类只有5.3/10，因为完备性要求排除清单之外的一切对象；现有硬墙是一般解析势的临界区域仍是全局谱论纲领。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。"},{"id":"feynman-singularities","title":"Feynman 积分与 S-matrix 奇点","domain":"QFT与散射振幅","ai_score":9.2,"complete_score":7.2,"source_type":"ICM","source_label":"1970-mathphys-58","problem_url":"https://icmconjectures.com/1970-mathphys-58","evidence_url":"https://arxiv.org/abs/2203.13014","project":"对固定二至三圈图族枚举 Landau 方程和 leading singularity，确定物理片区。","generator":"图生成器、符号代数、sector decomposition","verifier":"Landau 方程、微分方程和 branch-cut 数值检查","risk":"一般图的重整化与分布边界值远超固定圈数任务。","verification_best_direction":"受限反例／证书","verification_best_score":6.8,"verification_other_direction":"一般定理正证","verification_other_score":5.6,"verification_analysis":"对“Feynman 积分与 S-matrix 奇点”，最强验收方向是受限反例／证书（6.8/10）：候选答案一旦给出，可用Landau 方程、微分方程和 branch-cut 数值检查检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有5.6/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是一般图的重整化与分布边界值远超固定圈数任务。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。","search_text":"feynman-singularities feynman 积分与 s-matrix 奇点 qft与散射振幅 9.2 7.2 icm 1970-mathphys-58 https://icmconjectures.com/1970-mathphys-58 https://arxiv.org/abs/2203.13014 对固定二至三圈图族枚举 landau 方程和 leading singularity，确定物理片区。 图生成器、符号代数、sector decomposition landau 方程、微分方程和 branch-cut 数值检查 一般图的重整化与分布边界值远超固定圈数任务。 受限反例／证书 一般定理正证 对“feynman 积分与 s-matrix 奇点”，最强验收方向是受限反例／证书（6.8/10）：候选答案一旦给出，可用landau 方程、微分方程和 branch-cut 数值检查检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有5.6/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是一般图的重整化与分布边界值远超固定圈数任务。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。"},{"id":"lorentz-inverse","title":"Lorentz 时空反问题","domain":"引力与时空几何","ai_score":8.9,"complete_score":7.5,"source_type":"ICM","source_label":"2018-geom-140","problem_url":"https://icmconjectures.com/2018-geom-140","evidence_url":"https://doi.org/10.1007/s00222-017-0780-y","project":"在静态、球对称或小扰动时空中，从有限波源—响应恢复度规分量并给稳定性估计。","generator":"有限元、边界控制与几何参数搜索","verifier":"Carleman/唯一性估计与区间反演误差","risk":"一般时空中的规范不唯一和奇点传播难以自动化。","verification_best_direction":"受限反例／证书","verification_best_score":9.0,"verification_other_direction":"一般定理正证","verification_other_score":7.6,"verification_analysis":"对“Lorentz 时空反问题”，最强验收方向是受限反例／证书（9.0/10）：候选答案一旦给出，可用Carleman/唯一性估计与区间反演误差检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有7.6/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是一般时空中的规范不唯一和奇点传播难以自动化。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。","search_text":"lorentz-inverse lorentz 时空反问题 引力与时空几何 8.9 7.5 icm 2018-geom-140 https://icmconjectures.com/2018-geom-140 https://doi.org/10.1007/s00222-017-0780-y 在静态、球对称或小扰动时空中，从有限波源—响应恢复度规分量并给稳定性估计。 有限元、边界控制与几何参数搜索 carleman/唯一性估计与区间反演误差 一般时空中的规范不唯一和奇点传播难以自动化。 受限反例／证书 一般定理正证 对“lorentz 时空反问题”，最强验收方向是受限反例／证书（9.0/10）：候选答案一旦给出，可用carleman/唯一性估计与区间反演误差检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有7.6/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是一般时空中的规范不唯一和奇点传播难以自动化。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。"},{"id":"three-body","title":"三体 / 多体新 choreography","domain":"数值PDE与动力系统","ai_score":9.3,"complete_score":7.5,"source_type":"ICM","source_label":"2002-mathphys-124/125","problem_url":"https://icmconjectures.com/2002-mathphys-124","related_url":"https://icmconjectures.com/2002-mathphys-125","evidence_url":"https://arxiv.org/abs/2407.19159","project":"固定质量、对称和拓扑词，发现新周期轨道并证明存在、局部唯一、无碰撞或稳定。","generator":"Fourier 谱、multiple shooting、连续 Newton","verifier":"区间 Newton/Krawczyk、validated ODE 与 Floquet 区间谱","risk":"局部轨道证书不能证明所有竞争路径中的全局作用量极小。","verification_best_direction":"构造存在","verification_best_score":9.6,"verification_other_direction":"全局极小正证","verification_other_score":6.0,"verification_analysis":"最强方向是构造存在（9.6/10）：Fourier 谱或 multiple shooting 给出候选后，区间 Newton/Krawczyk 与 validated ODE 能认证周期性、局部唯一、无碰撞，并可用 Floquet 区间谱检查稳定性。若转向作用量命题，找一条更低作用量竞争轨道也容易验收；但全局极小正证只有 6.0/10，因为必须控制无限维竞争路径，而不是只验证当前分支。","search_text":"three-body 三体 / 多体新 choreography 数值pde与动力系统 9.3 7.5 icm 2002-mathphys-124/125 https://icmconjectures.com/2002-mathphys-124 https://icmconjectures.com/2002-mathphys-125 https://arxiv.org/abs/2407.19159 固定质量、对称和拓扑词，发现新周期轨道并证明存在、局部唯一、无碰撞或稳定。 fourier 谱、multiple shooting、连续 newton 区间 newton/krawczyk、validated ode 与 floquet 区间谱 局部轨道证书不能证明所有竞争路径中的全局作用量极小。 构造存在 全局极小正证 最强方向是构造存在（9.6/10）：fourier 谱或 multiple shooting 给出候选后，区间 newton/krawczyk 与 validated ode 能认证周期性、局部唯一、无碰撞，并可用 floquet 区间谱检查稳定性。若转向作用量命题，找一条更低作用量竞争轨道也容易验收；但全局极小正证只有 6.0/10，因为必须控制无限维竞争路径，而不是只验证当前分支。"},{"id":"yang-baxter-ai","title":"Yang–Baxter / R-matrix 可积模型发现","domain":"量子多体与控制","ai_score":9.5,"complete_score":7.0,"source_type":"Frontier","source_label":"表外前沿","problem_url":"https://arxiv.org/abs/2503.10469","evidence_url":"https://arxiv.org/abs/2603.29932","project":"固定局域作用范围和自旋维数，寻找新的 YBE 解、Hamiltonian 族及 Bethe Ansatz。","generator":"神经数值搜索、LLM、Gröbner 与有理重构","verifier":"YBE 精确代入、[Q₂,Q₃]=0、transfer matrix 对易和 ED","risk":"完整分类所有 R-matrix 仍是低分纲领；高分只属于有限参数族。","verification_best_direction":"构造存在","verification_best_score":8.9,"verification_other_direction":"非存在证明","verification_other_score":6.5,"verification_analysis":"对“Yang–Baxter / R-matrix 可积模型发现”，最强验收方向是构造存在（8.9/10）：候选答案一旦给出，可用YBE 精确代入、[Q₂,Q₃]=0、transfer matrix 对易和 ED检查候选是否满足方程、约束及所需非退化条件。相对地，非存在证明只有6.5/10，因为非存在方向必须排除整个候选空间；现有硬墙是完整分类所有 R-matrix 仍是低分纲领；高分只属于有限参数族。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。","search_text":"yang-baxter-ai yang–baxter / r-matrix 可积模型发现 量子多体与控制 9.5 7.0 frontier 表外前沿 https://arxiv.org/abs/2503.10469 https://arxiv.org/abs/2603.29932 固定局域作用范围和自旋维数，寻找新的 ybe 解、hamiltonian 族及 bethe ansatz。 神经数值搜索、llm、gröbner 与有理重构 ybe 精确代入、[q₂,q₃]=0、transfer matrix 对易和 ed 完整分类所有 r-matrix 仍是低分纲领；高分只属于有限参数族。 构造存在 非存在证明 对“yang–baxter / r-matrix 可积模型发现”，最强验收方向是构造存在（8.9/10）：候选答案一旦给出，可用ybe 精确代入、[q₂,q₃]=0、transfer matrix 对易和 ed检查候选是否满足方程、约束及所需非退化条件。相对地，非存在证明只有6.5/10，因为非存在方向必须排除整个候选空间；现有硬墙是完整分类所有 r-matrix 仍是低分纲领；高分只属于有限参数族。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。"},{"id":"single-minus-amplitude","title":"Single-minus / 高圈散射振幅","domain":"QFT与散射振幅","ai_score":9.5,"complete_score":7.8,"source_type":"Frontier","source_label":"表外前沿","problem_url":"https://openai.com/index/new-result-theoretical-physics/","evidence_url":"https://openai.com/index/extending-single-minus-amplitudes-to-gravitons/","project":"固定点数、圈数和螺旋度，从有限域/递推数据猜一般解析公式并扩展到新理论。","generator":"BCFW、unitarity cuts、有限域采样与符号回归","verifier":"Ward、soft/collinear、factorization 与独立递推","risk":"已有 gluon/graviton 结果是成功基准；新项目必须改变圈数或拓扑。","verification_best_direction":"反例／失效点","verification_best_score":8.5,"verification_other_direction":"恒等式正证","verification_other_score":7.5,"verification_analysis":"对“Single-minus / 高圈散射振幅”，最强验收方向是反例／失效点（8.5/10）：候选答案一旦给出，可用Ward、soft/collinear、factorization 与独立递推检查代入后是否满足前提并使等式或对应失效。相对地，恒等式正证只有7.5/10，因为正证仍需处理全部参数和退化分支；现有硬墙是已有 gluon/graviton 结果是成功基准；新项目必须改变圈数或拓扑。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。","search_text":"single-minus-amplitude single-minus / 高圈散射振幅 qft与散射振幅 9.5 7.8 frontier 表外前沿 https://openai.com/index/new-result-theoretical-physics/ https://openai.com/index/extending-single-minus-amplitudes-to-gravitons/ 固定点数、圈数和螺旋度，从有限域/递推数据猜一般解析公式并扩展到新理论。 bcfw、unitarity cuts、有限域采样与符号回归 ward、soft/collinear、factorization 与独立递推 已有 gluon/graviton 结果是成功基准；新项目必须改变圈数或拓扑。 反例／失效点 恒等式正证 对“single-minus / 高圈散射振幅”，最强验收方向是反例／失效点（8.5/10）：候选答案一旦给出，可用ward、soft/collinear、factorization 与独立递推检查代入后是否满足前提并使等式或对应失效。相对地，恒等式正证只有7.5/10，因为正证仍需处理全部参数和退化分支；现有硬墙是已有 gluon/graviton 结果是成功基准；新项目必须改变圈数或拓扑。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。"},{"id":"feynman-regression","title":"Feynman 积分解析回归","domain":"QFT与散射振幅","ai_score":9.4,"complete_score":7.4,"source_type":"Frontier","source_label":"表外前沿","problem_url":"https://arxiv.org/abs/2507.17815","evidence_url":"https://arxiv.org/abs/2510.10099","project":"对固定图族，以有限域或高精度采样重构 ε 展开、symbol alphabet 和边界常数。","generator":"有限域、PSLQ、有理重构、symbolic regression","verifier":"IBP 恒等式、微分方程残差和独立数值点","risk":"函数空间必须由人类或先验结构限制，否则搜索迅速失控。","verification_best_direction":"越界反例","verification_best_score":9.2,"verification_other_direction":"统一界正证","verification_other_score":7.3,"verification_analysis":"对“Feynman 积分解析回归”，最强验收方向是越界反例（9.2/10）：候选答案一旦给出，可用IBP 恒等式、微分方程残差和独立数值点检查实例是否满足前提且严格越过所声称的界。相对地，统一界正证只有7.3/10，因为统一界需要覆盖无限参数或尺度；现有硬墙是函数空间必须由人类或先验结构限制，否则搜索迅速失控。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。","search_text":"feynman-regression feynman 积分解析回归 qft与散射振幅 9.4 7.4 frontier 表外前沿 https://arxiv.org/abs/2507.17815 https://arxiv.org/abs/2510.10099 对固定图族，以有限域或高精度采样重构 ε 展开、symbol alphabet 和边界常数。 有限域、pslq、有理重构、symbolic regression ibp 恒等式、微分方程残差和独立数值点 函数空间必须由人类或先验结构限制，否则搜索迅速失控。 越界反例 统一界正证 对“feynman 积分解析回归”，最强验收方向是越界反例（9.2/10）：候选答案一旦给出，可用ibp 恒等式、微分方程残差和独立数值点检查实例是否满足前提且严格越过所声称的界。相对地，统一界正证只有7.3/10，因为统一界需要覆盖无限参数或尺度；现有硬墙是函数空间必须由人类或先验结构限制，否则搜索迅速失控。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。"},{"id":"conformal-bootstrap","title":"数值 conformal bootstrap","domain":"QFT与散射振幅","ai_score":9.3,"complete_score":7.6,"source_type":"Frontier","source_label":"表外前沿","problem_url":"https://arxiv.org/abs/1502.02033","evidence_url":"https://arxiv.org/abs/2507.00124","project":"扩展混合相关器或六点 crossing SDP，寻找新的严格排除界和 extremal functional。","generator":"crossing 方程、稀疏化和高精度 SDPB","verifier":"对偶可行性、正泛函和独立任意精度复算","risk":"有限截断的排除界并不证明某个 CFT 真正存在。","verification_best_direction":"构造存在","verification_best_score":9.2,"verification_other_direction":"非存在证明","verification_other_score":6.8,"verification_analysis":"对“数值 conformal bootstrap”，最强验收方向是构造存在（9.2/10）：候选答案一旦给出，可用对偶可行性、正泛函和独立任意精度复算检查候选是否满足方程、约束及所需非退化条件。相对地，非存在证明只有6.8/10，因为非存在方向必须排除整个候选空间；现有硬墙是有限截断的排除界并不证明某个 CFT 真正存在。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。","search_text":"conformal-bootstrap 数值 conformal bootstrap qft与散射振幅 9.3 7.6 frontier 表外前沿 https://arxiv.org/abs/1502.02033 https://arxiv.org/abs/2507.00124 扩展混合相关器或六点 crossing sdp，寻找新的严格排除界和 extremal functional。 crossing 方程、稀疏化和高精度 sdpb 对偶可行性、正泛函和独立任意精度复算 有限截断的排除界并不证明某个 cft 真正存在。 构造存在 非存在证明 对“数值 conformal bootstrap”，最强验收方向是构造存在（9.2/10）：候选答案一旦给出，可用对偶可行性、正泛函和独立任意精度复算检查候选是否满足方程、约束及所需非退化条件。相对地，非存在证明只有6.8/10，因为非存在方向必须排除整个候选空间；现有硬墙是有限截断的排除界并不证明某个 cft 真正存在。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。"},{"id":"qec-search","title":"固定规模量子纠错码","domain":"量子信息与复杂度","ai_score":9.4,"complete_score":8.0,"source_type":"Frontier","source_label":"表外前沿","problem_url":"https://arxiv.org/abs/2305.06378","evidence_url":"https://arxiv.org/abs/2502.14372","project":"在固定 n、稳定子权重、噪声与硬件图下搜索最优 code distance 或逻辑错误率。","generator":"强化学习、Quantum Lego、进化程序和 ILP","verifier":"Knill–Laflamme、GF(2) tableau、穷举距离和 LP 上界","risk":"渐近 qLDPC 参数的完整问题不能从小规模最优码推出。","verification_best_direction":"反例：更优构造","verification_best_score":9.5,"verification_other_direction":"全局最优正证","verification_other_score":7.0,"verification_analysis":"对“固定规模量子纠错码”，最强验收方向是反例：更优构造（9.5/10）：候选答案一旦给出，可用Knill–Laflamme、GF(2) tableau、穷举距离和 LP 上界检查约束是否满足且目标值是否严格优于基准。相对地，全局最优正证只有7.0/10，因为全局正证必须覆盖整个竞争空间；现有硬墙是渐近 qLDPC 参数的完整问题不能从小规模最优码推出。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。","search_text":"qec-search 固定规模量子纠错码 量子信息与复杂度 9.4 8.0 frontier 表外前沿 https://arxiv.org/abs/2305.06378 https://arxiv.org/abs/2502.14372 在固定 n、稳定子权重、噪声与硬件图下搜索最优 code distance 或逻辑错误率。 强化学习、quantum lego、进化程序和 ilp knill–laflamme、gf(2) tableau、穷举距离和 lp 上界 渐近 qldpc 参数的完整问题不能从小规模最优码推出。 反例：更优构造 全局最优正证 对“固定规模量子纠错码”，最强验收方向是反例：更优构造（9.5/10）：候选答案一旦给出，可用knill–laflamme、gf(2) tableau、穷举距离和 lp 上界检查约束是否满足且目标值是否严格优于基准。相对地，全局最优正证只有7.0/10，因为全局正证必须覆盖整个竞争空间；现有硬墙是渐近 qldpc 参数的完整问题不能从小规模最优码推出。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。"},{"id":"fault-tolerant-circuit","title":"容错量子线路与 T-count","domain":"量子信息与复杂度","ai_score":9.2,"complete_score":8.0,"source_type":"Frontier","source_label":"表外前沿","problem_url":"https://arxiv.org/abs/2402.17761","evidence_url":"https://arxiv.org/abs/2402.14396","project":"固定目标态、门集和连通图，寻找更短 encoder、flag circuit 或更低 T-count。","generator":"RL、AlphaTensor、ZX 重写和电路枚举","verifier":"Clifford tableau、故障注入、SAT/ILP 下界","risk":"必须给出最优性下界，否则只能声称找到更好线路。","verification_best_direction":"构造存在","verification_best_score":9.5,"verification_other_direction":"非存在证明","verification_other_score":6.8,"verification_analysis":"对“容错量子线路与 T-count”，最强验收方向是构造存在（9.5/10）：候选答案一旦给出，可用Clifford tableau、故障注入、SAT/ILP 下界检查候选是否满足方程、约束及所需非退化条件。相对地，非存在证明只有6.8/10，因为非存在方向必须排除整个候选空间；现有硬墙是必须给出最优性下界，否则只能声称找到更好线路。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。","search_text":"fault-tolerant-circuit 容错量子线路与 t-count 量子信息与复杂度 9.2 8.0 frontier 表外前沿 https://arxiv.org/abs/2402.17761 https://arxiv.org/abs/2402.14396 固定目标态、门集和连通图，寻找更短 encoder、flag circuit 或更低 t-count。 rl、alphatensor、zx 重写和电路枚举 clifford tableau、故障注入、sat/ilp 下界 必须给出最优性下界，否则只能声称找到更好线路。 构造存在 非存在证明 对“容错量子线路与 t-count”，最强验收方向是构造存在（9.5/10）：候选答案一旦给出，可用clifford tableau、故障注入、sat/ilp 下界检查候选是否满足方程、约束及所需非退化条件。相对地，非存在证明只有6.8/10，因为非存在方向必须排除整个候选空间；现有硬墙是必须给出最优性下界，否则只能声称找到更好线路。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。"},{"id":"bethe-llm","title":"非标准边界的 Bethe Ansatz","domain":"量子多体与控制","ai_score":9.3,"complete_score":7.5,"source_type":"Frontier","source_label":"表外前沿","problem_url":"https://arxiv.org/abs/2603.29932","evidence_url":"https://arxiv.org/abs/2207.14193","project":"对新局域链、非对角边界或 Lindbladian 构造 coordinate/algebraic Bethe Ansatz。","generator":"LLM 推导、散射相位和嵌套 Ansatz 模板","verifier":"精确对角化、完备性计数和 transfer matrix 对易","risk":"标准 XXX/XXZ 的复现不是新成果；必须选择未解模型。","verification_best_direction":"构造存在","verification_best_score":8.9,"verification_other_direction":"非存在证明","verification_other_score":6.5,"verification_analysis":"对“非标准边界的 Bethe Ansatz”，最强验收方向是构造存在（8.9/10）：候选答案一旦给出，可用精确对角化、完备性计数和 transfer matrix 对易检查候选是否满足方程、约束及所需非退化条件。相对地，非存在证明只有6.5/10，因为非存在方向必须排除整个候选空间；现有硬墙是标准 XXX/XXZ 的复现不是新成果；必须选择未解模型。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。","search_text":"bethe-llm 非标准边界的 bethe ansatz 量子多体与控制 9.3 7.5 frontier 表外前沿 https://arxiv.org/abs/2603.29932 https://arxiv.org/abs/2207.14193 对新局域链、非对角边界或 lindbladian 构造 coordinate/algebraic bethe ansatz。 llm 推导、散射相位和嵌套 ansatz 模板 精确对角化、完备性计数和 transfer matrix 对易 标准 xxx/xxz 的复现不是新成果；必须选择未解模型。 构造存在 非存在证明 对“非标准边界的 bethe ansatz”，最强验收方向是构造存在（8.9/10）：候选答案一旦给出，可用精确对角化、完备性计数和 transfer matrix 对易检查候选是否满足方程、约束及所需非退化条件。相对地，非存在证明只有6.5/10，因为非存在方向必须排除整个候选空间；现有硬墙是标准 xxx/xxz 的复现不是新成果；必须选择未解模型。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。"},{"id":"cosmic-string-integral","title":"宇宙弦引力辐射积分","domain":"引力与时空几何","ai_score":9.1,"complete_score":7.2,"source_type":"Frontier","source_label":"表外前沿","problem_url":"https://arxiv.org/abs/2603.04735","evidence_url":"https://research.google/pubs/solving-an-open-problem-in-theoretical-physics-using-ai-assisted-discovery/","project":"对新的 loop geometry、cusp/kink 或回馈修正，寻找精确 Fourier/worldsheet 积分和渐近。","generator":"树搜索、Gegenbauer/Bessel 展开和符号积分","verifier":"微分回代、守恒/正性和独立高精度积分","risk":"已有积分解是方法基准；宇宙弦网络的完整背景谱仍是多尺度问题。","verification_best_direction":"构造存在","verification_best_score":8.5,"verification_other_direction":"非存在证明","verification_other_score":6.1,"verification_analysis":"对“宇宙弦引力辐射积分”，最强验收方向是构造存在（8.5/10）：候选答案一旦给出，可用微分回代、守恒/正性和独立高精度积分检查候选是否满足方程、约束及所需非退化条件。相对地，非存在证明只有6.1/10，因为非存在方向必须排除整个候选空间；现有硬墙是已有积分解是方法基准；宇宙弦网络的完整背景谱仍是多尺度问题。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。","search_text":"cosmic-string-integral 宇宙弦引力辐射积分 引力与时空几何 9.1 7.2 frontier 表外前沿 https://arxiv.org/abs/2603.04735 https://research.google/pubs/solving-an-open-problem-in-theoretical-physics-using-ai-assisted-discovery/ 对新的 loop geometry、cusp/kink 或回馈修正，寻找精确 fourier/worldsheet 积分和渐近。 树搜索、gegenbauer/bessel 展开和符号积分 微分回代、守恒/正性和独立高精度积分 已有积分解是方法基准；宇宙弦网络的完整背景谱仍是多尺度问题。 构造存在 非存在证明 对“宇宙弦引力辐射积分”，最强验收方向是构造存在（8.5/10）：候选答案一旦给出，可用微分回代、守恒/正性和独立高精度积分检查候选是否满足方程、约束及所需非退化条件。相对地，非存在证明只有6.1/10，因为非存在方向必须排除整个候选空间；现有硬墙是已有积分解是方法基准；宇宙弦网络的完整背景谱仍是多尺度问题。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。"}]</script>
+
+  <script>
+    const data = JSON.parse(document.getElementById('problem-data').textContent);
+    const grid = document.getElementById('problem-grid');
+    const searchInput = document.getElementById('search-input');
+    const domainFilter = document.getElementById('domain-filter');
+    const tierFilter = document.getElementById('tier-filter');
+    const sourceFilter = document.getElementById('source-filter');
+    const verificationSort = document.getElementById('verification-sort');
+    const resultCount = document.getElementById('result-count');
+    const resetFilters = document.getElementById('reset-filters');
+
+    const tierOf = score => score >= 9.2 ? 'robust' : score >= 9.0 ? 'strong' : 'edge';
+    const tierLabel = score => score >= 9.2 ? '稳健高适配' : score >= 9.0 ? '强适配' : '临界入选';
+    const escapeHtml = value => String(value).replace(/[&<>'"]/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
+
+    [...new Set(data.map(item => item.domain))].sort((a, b) => a.localeCompare(b, 'zh-CN')).forEach(domain => {
+      const option = document.createElement('option');
+      option.value = domain;
+      option.textContent = domain;
+      domainFilter.appendChild(option);
+    });
+
+    function cardTemplate(item) {
+      const related = item.related_url ? `<a href="${escapeHtml(item.related_url)}" target="_blank" rel="noopener">关联原题</a>` : '';
+      return `<article class="problem-card" data-score="${item.ai_score}">
+        <div class="card-top">
+          <div class="tags"><span class="tag ${item.source_type.toLowerCase()}">${escapeHtml(item.source_type)}</span><span class="tag">${escapeHtml(item.domain)}</span><span class="tag">${tierLabel(item.ai_score)}</span></div>
+          <div class="score-block"><strong>${item.ai_score.toFixed(1)}</strong><span>忠实子题</span></div>
+        </div>
+        <h3>${escapeHtml(item.title)}</h3>
+        <p class="complete-score">完整原题：${item.complete_score.toFixed(1)}/10 · ${escapeHtml(item.source_label)}</p>
+        <p class="project">${escapeHtml(item.project)}</p>
+        <div class="mechanism"><div><b>候选生成器</b><span>${escapeHtml(item.generator)}</span></div><div><b>独立核验器</b><span>${escapeHtml(item.verifier)}</span></div></div>
+        <section class="verification-argument"><div class="verification-head"><strong>${item.verification_best_score.toFixed(1)}</strong><span>${escapeHtml(item.verification_best_direction)}</span></div><p>${escapeHtml(item.verification_analysis)}</p><small>较弱方向：${escapeHtml(item.verification_other_direction)} ${item.verification_other_score.toFixed(1)}/10</small></section><p class="risk"><strong>主要扣分：</strong>${escapeHtml(item.risk)}</p>
+        <div class="card-links"><a href="${escapeHtml(item.problem_url)}" target="_blank" rel="noopener">${item.source_type === 'ICM' ? 'ICM 原网页' : '问题 / 案例'}</a>${related}<a href="${escapeHtml(item.evidence_url)}" target="_blank" rel="noopener">证据文献</a></div>
+      </article>`;
+    }
+
+    function render() {
+      const query = searchInput.value.trim().toLowerCase();
+      const selectedDomain = domainFilter.value;
+      const selectedTier = tierFilter.value;
+      const selectedSource = sourceFilter.value;
+      const filtered = data
+        .filter(item => selectedDomain === 'all' || item.domain === selectedDomain)
+        .filter(item => selectedTier === 'all' || tierOf(item.ai_score) === selectedTier)
+        .filter(item => selectedSource === 'all' || item.source_type === selectedSource)
+        .filter(item => !query || [item.title, item.domain, item.project, item.generator, item.verifier, item.source_label].join(' ').toLowerCase().includes(query))
+        .sort((a, b) => verificationSort.value === 'verification' ? (b.verification_best_score - a.verification_best_score || b.ai_score - a.ai_score) : (b.ai_score - a.ai_score || b.complete_score - a.complete_score || a.title.localeCompare(b.title, 'zh-CN')));
+
+      resultCount.textContent = `显示 ${filtered.length} / ${data.length} 个方向`;
+      grid.innerHTML = filtered.length ? filtered.map(cardTemplate).join('') : '<div class="empty">没有符合当前条件的问题。试试清除筛选，或搜索更宽的关键词。</div>';
+    }
+
+    [searchInput, domainFilter, tierFilter, sourceFilter, verificationSort].forEach(control => control.addEventListener(control === searchInput ? 'input' : 'change', render));
+    resetFilters.addEventListener('click', () => {
+      searchInput.value = '';
+      domainFilter.value = 'all';
+      tierFilter.value = 'all';
+      sourceFilter.value = 'all';
+      verificationSort.value = 'verification';
+      render();
+      searchInput.focus();
+    });
+    render();
+  </script>
+</body>
+</html>

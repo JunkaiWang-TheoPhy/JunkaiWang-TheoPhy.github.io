@@ -1,0 +1,1045 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>公开数学物理问题 · Codex/AI 普查</title>
+<style>
+:root{--paper:#f7f6f1;--card:#fffefa;--ink:#112c42;--muted:#5b7182;--teal:#0d877c;--cyan:#dff3ee;--lilac:#eee9fb;--peach:#fbe9dd;--line:#d5dfdd;--gold:#c65b22;--shadow:0 16px 45px rgba(25,55,64,.08)}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,"PingFang SC","Noto Sans CJK SC",system-ui,sans-serif;line-height:1.65}a{color:var(--teal)}.wrap{width:min(1480px,calc(100% - 44px));margin:auto}header{padding:72px 0 46px;background:linear-gradient(135deg,#f8f6ef 0%,#edf8f4 52%,#f3eefb 100%);border-bottom:1px solid var(--line)}nav{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:58px}nav .brand{letter-spacing:.18em;font-weight:800;color:var(--teal)}nav .links{display:flex;gap:18px;flex-wrap:wrap}nav a{text-decoration:none;font-weight:650}.eyebrow{font-weight:800;letter-spacing:.19em;color:var(--teal);text-transform:uppercase}h1{font-family:Georgia,"Songti SC",serif;font-size:clamp(42px,6vw,86px);line-height:1.07;margin:14px 0 24px;max-width:1120px}.lede{font-size:clamp(18px,2vw,27px);color:var(--muted);max-width:1050px}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:38px}.metric{background:rgba(255,255,255,.76);border:1px solid var(--line);border-radius:22px;padding:22px}.metric strong{display:block;font-size:36px;color:var(--teal)}.metric span{color:var(--muted)}main section.block{padding:68px 0;border-bottom:1px solid var(--line)}h2{font-family:Georgia,"Songti SC",serif;font-size:clamp(34px,4vw,58px);margin:0 0 14px}.intro{max-width:1020px;color:var(--muted);font-size:19px}.method-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:32px}.method-card{border:1px solid var(--line);background:var(--card);padding:24px;border-radius:22px}.method-card:nth-child(2){background:var(--cyan)}.method-card:nth-child(3){background:var(--lilac)}.method-card:nth-child(4){background:var(--peach)}.method-card h3{margin:0 0 9px;font-size:22px}.timeline{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:30px}.era{padding:23px;border-top:4px solid var(--teal);background:#fff;border-radius:0 0 16px 16px}.era strong{display:block;font-size:22px}.filters{position:sticky;top:0;z-index:5;display:grid;grid-template-columns:2fr repeat(4,1fr);gap:12px;padding:16px;margin:26px 0;background:rgba(247,246,241,.95);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:18px}input,select{width:100%;padding:13px 14px;border:1px solid #bdcbc8;border-radius:12px;background:#fff;font:inherit;color:var(--ink)}#result-count{color:var(--muted);margin:0 0 18px}.catalog{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.problem-card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:24px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:13px}.card-top,.card-foot,.score-row{display:flex;justify-content:space-between;gap:12px;align-items:center}.id{font-weight:850;color:var(--teal);letter-spacing:.08em}.status{font-size:12px;padding:4px 8px;background:var(--cyan);border-radius:99px;margin-left:8px}.score{text-align:right}.score strong{font-size:32px;color:var(--gold);display:block;line-height:1}.score small{color:var(--muted)}.problem-card h3{font-family:Georgia,"Songti SC",serif;font-size:25px;line-height:1.28;margin:0}.meta{margin:0;color:var(--muted)}.score-row{justify-content:flex-start;flex-wrap:wrap}.score-row>span{font-size:12px;padding:5px 9px;border:1px solid var(--line);border-radius:99px}.score-row span span{margin-right:4px}.problem-card section h4{font-size:13px;letter-spacing:.08em;color:var(--teal);margin:0 0 4px;text-transform:uppercase}.problem-card section p,.problem-card details p{margin:0;color:#334e61}.gv{display:grid;grid-template-columns:1fr 1fr;gap:12px}.gv section{padding:13px;border-radius:14px;background:#f1f6f4}.verification-guide{margin:22px 0 0;padding:18px 20px;border:1px solid #acd7cf;border-radius:18px;background:#e6f6f2;color:#365c68}.verification-guide strong{color:var(--teal)}.verification-argument{padding:15px;border:1px solid #c6dfda;border-radius:15px;background:#eef8f5}.verification-head{display:flex;align-items:center;gap:9px;margin-bottom:7px}.verification-head strong{color:var(--teal);font-size:1.25rem}.verification-head span{padding:4px 8px;border-radius:999px;background:#d9efea;color:#27665f;font-size:12px;font-weight:800}.verification-argument small{display:block;margin-top:7px;color:#73838b}details{border-top:1px solid var(--line);padding-top:10px}summary{cursor:pointer;font-weight:700}.card-foot{margin-top:auto;border-top:1px solid var(--line);padding-top:14px;font-size:13px;color:var(--muted)}.card-foot a{font-weight:750;white-space:nowrap}.audit{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}.audit article{background:#fff;border:1px solid var(--line);border-left:5px solid var(--gold);padding:18px;border-radius:12px}.audit h3{font-size:17px;margin:0 0 5px}.audit p{margin:0;color:var(--muted)}footer{padding:44px 0 70px;color:var(--muted)}.hide{display:none!important}@media(max-width:1050px){.catalog{grid-template-columns:repeat(2,1fr)}.method-grid,.metrics{grid-template-columns:repeat(2,1fr)}.timeline{grid-template-columns:repeat(3,1fr)}}@media(max-width:700px){.wrap{width:min(100% - 24px,1480px)}header{padding-top:28px}nav{display:block;margin-bottom:36px}nav .links{margin-top:12px}.catalog,.method-grid,.metrics,.timeline,.audit{grid-template-columns:1fr}.filters{position:static;grid-template-columns:1fr}.gv{grid-template-columns:1fr}}
+</style><link rel="icon" href="../icon.svg" type="image/svg+xml">
+</head><body>
+
+<a class="atlas-hub-link" href="../" aria-label="返回数学物理 AI 研究图谱总入口">← 返回总入口</a>
+<style>
+  .atlas-hub-link{position:fixed;right:18px;bottom:18px;z-index:9999;display:inline-flex;align-items:center;padding:10px 15px;border:1px solid rgba(15,54,78,.16);border-radius:999px;color:#123047!important;background:rgba(255,255,255,.94);box-shadow:0 10px 30px rgba(15,54,78,.16);font:700 13px/1.2 ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;text-decoration:none!important;backdrop-filter:blur(12px)}
+  .atlas-hub-link:hover{transform:translateY(-1px);box-shadow:0 13px 34px rgba(15,54,78,.22)}
+  @media(max-width:640px){.atlas-hub-link{right:10px;bottom:10px;padding:9px 12px}}
+  @media print{.atlas-hub-link{display:none!important}}
+</style>
+
+<header><div class="wrap"><nav><div class="brand">CODEX · PUBLIC CENSUS</div><div class="links"><a href="#method">方法</a><a href="#history">历史</a><a href="#catalog">目录</a><a href="../ai-shortlist/">旧版 35 项 ↗</a></div></nav><div class="eyebrow">截至 2026-08-13 · 独立母集重建</div><h1>公开数学物理名题<br>AI 可发表切片普查</h1><p class="lede">不是把“著名”误当“适合 AI”。我们从公开问题页、综述、ICM 以及 DeepSeek / Luna Max 的独立召回出发，区分宏大原题与可由候选生成器和独立核验器闭环的忠实子题。</p><div class="metrics"><div class="metric"><strong>303</strong><span>四批原始候选槽位</span></div><div class="metric"><strong>100</strong><span>已落盘审计决定</span></div><div class="metric"><strong>85</strong><span>严格 &gt; 8.8 的子题</span></div><div class="metric"><strong>77</strong><span>此前对话未涉及</span></div></div></div></header>
+<main>
+<section class="block" id="method"><div class="wrap"><div class="eyebrow">Scope &amp; method</div><h2>评分对象是工作流，不是名气</h2><p class="intro">完整问题分衡量世界级难度与边界；AI 子题分衡量能否形成“生成候选 G → 独立核验 V → 复现 → 论文”的闭环。G 与 V 用调和平均，任何一边弱都会被惩罚。</p><div class="method-grid"><article class="method-card"><h3>完整问题 /10</h3><p>物理重要性、开放度、可判定性、物理接口、可分解性各 20%。研究纲领若没有单一真值条件，可判定性主动降分。</p></article><article class="method-card"><h3>AI 子题 /10</h3><p>G/V 闭环 30%，benchmark 20%，可复现 20%，新颖性 15%，物理增量 15%。只保留严格大于 8.8。</p></article><article class="method-card"><h3>硬门槛</h3><p>V 或物理增量不足时封顶 8.8；只靠数值拟合不入选；已解决复现题封顶 8.5，并转入排除审计。</p></article><article class="method-card"><h3>解决概率 ≠ 适合度</h3><p>9.4 表示一个窄子题很适合机器闭环，不表示 Clay 名题有 94% 概率解决。卡片给的是定性“闭环把握”。</p></article></div></div></section>
+<section class="block" id="history"><div class="wrap"><div class="eyebrow">Historical coverage</div><h2>37 个历史名题进入保留集</h2><p class="intro">历史线索从三体、Boltzmann、Ising、湍流延伸到规范场、量子信息和现代广义对称。高分不是因为问题老，而是因为能切出可认证的有限分支。</p><div class="timeline"><div class="era"><strong>18–19 世纪</strong><span>三体、作用量、统计力学起源</span></div><div class="era"><strong>1900–1949</strong><span>Hilbert VI、量子/流体方程、Ising</span></div><div class="era"><strong>1950–1979</strong><span>Yang–Mills、Anderson、YBE、GR</span></div><div class="era"><strong>1980–1999</strong><span>KPZ、QEC、TQFT、现代振幅</span></div><div class="era"><strong>2000–现在</strong><span>bootstrap、张量网络、广义对称</span></div></div></div></section>
+<section class="block" id="catalog"><div class="wrap"><div class="eyebrow">Audited catalog</div><h2>可搜索的保留目录</h2><p class="intro">每张卡都给出断言边界。先选领域，再检查 V 是否真正独立于 G。</p><div class="verification-guide"><strong>方向化可验证性：</strong>同一问题的构造、反例、全局正证与完备分类分别评分。构造或反例常由一个有限对象验收；全称命题仍需覆盖全部允许对象。默认按每题当前最强验收方向排序，卡片内是一段完整论证而不是标签。</div><div class="filters"><label><span class="sr-only">搜索</span><input id="search-input" type="search" placeholder="搜索问题、领域、提出者或子题…"></label><label><select id="domain-filter"><option value="">全部领域</option><option value="共形场论">共形场论</option><option value="几何分析">几何分析</option><option value="动力学PDE">动力学PDE</option><option value="动力系统">动力系统</option><option value="反问题">反问题</option><option value="变分力学">变分力学</option><option value="可积概率">可积概率</option><option value="可积系统">可积系统</option><option value="天体力学">天体力学</option><option value="广义对称">广义对称</option><option value="开放量子系统">开放量子系统</option><option value="弦论与BPS">弦论与BPS</option><option value="拓扑量子场论">拓扑量子场论</option><option value="拓扑量子物态">拓扑量子物态</option><option value="散射振幅">散射振幅</option><option value="数值分析">数值分析</option><option value="数学相对论">数学相对论</option><option value="枚举几何">枚举几何</option><option value="格点统计物理">格点统计物理</option><option value="格点规范论">格点规范论</option><option value="概率统计力学">概率统计力学</option><option value="正几何">正几何</option><option value="流体与PDE">流体与PDE</option><option value="表示论物理">表示论物理</option><option value="谱理论">谱理论</option><option value="量子信息">量子信息</option><option value="量子场论">量子场论</option><option value="量子基础">量子基础</option><option value="量子复杂性">量子复杂性</option><option value="量子多体">量子多体</option><option value="量子引力">量子引力</option><option value="量子拓扑">量子拓扑</option><option value="量子控制">量子控制</option><option value="量子统计">量子统计</option><option value="量子计算">量子计算</option><option value="量子计量">量子计量</option><option value="随机矩阵">随机矩阵</option><option value="随机过程">随机过程</option></select></label><label><select id="era-filter"><option value="">全部时代</option><option>历史名题</option><option>现代方向</option></select></label><label><select id="source-filter"><option value="">全部来源</option><option value="ICM">ICM</option><option value="public-list">公开问题清单</option><option value="review">权威综述</option></select></label><label><select id="verification-sort"><option value="verification" selected>按最强验收方向</option><option value="ai">按 AI 子题分</option></select></label></div><p id="result-count" aria-live="polite">显示 85 / 85 项</p><div class="catalog"><article class="problem-card" data-domain="天体力学" data-era="历史名题" data-source="ICM" data-verification="9.6" data-search="平面三体对称周期轨道的分类 天体力学 固定质量、对称群和拓扑词，枚举新周期轨道并认证存在、非碰撞与非退化。 euler、lagrange；现代 choreography 社区">
+      <div class="card-top"><div><span class="id">DYN-03</span><span class="status">既有对话</span></div><div class="score"><strong>9.3</strong><small>AI 子题 /10</small></div></div>
+      <h3>平面三体对称周期轨道的分类</h3>
+      <p class="meta">天体力学 · 1770s– · Euler、Lagrange；现代 choreography 社区</p>
+      <div class="score-row"><span>完整问题 8.2</span><span>历史名题</span><span><span>ICM</span> <span>公开清单</span></span></div>
+      <section><h4>可发表切片</h4><p>固定质量、对称群和拓扑词，枚举新周期轨道并认证存在、非碰撞与非退化。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>Fourier/射击搜索、连续 Newton、拓扑词枚举</p></section><section><h4>V · 独立核验器</h4><p>interval Newton/Krawczyk、validated ODE 与 Floquet 区间谱</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>9.6</strong><span>构造存在</span></div><h4>方向化可验证性</h4><p>最强方向是构造存在（9.6/10）：给出固定质量、对称群和拓扑词下的候选轨道后，可用 interval Newton/Krawczyk、validated ODE 与 Floquet 区间谱检查方程残差、无碰撞、非退化和局部唯一。较弱方向是完备分类（6.2/10），因为逐条认证局部分支并不能排除搜索盒之外或其他拓扑词中的轨道，所以该分数不能外推为三体周期轨道已被全部分类。</p><small>较弱方向：完备分类 6.2/10</small></section>
+      <section><h4>物理接口</h4><p>少体引力动力学与轨道稳定性</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>局部分支认证不等于全部拓扑类分类</p><p><b>边界：</b>结论严格限制于搜索盒和拓扑词。</p></details>
+      <div class="card-foot"><span>高：适合立即立项，但仍需领域专家把关</span><a href="https://www.crm.cat/wp-content/uploads/2022/06/bookQ-copy.pdf" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="量子信息" data-era="现代方向" data-source="review" data-verification="9.5" data-search="量子 ldpc 的阈值—码率—距离最优权衡 量子信息 对一个显式好量子 ldpc 族，在电路级噪声下构造译码器并认证有限尺寸阈值下界。 calderbank–shor–steane；ldpc 社区">
+      <div class="card-top"><div><span class="id">QEC-01</span><span class="status">本轮新增</span></div><div class="score"><strong>9.4</strong><small>AI 子题 /10</small></div></div>
+      <h3>量子 LDPC 的阈值—码率—距离最优权衡</h3>
+      <p class="meta">量子信息 · 1990s– · Calderbank–Shor–Steane；LDPC 社区</p>
+      <div class="score-row"><span>完整问题 8.4</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>对一个显式好量子 LDPC 族，在电路级噪声下构造译码器并认证有限尺寸阈值下界。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>码族/译码器搜索、张量网络和 RL</p></section><section><h4>V · 独立核验器</h4><p>GF(2) 精确检查、综合故障注入与置信区间</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>9.5</strong><span>反例：更优构造</span></div><h4>方向化可验证性</h4><p>对“量子 LDPC 的阈值—码率—距离最优权衡”，最强验收方向是反例：更优构造（9.5/10）：候选答案一旦给出，可用GF(2) 精确检查、综合故障注入与置信区间检查约束是否满足且目标值是否严格优于基准。相对地，全局最优正证只有7.0/10，因为全局正证必须覆盖整个竞争空间；现有硬墙是相关故障和译码复杂度；好量子 LDPC 的存在性已解决；本条只保留最优权衡和实际阈值。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：全局最优正证 7.0/10</small></section>
+      <section><h4>物理接口</h4><p>容错量子计算与量子存储</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>相关故障和译码复杂度</p><p><b>边界：</b>好量子 LDPC 的存在性已解决；本条只保留最优权衡和实际阈值。</p></details>
+      <div class="card-foot"><span>高：适合立即立项，但仍需领域专家把关</span><a href="https://arxiv.org/abs/2103.06309" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="可积系统" data-era="历史名题" data-source="review" data-verification="9.5" data-search="yang–baxter 方程谱参数解的有限维分类 可积系统 固定局域维数 d≤4 与多项式/有理非差分型 ansatz，枚举规范等价类并给出完备性或最小反例证书。 c. n. yang；r. j. baxter">
+      <div class="card-top"><div><span class="id">YB-01</span><span class="status">本轮新增</span></div><div class="score"><strong>9.4</strong><small>AI 子题 /10</small></div></div>
+      <h3>Yang–Baxter 方程谱参数解的有限维分类</h3>
+      <p class="meta">可积系统 · 1967–1972 · C. N. Yang；R. J. Baxter</p>
+      <div class="score-row"><span>完整问题 7.4</span><span>历史名题</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>固定局域维数 d≤4 与多项式/有理非差分型 ansatz，枚举规范等价类并给出完备性或最小反例证书。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>神经候选搜索、符号回归、Gröbner 分解</p></section><section><h4>V · 独立核验器</h4><p>逐项精确代回 YBE，核验 unitarity、crossing 与转移矩阵对易</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>9.5</strong><span>遗漏对象／反例</span></div><h4>方向化可验证性</h4><p>对“Yang–Baxter 方程谱参数解的有限维分类”，最强验收方向是遗漏对象／反例（9.5/10）：候选答案一旦给出，可用逐项精确代回 YBE，核验 unitarity、crossing 与转移矩阵对易检查新对象是否满足定义且不等价于已列对象。相对地，完备分类只有7.2/10，因为完备性要求排除清单之外的一切对象；现有硬墙是高次代数簇、规范冗余以及退化分支爆炸；只声称给定 ansatz 和维数内完备；不声称分类全部 R 矩阵。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：完备分类 7.2/10</small></section>
+      <section><h4>物理接口</h4><p>量子自旋链、二维顶点模型、可积散射</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>高次代数簇、规范冗余以及退化分支爆炸</p><p><b>边界：</b>只声称给定 ansatz 和维数内完备；不声称分类全部 R 矩阵。</p></details>
+      <div class="card-foot"><span>高：适合立即立项，但仍需领域专家把关</span><a href="https://arxiv.org/abs/hep-th/9404143" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="量子基础" data-era="历史名题" data-source="review" data-verification="9.5" data-search="sic-povm 的全维存在性：固定未解维数切片 量子基础 在一个尚无精确闭式的固定维数寻找 sic，并给出精确代数数、galois 轨道和 gram 矩阵证书。 gerhard zauner">
+      <div class="card-top"><div><span class="id">QEC-04</span><span class="status">本轮新增</span></div><div class="score"><strong>9.3</strong><small>AI 子题 /10</small></div></div>
+      <h3>SIC-POVM 的全维存在性：固定未解维数切片</h3>
+      <p class="meta">量子基础 · 1999 · Gerhard Zauner</p>
+      <div class="score-row"><span>完整问题 8.9</span><span>历史名题</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>在一个尚无精确闭式的固定维数寻找 SIC，并给出精确代数数、Galois 轨道和 Gram 矩阵证书。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>高精度非线性求解、代数数识别、群轨道搜索</p></section><section><h4>V · 独立核验器</h4><p>等角条件精确代回、PSD 与独立数域计算</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>9.5</strong><span>构造存在</span></div><h4>方向化可验证性</h4><p>对“SIC-POVM 的全维存在性：固定未解维数切片”，最强验收方向是构造存在（9.5/10）：候选答案一旦给出，可用等角条件精确代回、PSD 与独立数域计算检查候选是否满足方程、约束及所需非退化条件。相对地，非存在证明只有6.8/10，因为非存在方向必须排除整个候选空间；现有硬墙是数值 SIC 不等于任意维数存在性；只声称固定维数的精确构造/分类；不外推 Zauner 猜想。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：非存在证明 6.8/10</small></section>
+      <section><h4>物理接口</h4><p>量子态层析、对称测量和离散相空间</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>数值 SIC 不等于任意维数存在性</p><p><b>边界：</b>只声称固定维数的精确构造/分类；不外推 Zauner 猜想。</p></details>
+      <div class="card-foot"><span>高：适合立即立项，但仍需领域专家把关</span><a href="https://journals.aps.org/prxquantum/abstract/10.1103/PRXQuantum.3.010101" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="量子计算" data-era="现代方向" data-source="review" data-verification="9.5" data-search="容错逻辑态制备/线路最优化的有限实例 量子计算 固定码、门集和硬件图，寻找最短 encoder/flag 电路并证明在给定故障模型下最优。 shor；steane；容错社区">
+      <div class="card-top"><div><span class="id">QCIR-01</span><span class="status">本轮新增</span></div><div class="score"><strong>9.2</strong><small>AI 子题 /10</small></div></div>
+      <h3>容错逻辑态制备/线路最优化的有限实例</h3>
+      <p class="meta">量子计算 · 1990s– · Shor；Steane；容错社区</p>
+      <div class="score-row"><span>完整问题 8.5</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>固定码、门集和硬件图，寻找最短 encoder/flag 电路并证明在给定故障模型下最优。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>RL、ZX 重写、SAT/ILP</p></section><section><h4>V · 独立核验器</h4><p>Clifford tableau、穷举故障注入与下界证书</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>9.5</strong><span>反例：更优构造</span></div><h4>方向化可验证性</h4><p>对“容错逻辑态制备/线路最优化的有限实例”，最强验收方向是反例：更优构造（9.5/10）：候选答案一旦给出，可用Clifford tableau、穷举故障注入与下界证书检查约束是否满足且目标值是否严格优于基准。相对地，全局最优正证只有7.0/10，因为全局正证必须覆盖整个竞争空间；现有硬墙是一般线路最优化 NP-hard 且故障相关；规模、门集和噪声模型必须写入命题。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：全局最优正证 7.0/10</small></section>
+      <section><h4>物理接口</h4><p>容错量子处理器</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>一般线路最优化 NP-hard 且故障相关</p><p><b>边界：</b>规模、门集和噪声模型必须写入命题。</p></details>
+      <div class="card-foot"><span>中高：搜索—证书闭环明确</span><a href="https://arxiv.org/abs/2402.17761" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="拓扑量子场论" data-era="现代方向" data-source="review" data-verification="9.5" data-search="秩六及以上幺正模张量范畴分类 拓扑量子场论 在一个固定 galois/群论约束下完成 rank-6 单位ary modular tensor category 分类。 reshetikhin–turaev；融合范畴社区">
+      <div class="card-top"><div><span class="id">TQFT-01</span><span class="status">本轮新增</span></div><div class="score"><strong>9.2</strong><small>AI 子题 /10</small></div></div>
+      <h3>秩六及以上幺正模张量范畴分类</h3>
+      <p class="meta">拓扑量子场论 · 1980s– · Reshetikhin–Turaev；融合范畴社区</p>
+      <div class="score-row"><span>完整问题 7.2</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>在一个固定 Galois/群论约束下完成 rank-6 单位ary modular tensor category 分类。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>融合环枚举、数值代数几何、SAT</p></section><section><h4>V · 独立核验器</h4><p>pentagon/hexagon 精确求解、unitarity 与等价消重</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>9.5</strong><span>遗漏对象／反例</span></div><h4>方向化可验证性</h4><p>对“秩六及以上幺正模张量范畴分类”，最强验收方向是遗漏对象／反例（9.5/10）：候选答案一旦给出，可用pentagon/hexagon 精确求解、unitarity 与等价消重检查新对象是否满足定义且不等价于已列对象。相对地，完备分类只有7.2/10，因为完备性要求排除清单之外的一切对象；现有硬墙是Ocneanu rigidity 只保证离散性，不消除组合爆炸；固定秩和约束；模数据一致不自动给局域 Hamiltonian。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：完备分类 7.2/10</small></section>
+      <section><h4>物理接口</h4><p>任意子、拓扑量子计算和 3D TQFT</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>Ocneanu rigidity 只保证离散性，不消除组合爆炸</p><p><b>边界：</b>固定秩和约束；模数据一致不自动给局域 Hamiltonian。</p></details>
+      <div class="card-foot"><span>中高：搜索—证书闭环明确</span><a href="https://arxiv.org/abs/1908.07128" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="变分力学" data-era="现代方向" data-source="ICM" data-verification="9.4" data-search="三体 choreography 的作用量全局极小性 变分力学 对固定对称/同伦类，将候选轨道的严格上界与所有竞争路径的分块下界闭合。 chenciner–montgomery 等">
+      <div class="card-top"><div><span class="id">DYN-04</span><span class="status">既有对话</span></div><div class="score"><strong>9.2</strong><small>AI 子题 /10</small></div></div>
+      <h3>三体 choreography 的作用量全局极小性</h3>
+      <p class="meta">变分力学 · 2000s · Chenciner–Montgomery 等</p>
+      <div class="score-row"><span>完整问题 8.8</span><span>现代方向</span><span><span>ICM</span></span></div>
+      <section><h4>可发表切片</h4><p>对固定对称/同伦类，将候选轨道的严格上界与所有竞争路径的分块下界闭合。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>谱配置搜索、对称约化、全局分支定界</p></section><section><h4>V · 独立核验器</h4><p>区间变分、碰撞排除和覆盖全部竞争盒的证书</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>9.4</strong><span>反例：更低作用量轨道</span></div><h4>方向化可验证性</h4><p>最强方向是反例：更低作用量轨道（9.4/10）：一旦找到满足同一对称和同伦约束的竞争轨道，区间变分与 validated ODE 可同时认证其可行性，并严格比较作用量上界，从而推翻既有全局极小主张。较弱方向是全局极小正证（6.0/10），因为它必须对无限维竞争路径空间给出完备覆盖、统一下界和碰撞排除；局部极小或单条轨道的存在证书远远不够。</p><small>较弱方向：全局极小正证 6.0/10</small></section>
+      <section><h4>物理接口</h4><p>经典作用量原理与少体周期轨道</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>局部极小/存在证书不自动给全局极小</p><p><b>边界：</b>必须展示竞争路径空间的完备覆盖。</p></details>
+      <div class="card-foot"><span>中高：搜索—证书闭环明确</span><a href="https://icmconjectures.com/2002-mathphys-125" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="量子场论" data-era="现代方向" data-source="review" data-verification="9.3" data-search="格点规范论的 loop/positivity bootstrap 量子场论 对固定维数、规范群和有限 wilson-loop 截断，收紧一个质量隙/plaquette 严格界并证明收敛方向。 现代 lattice bootstrap 社区">
+      <div class="card-top"><div><span class="id">ML-02</span><span class="status">本轮新增</span></div><div class="score"><strong>9.2</strong><small>AI 子题 /10</small></div></div>
+      <h3>格点规范论的 loop/positivity bootstrap</h3>
+      <p class="meta">量子场论 · 2020s · 现代 lattice bootstrap 社区</p>
+      <div class="score-row"><span>完整问题 8.7</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>对固定维数、规范群和有限 Wilson-loop 截断，收紧一个质量隙/plaquette 严格界并证明收敛方向。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>loop 方程生成、SDP/正性约束搜索</p></section><section><h4>V · 独立核验器</h4><p>对偶可行证书、强弱耦合极限和 Monte Carlo 交叉</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>9.3</strong><span>越界反例</span></div><h4>方向化可验证性</h4><p>对“格点规范论的 loop/positivity bootstrap”，最强验收方向是越界反例（9.3/10）：候选答案一旦给出，可用对偶可行证书、强弱耦合极限和 Monte Carlo 交叉检查实例是否满足前提且严格越过所声称的界。相对地，统一界正证只有7.3/10，因为统一界需要覆盖无限参数或尺度；现有硬墙是有限截断界到连续极限的收敛未知；只声称严格有限截断界。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：统一界正证 7.3/10</small></section>
+      <section><h4>物理接口</h4><p>非微扰规范理论与禁闭</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>有限截断界到连续极限的收敛未知</p><p><b>边界：</b>只声称严格有限截断界。</p></details>
+      <div class="card-foot"><span>中高：搜索—证书闭环明确</span><a href="https://arxiv.org/abs/2404.17071" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="格点规范论" data-era="现代方向" data-source="review" data-verification="9.3" data-search="有限密度 qcd 符号问题的可证 toy model 格点规范论 在重密度或低维规范 toy model 中证明一种 dual/thimble/complex-langevin 算法无偏并给方差界。 有限密度格点 qcd 社区">
+      <div class="card-top"><div><span class="id">LAT-04</span><span class="status">本轮新增</span></div><div class="score"><strong>9.1</strong><small>AI 子题 /10</small></div></div>
+      <h3>有限密度 QCD 符号问题的可证 toy model</h3>
+      <p class="meta">格点规范论 · 1980s– · 有限密度格点 QCD 社区</p>
+      <div class="score-row"><span>完整问题 7.0</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>在重密度或低维规范 toy model 中证明一种 dual/thimble/complex-Langevin 算法无偏并给方差界。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>复积分 contour 搜索、张量网络与符号重权</p></section><section><h4>V · 独立核验器</h4><p>精确配分函数、Ward 恒等式和体积缩放审计</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>9.3</strong><span>越界反例</span></div><h4>方向化可验证性</h4><p>对“有限密度 QCD 符号问题的可证 toy model”，最强验收方向是越界反例（9.3/10）：候选答案一旦给出，可用精确配分函数、Ward 恒等式和体积缩放审计检查实例是否满足前提且严格越过所声称的界。相对地，统一界正证只有7.3/10，因为统一界需要覆盖无限参数或尺度；现有硬墙是平均相位指数衰减及复杂性障碍；不把 toy model 算法外推为通用 QCD 解法。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：统一界正证 7.3/10</small></section>
+      <section><h4>物理接口</h4><p>中子星物质与 QCD 相图</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>平均相位指数衰减及复杂性障碍</p><p><b>边界：</b>不把 toy model 算法外推为通用 QCD 解法。</p></details>
+      <div class="card-foot"><span>中高：搜索—证书闭环明确</span><a href="https://arxiv.org/abs/2108.12423" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="散射振幅" data-era="现代方向" data-source="review" data-verification="9.2" data-search="椭圆与多尺度 feynman 积分的规范微分方程 散射振幅 对一个固定两圈椭圆拓扑寻找并认证 ε-分解基底、字母表和边界常数。 ibp/de 社区">
+      <div class="card-top"><div><span class="id">AMP-02</span><span class="status">本轮新增</span></div><div class="score"><strong>9.5</strong><small>AI 子题 /10</small></div></div>
+      <h3>椭圆与多尺度 Feynman 积分的规范微分方程</h3>
+      <p class="meta">散射振幅 · 1990s– · IBP/DE 社区</p>
+      <div class="score-row"><span>完整问题 8.0</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>对一个固定两圈椭圆拓扑寻找并认证 ε-分解基底、字母表和边界常数。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>有限域 IBP、基底搜索、有理重构</p></section><section><h4>V · 独立核验器</h4><p>IBP 恒等式、微分方程残差、sector decomposition 高精度点</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>9.2</strong><span>构造存在</span></div><h4>方向化可验证性</h4><p>对“椭圆与多尺度 Feynman 积分的规范微分方程”，最强验收方向是构造存在（9.2/10）：候选答案一旦给出，可用IBP 恒等式、微分方程残差、sector decomposition 高精度点检查候选是否满足方程、约束及所需非退化条件。相对地，非存在证明只有6.8/10，因为非存在方向必须排除整个候选空间；现有硬墙是椭圆周期和多尺度阈值使纯多对数框架失效；仅对给定图族、质量与运动学区域成立。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：非存在证明 6.8/10</small></section>
+      <section><h4>物理接口</h4><p>精密 QCD/电弱修正</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>椭圆周期和多尺度阈值使纯多对数框架失效</p><p><b>边界：</b>仅对给定图族、质量与运动学区域成立。</p></details>
+      <div class="card-foot"><span>高：适合立即立项，但仍需领域专家把关</span><a href="https://arxiv.org/abs/2203.13014" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="共形场论" data-era="历史名题" data-source="review" data-verification="9.2" data-search="三维 ising cft 的混合相关器 bootstrap 共形场论 加入一个明确混合相关器，收紧单个 ope 系数或谱隙界，并给任意精度对偶可行证书。 wilson；现代数值 bootstrap 社区">
+      <div class="card-top"><div><span class="id">CB-01</span><span class="status">本轮新增</span></div><div class="score"><strong>9.4</strong><small>AI 子题 /10</small></div></div>
+      <h3>三维 Ising CFT 的混合相关器 bootstrap</h3>
+      <p class="meta">共形场论 · 1970s / 2012– · Wilson；现代数值 bootstrap 社区</p>
+      <div class="score-row"><span>完整问题 8.8</span><span>历史名题</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>加入一个明确混合相关器，收紧单个 OPE 系数或谱隙界，并给任意精度对偶可行证书。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>共形块生成、SDP 功能泛函搜索</p></section><section><h4>V · 独立核验器</h4><p>SDPB 高精度正性、区间算术与独立截断复算</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>9.2</strong><span>反例</span></div><h4>方向化可验证性</h4><p>对“三维 Ising CFT 的混合相关器 bootstrap”，最强验收方向是反例（9.2/10）：候选答案一旦给出，可用SDPB 高精度正性、区间算术与独立截断复算检查一个实例是否满足前提并违反结论。相对地，全称正证只有6.9/10，因为全称正证必须控制所有参数和对象；现有硬墙是截断极限与 CFT 存在/唯一性之间仍有逻辑缝隙；只声称严格排除界或条件化 island，不声称精确解 3D Ising。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：全称正证 6.9/10</small></section>
+      <section><h4>物理接口</h4><p>三维临界磁体与普适类</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>截断极限与 CFT 存在/唯一性之间仍有逻辑缝隙</p><p><b>边界：</b>只声称严格排除界或条件化 island，不声称精确解 3D Ising。</p></details>
+      <div class="card-foot"><span>高：适合立即立项，但仍需领域专家把关</span><a href="https://arxiv.org/abs/1805.04405" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="数值分析" data-era="现代方向" data-source="ICM" data-verification="9.2" data-search="半经典 schrödinger 的 asymptotic-preserving 算法 数值分析 在 1d/2d 明确势与短中时间内构造 uniform-in-ℏ 的可观测量误差 o(ℏ^p) 算法。 schrödinger；半经典数值社区">
+      <div class="card-top"><div><span class="id">NUM-01</span><span class="status">既有对话</span></div><div class="score"><strong>9.4</strong><small>AI 子题 /10</small></div></div>
+      <h3>半经典 Schrödinger 的 asymptotic-preserving 算法</h3>
+      <p class="meta">数值分析 · 1926– · Schrödinger；半经典数值社区</p>
+      <div class="score-row"><span>完整问题 8.2</span><span>现代方向</span><span><span>ICM</span></span></div>
+      <section><h4>可发表切片</h4><p>在 1D/2D 明确势与短中时间内构造 uniform-in-ℏ 的可观测量误差 O(ℏ^p) 算法。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>WKB/FGA 符号展开、自动微分和网格搜索</p></section><section><h4>V · 独立核验器</h4><p>区间稳定性、独立 split-step/FEM 与误差定理</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>9.2</strong><span>构造存在</span></div><h4>方向化可验证性</h4><p>对“半经典 Schrödinger 的 asymptotic-preserving 算法”，最强验收方向是构造存在（9.2/10）：候选答案一旦给出，可用区间稳定性、独立 split-step/FEM 与误差定理检查候选是否满足方程、约束及所需非退化条件。相对地，非存在证明只有6.8/10，因为非存在方向必须排除整个候选空间；现有硬墙是caustic 与 Ehrenfest 时间后误差失控；固定势、时间窗和观测量。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：非存在证明 6.8/10</small></section>
+      <section><h4>物理接口</h4><p>量子动力学和半经典极限</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>caustic 与 Ehrenfest 时间后误差失控</p><p><b>边界：</b>固定势、时间窗和观测量。</p></details>
+      <div class="card-foot"><span>高：适合立即立项，但仍需领域专家把关</span><a href="https://icmconjectures.com/2010-numcs-40" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="散射振幅" data-era="现代方向" data-source="review" data-verification="9.2" data-search="颜色—运动学对偶与 double-copy 的高圈构造 散射振幅 为固定五点三圈拓扑求 bcj 分子，并输出 jacobi 与 generalized unitarity 机器证书。 bern–carrasco–johansson">
+      <div class="card-top"><div><span class="id">AMP-03</span><span class="status">本轮新增</span></div><div class="score"><strong>9.2</strong><small>AI 子题 /10</small></div></div>
+      <h3>颜色—运动学对偶与 double-copy 的高圈构造</h3>
+      <p class="meta">散射振幅 · 2008– · Bern–Carrasco–Johansson</p>
+      <div class="score-row"><span>完整问题 7.5</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>为固定五点三圈拓扑求 BCJ 分子，并输出 Jacobi 与 generalized unitarity 机器证书。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>图枚举、线性/多项式约束求解</p></section><section><h4>V · 独立核验器</h4><p>全部切割、Jacobi 恒等式与独立数值点</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>9.2</strong><span>构造存在</span></div><h4>方向化可验证性</h4><p>对“颜色—运动学对偶与 double-copy 的高圈构造”，最强验收方向是构造存在（9.2/10）：候选答案一旦给出，可用全部切割、Jacobi 恒等式与独立数值点检查候选是否满足方程、约束及所需非退化条件。相对地，非存在证明只有6.8/10，因为非存在方向必须排除整个候选空间；现有硬墙是generalized gauge 自由度与非局域 ansatz；固定圈数和拓扑；不是全圈证明。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：非存在证明 6.8/10</small></section>
+      <section><h4>物理接口</h4><p>从 Yang–Mills 振幅构造引力振幅</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>generalized gauge 自由度与非局域 ansatz</p><p><b>边界：</b>固定圈数和拓扑；不是全圈证明。</p></details>
+      <div class="card-foot"><span>中高：搜索—证书闭环明确</span><a href="https://arxiv.org/abs/2203.13011" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="天体力学" data-era="历史名题" data-source="public-list" data-verification="9.2" data-search="现实行星模型中的 arnold 扩散 天体力学 在一个固定 sun–jupiter–asteroid 或空间三体模型中认证一条漂移轨道并给扩散时间界。 vladimir arnold">
+      <div class="card-top"><div><span class="id">DYN-01</span><span class="status">本轮新增</span></div><div class="score"><strong>9.2</strong><small>AI 子题 /10</small></div></div>
+      <h3>现实行星模型中的 Arnold 扩散</h3>
+      <p class="meta">天体力学 · 1964 · Vladimir Arnold</p>
+      <div class="score-row"><span>完整问题 7.8</span><span>历史名题</span><span><span>公开清单</span> <span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>在一个固定 Sun–Jupiter–asteroid 或空间三体模型中认证一条漂移轨道并给扩散时间界。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>正规形自动化、共振网搜索、validated numerics</p></section><section><h4>V · 独立核验器</h4><p>区间 shadowing、Melnikov/分裂界与独立积分</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>9.2</strong><span>越界反例</span></div><h4>方向化可验证性</h4><p>对“现实行星模型中的 Arnold 扩散”，最强验收方向是越界反例（9.2/10）：候选答案一旦给出，可用区间 shadowing、Melnikov/分裂界与独立积分检查实例是否满足前提且严格越过所声称的界。相对地，统一界正证只有7.3/10，因为统一界需要覆盖无限参数或尺度；现有硬墙是指数小的稳定/不稳定流形分裂；只证明指定参数和轨道通道。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：统一界正证 7.3/10</small></section>
+      <section><h4>物理接口</h4><p>小天体输运与长期轨道演化</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>指数小的稳定/不稳定流形分裂</p><p><b>边界：</b>只证明指定参数和轨道通道。</p></details>
+      <div class="card-foot"><span>中高：搜索—证书闭环明确</span><a href="https://www.crm.cat/wp-content/uploads/2022/06/bookQ-copy.pdf" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="格点统计物理" data-era="现代方向" data-source="review" data-verification="9.2" data-search="非理想周期晶格上的临界 ising/dimer 极限 格点统计物理 对一个弱非均匀或双周期晶格证明关联/高度场收敛 cft/gff 并给误差。 ising/dimer 社区">
+      <div class="card-top"><div><span class="id">ISDM-01</span><span class="status">本轮新增</span></div><div class="score"><strong>9.2</strong><small>AI 子题 /10</small></div></div>
+      <h3>非理想周期晶格上的临界 Ising/dimer 极限</h3>
+      <p class="meta">格点统计物理 · 1930s– · Ising/dimer 社区</p>
+      <div class="score-row"><span>完整问题 7.9</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>对一个弱非均匀或双周期晶格证明关联/高度场收敛 CFT/GFF 并给误差。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>Pfaffian、离散解析函数与数值猜测</p></section><section><h4>V · 独立核验器</h4><p>determinantal 恒等式、tightness 与离散 Green 函数</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>9.2</strong><span>越界反例</span></div><h4>方向化可验证性</h4><p>对“非理想周期晶格上的临界 Ising/dimer 极限”，最强验收方向是越界反例（9.2/10）：候选答案一旦给出，可用determinantal 恒等式、tightness 与离散 Green 函数检查实例是否满足前提且严格越过所声称的界。相对地，统一界正证只有7.3/10，因为统一界需要覆盖无限参数或尺度；现有硬墙是离开可积嵌入后离散复分析结构变弱；限定晶格扰动类。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：统一界正证 7.3/10</small></section>
+      <section><h4>物理接口</h4><p>二维临界统计物理和 CFT</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>离开可积嵌入后离散复分析结构变弱</p><p><b>边界：</b>限定晶格扰动类。</p></details>
+      <div class="card-foot"><span>中高：搜索—证书闭环明确</span><a href="https://arxiv.org/abs/2110.09372" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="格点规范论" data-era="历史名题" data-source="public-list" data-verification="9.2" data-search="4d yang–mills 存在性与质量隙的格点切片 格点规范论 在固定 su(2) wilson 格点与受控极限中证明反射正性、谱隙统一下界或连续极限的一个 os 公理。 yang–mills；clay 问题由 jaffe–witten 表述">
+      <div class="card-top"><div><span class="id">LAT-03</span><span class="status">本轮新增</span></div><div class="score"><strong>9.1</strong><small>AI 子题 /10</small></div></div>
+      <h3>4D Yang–Mills 存在性与质量隙的格点切片</h3>
+      <p class="meta">格点规范论 · 1954 / 2000 · Yang–Mills；Clay 问题由 Jaffe–Witten 表述</p>
+      <div class="score-row"><span>完整问题 6.4</span><span>历史名题</span><span><span>公开清单</span></span></div>
+      <section><h4>可发表切片</h4><p>在固定 SU(2) Wilson 格点与受控极限中证明反射正性、谱隙统一下界或连续极限的一个 OS 公理。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>强耦合簇展开、格点 bootstrap、传递矩阵谱搜索</p></section><section><h4>V · 独立核验器</h4><p>反射正性、区间谱界和不同体积/格距一致性</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>9.2</strong><span>构造存在</span></div><h4>方向化可验证性</h4><p>对“4D Yang–Mills 存在性与质量隙的格点切片”，最强验收方向是构造存在（9.2/10）：候选答案一旦给出，可用反射正性、区间谱界和不同体积/格距一致性检查候选是否满足方程、约束及所需非退化条件。相对地，非存在证明只有6.8/10，因为非存在方向必须排除整个候选空间；现有硬墙是真正难点是四维连续极限与非微扰构造；格点有限体积证书不等于 Clay 问题。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：非存在证明 6.8/10</small></section>
+      <section><h4>物理接口</h4><p>QCD 胶球质量与禁闭</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>真正难点是四维连续极限与非微扰构造</p><p><b>边界：</b>格点有限体积证书不等于 Clay 问题。</p></details>
+      <div class="card-foot"><span>中高：搜索—证书闭环明确</span><a href="https://www.claymath.org/millennium/yang-mills-the-maths-gap/" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="动力学PDE" data-era="历史名题" data-source="review" data-verification="9.2" data-search="相对论 vlasov–maxwell 小数据全局性 动力学pde 对周期或外部场中的一个小数据类证明全局存在、衰减与明确常数。 vlasov；maxwell">
+      <div class="card-top"><div><span class="id">PDE-04</span><span class="status">本轮新增</span></div><div class="score"><strong>9.1</strong><small>AI 子题 /10</small></div></div>
+      <h3>相对论 Vlasov–Maxwell 小数据全局性</h3>
+      <p class="meta">动力学PDE · 1930s– · Vlasov；Maxwell</p>
+      <div class="score-row"><span>完整问题 7.6</span><span>历史名题</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>对周期或外部场中的一个小数据类证明全局存在、衰减与明确常数。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>特征线/能量层级搜索、数值 bootstrap</p></section><section><h4>V · 独立核验器</h4><p>双线性估计、守恒量和 interval-PDE 残差</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>9.2</strong><span>构造存在</span></div><h4>方向化可验证性</h4><p>对“相对论 Vlasov–Maxwell 小数据全局性”，最强验收方向是构造存在（9.2/10）：候选答案一旦给出，可用双线性估计、守恒量和 interval-PDE 残差检查候选是否满足方程、约束及所需非退化条件。相对地，非存在证明只有6.8/10，因为非存在方向必须排除整个候选空间；现有硬墙是三维场—粒子反馈和速度支撑增长；大数据和真空边界仍不在结论内。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：非存在证明 6.8/10</small></section>
+      <section><h4>物理接口</h4><p>无碰撞等离子体与电磁波</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>三维场—粒子反馈和速度支撑增长</p><p><b>边界：</b>大数据和真空边界仍不在结论内。</p></details>
+      <div class="card-foot"><span>中高：搜索—证书闭环明确</span><a href="https://link.springer.com/article/10.12942/lrr-2005-2" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="量子基础" data-era="历史名题" data-source="review" data-verification="9.2" data-search="六维最大互无偏基组 量子基础 分类或排除一个明确的六维复 hadamard 参数族，给等价群轨道和不可扩张证书。 schwinger；ivanović">
+      <div class="card-top"><div><span class="id">QEC-05</span><span class="status">本轮新增</span></div><div class="score"><strong>9.1</strong><small>AI 子题 /10</small></div></div>
+      <h3>六维最大互无偏基组</h3>
+      <p class="meta">量子基础 · 1960 / 1981 · Schwinger；Ivanović</p>
+      <div class="score-row"><span>完整问题 8.8</span><span>历史名题</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>分类或排除一个明确的六维复 Hadamard 参数族，给等价群轨道和不可扩张证书。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>Hadamard 枚举、SAT/Gröbner 与 interval branch-and-bound</p></section><section><h4>V · 独立核验器</h4><p>精确正交/等模条件、轨道覆盖和独立求解器</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>9.2</strong><span>遗漏对象／反例</span></div><h4>方向化可验证性</h4><p>对“六维最大互无偏基组”，最强验收方向是遗漏对象／反例（9.2/10）：候选答案一旦给出，可用精确正交/等模条件、轨道覆盖和独立求解器检查新对象是否满足定义且不等价于已列对象。相对地，完备分类只有7.2/10，因为完备性要求排除清单之外的一切对象；现有硬墙是连续参数族和等价变换使全局排除困难；有限族排除不等于证明 d=6 最多三组。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：完备分类 7.2/10</small></section>
+      <section><h4>物理接口</h4><p>量子层析、纠错与互补性</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>连续参数族和等价变换使全局排除困难</p><p><b>边界：</b>有限族排除不等于证明 d=6 最多三组。</p></details>
+      <div class="card-foot"><span>中高：搜索—证书闭环明确</span><a href="https://journals.aps.org/prxquantum/abstract/10.1103/PRXQuantum.3.010101" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="拓扑量子场论" data-era="现代方向" data-source="review" data-verification="9.2" data-search="低秩 fusion ring 到 unitary category 的实现 拓扑量子场论 枚举秩≤6 的整数 fp 维 fusion rings，并对一个新环求全部 unitary pentagon/hexagon 解。 etingof–nikshych–ostrik 等">
+      <div class="card-top"><div><span class="id">FUS-01</span><span class="status">本轮新增</span></div><div class="score"><strong>9.0</strong><small>AI 子题 /10</small></div></div>
+      <h3>低秩 fusion ring 到 unitary category 的实现</h3>
+      <p class="meta">拓扑量子场论 · 2000s– · Etingof–Nikshych–Ostrik 等</p>
+      <div class="score-row"><span>完整问题 7.2</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>枚举秩≤6 的整数 FP 维 fusion rings，并对一个新环求全部 unitary pentagon/hexagon 解。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>有限融合规则、6j-symbol 与数值代数几何</p></section><section><h4>V · 独立核验器</h4><p>精确 coherence、unitarity、Galois 与等价消重</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>9.2</strong><span>遗漏对象／反例</span></div><h4>方向化可验证性</h4><p>对“低秩 fusion ring 到 unitary category 的实现”，最强验收方向是遗漏对象／反例（9.2/10）：候选答案一旦给出，可用精确 coherence、unitarity、Galois 与等价消重检查新对象是否满足定义且不等价于已列对象。相对地，完备分类只有7.2/10，因为完备性要求排除清单之外的一切对象；现有硬墙是categorifiability 与局域实现是不同层级；只保证抽象范畴，不声称存在稳定微观 Hamiltonian。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：完备分类 7.2/10</small></section>
+      <section><h4>物理接口</h4><p>任意子和拓扑序数据</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>categorifiability 与局域实现是不同层级</p><p><b>边界：</b>只保证抽象范畴，不声称存在稳定微观 Hamiltonian。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://arxiv.org/abs/math/0203060" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="格点统计物理" data-era="历史名题" data-source="review" data-verification="9.2" data-search="一般边界六顶点模型的非临界关联函数 格点统计物理 在非自由费米点计算一个有限尺寸边界关联函数并认证 determinant/多重积分公式。 lieb、sutherland、baxter 等">
+      <div class="card-top"><div><span class="id">LAT-02</span><span class="status">本轮新增</span></div><div class="score"><strong>9.0</strong><small>AI 子题 /10</small></div></div>
+      <h3>一般边界六顶点模型的非临界关联函数</h3>
+      <p class="meta">格点统计物理 · 1960s– · Lieb、Sutherland、Baxter 等</p>
+      <div class="score-row"><span>完整问题 7.9</span><span>历史名题</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>在非自由费米点计算一个有限尺寸边界关联函数并认证 determinant/多重积分公式。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>algebraic Bethe ansatz、行列式 ansatz</p></section><section><h4>V · 独立核验器</h4><p>精确对角化、Bethe 方程残差和渐近极限</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>9.2</strong><span>越界反例</span></div><h4>方向化可验证性</h4><p>对“一般边界六顶点模型的非临界关联函数”，最强验收方向是越界反例（9.2/10）：候选答案一旦给出，可用精确对角化、Bethe 方程残差和渐近极限检查实例是否满足前提且严格越过所声称的界。相对地，统一界正证只有7.3/10，因为统一界需要覆盖无限参数或尺度；现有硬墙是Bethe 根完备性与边界反射结构；固定边界 K 矩阵和参数区。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：统一界正证 7.3/10</small></section>
+      <section><h4>物理接口</h4><p>冰模型、铁电与可积量子链</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>Bethe 根完备性与边界反射结构</p><p><b>边界：</b>固定边界 K 矩阵和参数区。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://arxiv.org/abs/cond-mat/0304309" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="拓扑量子物态" data-era="现代方向" data-source="review" data-verification="9.2" data-search="任意子凝聚的显式格点边界实现 拓扑量子物态 对一个小秩 umtc 和 condensable algebra 构造 commuting-projector/peps 边界并核验全 excitation map。 bais–slingerland；kong 等">
+      <div class="card-top"><div><span class="id">ML-05</span><span class="status">本轮新增</span></div><div class="score"><strong>9.0</strong><small>AI 子题 /10</small></div></div>
+      <h3>任意子凝聚的显式格点边界实现</h3>
+      <p class="meta">拓扑量子物态 · 2010s– · Bais–Slingerland；Kong 等</p>
+      <div class="score-row"><span>完整问题 8.1</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>对一个小秩 UMTC 和 condensable algebra 构造 commuting-projector/PEPS 边界并核验全 excitation map。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>范畴数据、张量网络与局域项合成</p></section><section><h4>V · 独立核验器</h4><p>pentagon/half-braiding、谱隙小系统与边界扇区</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>9.2</strong><span>构造存在</span></div><h4>方向化可验证性</h4><p>对“任意子凝聚的显式格点边界实现”，最强验收方向是构造存在（9.2/10）：候选答案一旦给出，可用pentagon/half-braiding、谱隙小系统与边界扇区检查候选是否满足方程、约束及所需非退化条件。相对地，非存在证明只有6.8/10，因为非存在方向必须排除整个候选空间；现有硬墙是范畴一致性不自动给热力学谱隙；局域模型证书需写明尺寸外推条件。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：非存在证明 6.8/10</small></section>
+      <section><h4>物理接口</h4><p>拓扑相边界、任意子凝聚</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>范畴一致性不自动给热力学谱隙</p><p><b>边界：</b>局域模型证书需写明尺寸外推条件。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://arxiv.org/abs/1307.8244" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="量子信息" data-era="现代方向" data-source="review" data-verification="9.2" data-search="现实噪声下的鲁棒 self-testing 量子信息 对一个固定 bell 不等式和探测器噪声模型导出近最优鲁棒常数与有限统计证书。 mayers–yao 等">
+      <div class="card-top"><div><span class="id">QEC-03</span><span class="status">本轮新增</span></div><div class="score"><strong>9.0</strong><small>AI 子题 /10</small></div></div>
+      <h3>现实噪声下的鲁棒 self-testing</h3>
+      <p class="meta">量子信息 · 1990s– · Mayers–Yao 等</p>
+      <div class="score-row"><span>完整问题 8.4</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>对一个固定 Bell 不等式和探测器噪声模型导出近最优鲁棒常数与有限统计证书。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>NPA/SDP 对偶搜索、符号不等式</p></section><section><h4>V · 独立核验器</h4><p>解析 SOS 证书、独立 NPA 层级与模拟</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>9.2</strong><span>反例：更优构造</span></div><h4>方向化可验证性</h4><p>对“现实噪声下的鲁棒 self-testing”，最强验收方向是反例：更优构造（9.2/10）：候选答案一旦给出，可用解析 SOS 证书、独立 NPA 层级与模拟检查约束是否满足且目标值是否严格优于基准。相对地，全局最优正证只有7.0/10，因为全局正证必须覆盖整个竞争空间；现有硬墙是最优常数和对抗性有限样本；固定维数假设与设备无关假设必须分开。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：全局最优正证 7.0/10</small></section>
+      <section><h4>物理接口</h4><p>设备无关量子密钥分发</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>最优常数和对抗性有限样本</p><p><b>边界：</b>固定维数假设与设备无关假设必须分开。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://arxiv.org/abs/1702.01931" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="广义对称" data-era="现代方向" data-source="review" data-verification="9.2" data-search="融合 2-范畴与广义对称 anomaly 广义对称 对一个有限 2-group 在 3+1d 枚举 anomaly 类并构造匹配边界/反例。 高阶对称/symtft 社区">
+      <div class="card-top"><div><span class="id">TQFT-04</span><span class="status">本轮新增</span></div><div class="score"><strong>9.0</strong><small>AI 子题 /10</small></div></div>
+      <h3>融合 2-范畴与广义对称 anomaly</h3>
+      <p class="meta">广义对称 · 2010s– · 高阶对称/SymTFT 社区</p>
+      <div class="score-row"><span>完整问题 7.1</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>对一个有限 2-group 在 3+1D 枚举 anomaly 类并构造匹配边界/反例。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>群上同调、bordism 与 coherence 方程枚举</p></section><section><h4>V · 独立核验器</h4><p>coboundary、pentagonator 与 anomaly inflow 独立检查</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>9.2</strong><span>构造存在</span></div><h4>方向化可验证性</h4><p>对“融合 2-范畴与广义对称 anomaly”，最强验收方向是构造存在（9.2/10）：候选答案一旦给出，可用coboundary、pentagonator 与 anomaly inflow 独立检查检查候选是否满足方程、约束及所需非退化条件。相对地，非存在证明只有6.8/10，因为非存在方向必须排除整个候选空间；现有硬墙是高阶 coherence 和物理实现性之间有缺口；固定群、维数和可逆/非可逆层级。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：非存在证明 6.8/10</small></section>
+      <section><h4>物理接口</h4><p>高形式/非可逆对称、SPT 与拓扑序</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>高阶 coherence 和物理实现性之间有缺口</p><p><b>边界：</b>固定群、维数和可逆/非可逆层级。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://arxiv.org/abs/2205.05096" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="数学相对论" data-era="现代方向" data-source="review" data-verification="9.2" data-search="临界引力坍缩的严格指数 数学相对论 在 einstein–scalar 或 einstein–yang–mills 的一个对称类中认证自相似临界解和一个不稳定本征值。 matthew choptuik">
+      <div class="card-top"><div><span class="id">GR-05</span><span class="status">本轮新增</span></div><div class="score"><strong>8.9</strong><small>AI 子题 /10</small></div></div>
+      <h3>临界引力坍缩的严格指数</h3>
+      <p class="meta">数学相对论 · 1993 · Matthew Choptuik</p>
+      <div class="score-row"><span>完整问题 8.1</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>在 Einstein–scalar 或 Einstein–Yang–Mills 的一个对称类中认证自相似临界解和一个不稳定本征值。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>自适应数值、self-similar ansatz、谱求解</p></section><section><h4>V · 独立核验器</h4><p>区间本征值、独立离散化与守恒检查</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>9.2</strong><span>越界反例</span></div><h4>方向化可验证性</h4><p>对“临界引力坍缩的严格指数”，最强验收方向是越界反例（9.2/10）：候选答案一旦给出，可用区间本征值、独立离散化与守恒检查检查实例是否满足前提且严格越过所声称的界。相对地，统一界正证只有7.3/10，因为统一界需要覆盖无限参数或尺度；现有硬墙是奇异自相似解和精细调参；限定物质模型与对称类。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：统一界正证 7.3/10</small></section>
+      <section><h4>物理接口</h4><p>黑洞形成与临界现象</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>奇异自相似解和精细调参</p><p><b>边界：</b>限定物质模型与对称类。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://doi.org/10.1007/S10714-019-2559-5" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="数值分析" data-era="历史名题" data-source="review" data-verification="9.2" data-search="高频 helmholtz 的无污染认证算法 数值分析 对一个 hp-fem/预条件器区间证明 k-uniform quasi-optimality 并提供可运行误差证书。 helmholtz 方程数值分析社区">
+      <div class="card-top"><div><span class="id">PDE-06</span><span class="status">本轮新增</span></div><div class="score"><strong>8.9</strong><small>AI 子题 /10</small></div></div>
+      <h3>高频 Helmholtz 的无污染认证算法</h3>
+      <p class="meta">数值分析 · 1940s– · Helmholtz 方程数值分析社区</p>
+      <div class="score-row"><span>完整问题 8.7</span><span>历史名题</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>对一个 hp-FEM/预条件器区间证明 k-uniform quasi-optimality 并提供可运行误差证书。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>网格/阶数搜索、自动残差估计</p></section><section><h4>V · 独立核验器</h4><p>后验区间界与 manufactured solution 交叉</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>9.2</strong><span>算法构造</span></div><h4>方向化可验证性</h4><p>对“高频 Helmholtz 的无污染认证算法”，最强验收方向是算法构造（9.2/10）：候选答案一旦给出，可用后验区间界与 manufactured solution 交叉检查输出是否满足规格、误差和资源上界。相对地，统一性能正证只有7.4/10，因为统一性能需要控制所有输入与极限区间；现有硬墙是高频 pollution 与 trapping；固定几何、边界条件和 k—h 关系。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：统一性能正证 7.4/10</small></section>
+      <section><h4>物理接口</h4><p>声学、电磁和波传播</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>高频 pollution 与 trapping</p><p><b>边界：</b>固定几何、边界条件和 k—h 关系。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://arxiv.org/abs/1510.06479" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="量子多体" data-era="现代方向" data-source="review" data-verification="9.2" data-search="费米 hamiltonian 的 sign-free 基变换分类 量子多体 对一个明确相互作用图族分类全部局域基变换中可 stoquastic/sign-free 的实例。 量子 monte carlo 社区">
+      <div class="card-top"><div><span class="id">RIG-01</span><span class="status">本轮新增</span></div><div class="score"><strong>8.9</strong><small>AI 子题 /10</small></div></div>
+      <h3>费米 Hamiltonian 的 sign-free 基变换分类</h3>
+      <p class="meta">量子多体 · 1980s– · 量子 Monte Carlo 社区</p>
+      <div class="score-row"><span>完整问题 7.2</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>对一个明确相互作用图族分类全部局域基变换中可 stoquastic/sign-free 的实例。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>SAT/图搜索、局域酉参数化</p></section><section><h4>V · 独立核验器</h4><p>精确矩阵元符号、复杂性归约与独立枚举</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>9.2</strong><span>遗漏对象／反例</span></div><h4>方向化可验证性</h4><p>对“费米 Hamiltonian 的 sign-free 基变换分类”，最强验收方向是遗漏对象／反例（9.2/10）：候选答案一旦给出，可用精确矩阵元符号、复杂性归约与独立枚举检查新对象是否满足定义且不等价于已列对象。相对地，完备分类只有7.2/10，因为完备性要求排除清单之外的一切对象；现有硬墙是符号问题依赖基且一般判定困难；只覆盖指定图族和局域变换类。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：完备分类 7.2/10</small></section>
+      <section><h4>物理接口</h4><p>量子材料模拟和蒙特卡洛</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>符号问题依赖基且一般判定困难</p><p><b>边界：</b>只覆盖指定图族和局域变换类。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://arxiv.org/abs/1802.03408" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="量子信息" data-era="现代方向" data-source="review" data-verification="9.0" data-search="局域 hamiltonian 学习的可证稀疏切片 量子信息 对一个 k-local、有限温或短时可访问模型，给样本复杂度和稳定重构的端到端证书。 量子 hamiltonian learning 社区">
+      <div class="card-top"><div><span class="id">ML-01</span><span class="status">本轮新增</span></div><div class="score"><strong>9.3</strong><small>AI 子题 /10</small></div></div>
+      <h3>局域 Hamiltonian 学习的可证稀疏切片</h3>
+      <p class="meta">量子信息 · 2010s– · 量子 Hamiltonian learning 社区</p>
+      <div class="score-row"><span>完整问题 8.8</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>对一个 k-local、有限温或短时可访问模型，给样本复杂度和稳定重构的端到端证书。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>实验设计、稀疏回归、符号交换子生成</p></section><section><h4>V · 独立核验器</h4><p>保留数据盲测、区间置信集与独立量子模拟</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>9.0</strong><span>受限反例／证书</span></div><h4>方向化可验证性</h4><p>对“局域 Hamiltonian 学习的可证稀疏切片”，最强验收方向是受限反例／证书（9.0/10）：候选答案一旦给出，可用保留数据盲测、区间置信集与独立量子模拟检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有7.6/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是可辨识性、SPAM 误差与长程尾；固定可观测集合、噪声模型和局域度。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：一般定理正证 7.6/10</small></section>
+      <section><h4>物理接口</h4><p>量子设备表征和多体动力学</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>可辨识性、SPAM 误差与长程尾</p><p><b>边界：</b>固定可观测集合、噪声模型和局域度。</p></details>
+      <div class="card-foot"><span>高：适合立即立项，但仍需领域专家把关</span><a href="https://arxiv.org/abs/2004.07266" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="散射振幅" data-era="历史名题" data-source="review" data-verification="9.0" data-search="固定图的 landau 奇点与物理片区 散射振幅 枚举二至三圈给定图的 landau 方程分支，判定物理片区并给出解析延拓证书。 lev landau">
+      <div class="card-top"><div><span class="id">AMP-04</span><span class="status">本轮新增</span></div><div class="score"><strong>9.2</strong><small>AI 子题 /10</small></div></div>
+      <h3>固定图的 Landau 奇点与物理片区</h3>
+      <p class="meta">散射振幅 · 1959 · Lev Landau</p>
+      <div class="score-row"><span>完整问题 7.2</span><span>历史名题</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>枚举二至三圈给定图的 Landau 方程分支，判定物理片区并给出解析延拓证书。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>图生成、消元、数值代数几何</p></section><section><h4>V · 独立核验器</h4><p>精确 Landau 方程、微分方程与独立积分的支切检查</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>9.0</strong><span>受限反例／证书</span></div><h4>方向化可验证性</h4><p>对“固定图的 Landau 奇点与物理片区”，最强验收方向是受限反例／证书（9.0/10）：候选答案一旦给出，可用精确 Landau 方程、微分方程与独立积分的支切检查检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有7.6/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是高圈分支组合爆炸与重整化边界值；固定图和外部质量；不覆盖一般 S-matrix。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：一般定理正证 7.6/10</small></section>
+      <section><h4>物理接口</h4><p>S-matrix 解析性与阈值结构</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>高圈分支组合爆炸与重整化边界值</p><p><b>边界：</b>固定图和外部质量；不覆盖一般 S-matrix。</p></details>
+      <div class="card-foot"><span>中高：搜索—证书闭环明确</span><a href="https://arxiv.org/abs/2203.13014" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="正几何" data-era="现代方向" data-source="ICM" data-verification="9.0" data-search="有限 (n,k) amplituhedron 的 canonical form 正几何 固定小 (n,k,l) 枚举 triangulation，精确计算 canonical form 并核对 bcfw 表达式。 arkani-hamed–trnka 等">
+      <div class="card-top"><div><span class="id">ALG-02</span><span class="status">既有对话</span></div><div class="score"><strong>9.1</strong><small>AI 子题 /10</small></div></div>
+      <h3>有限 (n,k) amplituhedron 的 canonical form</h3>
+      <p class="meta">正几何 · 2013– · Arkani-Hamed–Trnka 等</p>
+      <div class="score-row"><span>完整问题 7.6</span><span>现代方向</span><span><span>ICM</span></span></div>
+      <section><h4>可发表切片</h4><p>固定小 (n,k,L) 枚举 triangulation，精确计算 canonical form 并核对 BCFW 表达式。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>正几何/cluster 枚举、符号 residue</p></section><section><h4>V · 独立核验器</h4><p>有理函数恒等式、正性和独立振幅软件</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>9.0</strong><span>受限反例／证书</span></div><h4>方向化可验证性</h4><p>对“有限 (n,k) amplituhedron 的 canonical form”，最强验收方向是受限反例／证书（9.0/10）：候选答案一旦给出，可用有理函数恒等式、正性和独立振幅软件检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有7.6/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是全 n,k 几何和物理积分等价远超有限搜索；只覆盖给定有限参数。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：一般定理正证 7.6/10</small></section>
+      <section><h4>物理接口</h4><p>平面 N=4 SYM 散射振幅</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>全 n,k 几何和物理积分等价远超有限搜索</p><p><b>边界：</b>只覆盖给定有限参数。</p></details>
+      <div class="card-foot"><span>中高：搜索—证书闭环明确</span><a href="https://icmconjectures.com/2022-alg-178" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="格点规范论" data-era="历史名题" data-source="review" data-verification="9.0" data-search="无异常手征规范理论的格点镜像费米子解耦 格点规范论 对一个指定无异常表示证明强 yukawa 区镜像费米子质量化且不破坏规范/手征对称。 eichten–preskill；ginsparg–wilson 社区">
+      <div class="card-top"><div><span class="id">CHIR-01</span><span class="status">本轮新增</span></div><div class="score"><strong>9.0</strong><small>AI 子题 /10</small></div></div>
+      <h3>无异常手征规范理论的格点镜像费米子解耦</h3>
+      <p class="meta">格点规范论 · 1980s– · Eichten–Preskill；Ginsparg–Wilson 社区</p>
+      <div class="score-row"><span>完整问题 7.0</span><span>历史名题</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>对一个指定无异常表示证明强 Yukawa 区镜像费米子质量化且不破坏规范/手征对称。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>强耦合相图、张量网络与 Monte Carlo</p></section><section><h4>V · 独立核验器</h4><p>Ward 恒等式、anomaly matching 与独立谱测量</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>9.0</strong><span>受限反例／证书</span></div><h4>方向化可验证性</h4><p>对“无异常手征规范理论的格点镜像费米子解耦”，最强验收方向是受限反例／证书（9.0/10）：候选答案一旦给出，可用Ward 恒等式、anomaly matching 与独立谱测量检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有7.6/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是镜像扇区可能形成无隙复合态；必须指定表示；已知失败 toy model 进入反例审计。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：一般定理正证 7.6/10</small></section>
+      <section><h4>物理接口</h4><p>标准模型的非微扰定义</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>镜像扇区可能形成无隙复合态</p><p><b>边界：</b>必须指定表示；已知失败 toy model 进入反例审计。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://arxiv.org/abs/1003.5896" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="动力系统" data-era="现代方向" data-source="review" data-verification="9.0" data-search="快慢混沌系统的扩散极限 动力系统 在显式 mixing 条件下对一个 3-dof 快慢流证明慢变量扩散极限并计算 green–kubo 系数。 khasminskii；确定性均匀化社区">
+      <div class="card-top"><div><span class="id">FAST-01</span><span class="status">本轮新增</span></div><div class="score"><strong>9.0</strong><small>AI 子题 /10</small></div></div>
+      <h3>快慢混沌系统的扩散极限</h3>
+      <p class="meta">动力系统 · 1970s– · Khasminskii；确定性均匀化社区</p>
+      <div class="score-row"><span>完整问题 8.0</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>在显式 mixing 条件下对一个 3-DOF 快慢流证明慢变量扩散极限并计算 Green–Kubo 系数。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>轨道积分、Poisson 方程与平均化 ansatz</p></section><section><h4>V · 独立核验器</h4><p>martingale CLT、残差区间界和独立模拟</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>9.0</strong><span>受限反例／证书</span></div><h4>方向化可验证性</h4><p>对“快慢混沌系统的扩散极限”，最强验收方向是受限反例／证书（9.0/10）：候选答案一旦给出，可用martingale CLT、残差区间界和独立模拟检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有7.6/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是非均匀混合及慢变量反馈；混合条件是定理假设而非待证普适事实。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：一般定理正证 7.6/10</small></section>
+      <section><h4>物理接口</h4><p>输运、分子动力学和非平衡统计</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>非均匀混合及慢变量反馈</p><p><b>边界：</b>混合条件是定理假设而非待证普适事实。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://arxiv.org/abs/1803.06137" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="流体与PDE" data-era="历史名题" data-source="review" data-verification="9.0" data-search="湍流异常耗散与结构函数的可证模型 流体与pde 在一个 shell model 或受限随机 navier–stokes 模型证明异常耗散/单个结构函数指数。 andrey kolmogorov">
+      <div class="card-top"><div><span class="id">PDE-02</span><span class="status">本轮新增</span></div><div class="score"><strong>9.0</strong><small>AI 子题 /10</small></div></div>
+      <h3>湍流异常耗散与结构函数的可证模型</h3>
+      <p class="meta">流体与PDE · 1941 · Andrey Kolmogorov</p>
+      <div class="score-row"><span>完整问题 7.0</span><span>历史名题</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>在一个 shell model 或受限随机 Navier–Stokes 模型证明异常耗散/单个结构函数指数。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>DNS、闭合 ansatz 与多重分形拟合</p></section><section><h4>V · 独立核验器</h4><p>能量通量恒等式、独立 ensemble 和概率界</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>9.0</strong><span>受限反例／证书</span></div><h4>方向化可验证性</h4><p>对“湍流异常耗散与结构函数的可证模型”，最强验收方向是受限反例／证书（9.0/10）：候选答案一旦给出，可用能量通量恒等式、独立 ensemble 和概率界检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有7.6/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是间歇性导致统计层级不闭合；真实三维流体的经验标度不能直接升级为定理。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：一般定理正证 7.6/10</small></section>
+      <section><h4>物理接口</h4><p>高 Reynolds 数湍流与输运</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>间歇性导致统计层级不闭合</p><p><b>边界：</b>真实三维流体的经验标度不能直接升级为定理。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://arxiv.org/abs/2101.03761" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="反问题" data-era="现代方向" data-source="review" data-verification="9.0" data-search="受限 lorentz 时空的波响应反问题 反问题 在静态/球对称或小扰动度规类中，从有限源—响应数据恢复一个度规分量并给稳定性。 kurylev–lassas–uhlmann 等">
+      <div class="card-top"><div><span class="id">INV-01</span><span class="status">本轮新增</span></div><div class="score"><strong>8.9</strong><small>AI 子题 /10</small></div></div>
+      <h3>受限 Lorentz 时空的波响应反问题</h3>
+      <p class="meta">反问题 · 2000s– · Kurylev–Lassas–Uhlmann 等</p>
+      <div class="score-row"><span>完整问题 7.5</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>在静态/球对称或小扰动度规类中，从有限源—响应数据恢复一个度规分量并给稳定性。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>有限元边界控制、参数反演</p></section><section><h4>V · 独立核验器</h4><p>Carleman/唯一性估计、合成数据与区间误差</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>9.0</strong><span>受限反例／证书</span></div><h4>方向化可验证性</h4><p>对“受限 Lorentz 时空的波响应反问题”，最强验收方向是受限反例／证书（9.0/10）：候选答案一旦给出，可用Carleman/唯一性估计、合成数据与区间误差检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有7.6/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是规范非唯一性与奇点传播；必须固定 gauge 和观测区域。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：一般定理正证 7.6/10</small></section>
+      <section><h4>物理接口</h4><p>引力波层析和时空几何恢复</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>规范非唯一性与奇点传播</p><p><b>边界：</b>必须固定 gauge 和观测区域。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://doi.org/10.1007/s00222-017-0780-y" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="表示论物理" data-era="现代方向" data-source="ICM" data-verification="8.9" data-search="有限秩 current algebra fusion product 表示论物理 固定 sl2/sl3 与有限权，证明 fusion product 参数无关性并给 pbw/hilbert 证书。 feigin–loktev 等">
+      <div class="card-top"><div><span class="id">ALG-01</span><span class="status">既有对话</span></div><div class="score"><strong>9.2</strong><small>AI 子题 /10</small></div></div>
+      <h3>有限秩 current algebra fusion product</h3>
+      <p class="meta">表示论物理 · 1990s– · Feigin–Loktev 等</p>
+      <div class="score-row"><span>完整问题 7.8</span><span>现代方向</span><span><span>ICM</span></span></div>
+      <section><h4>可发表切片</h4><p>固定 sl2/sl3 与有限权，证明 fusion product 参数无关性并给 PBW/Hilbert 证书。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>非交换 Gröbner、PBW 基与 fermionic 公式搜索</p></section><section><h4>V · 独立核验器</h4><p>精确 GB/PBW 计算和 Lean/Coq 小核验</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>8.9</strong><span>受限反例／证书</span></div><h4>方向化可验证性</h4><p>对“有限秩 current algebra fusion product”，最强验收方向是受限反例／证书（8.9/10）：候选答案一旦给出，可用精确 GB/PBW 计算和 Lean/Coq 小核验检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有7.6/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是非交换 Gröbner 随秩和权爆炸；仅有限 Lie 型和权区间。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：一般定理正证 7.6/10</small></section>
+      <section><h4>物理接口</h4><p>WZW/可积模型与费米谱</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>非交换 Gröbner 随秩和权爆炸</p><p><b>边界：</b>仅有限 Lie 型和权区间。</p></details>
+      <div class="card-foot"><span>中高：搜索—证书闭环明确</span><a href="https://icmconjectures.com/2014-mathphys-32" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="量子引力" data-era="现代方向" data-source="review" data-verification="8.9" data-search="矩阵量子力学的谱/热力学 bootstrap 量子引力 对一个有限 n 矩阵模型用矩正性和 ward 恒等式给基态能/热力学量严格上下界。 bfss；现代数值 bootstrap 社区">
+      <div class="card-top"><div><span class="id">ML-03</span><span class="status">本轮新增</span></div><div class="score"><strong>9.1</strong><small>AI 子题 /10</small></div></div>
+      <h3>矩阵量子力学的谱/热力学 bootstrap</h3>
+      <p class="meta">量子引力 · 1996– · BFSS；现代数值 bootstrap 社区</p>
+      <div class="score-row"><span>完整问题 8.1</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>对一个有限 N 矩阵模型用矩正性和 Ward 恒等式给基态能/热力学量严格上下界。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>矩方程生成、SDP 与高精度拟合</p></section><section><h4>V · 独立核验器</h4><p>对偶可行性、Monte Carlo 与已知大 N/微扰极限</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>8.9</strong><span>越界反例</span></div><h4>方向化可验证性</h4><p>对“矩阵量子力学的谱/热力学 bootstrap”，最强验收方向是越界反例（8.9/10）：候选答案一旦给出，可用对偶可行性、Monte Carlo 与已知大 N/微扰极限检查实例是否满足前提且严格越过所声称的界。相对地，统一界正证只有7.2/10，因为统一界需要覆盖无限参数或尺度；现有硬墙是大 N 与连续谱使界收敛困难；有限 N 严格界不等于非微扰定义 M 理论。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：统一界正证 7.2/10</small></section>
+      <section><h4>物理接口</h4><p>D-brane、M 理论和全息</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>大 N 与连续谱使界收敛困难</p><p><b>边界：</b>有限 N 严格界不等于非微扰定义 M 理论。</p></details>
+      <div class="card-foot"><span>中高：搜索—证书闭环明确</span><a href="https://arxiv.org/abs/2004.10212" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="枚举几何" data-era="历史名题" data-source="review" data-verification="8.9" data-search="有限 quiver/cy3 的 dt 壁穿越 枚举几何 对一个有限 quiver（含 potential）枚举稳定 chamber 并精确验证 ks/joyce–song 生成函数恒等式。 donaldson–thomas；kontsevich–soibelman">
+      <div class="card-top"><div><span class="id">ALG-03</span><span class="status">本轮新增</span></div><div class="score"><strong>9.0</strong><small>AI 子题 /10</small></div></div>
+      <h3>有限 quiver/CY3 的 DT 壁穿越</h3>
+      <p class="meta">枚举几何 · 1990s– · Donaldson–Thomas；Kontsevich–Soibelman</p>
+      <div class="score-row"><span>完整问题 7.0</span><span>历史名题</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>对一个有限 quiver（含 potential）枚举稳定 chamber 并精确验证 KS/Joyce–Song 生成函数恒等式。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>quiver mutation、chamber 与生成函数枚举</p></section><section><h4>V · 独立核验器</h4><p>Hall algebra/壁穿越乘积和精确系数</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>8.9</strong><span>反例／失效点</span></div><h4>方向化可验证性</h4><p>对“有限 quiver/CY3 的 DT 壁穿越”，最强验收方向是反例／失效点（8.9/10）：候选答案一旦给出，可用Hall algebra/壁穿越乘积和精确系数检查代入后是否满足前提并使等式或对应失效。相对地，恒等式正证只有7.9/10，因为正证仍需处理全部参数和退化分支；现有硬墙是一般 CY3 的非紧性和 orientation data；固定有限 quiver 与稳定条件。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：恒等式正证 7.9/10</small></section>
+      <section><h4>物理接口</h4><p>弦论 BPS 态与 D-brane 束缚态</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>一般 CY3 的非紧性和 orientation data</p><p><b>边界：</b>固定有限 quiver 与稳定条件。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://arxiv.org/abs/0811.2435" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="天体力学" data-era="历史名题" data-source="public-list" data-verification="8.9" data-search="太阳系长期稳定性的严格子系统界 天体力学 把 nekhoroshev/kam 的计算机辅助界推进到一个真实质量的四体子系统。 poincaré；kolmogorov–arnold–moser">
+      <div class="card-top"><div><span class="id">DYN-02</span><span class="status">本轮新增</span></div><div class="score"><strong>9.0</strong><small>AI 子题 /10</small></div></div>
+      <h3>太阳系长期稳定性的严格子系统界</h3>
+      <p class="meta">天体力学 · 1890s– · Poincaré；Kolmogorov–Arnold–Moser</p>
+      <div class="score-row"><span>完整问题 7.2</span><span>历史名题</span><span><span>公开清单</span> <span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>把 Nekhoroshev/KAM 的计算机辅助界推进到一个真实质量的四体子系统。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>高阶正规形、整数关系约化、区间计算</p></section><section><h4>V · 独立核验器</h4><p>小分母、twist 条件和区间余项</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>8.9</strong><span>越界反例</span></div><h4>方向化可验证性</h4><p>对“太阳系长期稳定性的严格子系统界”，最强验收方向是越界反例（8.9/10）：候选答案一旦给出，可用小分母、twist 条件和区间余项检查实例是否满足前提且严格越过所声称的界。相对地，统一界正证只有7.2/10，因为统一界需要覆盖无限参数或尺度；现有硬墙是维数、共振和巨大时间尺度；不是证明完整太阳系永远稳定。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：统一界正证 7.2/10</small></section>
+      <section><h4>物理接口</h4><p>行星系统的长期稳定与混沌</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>维数、共振和巨大时间尺度</p><p><b>边界：</b>不是证明完整太阳系永远稳定。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://www.crm.cat/wp-content/uploads/2022/06/bookQ-copy.pdf" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="量子多体" data-era="历史名题" data-source="review" data-verification="8.9" data-search="二维有隙量子系统的面积律子类 量子多体 对一个 commuting-projector 或弱纠缠二维子类证明面积律并构造可控 peps 近似。 bekenstein；量子信息/多体社区">
+      <div class="card-top"><div><span class="id">LAT-07</span><span class="status">本轮新增</span></div><div class="score"><strong>9.0</strong><small>AI 子题 /10</small></div></div>
+      <h3>二维有隙量子系统的面积律子类</h3>
+      <p class="meta">量子多体 · 1990s– · Bekenstein；量子信息/多体社区</p>
+      <div class="score-row"><span>完整问题 7.0</span><span>历史名题</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>对一个 commuting-projector 或弱纠缠二维子类证明面积律并构造可控 PEPS 近似。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>准绝热延拓、张量网络与局域分解搜索</p></section><section><h4>V · 独立核验器</h4><p>Lieb–Robinson、熵不等式和精确 contraction 小例</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>8.9</strong><span>构造存在</span></div><h4>方向化可验证性</h4><p>对“二维有隙量子系统的面积律子类”，最强验收方向是构造存在（8.9/10）：候选答案一旦给出，可用Lieb–Robinson、熵不等式和精确 contraction 小例检查候选是否满足方程、约束及所需非退化条件。相对地，非存在证明只有6.5/10，因为非存在方向必须排除整个候选空间；现有硬墙是一般二维有隙系统尚缺一维式结构定理；一维面积律已解决；本条只保留明确二维子类。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：非存在证明 6.5/10</small></section>
+      <section><h4>物理接口</h4><p>基态可模拟性和拓扑序</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>一般二维有隙系统尚缺一维式结构定理</p><p><b>边界：</b>一维面积律已解决；本条只保留明确二维子类。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://arxiv.org/abs/1306.1501" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="开放量子系统" data-era="历史名题" data-source="review" data-verification="8.9" data-search="有限维 lindblad 生成元的最优谱隙界 开放量子系统 对一个局域耗散链族自动发现并证明 mixing time/谱隙的紧界。 gorini–kossakowski–sudarshan–lindblad">
+      <div class="card-top"><div><span class="id">OPQ-01</span><span class="status">本轮新增</span></div><div class="score"><strong>8.9</strong><small>AI 子题 /10</small></div></div>
+      <h3>有限维 Lindblad 生成元的最优谱隙界</h3>
+      <p class="meta">开放量子系统 · 1970s– · Gorini–Kossakowski–Sudarshan–Lindblad</p>
+      <div class="score-row"><span>完整问题 8.2</span><span>历史名题</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>对一个局域耗散链族自动发现并证明 mixing time/谱隙的紧界。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>Lyapunov/对数 Sobolev ansatz、SDP</p></section><section><h4>V · 独立核验器</h4><p>生成元谱、complete positivity 和区间线性代数</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>8.9</strong><span>反例：更优构造</span></div><h4>方向化可验证性</h4><p>对“有限维 Lindblad 生成元的最优谱隙界”，最强验收方向是反例：更优构造（8.9/10）：候选答案一旦给出，可用生成元谱、complete positivity 和区间线性代数检查约束是否满足且目标值是否严格优于基准。相对地，全局最优正证只有6.7/10，因为全局正证必须覆盖整个竞争空间；现有硬墙是非正规谱与尺寸依赖常数；固定维数、局域项和边界。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：全局最优正证 6.7/10</small></section>
+      <section><h4>物理接口</h4><p>耗散态制备和开放系统热化</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>非正规谱与尺寸依赖常数</p><p><b>边界：</b>固定维数、局域项和边界。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://arxiv.org/abs/1210.7127" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="概率统计力学" data-era="现代方向" data-source="review" data-verification="8.5" data-search="wasep 到 kpz 的定量极限 概率统计力学 对一个新初值/弱非对称率证明 1:2:3 缩放到 kpz，并给离散误差界。 gärtner；bertini–giacomin 等">
+      <div class="card-top"><div><span class="id">PROB-02</span><span class="status">本轮新增</span></div><div class="score"><strong>9.3</strong><small>AI 子题 /10</small></div></div>
+      <h3>WASEP 到 KPZ 的定量极限</h3>
+      <p class="meta">概率统计力学 · 1980s– · Gärtner；Bertini–Giacomin 等</p>
+      <div class="score-row"><span>完整问题 8.6</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>对一个新初值/弱非对称率证明 1:2:3 缩放到 KPZ，并给离散误差界。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>生成元与鞅分解自动化、正则结构模板</p></section><section><h4>V · 独立核验器</h4><p>tightness、martingale problem 与独立模拟</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>8.5</strong><span>越界反例</span></div><h4>方向化可验证性</h4><p>对“WASEP 到 KPZ 的定量极限”，最强验收方向是越界反例（8.5/10）：候选答案一旦给出，可用tightness、martingale problem 与独立模拟检查实例是否满足前提且严格越过所声称的界。相对地，统一界正证只有6.8/10，因为统一界需要覆盖无限参数或尺度；现有硬墙是非线性噪声极限与初值奇异性；固定一维格点过程和初值类。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：统一界正证 6.8/10</small></section>
+      <section><h4>物理接口</h4><p>非平衡输运和随机界面</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>非线性噪声极限与初值奇异性</p><p><b>边界：</b>固定一维格点过程和初值类。</p></details>
+      <div class="card-foot"><span>高：适合立即立项，但仍需领域专家把关</span><a href="https://arxiv.org/abs/1106.1591" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="量子控制" data-era="现代方向" data-source="review" data-verification="8.5" data-search="有限维开放量子系统的鲁棒反馈综合 量子控制 固定 lindblad/kraus 系统和目标子空间，综合反馈律并证明全局及参数鲁棒收敛。 wiseman–milburn；量子控制社区">
+      <div class="card-top"><div><span class="id">CTRL-01</span><span class="status">本轮新增</span></div><div class="score"><strong>9.2</strong><small>AI 子题 /10</small></div></div>
+      <h3>有限维开放量子系统的鲁棒反馈综合</h3>
+      <p class="meta">量子控制 · 2000s– · Wiseman–Milburn；量子控制社区</p>
+      <div class="score-row"><span>完整问题 8.0</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>固定 Lindblad/Kraus 系统和目标子空间，综合反馈律并证明全局及参数鲁棒收敛。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>控制律搜索、Lyapunov/SOS/SDP</p></section><section><h4>V · 独立核验器</h4><p>Lyapunov 不等式、谱隙和独立主方程模拟</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>8.5</strong><span>算法构造</span></div><h4>方向化可验证性</h4><p>对“有限维开放量子系统的鲁棒反馈综合”，最强验收方向是算法构造（8.5/10）：候选答案一旦给出，可用Lyapunov 不等式、谱隙和独立主方程模拟检查输出是否满足规格、误差和资源上界。相对地，统一性能正证只有7.0/10，因为统一性能需要控制所有输入与极限区间；现有硬墙是测量反作用与部分观测；限定有限维、噪声区间和可用控制通道。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：统一性能正证 7.0/10</small></section>
+      <section><h4>物理接口</h4><p>量子态制备、误差抑制和实验控制</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>测量反作用与部分观测</p><p><b>边界：</b>限定有限维、噪声区间和可用控制通道。</p></details>
+      <div class="card-foot"><span>中高：搜索—证书闭环明确</span><a href="https://arxiv.org/abs/1210.7127" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="拓扑量子物态" data-era="历史名题" data-source="review" data-verification="8.5" data-search="给定模数据的拓扑序/整格实现 拓扑量子物态 给定小秩 k 矩阵或模数据，搜索 umtc/整格实现并检查边界 anomaly 与局域模型候选。 laughlin；chern–simons/fqh 社区">
+      <div class="card-top"><div><span class="id">FQH-01</span><span class="status">本轮新增</span></div><div class="score"><strong>9.2</strong><small>AI 子题 /10</small></div></div>
+      <h3>给定模数据的拓扑序/整格实现</h3>
+      <p class="meta">拓扑量子物态 · 1980s– · Laughlin；Chern–Simons/FQH 社区</p>
+      <div class="score-row"><span>完整问题 7.8</span><span>历史名题</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>给定小秩 K 矩阵或模数据，搜索 UMTC/整格实现并检查边界 anomaly 与局域模型候选。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>整数格、模表示、SAT/ILP</p></section><section><h4>V · 独立核验器</h4><p>S,T、Verlinde、unitarity 与独立边界条件</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>8.5</strong><span>构造存在</span></div><h4>方向化可验证性</h4><p>对“给定模数据的拓扑序/整格实现”，最强验收方向是构造存在（8.5/10）：候选答案一旦给出，可用S,T、Verlinde、unitarity 与独立边界条件检查候选是否满足方程、约束及所需非退化条件。相对地，非存在证明只有6.1/10，因为非存在方向必须排除整个候选空间；现有硬墙是拓扑数据一致不代表热力学稳定局域相；严格区分范畴实现与 Hamiltonian 实现。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：非存在证明 6.1/10</small></section>
+      <section><h4>物理接口</h4><p>分数量子霍尔、任意子和拓扑量子计算</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>拓扑数据一致不代表热力学稳定局域相</p><p><b>边界：</b>严格区分范畴实现与 Hamiltonian 实现。</p></details>
+      <div class="card-foot"><span>中高：搜索—证书闭环明确</span><a href="https://arxiv.org/abs/1212.5121" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="格点统计物理" data-era="历史名题" data-source="review" data-verification="8.5" data-search="三维最近邻 ising 模型的受限解析定理 格点统计物理 对各向异性切片或高温区证明一个新的 susceptibility/自然边界/系数渐近定理。 lenz–ising；onsager 后续问题">
+      <div class="card-top"><div><span class="id">LAT-01</span><span class="status">本轮新增</span></div><div class="score"><strong>9.2</strong><small>AI 子题 /10</small></div></div>
+      <h3>三维最近邻 Ising 模型的受限解析定理</h3>
+      <p class="meta">格点统计物理 · 1920s– · Lenz–Ising；Onsager 后续问题</p>
+      <div class="score-row"><span>完整问题 6.9</span><span>历史名题</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>对各向异性切片或高温区证明一个新的 susceptibility/自然边界/系数渐近定理。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>高阶级数、transfer matrix、符号恒等式搜索</p></section><section><h4>V · 独立核验器</h4><p>整数/有理系数复算、cluster expansion 与独立 Monte Carlo</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>8.5</strong><span>越界反例</span></div><h4>方向化可验证性</h4><p>对“三维最近邻 Ising 模型的受限解析定理”，最强验收方向是越界反例（8.5/10）：候选答案一旦给出，可用整数/有理系数复算、cluster expansion 与独立 Monte Carlo检查实例是否满足前提且严格越过所声称的界。相对地，统一界正证只有6.8/10，因为统一界需要覆盖无限参数或尺度；现有硬墙是三维模型无二维式可积结构；不是宣称给出 3D Ising 全闭式解。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：统一界正证 6.8/10</small></section>
+      <section><h4>物理接口</h4><p>三维磁性相变和普适性</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>三维模型无二维式可积结构</p><p><b>边界：</b>不是宣称给出 3D Ising 全闭式解。</p></details>
+      <div class="card-foot"><span>中高：搜索—证书闭环明确</span><a href="https://arxiv.org/abs/2205.12357" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="流体与PDE" data-era="历史名题" data-source="public-list" data-verification="8.5" data-search="三维 navier–stokes 正则性的计算机辅助子类 流体与pde 对一个轴对称/离散自相似/大数据参数族，用区间 pde 排除有限时 blow-up 或闭合正则性判据。 leray；clay 问题由 fefferman 表述">
+      <div class="card-top"><div><span class="id">PDE-01</span><span class="status">本轮新增</span></div><div class="score"><strong>9.2</strong><small>AI 子题 /10</small></div></div>
+      <h3>三维 Navier–Stokes 正则性的计算机辅助子类</h3>
+      <p class="meta">流体与PDE · 1934 / 2000 · Leray；Clay 问题由 Fefferman 表述</p>
+      <div class="score-row"><span>完整问题 6.5</span><span>历史名题</span><span><span>公开清单</span></span></div>
+      <section><h4>可发表切片</h4><p>对一个轴对称/离散自相似/大数据参数族，用区间 PDE 排除有限时 blow-up 或闭合正则性判据。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>能量泛函搜索、interval CFD、bootstrap 猜测</p></section><section><h4>V · 独立核验器</h4><p>严格残差、后验误差估计与独立网格</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>8.5</strong><span>受限反例／证书</span></div><h4>方向化可验证性</h4><p>对“三维 Navier–Stokes 正则性的计算机辅助子类”，最强验收方向是受限反例／证书（8.5/10）：候选答案一旦给出，可用严格残差、后验误差估计与独立网格检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有7.3/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是临界范数超临界且局部数值不能覆盖全函数空间；只证明指定子类；不能称解决 Clay 问题。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：一般定理正证 7.3/10</small></section>
+      <section><h4>物理接口</h4><p>湍流、黏性流体和涡动力学</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>临界范数超临界且局部数值不能覆盖全函数空间</p><p><b>边界：</b>只证明指定子类；不能称解决 Clay 问题。</p></details>
+      <div class="card-foot"><span>中高：搜索—证书闭环明确</span><a href="https://www.claymath.org/millennium/Navier-Stokes-Equation/" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="数学相对论" data-era="历史名题" data-source="review" data-verification="8.5" data-search="极端 kerr 的非线性稳定性 数学相对论 对近极端外部区域的一个扰动类建立统一衰减与非线性闭合估计。 roy kerr；现代稳定性计划">
+      <div class="card-top"><div><span class="id">GR-02</span><span class="status">本轮新增</span></div><div class="score"><strong>9.1</strong><small>AI 子题 /10</small></div></div>
+      <h3>极端 Kerr 的非线性稳定性</h3>
+      <p class="meta">数学相对论 · 1963– · Roy Kerr；现代稳定性计划</p>
+      <div class="score-row"><span>完整问题 8.0</span><span>历史名题</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>对近极端外部区域的一个扰动类建立统一衰减与非线性闭合估计。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>vector-field multiplier 搜索、张量恒等式自动化</p></section><section><h4>V · 独立核验器</h4><p>独立能量估计、规范约束与模式数值</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>8.5</strong><span>受限反例／证书</span></div><h4>方向化可验证性</h4><p>对“极端 Kerr 的非线性稳定性”，最强验收方向是受限反例／证书（8.5/10）：候选答案一旦给出，可用独立能量估计、规范约束与模式数值检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有7.3/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是退化视界和 Aretakis 型不稳定；一般亚极端 Kerr 外部已有重大进展；只保留极端/参数缺口。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：一般定理正证 7.3/10</small></section>
+      <section><h4>物理接口</h4><p>黑洞动力学与引力波</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>退化视界和 Aretakis 型不稳定</p><p><b>边界：</b>一般亚极端 Kerr 外部已有重大进展；只保留极端/参数缺口。</p></details>
+      <div class="card-foot"><span>中高：搜索—证书闭环明确</span><a href="https://doi.org/10.1007/S10714-019-2559-5" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="量子引力" data-era="历史名题" data-source="review" data-verification="8.5" data-search="黑洞信息的有限模型 hilbert 空间因子化 量子引力 在具体 jt+物质或有限 n holographic toy model 构造内部算符、因子化 hilbert 空间与可验证解码协议。 hawking；page；全息社区">
+      <div class="card-top"><div><span class="id">HOLO-01</span><span class="status">本轮新增</span></div><div class="score"><strong>9.1</strong><small>AI 子题 /10</small></div></div>
+      <h3>黑洞信息的有限模型 Hilbert 空间因子化</h3>
+      <p class="meta">量子引力 · 1976– · Hawking；Page；全息社区</p>
+      <div class="score-row"><span>完整问题 7.0</span><span>历史名题</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>在具体 JT+物质或有限 N holographic toy model 构造内部算符、因子化 Hilbert 空间与可验证解码协议。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>replica/矩阵积分、张量网络和量子线路</p></section><section><h4>V · 独立核验器</h4><p>unitarity、相对熵、代数因子化与独立谱计算</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>8.5</strong><span>构造存在</span></div><h4>方向化可验证性</h4><p>对“黑洞信息的有限模型 Hilbert 空间因子化”，最强验收方向是构造存在（8.5/10）：候选答案一旦给出，可用unitarity、相对熵、代数因子化与独立谱计算检查候选是否满足方程、约束及所需非退化条件。相对地，非存在证明只有6.1/10，因为非存在方向必须排除整个候选空间；现有硬墙是引力约束使区域因子化非平凡；Page 曲线已有重大进展；toy model 不等于真实渐近平坦黑洞。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：非存在证明 6.1/10</small></section>
+      <section><h4>物理接口</h4><p>黑洞蒸发和全息量子引力</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>引力约束使区域因子化非平凡</p><p><b>边界：</b>Page 曲线已有重大进展；toy model 不等于真实渐近平坦黑洞。</p></details>
+      <div class="card-foot"><span>中高：搜索—证书闭环明确</span><a href="https://adscft.org/black-hole-information/frontiers/open-problems/" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="随机过程" data-era="历史名题" data-source="review" data-verification="8.5" data-search="2+1 维 kpz 指数与极限律 随机过程 对一个指定离散增长模型给出可重复有限尺寸分析，并证明一个非平凡指数界或弱非线性极限。 kardar–parisi–zhang">
+      <div class="card-top"><div><span class="id">KPZ-02</span><span class="status">本轮新增</span></div><div class="score"><strong>9.1</strong><small>AI 子题 /10</small></div></div>
+      <h3>2+1 维 KPZ 指数与极限律</h3>
+      <p class="meta">随机过程 · 1986 · Kardar–Parisi–Zhang</p>
+      <div class="score-row"><span>完整问题 7.3</span><span>历史名题</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>对一个指定离散增长模型给出可重复有限尺寸分析，并证明一个非平凡指数界或弱非线性极限。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>GPU Monte Carlo、正则化群候选、统计推断</p></section><section><h4>V · 独立核验器</h4><p>独立随机种子、有限尺寸误差审计与解析上下界</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>8.5</strong><span>越界反例</span></div><h4>方向化可验证性</h4><p>对“2+1 维 KPZ 指数与极限律”，最强验收方向是越界反例（8.5/10）：候选答案一旦给出，可用独立随机种子、有限尺寸误差审计与解析上下界检查实例是否满足前提且严格越过所声称的界。相对地，统一界正证只有6.8/10，因为统一界需要覆盖无限参数或尺度；现有硬墙是强修正标度且没有精确可积解；数值拟合本身不算解决；必须附严格界或误差证书。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：统一界正证 6.8/10</small></section>
+      <section><h4>物理接口</h4><p>二维表面生长和非平衡统计物理</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>强修正标度且没有精确可积解</p><p><b>边界：</b>数值拟合本身不算解决；必须附严格界或误差证书。</p></details>
+      <div class="card-foot"><span>中高：搜索—证书闭环明确</span><a href="https://arxiv.org/abs/1809.00803" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="量子多体" data-era="现代方向" data-source="review" data-verification="8.5" data-search="多体局域化的强无序稳定区 量子多体 对一个指定 1d 局域 hamiltonian 和无序分布证明 liom 指数局域及小扰动稳定。 basko–aleiner–altshuler 等">
+      <div class="card-top"><div><span class="id">LAT-06</span><span class="status">本轮新增</span></div><div class="score"><strong>9.1</strong><small>AI 子题 /10</small></div></div>
+      <h3>多体局域化的强无序稳定区</h3>
+      <p class="meta">量子多体 · 2005– · Basko–Aleiner–Altshuler 等</p>
+      <div class="score-row"><span>完整问题 7.5</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>对一个指定 1D 局域 Hamiltonian 和无序分布证明 LIOM 指数局域及小扰动稳定。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>ED/张量网络、LIOM ansatz 与图展开</p></section><section><h4>V · 独立核验器</h4><p>多尺度分析、纠缠/输运界和独立动力学</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>8.5</strong><span>受限反例／证书</span></div><h4>方向化可验证性</h4><p>对“多体局域化的强无序稳定区”，最强验收方向是受限反例／证书（8.5/10）：候选答案一旦给出，可用多尺度分析、纠缠/输运界和独立动力学检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有7.3/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是热雪崩和有限尺寸漂移；不外推到二维或一般分布。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：一般定理正证 7.3/10</small></section>
+      <section><h4>物理接口</h4><p>孤立量子系统非热化与量子记忆</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>热雪崩和有限尺寸漂移</p><p><b>边界：</b>不外推到二维或一般分布。</p></details>
+      <div class="card-foot"><span>中高：搜索—证书闭环明确</span><a href="https://arxiv.org/abs/2403.07111" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="概率统计力学" data-era="现代方向" data-source="ICM" data-verification="8.5" data-search="随机正则图 hard-core 模型的阈值与混合 概率统计力学 固定度数 δ，严格定位 uniqueness/cavity 阈值或证明一个采样算法的快混合区间。 dobrushin；bethe/cavity 社区">
+      <div class="card-top"><div><span class="id">PROB-01</span><span class="status">既有对话</span></div><div class="score"><strong>9.1</strong><small>AI 子题 /10</small></div></div>
+      <h3>随机正则图 hard-core 模型的阈值与混合</h3>
+      <p class="meta">概率统计力学 · 1980s– · Dobrushin；Bethe/cavity 社区</p>
+      <div class="score-row"><span>完整问题 7.8</span><span>现代方向</span><span><span>ICM</span></span></div>
+      <section><h4>可发表切片</h4><p>固定度数 Δ，严格定位 uniqueness/cavity 阈值或证明一个采样算法的快混合区间。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>树递推、belief propagation、小图反例搜索</p></section><section><h4>V · 独立核验器</h4><p>收缩/聚合函数、概率界与独立枚举</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>8.5</strong><span>越界反例</span></div><h4>方向化可验证性</h4><p>对“随机正则图 hard-core 模型的阈值与混合”，最强验收方向是越界反例（8.5/10）：候选答案一旦给出，可用收缩/聚合函数、概率界与独立枚举检查实例是否满足前提且严格越过所声称的界。相对地，统一界正证只有6.8/10，因为统一界需要覆盖无限参数或尺度；现有硬墙是树上递推不自动推广随机图，长环与 RSB 是障碍；限定 Δ、活动度和图 ensemble。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：统一界正证 6.8/10</small></section>
+      <section><h4>物理接口</h4><p>格气、独立集和相变</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>树上递推不自动推广随机图，长环与 RSB 是障碍</p><p><b>边界：</b>限定 Δ、活动度和图 ensemble。</p></details>
+      <div class="card-foot"><span>中高：搜索—证书闭环明确</span><a href="https://icmconjectures.com/2002-mathphys-121" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="随机矩阵" data-era="现代方向" data-source="review" data-verification="8.5" data-search="结构化随机矩阵的极限矩 随机矩阵 固定 link function，枚举配对词并证明极限矩序列、唯一谱律与一个局部修正。 toeplitz/hankel 随机谱社区">
+      <div class="card-top"><div><span class="id">RSP-01</span><span class="status">本轮新增</span></div><div class="score"><strong>9.1</strong><small>AI 子题 /10</small></div></div>
+      <h3>结构化随机矩阵的极限矩</h3>
+      <p class="meta">随机矩阵 · 1970s– · Toeplitz/Hankel 随机谱社区</p>
+      <div class="score-row"><span>完整问题 8.0</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>固定 link function，枚举配对词并证明极限矩序列、唯一谱律与一个局部修正。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>配对词/图枚举、符号矩生成</p></section><section><h4>V · 独立核验器</h4><p>矩法、Carleman、正定性和独立谱模拟</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>8.5</strong><span>反例</span></div><h4>方向化可验证性</h4><p>对“结构化随机矩阵的极限矩”，最强验收方向是反例（8.5/10）：候选答案一旦给出，可用矩法、Carleman、正定性和独立谱模拟检查一个实例是否满足前提并违反结论。相对地，全称正证只有6.2/10，因为全称正证必须控制所有参数和对象；现有硬墙是不同 link function 的依赖结构差异大；固定 ensemble；不宣称全部 patterned matrices。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：全称正证 6.2/10</small></section>
+      <section><h4>物理接口</h4><p>随机 Hamiltonian 与无序谱</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>不同 link function 的依赖结构差异大</p><p><b>边界：</b>固定 ensemble；不宣称全部 patterned matrices。</p></details>
+      <div class="card-foot"><span>中高：搜索—证书闭环明确</span><a href="https://www.isical.ac.in/~statmath/report/54978-14.pdf" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="可积系统" data-era="现代方向" data-source="review" data-verification="8.5" data-search="高秩 qkz 方程的联络矩阵与单值化 可积系统 对固定 u_q(sl3) 表示与边界数据计算联络矩阵，严格验证 braid/monodromy 关系。 frenkel–reshetikhin 等">
+      <div class="card-top"><div><span class="id">YB-02</span><span class="status">本轮新增</span></div><div class="score"><strong>9.1</strong><small>AI 子题 /10</small></div></div>
+      <h3>高秩 qKZ 方程的联络矩阵与单值化</h3>
+      <p class="meta">可积系统 · 1990s · Frenkel–Reshetikhin 等</p>
+      <div class="score-row"><span>完整问题 8.1</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>对固定 U_q(sl3) 表示与边界数据计算联络矩阵，严格验证 braid/monodromy 关系。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>精确递推、特殊函数基底搜索、数值解析延拓</p></section><section><h4>V · 独立核验器</h4><p>符号 braid 关系与高精度独立 monodromy 复算</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>8.5</strong><span>越界反例</span></div><h4>方向化可验证性</h4><p>对“高秩 qKZ 方程的联络矩阵与单值化”，最强验收方向是越界反例（8.5/10）：候选答案一旦给出，可用符号 braid 关系与高精度独立 monodromy 复算检查实例是否满足前提且严格越过所声称的界。相对地，统一界正证只有6.8/10，因为统一界需要覆盖无限参数或尺度；现有硬墙是奇异超平面、Stokes 数据与表示退化；限于一个表示族和明确解析域。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：统一界正证 6.8/10</small></section>
+      <section><h4>物理接口</h4><p>可积链关联函数与量子群</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>奇异超平面、Stokes 数据与表示退化</p><p><b>边界：</b>限于一个表示族和明确解析域。</p></details>
+      <div class="card-foot"><span>中高：搜索—证书闭环明确</span><a href="https://arxiv.org/abs/q-alg/9602024" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="共形场论" data-era="现代方向" data-source="review" data-verification="8.5" data-search="边界与界面共形 bootstrap 共形场论 对一个指定 3d bulk/2d defect 系统建立 crossing 方程并得到可复核的谱界。 cardy 等">
+      <div class="card-top"><div><span class="id">CB-02</span><span class="status">本轮新增</span></div><div class="score"><strong>9.0</strong><small>AI 子题 /10</small></div></div>
+      <h3>边界与界面共形 bootstrap</h3>
+      <p class="meta">共形场论 · 1980s– · Cardy 等</p>
+      <div class="score-row"><span>完整问题 8.2</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>对一个指定 3D bulk/2D defect 系统建立 crossing 方程并得到可复核的谱界。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>缺陷共形块、功能泛函与 SDP</p></section><section><h4>V · 独立核验器</h4><p>反射正性、交叉残差、独立 SDPB</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>8.5</strong><span>越界反例</span></div><h4>方向化可验证性</h4><p>对“边界与界面共形 bootstrap”，最强验收方向是越界反例（8.5/10）：候选答案一旦给出，可用反射正性、交叉残差、独立 SDPB检查实例是否满足前提且严格越过所声称的界。相对地，统一界正证只有6.8/10，因为统一界需要覆盖无限参数或尺度；现有硬墙是bulk—boundary 谱强耦合；固定幺正性、对称群和算符截断。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：统一界正证 6.8/10</small></section>
+      <section><h4>物理接口</h4><p>表面临界现象、杂质与拓扑缺陷</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>bulk—boundary 谱强耦合</p><p><b>边界：</b>固定幺正性、对称群和算符截断。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://arxiv.org/abs/1805.04405" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="量子统计" data-era="现代方向" data-source="review" data-verification="8.5" data-search="固定非可积自旋链的强 eth 界 量子统计 对一个明确非可积局域链证明微正则窗内本征矩阵元偏差的尺寸界。 deutsch；srednicki">
+      <div class="card-top"><div><span class="id">ETH-01</span><span class="status">本轮新增</span></div><div class="score"><strong>9.0</strong><small>AI 子题 /10</small></div></div>
+      <h3>固定非可积自旋链的强 ETH 界</h3>
+      <p class="meta">量子统计 · 1991– · Deutsch；Srednicki</p>
+      <div class="score-row"><span>完整问题 7.2</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>对一个明确非可积局域链证明微正则窗内本征矩阵元偏差的尺寸界。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>谱统计、局域观测与随机矩阵 ansatz</p></section><section><h4>V · 独立核验器</h4><p>独立 resolvent/浓缩估计和有限尺寸严格包络</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>8.5</strong><span>越界反例</span></div><h4>方向化可验证性</h4><p>对“固定非可积自旋链的强 ETH 界”，最强验收方向是越界反例（8.5/10）：候选答案一旦给出，可用独立 resolvent/浓缩估计和有限尺寸严格包络检查实例是否满足前提且严格越过所声称的界。相对地，统一界正证只有6.8/10，因为统一界需要覆盖无限参数或尺度；现有硬墙是rare states 使强 ETH 易失败；先固定强/弱 ETH 定义和能量窗口。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：统一界正证 6.8/10</small></section>
+      <section><h4>物理接口</h4><p>孤立量子系统热化</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>rare states 使强 ETH 易失败</p><p><b>边界：</b>先固定强/弱 ETH 定义和能量窗口。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://arxiv.org/abs/1509.06411" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="量子复杂性" data-era="现代方向" data-source="review" data-verification="8.5" data-search="qma 与 qcma 的受限分离 量子复杂性 在一个明确 oracle/query 模型构造 qma≠qcma 分离，量化量子见证优势。 watrous；aharonov–naveh 等">
+      <div class="card-top"><div><span class="id">QEC-07</span><span class="status">本轮新增</span></div><div class="score"><strong>9.0</strong><small>AI 子题 /10</small></div></div>
+      <h3>QMA 与 QCMA 的受限分离</h3>
+      <p class="meta">量子复杂性 · 2000s · Watrous；Aharonov–Naveh 等</p>
+      <div class="score-row"><span>完整问题 8.3</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>在一个明确 oracle/query 模型构造 QMA≠QCMA 分离，量化量子见证优势。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>随机 oracle、通信协议与 SDP</p></section><section><h4>V · 独立核验器</h4><p>adversary/diagonalization 下界和独立 query 计数</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>8.5</strong><span>构造存在</span></div><h4>方向化可验证性</h4><p>对“QMA 与 QCMA 的受限分离”，最强验收方向是构造存在（8.5/10）：候选答案一旦给出，可用adversary/diagonalization 下界和独立 query 计数检查候选是否满足方程、约束及所需非退化条件。相对地，非存在证明只有6.1/10，因为非存在方向必须排除整个候选空间；现有硬墙是相对化分离不推出无条件复杂性分离；成果标题必须写明 oracle 或受限模型。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：非存在证明 6.1/10</small></section>
+      <section><h4>物理接口</h4><p>量子验证、测量与局域 Hamiltonian</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>相对化分离不推出无条件复杂性分离</p><p><b>边界：</b>成果标题必须写明 oracle 或受限模型。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://arxiv.org/abs/2109.06917" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="谱理论" data-era="现代方向" data-source="ICM" data-verification="8.5" data-search="固定解析势的准周期谱相图 谱理论 对一个指定解析准周期势，按 lyapunov 指数与频率算术条件证明一段 ac/sc/pp 谱相图。 aubry–andré；avila 等">
+      <div class="card-top"><div><span class="id">QSP-01</span><span class="status">既有对话</span></div><div class="score"><strong>9.0</strong><small>AI 子题 /10</small></div></div>
+      <h3>固定解析势的准周期谱相图</h3>
+      <p class="meta">谱理论 · 1970s– · Aubry–André；Avila 等</p>
+      <div class="score-row"><span>完整问题 7.9</span><span>现代方向</span><span><span>ICM</span></span></div>
+      <section><h4>可发表切片</h4><p>对一个指定解析准周期势，按 Lyapunov 指数与频率算术条件证明一段 AC/SC/PP 谱相图。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>转移矩阵、有限频率近似和 Lyapunov 数值</p></section><section><h4>V · 独立核验器</h4><p>reducibility/LDT 定理与谱测度独立计算</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>8.5</strong><span>受限反例／证书</span></div><h4>方向化可验证性</h4><p>对“固定解析势的准周期谱相图”，最强验收方向是受限反例／证书（8.5/10）：候选答案一旦给出，可用reducibility/LDT 定理与谱测度独立计算检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有7.3/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是临界区 small divisor 与相变共存；固定势、耦合区和频率类。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：一般定理正证 7.3/10</small></section>
+      <section><h4>物理接口</h4><p>量子准晶和电子输运</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>临界区 small divisor 与相变共存</p><p><b>边界：</b>固定势、耦合区和频率类。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://icmconjectures.com/2022-mathphys-83" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="数学相对论" data-era="现代方向" data-source="review" data-verification="8.5" data-search="ads 时空的非线性稳定性/弱湍流 数学相对论 固定对称初值族，证明一个能量级联分支或一个非线性稳定岛。 bizoń–rostworowski 等">
+      <div class="card-top"><div><span class="id">GR-03</span><span class="status">本轮新增</span></div><div class="score"><strong>8.9</strong><small>AI 子题 /10</small></div></div>
+      <h3>AdS 时空的非线性稳定性/弱湍流</h3>
+      <p class="meta">数学相对论 · 1990s / 2011– · Bizoń–Rostworowski 等</p>
+      <div class="score-row"><span>完整问题 7.5</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>固定对称初值族，证明一个能量级联分支或一个非线性稳定岛。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>谱 Galerkin、共振图枚举、长时积分</p></section><section><h4>V · 独立核验器</h4><p>守恒量、误差控制与独立高精度演化</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>8.5</strong><span>受限反例／证书</span></div><h4>方向化可验证性</h4><p>对“AdS 时空的非线性稳定性/弱湍流”，最强验收方向是受限反例／证书（8.5/10）：候选答案一旦给出，可用守恒量、误差控制与独立高精度演化检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有7.3/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是全反射边界导致密集共振；数值坍缩不等于全相空间不稳定。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：一般定理正证 7.3/10</small></section>
+      <section><h4>物理接口</h4><p>AdS/CFT 热化与引力坍缩</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>全反射边界导致密集共振</p><p><b>边界：</b>数值坍缩不等于全相空间不稳定。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://arxiv.org/abs/1708.05600" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="谱理论" data-era="现代方向" data-source="review" data-verification="8.5" data-search="非自伴随机算子的共振统计 谱理论 对一个稀疏非 hermitian ensemble 推导极限共振密度或离群值定理。 开放量子系统/随机算子社区">
+      <div class="card-top"><div><span class="id">INV-02</span><span class="status">本轮新增</span></div><div class="score"><strong>8.9</strong><small>AI 子题 /10</small></div></div>
+      <h3>非自伴随机算子的共振统计</h3>
+      <p class="meta">谱理论 · 1990s– · 开放量子系统/随机算子社区</p>
+      <div class="score-row"><span>完整问题 7.7</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>对一个稀疏非 Hermitian ensemble 推导极限共振密度或离群值定理。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>resolvent 展开、随机矩阵模拟</p></section><section><h4>V · 独立核验器</h4><p>pseudospectrum、奇异值界与独立抽样</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>8.5</strong><span>受限反例／证书</span></div><h4>方向化可验证性</h4><p>对“非自伴随机算子的共振统计”，最强验收方向是受限反例／证书（8.5/10）：候选答案一旦给出，可用pseudospectrum、奇异值界与独立抽样检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有7.3/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是pseudospectral 不稳定放大微小误差；固定 ensemble 和稀疏标度。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：一般定理正证 7.3/10</small></section>
+      <section><h4>物理接口</h4><p>开放量子系统和衰减模</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>pseudospectral 不稳定放大微小误差</p><p><b>边界：</b>固定 ensemble 和稀疏标度。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://arxiv.org/abs/1609.06686" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="动力学PDE" data-era="历史名题" data-source="review" data-verification="8.5" data-search="有边界 boltzmann 方程的流体极限 动力学pde 在一个有界几何和指定 accommodation law 下证明到 navier–stokes 的极限并控制边界层。 boltzmann；hilbert 第六问题">
+      <div class="card-top"><div><span class="id">PDE-03</span><span class="status">本轮新增</span></div><div class="score"><strong>8.9</strong><small>AI 子题 /10</small></div></div>
+      <h3>有边界 Boltzmann 方程的流体极限</h3>
+      <p class="meta">动力学PDE · 1872 / 1900 · Boltzmann；Hilbert 第六问题</p>
+      <div class="score-row"><span>完整问题 7.7</span><span>历史名题</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>在一个有界几何和指定 accommodation law 下证明到 Navier–Stokes 的极限并控制边界层。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>Hilbert/Chapman–Enskog 展开与 DSMC</p></section><section><h4>V · 独立核验器</h4><p>熵方法、谱隙和独立数值残差</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>8.5</strong><span>越界反例</span></div><h4>方向化可验证性</h4><p>对“有边界 Boltzmann 方程的流体极限”，最强验收方向是越界反例（8.5/10）：候选答案一旦给出，可用熵方法、谱隙和独立数值残差检查实例是否满足前提且严格越过所声称的界。相对地，统一界正证只有6.8/10，因为统一界需要覆盖无限参数或尺度；现有硬墙是Knudsen 边界层和 shock 奇异极限；限定小扰动、几何和时间尺度。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：统一界正证 6.8/10</small></section>
+      <section><h4>物理接口</h4><p>稀薄气体与统计力学到连续介质</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>Knudsen 边界层和 shock 奇异极限</p><p><b>边界：</b>限定小扰动、几何和时间尺度。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://arxiv.org/abs/1009.3663" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="动力学PDE" data-era="历史名题" data-source="review" data-verification="8.5" data-search="低正则 landau 阻尼与 plasma echoes 动力学pde 对 penrose 稳定平衡和指定 sobolev 指数证明衰减率或精确构造 echo 阻碍。 lev landau">
+      <div class="card-top"><div><span class="id">PDE-05</span><span class="status">本轮新增</span></div><div class="score"><strong>8.9</strong><small>AI 子题 /10</small></div></div>
+      <h3>低正则 Landau 阻尼与 plasma echoes</h3>
+      <p class="meta">动力学PDE · 1946 · Lev Landau</p>
+      <div class="score-row"><span>完整问题 7.8</span><span>历史名题</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>对 Penrose 稳定平衡和指定 Sobolev 指数证明衰减率或精确构造 echo 阻碍。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>频率共振图、Volterra 核展开与谱模拟</p></section><section><h4>V · 独立核验器</h4><p>能量估计、echo 级联界和独立数值</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>8.5</strong><span>构造存在</span></div><h4>方向化可验证性</h4><p>对“低正则 Landau 阻尼与 plasma echoes”，最强验收方向是构造存在（8.5/10）：候选答案一旦给出，可用能量估计、echo 级联界和独立数值检查候选是否满足方程、约束及所需非退化条件。相对地，非存在证明只有6.1/10，因为非存在方向必须排除整个候选空间；现有硬墙是Sobolev 正则下非线性 echoes 累积；解析/Gevrey 小扰动已有定理，不能重复计入。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：非存在证明 6.1/10</small></section>
+      <section><h4>物理接口</h4><p>等离子体无碰撞阻尼</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>Sobolev 正则下非线性 echoes 累积</p><p><b>边界：</b>解析/Gevrey 小扰动已有定理，不能重复计入。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://doi.org/10.1007/s40818-016-0008-2" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="量子多体" data-era="现代方向" data-source="review" data-verification="8.5" data-search="pxp/规范链中量子 scar 的可证持久性 量子多体 对一个变形 pxp 或 gauge 链分类嵌入 scar 态并给微扰下寿命下界。 bernien 等；scar 社区">
+      <div class="card-top"><div><span class="id">SCAR-01</span><span class="status">本轮新增</span></div><div class="score"><strong>8.9</strong><small>AI 子题 /10</small></div></div>
+      <h3>PXP/规范链中量子 scar 的可证持久性</h3>
+      <p class="meta">量子多体 · 2017– · Bernien 等；scar 社区</p>
+      <div class="score-row"><span>完整问题 8.2</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>对一个变形 PXP 或 gauge 链分类嵌入 scar 态并给微扰下寿命下界。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>ED/DMRG、代数 ladder ansatz</p></section><section><h4>V · 独立核验器</h4><p>本征残差、动力学复现与扰动论界</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>8.5</strong><span>遗漏对象／反例</span></div><h4>方向化可验证性</h4><p>对“PXP/规范链中量子 scar 的可证持久性”，最强验收方向是遗漏对象／反例（8.5/10）：候选答案一旦给出，可用本征残差、动力学复现与扰动论界检查新对象是否满足定义且不等价于已列对象。相对地，完备分类只有6.6/10，因为完备性要求排除清单之外的一切对象；现有硬墙是少量非热态嵌入热谱；固定模型、能区和扰动范数。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：完备分类 6.6/10</small></section>
+      <section><h4>物理接口</h4><p>冷原子非平衡动力学</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>少量非热态嵌入热谱</p><p><b>边界：</b>固定模型、能区和扰动范数。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://arxiv.org/abs/1711.09656" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="谱理论" data-era="历史名题" data-source="review" data-verification="8.5" data-search="有边界混沌台球的量子唯一遍历率 谱理论 为一个散射台球证明量子方差衰减率，或排除一类 scar 序列。 bohigas–giannoni–schmit；rudnick–sarnak">
+      <div class="card-top"><div><span class="id">SPEC-03</span><span class="status">本轮新增</span></div><div class="score"><strong>8.9</strong><small>AI 子题 /10</small></div></div>
+      <h3>有边界混沌台球的量子唯一遍历率</h3>
+      <p class="meta">谱理论 · 1970s– · Bohigas–Giannoni–Schmit；Rudnick–Sarnak</p>
+      <div class="score-row"><span>完整问题 7.6</span><span>历史名题</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>为一个散射台球证明量子方差衰减率，或排除一类 scar 序列。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>周期轨道/迹公式枚举、谱数值</p></section><section><h4>V · 独立核验器</h4><p>microlocal 估计、边界项与独立本征函数计算</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>8.5</strong><span>反例</span></div><h4>方向化可验证性</h4><p>对“有边界混沌台球的量子唯一遍历率”，最强验收方向是反例（8.5/10）：候选答案一旦给出，可用microlocal 估计、边界项与独立本征函数计算检查一个实例是否满足前提并违反结论。相对地，全称正证只有6.2/10，因为全称正证必须控制所有参数和对象；现有硬墙是周期轨道相关和 grazing rays；固定几何和密度一子序列。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：全称正证 6.2/10</small></section>
+      <section><h4>物理接口</h4><p>量子混沌与经典遍历性</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>周期轨道相关和 grazing rays</p><p><b>边界：</b>固定几何和密度一子序列。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://arxiv.org/abs/math/0507164" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="散射振幅" data-era="现代方向" data-source="review" data-verification="7.8" data-search="非平面多圈规范理论振幅 bootstrap 散射振幅 固定五点三圈的一个非平面颜色分量，从幺正切、steinmann 与对称性约束重构解析表达式。 bern–dixon–kosower 等">
+      <div class="card-top"><div><span class="id">AMP-01</span><span class="status">本轮新增</span></div><div class="score"><strong>9.4</strong><small>AI 子题 /10</small></div></div>
+      <h3>非平面多圈规范理论振幅 bootstrap</h3>
+      <p class="meta">散射振幅 · 1980s– · Bern–Dixon–Kosower 等</p>
+      <div class="score-row"><span>完整问题 7.3</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>固定五点三圈的一个非平面颜色分量，从幺正切、Steinmann 与对称性约束重构解析表达式。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>图拓扑枚举、有限域采样、符号 ansatz</p></section><section><h4>V · 独立核验器</h4><p>Jacobi/幺正切、软共线极限与独立数值相空间点</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>7.8</strong><span>受限反例／证书</span></div><h4>方向化可验证性</h4><p>对“非平面多圈规范理论振幅 bootstrap”，最强验收方向是受限反例／证书（7.8/10）：候选答案一旦给出，可用Jacobi/幺正切、软共线极限与独立数值相空间点检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有6.6/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是函数空间维数和椭圆扇区迅速增长；不声称全圈或全色结构。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：一般定理正证 6.6/10</small></section>
+      <section><h4>物理接口</h4><p>微扰规范论、引力 double copy、对撞机精度</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>函数空间维数和椭圆扇区迅速增长</p><p><b>边界：</b>不声称全圈或全色结构。</p></details>
+      <div class="card-foot"><span>高：适合立即立项，但仍需领域专家把关</span><a href="https://arxiv.org/abs/2203.13011" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="量子多体" data-era="历史名题" data-source="review" data-verification="7.8" data-search="二维 hubbard 模型的配对关联界 量子多体 固定 u/t、掺杂与几何，严格上下夹逼 d-wave pairing susceptibility 或排除某相。 john hubbard">
+      <div class="card-top"><div><span class="id">LAT-05</span><span class="status">本轮新增</span></div><div class="score"><strong>9.3</strong><small>AI 子题 /10</small></div></div>
+      <h3>二维 Hubbard 模型的配对关联界</h3>
+      <p class="meta">量子多体 · 1963 · John Hubbard</p>
+      <div class="score-row"><span>完整问题 7.1</span><span>历史名题</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>固定 U/t、掺杂与几何，严格上下夹逼 d-wave pairing susceptibility 或排除某相。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>DMRG/AFQMC、变分态和不等式猜测</p></section><section><h4>V · 独立核验器</h4><p>无符号子域、不同张量网络、有限尺寸与解析界交叉</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>7.8</strong><span>越界反例</span></div><h4>方向化可验证性</h4><p>对“二维 Hubbard 模型的配对关联界”，最强验收方向是越界反例（7.8/10）：候选答案一旦给出，可用无符号子域、不同张量网络、有限尺寸与解析界交叉检查实例是否满足前提且严格越过所声称的界。相对地，统一界正证只有6.1/10，因为统一界需要覆盖无限参数或尺度；现有硬墙是费米符号问题和长相关长度；有限团簇趋势不等于热力学极限长程序。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：统一界正证 6.1/10</small></section>
+      <section><h4>物理接口</h4><p>铜氧化物高温超导</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>费米符号问题和长相关长度</p><p><b>边界：</b>有限团簇趋势不等于热力学极限长程序。</p></details>
+      <div class="card-foot"><span>高：适合立即立项，但仍需领域专家把关</span><a href="https://par.nsf.gov/servlets/purl/10320097" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="数学相对论" data-era="历史名题" data-source="review" data-verification="7.8" data-search="旋转/带电黑洞内部的强宇宙监督 数学相对论 对一个亚极端 kerr–de sitter 参数区证明合适正则性版本的不可延拓。 roger penrose">
+      <div class="card-top"><div><span class="id">GR-01</span><span class="status">本轮新增</span></div><div class="score"><strong>9.2</strong><small>AI 子题 /10</small></div></div>
+      <h3>旋转/带电黑洞内部的强宇宙监督</h3>
+      <p class="meta">数学相对论 · 1969 · Roger Penrose</p>
+      <div class="score-row"><span>完整问题 8.2</span><span>历史名题</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>对一个亚极端 Kerr–de Sitter 参数区证明合适正则性版本的不可延拓。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>PDE bootstrap 层级与符号张量计算</p></section><section><h4>V · 独立核验器</h4><p>能量估计、蓝移/衰减率比较与严格数值</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>7.8</strong><span>受限反例／证书</span></div><h4>方向化可验证性</h4><p>对“旋转/带电黑洞内部的强宇宙监督”，最强验收方向是受限反例／证书（7.8/10）：候选答案一旦给出，可用能量估计、蓝移/衰减率比较与严格数值检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有6.6/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是结论依赖 Λ、参数区和正则性定义；不把某一参数区定理外推为所有版本的宇宙监督。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：一般定理正证 6.6/10</small></section>
+      <section><h4>物理接口</h4><p>广义相对论决定论和黑洞内部</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>结论依赖 Λ、参数区和正则性定义</p><p><b>边界：</b>不把某一参数区定理外推为所有版本的宇宙监督。</p></details>
+      <div class="card-foot"><span>中高：搜索—证书闭环明确</span><a href="https://arxiv.org/abs/1602.03837" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="随机矩阵" data-era="现代方向" data-source="review" data-verification="7.8" data-search="随机带矩阵的固定参数局部化—goe 转变 随机矩阵 固定一维带宽尺度和能区，证明一个局部律/本征向量离域或 crossover 子定理。 fyodorov–mirlin 等">
+      <div class="card-top"><div><span class="id">RBM-01</span><span class="status">本轮新增</span></div><div class="score"><strong>9.2</strong><small>AI 子题 /10</small></div></div>
+      <h3>随机带矩阵的固定参数局部化—GOE 转变</h3>
+      <p class="meta">随机矩阵 · 1990s– · Fyodorov–Mirlin 等</p>
+      <div class="score-row"><span>完整问题 7.4</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>固定一维带宽尺度和能区，证明一个局部律/本征向量离域或 crossover 子定理。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>谱/本征向量统计、resolvent 图展开</p></section><section><h4>V · 独立核验器</h4><p>Green-function comparison、moment flow 与独立数值</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>7.8</strong><span>受限反例／证书</span></div><h4>方向化可验证性</h4><p>对“随机带矩阵的固定参数局部化—GOE 转变”，最强验收方向是受限反例／证书（7.8/10）：候选答案一旦给出，可用Green-function comparison、moment flow 与独立数值检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有6.6/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是临界带宽附近没有充分小参数；不把有限 N 数值标度称为完整相变定理。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：一般定理正证 6.6/10</small></section>
+      <section><h4>物理接口</h4><p>介观输运和无序量子系统</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>临界带宽附近没有充分小参数</p><p><b>边界：</b>不把有限 N 数值标度称为完整相变定理。</p></details>
+      <div class="card-foot"><span>中高：搜索—证书闭环明确</span><a href="https://arxiv.org/abs/1205.5669" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="量子计量" data-era="历史名题" data-source="review" data-verification="7.8" data-search="多参数量子 cramér–rao 界的可饱和性 量子计量 对一个有限维含噪多参数族判定 holevo 界与 sld 界何时相等并构造最优测量。 helstrom；holevo">
+      <div class="card-top"><div><span class="id">QMET-01</span><span class="status">本轮新增</span></div><div class="score"><strong>9.0</strong><small>AI 子题 /10</small></div></div>
+      <h3>多参数量子 Cramér–Rao 界的可饱和性</h3>
+      <p class="meta">量子计量 · 1960s– · Helstrom；Holevo</p>
+      <div class="score-row"><span>完整问题 8.1</span><span>历史名题</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>对一个有限维含噪多参数族判定 Holevo 界与 SLD 界何时相等并构造最优测量。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>Fisher 信息、POVM 枚举与 SDP</p></section><section><h4>V · 独立核验器</h4><p>Holevo bound 解析、PSD 与独立数值</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>7.8</strong><span>反例：更优构造</span></div><h4>方向化可验证性</h4><p>对“多参数量子 Cramér–Rao 界的可饱和性”，最强验收方向是反例：更优构造（7.8/10）：候选答案一旦给出，可用Holevo bound 解析、PSD 与独立数值检查约束是否满足且目标值是否严格优于基准。相对地，全局最优正证只有5.6/10，因为全局正证必须覆盖整个竞争空间；现有硬墙是不相容参数和集体测量正则化；区分单拷贝、渐近和自适应方案。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：全局最优正证 5.6/10</small></section>
+      <section><h4>物理接口</h4><p>量子传感和参数估计</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>不相容参数和集体测量正则化</p><p><b>边界：</b>区分单拷贝、渐近和自适应方案。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://journals.aps.org/prxquantum/abstract/10.1103/PRXQuantum.3.010101" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="可积概率" data-era="现代方向" data-source="review" data-verification="7.8" data-search="带边界随机顶点模型与 kpz 极限 可积概率 为一个新的可积边界族导出精确电流涨落核，并证明概率权重非负及 kpz 缩放极限。 borodin–corwin 等">
+      <div class="card-top"><div><span class="id">YB-03</span><span class="status">本轮新增</span></div><div class="score"><strong>9.0</strong><small>AI 子题 /10</small></div></div>
+      <h3>带边界随机顶点模型与 KPZ 极限</h3>
+      <p class="meta">可积概率 · 2010s · Borodin–Corwin 等</p>
+      <div class="score-row"><span>完整问题 8.4</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>为一个新的可积边界族导出精确电流涨落核，并证明概率权重非负及 KPZ 缩放极限。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>Bethe ansatz、边界 K 矩阵搜索、Monte Carlo</p></section><section><h4>V · 独立核验器</h4><p>随机性逐项检查、Fredholm 行列式渐近与独立模拟</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>7.8</strong><span>越界反例</span></div><h4>方向化可验证性</h4><p>对“带边界随机顶点模型与 KPZ 极限”，最强验收方向是越界反例（7.8/10）：候选答案一旦给出，可用随机性逐项检查、Fredholm 行列式渐近与独立模拟检查实例是否满足前提且严格越过所声称的界。相对地，统一界正证只有6.1/10，因为统一界需要覆盖无限参数或尺度；现有硬墙是边界极点与 Bethe 根完备性；不外推到任意非可积边界。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：统一界正证 6.1/10</small></section>
+      <section><h4>物理接口</h4><p>驱动扩散、界面增长和 KPZ 普适性</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>边界极点与 Bethe 根完备性</p><p><b>边界：</b>不外推到任意非可积边界。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://arxiv.org/abs/1703.07314" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="几何分析" data-era="历史名题" data-source="review" data-verification="7.8" data-search="含角动量/电荷的 penrose 不等式 几何分析 对轴对称最大初始数据和一个明确电荷条件证明强化 penrose 不等式。 roger penrose">
+      <div class="card-top"><div><span class="id">GR-04</span><span class="status">本轮新增</span></div><div class="score"><strong>8.9</strong><small>AI 子题 /10</small></div></div>
+      <h3>含角动量/电荷的 Penrose 不等式</h3>
+      <p class="meta">几何分析 · 1973 · Roger Penrose</p>
+      <div class="score-row"><span>完整问题 8.3</span><span>历史名题</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>对轴对称最大初始数据和一个明确电荷条件证明强化 Penrose 不等式。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>几何流候选、符号变分与 SDP/SOS</p></section><section><h4>V · 独立核验器</h4><p>几何不等式链、边界项与数值极值检查</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>7.8</strong><span>越界反例</span></div><h4>方向化可验证性</h4><p>对“含角动量/电荷的 Penrose 不等式”，最强验收方向是越界反例（7.8/10）：候选答案一旦给出，可用几何不等式链、边界项与数值极值检查检查实例是否满足前提且严格越过所声称的界。相对地，统一界正证只有6.1/10，因为统一界需要覆盖无限参数或尺度；现有硬墙是一般初始数据的非线性几何与角动量项；仅在写明的对称/能量条件下成立。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：统一界正证 6.1/10</small></section>
+      <section><h4>物理接口</h4><p>黑洞质量、面积和宇宙监督</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>一般初始数据的非线性几何与角动量项</p><p><b>边界：</b>仅在写明的对称/能量条件下成立。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://arxiv.org/abs/1602.03837" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="随机矩阵" data-era="历史名题" data-source="review" data-verification="7.8" data-search="稀疏相关随机矩阵的局部普适性 随机矩阵 对一个明确稀疏相关 ensemble 证明 bulk 或 edge 局部律及最小奇异值界。 wigner；现代局部律社区">
+      <div class="card-top"><div><span class="id">RMT-01</span><span class="status">本轮新增</span></div><div class="score"><strong>8.9</strong><small>AI 子题 /10</small></div></div>
+      <h3>稀疏相关随机矩阵的局部普适性</h3>
+      <p class="meta">随机矩阵 · 1950s– · Wigner；现代局部律社区</p>
+      <div class="score-row"><span>完整问题 8.2</span><span>历史名题</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>对一个明确稀疏相关 ensemble 证明 bulk 或 edge 局部律及最小奇异值界。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>矩/累积量展开、近核向量搜索</p></section><section><h4>V · 独立核验器</h4><p>小球概率、Green 函数比较与独立谱模拟</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>7.8</strong><span>反例</span></div><h4>方向化可验证性</h4><p>对“稀疏相关随机矩阵的局部普适性”，最强验收方向是反例（7.8/10）：候选答案一旦给出，可用小球概率、Green 函数比较与独立谱模拟检查一个实例是否满足前提并违反结论。相对地，全称正证只有5.5/10，因为全称正证必须控制所有参数和对象；现有硬墙是相关性、重尾与稀疏度临界相互作用；固定 ensemble 与稀疏尺度。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：全称正证 5.5/10</small></section>
+      <section><h4>物理接口</h4><p>无序量子系统和复杂网络</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>相关性、重尾与稀疏度临界相互作用</p><p><b>边界：</b>固定 ensemble 与稀疏尺度。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://arxiv.org/abs/2202.00669" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="随机过程" data-era="历史名题" data-source="review" data-verification="7.2" data-search="一般初值/边界下的 kpz 固定点普适性 随机过程 证明一个可积模型的指定非可积扰动或初值类收敛到同一 kpz 固定点。 kardar–parisi–zhang">
+      <div class="card-top"><div><span class="id">KPZ-01</span><span class="status">本轮新增</span></div><div class="score"><strong>9.3</strong><small>AI 子题 /10</small></div></div>
+      <h3>一般初值/边界下的 KPZ 固定点普适性</h3>
+      <p class="meta">随机过程 · 1986 · Kardar–Parisi–Zhang</p>
+      <div class="score-row"><span>完整问题 8.0</span><span>历史名题</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>证明一个可积模型的指定非可积扰动或初值类收敛到同一 KPZ 固定点。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>耦合构造、随机模拟、尺度律发现</p></section><section><h4>V · 独立核验器</h4><p>tightness、鞅问题、可积极限基准</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>7.2</strong><span>反例</span></div><h4>方向化可验证性</h4><p>对“一般初值/边界下的 KPZ 固定点普适性”，最强验收方向是反例（7.2/10）：候选答案一旦给出，可用tightness、鞅问题、可积极限基准检查一个实例是否满足前提并违反结论。相对地，全称正证只有4.9/10，因为全称正证必须控制所有参数和对象；现有硬墙是离开行列式结构后缺少精确核；固定一维模型和初值正则类。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：全称正证 4.9/10</small></section>
+      <section><h4>物理接口</h4><p>界面增长、定向聚合物、随机输运</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>离开行列式结构后缺少精确核</p><p><b>边界：</b>固定一维模型和初值正则类。</p></details>
+      <div class="card-foot"><span>高：适合立即立项，但仍需领域专家把关</span><a href="https://arxiv.org/abs/1506.04131" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="概率统计力学" data-era="现代方向" data-source="review" data-verification="7.2" data-search="定向聚合物自由能与 kpz 涨落切片 概率统计力学 对一个指定 i.i.d. 或近可积环境证明自由能变分式并控制一个涨落指数界。 huse–henley；kardar 等">
+      <div class="card-top"><div><span class="id">PROB-03</span><span class="status">本轮新增</span></div><div class="score"><strong>9.2</strong><small>AI 子题 /10</small></div></div>
+      <h3>定向聚合物自由能与 KPZ 涨落切片</h3>
+      <p class="meta">概率统计力学 · 1980s– · Huse–Henley；Kardar 等</p>
+      <div class="score-row"><span>完整问题 7.9</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>对一个指定 i.i.d. 或近可积环境证明自由能变分式并控制一个涨落指数界。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>动态规划、Monte Carlo 与变分候选</p></section><section><h4>V · 独立核验器</h4><p>次可加性、集中不等式和可积核基准</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>7.2</strong><span>越界反例</span></div><h4>方向化可验证性</h4><p>对“定向聚合物自由能与 KPZ 涨落切片”，最强验收方向是越界反例（7.2/10）：候选答案一旦给出，可用次可加性、集中不等式和可积核基准检查实例是否满足前提且严格越过所声称的界。相对地，统一界正证只有5.5/10，因为统一界需要覆盖无限参数或尺度；现有硬墙是一般环境缺少行列式结构；固定环境分布和温度区间。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：统一界正证 5.5/10</small></section>
+      <section><h4>物理接口</h4><p>随机介质输运与聚合物</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>一般环境缺少行列式结构</p><p><b>边界：</b>固定环境分布和温度区间。</p></details>
+      <div class="card-foot"><span>中高：搜索—证书闭环明确</span><a href="https://arxiv.org/abs/1311.3016" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="量子复杂性" data-era="现代方向" data-source="review" data-verification="7.2" data-search="量子 pcp 猜想的受限 gap amplification 量子复杂性 对一个指定 k-local hamiltonian/量子码族构造保持局域性的常数 gap 放大，或给出严格不可能性。 aharonov 等">
+      <div class="card-top"><div><span class="id">QEC-02</span><span class="status">本轮新增</span></div><div class="score"><strong>9.2</strong><small>AI 子题 /10</small></div></div>
+      <h3>量子 PCP 猜想的受限 gap amplification</h3>
+      <p class="meta">量子复杂性 · 2006– · Aharonov 等</p>
+      <div class="score-row"><span>完整问题 8.0</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>对一个指定 k-local Hamiltonian/量子码族构造保持局域性的常数 gap 放大，或给出严格不可能性。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>局域 gadget、SAT/编码器搜索</p></section><section><h4>V · 独立核验器</h4><p>谱界、QMA 归约与 proof assistant 小引理</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>7.2</strong><span>构造存在</span></div><h4>方向化可验证性</h4><p>对“量子 PCP 猜想的受限 gap amplification”，最强验收方向是构造存在（7.2/10）：候选答案一旦给出，可用谱界、QMA 归约与 proof assistant 小引理检查候选是否满足方程、约束及所需非退化条件。相对地，非存在证明只有4.8/10，因为非存在方向必须排除整个候选空间；现有硬墙是局域性、纠缠与能隙放大互相制约；基础 NLTS 已有突破；不把复现 NLTS 当开放成果。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：非存在证明 4.8/10</small></section>
+      <section><h4>物理接口</h4><p>多体基态复杂性、拓扑序和量子码</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>局域性、纠缠与能隙放大互相制约</p><p><b>边界：</b>基础 NLTS 已有突破；不把复现 NLTS 当开放成果。</p></details>
+      <div class="card-foot"><span>中高：搜索—证书闭环明确</span><a href="https://arxiv.org/abs/1309.7495" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="量子基础" data-era="历史名题" data-source="review" data-verification="7.2" data-search="npt bound entanglement 的对称族判定 量子基础 在 3×3 或 4×4 指定对称态族中构造 npt 不可蒸馏证书，或给出统一蒸馏协议。 divincenzo–shor–smolin 等">
+      <div class="card-top"><div><span class="id">QEC-06</span><span class="status">本轮新增</span></div><div class="score"><strong>9.1</strong><small>AI 子题 /10</small></div></div>
+      <h3>NPT bound entanglement 的对称族判定</h3>
+      <p class="meta">量子基础 · 1998– · DiVincenzo–Shor–Smolin 等</p>
+      <div class="score-row"><span>完整问题 8.7</span><span>历史名题</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>在 3×3 或 4×4 指定对称态族中构造 NPT 不可蒸馏证书，或给出统一蒸馏协议。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>随机密度矩阵、正映射与 SDP 搜索</p></section><section><h4>V · 独立核验器</h4><p>部分转置谱、k-copy SDP、解析纠缠见证</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>7.2</strong><span>构造存在</span></div><h4>方向化可验证性</h4><p>对“NPT bound entanglement 的对称族判定”，最强验收方向是构造存在（7.2/10）：候选答案一旦给出，可用部分转置谱、k-copy SDP、解析纠缠见证检查候选是否满足方程、约束及所需非退化条件。相对地，非存在证明只有4.8/10，因为非存在方向必须排除整个候选空间；现有硬墙是不可蒸馏要求控制任意拷贝数；有限 k 证书必须明确，不能冒充无限拷贝结论。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：非存在证明 4.8/10</small></section>
+      <section><h4>物理接口</h4><p>纠缠资源理论和量子通信</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>不可蒸馏要求控制任意拷贝数</p><p><b>边界：</b>有限 k 证书必须明确，不能冒充无限拷贝结论。</p></details>
+      <div class="card-foot"><span>中高：搜索—证书闭环明确</span><a href="https://journals.aps.org/prxquantum/abstract/10.1103/PRXQuantum.3.010101" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="谱理论" data-era="历史名题" data-source="public-list" data-verification="7.2" data-search="riemann 零点的自伴谱实现 谱理论 对一个具体自伴算子候选证明有限能窗谱与显式公式兼容，并排除伪零点。 hilbert–pólya 思路">
+      <div class="card-top"><div><span class="id">SPEC-01</span><span class="status">本轮新增</span></div><div class="score"><strong>9.1</strong><small>AI 子题 /10</small></div></div>
+      <h3>Riemann 零点的自伴谱实现</h3>
+      <p class="meta">谱理论 · 1910s– · Hilbert–Pólya 思路</p>
+      <div class="score-row"><span>完整问题 7.0</span><span>历史名题</span><span><span>公开清单</span></span></div>
+      <section><h4>可发表切片</h4><p>对一个具体自伴算子候选证明有限能窗谱与显式公式兼容，并排除伪零点。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>逆谱、迹公式与高精度零点拟合</p></section><section><h4>V · 独立核验器</h4><p>自伴性、rigorous eigenvalue enclosure 与显式公式</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>7.2</strong><span>构造存在</span></div><h4>方向化可验证性</h4><p>对“Riemann 零点的自伴谱实现”，最强验收方向是构造存在（7.2/10）：候选答案一旦给出，可用自伴性、rigorous eigenvalue enclosure 与显式公式检查候选是否满足方程、约束及所需非退化条件。相对地，非存在证明只有4.8/10，因为非存在方向必须排除整个候选空间；现有硬墙是尚无公认算子，拟合零点极易过拟合；只评价具体候选的可证子命题；不把数值匹配称为 RH 证明。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：非存在证明 4.8/10</small></section>
+      <section><h4>物理接口</h4><p>量子混沌、随机矩阵与素数谱</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>尚无公认算子，拟合零点极易过拟合</p><p><b>边界：</b>只评价具体候选的可证子命题；不把数值匹配称为 RH 证明。</p></details>
+      <div class="card-foot"><span>中高：搜索—证书闭环明确</span><a href="https://www.claymath.org/riemann/" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="量子场论" data-era="现代方向" data-source="review" data-verification="7.2" data-search="非超对称规范理论 conformal window 的固定 nf 判定 量子场论 固定 su(3) 基本表示，区分一个 nf 的 ir fixed point、walking 与手征破缺并给连续外推。 banks–zaks；格点强耦合社区">
+      <div class="card-top"><div><span class="id">CONF-01</span><span class="status">本轮新增</span></div><div class="score"><strong>9.0</strong><small>AI 子题 /10</small></div></div>
+      <h3>非超对称规范理论 conformal window 的固定 Nf 判定</h3>
+      <p class="meta">量子场论 · 1980s– · Banks–Zaks；格点强耦合社区</p>
+      <div class="score-row"><span>完整问题 7.6</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>固定 SU(3) 基本表示，区分一个 Nf 的 IR fixed point、walking 与手征破缺并给连续外推。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>格点谱、gradient flow 和有限尺寸标度</p></section><section><h4>V · 独立核验器</h4><p>多格距/体积、谱密度与独立离散化</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>7.2</strong><span>受限反例／证书</span></div><h4>方向化可验证性</h4><p>对“非超对称规范理论 conformal window 的固定 Nf 判定”，最强验收方向是受限反例／证书（7.2/10）：候选答案一旦给出，可用多格距/体积、谱密度与独立离散化检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有6.0/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是缓慢 running 极易伪装红外不动点；结论限定作用量、外推方案和 Nf。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：一般定理正证 6.0/10</small></section>
+      <section><h4>物理接口</h4><p>复合 Higgs 与强耦合规范论</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>缓慢 running 极易伪装红外不动点</p><p><b>边界：</b>结论限定作用量、外推方案和 Nf。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://arxiv.org/abs/1102.4066" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="弦论与BPS" data-era="现代方向" data-source="review" data-verification="7.2" data-search="固定 bps quiver 的稳定谱枚举 弦论与bps 固定 quiver 和 chamber，枚举稳定表示并认证 wall-crossing/bps 指标。 seiberg–witten；bps quiver 社区">
+      <div class="card-top"><div><span class="id">ML-04</span><span class="status">本轮新增</span></div><div class="score"><strong>9.0</strong><small>AI 子题 /10</small></div></div>
+      <h3>固定 BPS quiver 的稳定谱枚举</h3>
+      <p class="meta">弦论与BPS · 1990s– · Seiberg–Witten；BPS quiver 社区</p>
+      <div class="score-row"><span>完整问题 8.0</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>固定 quiver 和 chamber，枚举稳定表示并认证 wall-crossing/BPS 指标。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>quiver representation、mutation 与整数谱搜索</p></section><section><h4>V · 独立核验器</h4><p>KS 因子、DT 不变量和独立谱网络</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>7.2</strong><span>受限反例／证书</span></div><h4>方向化可验证性</h4><p>对“固定 BPS quiver 的稳定谱枚举”，最强验收方向是受限反例／证书（7.2/10）：候选答案一旦给出，可用KS 因子、DT 不变量和独立谱网络检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有6.0/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是wild chamber 的指数谱增长；固定 quiver、维数向量和 chamber。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：一般定理正证 6.0/10</small></section>
+      <section><h4>物理接口</h4><p>超对称规范论与黑洞微态</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>wild chamber 的指数谱增长</p><p><b>边界：</b>固定 quiver、维数向量和 chamber。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://arxiv.org/abs/1211.7071" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="谱理论" data-era="历史名题" data-source="review" data-verification="7.2" data-search="三维 anderson 局域化—离域化转变 谱理论 对一个明确相关无序模型证明一侧局域化界或一个临界标度不等式。 philip anderson">
+      <div class="card-top"><div><span class="id">SPEC-02</span><span class="status">本轮新增</span></div><div class="score"><strong>9.0</strong><small>AI 子题 /10</small></div></div>
+      <h3>三维 Anderson 局域化—离域化转变</h3>
+      <p class="meta">谱理论 · 1958 · Philip Anderson</p>
+      <div class="score-row"><span>完整问题 7.7</span><span>历史名题</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>对一个明确相关无序模型证明一侧局域化界或一个临界标度不等式。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>大规模稀疏对角化、multifractal/transfer-matrix 搜索</p></section><section><h4>V · 独立核验器</h4><p>多尺度分析、fractional moments 与独立有限尺寸标度</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>7.2</strong><span>越界反例</span></div><h4>方向化可验证性</h4><p>对“三维 Anderson 局域化—离域化转变”，最强验收方向是越界反例（7.2/10）：候选答案一旦给出，可用多尺度分析、fractional moments 与独立有限尺寸标度检查实例是否满足前提且严格越过所声称的界。相对地，统一界正证只有5.5/10，因为统一界需要覆盖无限参数或尺度；现有硬墙是稀有区与临界点缺少小参数；不由数值临界指数推断一般定理。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：统一界正证 5.5/10</small></section>
+      <section><h4>物理接口</h4><p>无序固体、波输运和金属—绝缘体转变</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>稀有区与临界点缺少小参数</p><p><b>边界：</b>不由数值临界指数推断一般定理。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://arxiv.org/abs/1001.3005" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="拓扑量子场论" data-era="现代方向" data-source="review" data-verification="7.2" data-search="非半单范畴的扩展 3d tqft 拓扑量子场论 构造一个显式非半单 fully-dualizable 候选并计算若干生成流形的配分函数。 lyubashenko 等">
+      <div class="card-top"><div><span class="id">TQFT-03</span><span class="status">本轮新增</span></div><div class="score"><strong>9.0</strong><small>AI 子题 /10</small></div></div>
+      <h3>非半单范畴的扩展 3D TQFT</h3>
+      <p class="meta">拓扑量子场论 · 1990s– · Lyubashenko 等</p>
+      <div class="score-row"><span>完整问题 7.4</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>构造一个显式非半单 fully-dualizable 候选并计算若干生成流形的配分函数。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>图解代数、state-sum 张量生成</p></section><section><h4>V · 独立核验器</h4><p>Pachner move、迹收敛与独立 surgery 计算</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>7.2</strong><span>构造存在</span></div><h4>方向化可验证性</h4><p>对“非半单范畴的扩展 3D TQFT”，最强验收方向是构造存在（7.2/10）：候选答案一旦给出，可用Pachner move、迹收敛与独立 surgery 计算检查候选是否满足方程、约束及所需非退化条件。相对地，非存在证明只有4.8/10，因为非存在方向必须排除整个候选空间；现有硬墙是非半单迹和高阶 coherence；一个范畴实例，不是全分类。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：非存在证明 4.8/10</small></section>
+      <section><h4>物理接口</h4><p>对数 CFT、量子群和三维量子引力</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>非半单迹和高阶 coherence</p><p><b>边界：</b>一个范畴实例，不是全分类。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://arxiv.org/abs/1706.07813" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="量子拓扑" data-era="现代方向" data-source="review" data-verification="7.2" data-search="有限 knot family 的链级 khovanov 精炼 量子拓扑 对交叉数≤n 的一个结族构造链级精炼并验证自然性与 bps 维数。 mikhail khovanov">
+      <div class="card-top"><div><span class="id">ALG-04</span><span class="status">本轮新增</span></div><div class="score"><strong>8.9</strong><small>AI 子题 /10</small></div></div>
+      <h3>有限 knot family 的链级 Khovanov 精炼</h3>
+      <p class="meta">量子拓扑 · 1999– · Mikhail Khovanov</p>
+      <div class="score-row"><span>完整问题 7.5</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>对交叉数≤N 的一个结族构造链级精炼并验证自然性与 BPS 维数。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>链复形枚举、表示论模式发现</p></section><section><h4>V · 独立核验器</h4><p>链同伦、Euler/Poincaré 与已知不变量</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>7.2</strong><span>构造存在</span></div><h4>方向化可验证性</h4><p>对“有限 knot family 的链级 Khovanov 精炼”，最强验收方向是构造存在（7.2/10）：候选答案一旦给出，可用链同伦、Euler/Poincaré 与已知不变量检查候选是否满足方程、约束及所需非退化条件。相对地，非存在证明只有4.8/10，因为非存在方向必须排除整个候选空间；现有硬墙是高阶 coherence 与全结族自然性；有限结族证书不能外推全理论。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：非存在证明 4.8/10</small></section>
+      <section><h4>物理接口</h4><p>Chern–Simons、BPS 态和结物理</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>高阶 coherence 与全结族自然性</p><p><b>边界：</b>有限结族证书不能外推全理论。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://arxiv.org/abs/math/9908171" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="共形场论" data-era="现代方向" data-source="review" data-verification="7.2" data-search="对数/非幺正 cft 的交叉方程 共形场论 为一个 c&lt;0 模型推导含 jordan 块的 crossing-consistent 共形块并验证单值性。 gurarie 等">
+      <div class="card-top"><div><span class="id">CB-03</span><span class="status">本轮新增</span></div><div class="score"><strong>8.9</strong><small>AI 子题 /10</small></div></div>
+      <h3>对数/非幺正 CFT 的交叉方程</h3>
+      <p class="meta">共形场论 · 1980s– · Gurarie 等</p>
+      <div class="score-row"><span>完整问题 7.9</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>为一个 c&lt;0 模型推导含 Jordan 块的 crossing-consistent 共形块并验证单值性。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>表示论模板、微分方程与符号级数</p></section><section><h4>V · 独立核验器</h4><p>null-vector、monodromy、已知格点极限交叉检查</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>7.2</strong><span>受限反例／证书</span></div><h4>方向化可验证性</h4><p>对“对数/非幺正 CFT 的交叉方程”，最强验收方向是受限反例／证书（7.2/10）：候选答案一旦给出，可用null-vector、monodromy、已知格点极限交叉检查检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有6.0/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是dilatation 不可对角化导致正性工具失效；局限于一个明确 indecomposable 模块。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：一般定理正证 6.0/10</small></section>
+      <section><h4>物理接口</h4><p>渗流、聚合物、无序系统</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>dilatation 不可对角化导致正性工具失效</p><p><b>边界：</b>局限于一个明确 indecomposable 模块。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://arxiv.org/abs/1805.04405" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="量子场论" data-era="历史名题" data-source="review" data-verification="7.2" data-search="异常匹配与广义对称实现的固定群分类 量子场论 固定有限群和 3+1d 手征规范内容，枚举 anomaly-free 实现并构造匹配 ir tqft 或 obstruction。 &#x27;t hooft；现代广义对称社区">
+      <div class="card-top"><div><span class="id">GEN-01</span><span class="status">本轮新增</span></div><div class="score"><strong>8.9</strong><small>AI 子题 /10</small></div></div>
+      <h3>异常匹配与广义对称实现的固定群分类</h3>
+      <p class="meta">量子场论 · 1969– · &#x27;t Hooft；现代广义对称社区</p>
+      <div class="score-row"><span>完整问题 7.4</span><span>历史名题</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>固定有限群和 3+1D 手征规范内容，枚举 anomaly-free 实现并构造匹配 IR TQFT 或 obstruction。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>群上同调/bordism、表示与范畴枚举</p></section><section><h4>V · 独立核验器</h4><p>anomaly inflow、配分函数相位与独立 bordism</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>7.2</strong><span>遗漏对象／反例</span></div><h4>方向化可验证性</h4><p>对“异常匹配与广义对称实现的固定群分类”，最强验收方向是遗漏对象／反例（7.2/10）：候选答案一旦给出，可用anomaly inflow、配分函数相位与独立 bordism检查新对象是否满足定义且不等价于已列对象。相对地，完备分类只有5.3/10，因为完备性要求排除清单之外的一切对象；现有硬墙是微观局域实现不由 anomaly 数据自动保证；固定维数、群和费米表示。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：完备分类 5.3/10</small></section>
+      <section><h4>物理接口</h4><p>禁闭、SPT 边界和标准模型一致性</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>微观局域实现不由 anomaly 数据自动保证</p><p><b>边界：</b>固定维数、群和费米表示。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://arxiv.org/abs/1911.05034" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="量子多体" data-era="现代方向" data-source="ICM" data-verification="7.2" data-search="量子多体的准局域等价反问题 量子多体 在 1d injective mps/mpo 或严格限定 automorphism 类中，证明准局域基态映射可积为统一有隙路径。 ogata；bachmann–michalakis–nachtergaele–sims 等">
+      <div class="card-top"><div><span class="id">GEN-02</span><span class="status">既有对话</span></div><div class="score"><strong>8.9</strong><small>AI 子题 /10</small></div></div>
+      <h3>量子多体的准局域等价反问题</h3>
+      <p class="meta">量子多体 · 2010s– · Ogata；Bachmann–Michalakis–Nachtergaele–Sims 等</p>
+      <div class="score-row"><span>完整问题 6.8</span><span>现代方向</span><span><span>ICM</span></span></div>
+      <section><h4>可发表切片</h4><p>在 1D injective MPS/MPO 或严格限定 automorphism 类中，证明准局域基态映射可积为统一有隙路径。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>生成元反演、MPS 插值与 Lieb–Robinson 约束搜索</p></section><section><h4>V · 独立核验器</h4><p>父 Hamiltonian 谱隙、quasi-adiabatic flow 和不变量检查</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>7.2</strong><span>反例／失效点</span></div><h4>方向化可验证性</h4><p>对“量子多体的准局域等价反问题”，最强验收方向是反例／失效点（7.2/10）：候选答案一旦给出，可用父 Hamiltonian 谱隙、quasi-adiabatic flow 和不变量检查检查代入后是否满足前提并使等式或对应失效。相对地，恒等式正证只有6.2/10，因为正证仍需处理全部参数和退化分支；现有硬墙是正向 spectral flow 已知；反向需要可积性与全程 gap 控制；一般高维 converse 仍非共识定理，只保留 MPS/MPO 限定版。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：恒等式正证 6.2/10</small></section>
+      <section><h4>物理接口</h4><p>拓扑相、SPT 与广义对称</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>正向 spectral flow 已知；反向需要可积性与全程 gap 控制</p><p><b>边界：</b>一般高维 converse 仍非共识定理，只保留 MPS/MPO 限定版。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://icmconjectures.com/2022-mathphys-47" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="数学相对论" data-era="现代方向" data-source="review" data-verification="7.2" data-search="高维黑洞/黑环的受限唯一性分类 数学相对论 在 d=5 双轴对称、给定 rod structure 下枚举正则分支并证明完备性。 emparan–reall 等">
+      <div class="card-top"><div><span class="id">GR-06</span><span class="status">本轮新增</span></div><div class="score"><strong>8.9</strong><small>AI 子题 /10</small></div></div>
+      <h3>高维黑洞/黑环的受限唯一性分类</h3>
+      <p class="meta">数学相对论 · 2002– · Emparan–Reall 等</p>
+      <div class="score-row"><span>完整问题 7.6</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>在 D=5 双轴对称、给定 rod structure 下枚举正则分支并证明完备性。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>Einstein 方程约化、分支延拓、拓扑枚举</p></section><section><h4>V · 独立核验器</h4><p>正则性、Smarr/Komar 关系与独立 continuation</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>7.2</strong><span>遗漏对象／反例</span></div><h4>方向化可验证性</h4><p>对“高维黑洞/黑环的受限唯一性分类”，最强验收方向是遗漏对象／反例（7.2/10）：候选答案一旦给出，可用正则性、Smarr/Komar 关系与独立 continuation检查新对象是否满足定义且不等价于已列对象。相对地，完备分类只有5.3/10，因为完备性要求排除清单之外的一切对象；现有硬墙是D≥5 允许非球拓扑且唯一性失效；只分类指定对称和渐近条件。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：完备分类 5.3/10</small></section>
+      <section><h4>物理接口</h4><p>高维引力和弦论黑洞</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>D≥5 允许非球拓扑且唯一性失效</p><p><b>边界：</b>只分类指定对称和渐近条件。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5253845/" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="量子引力" data-era="历史名题" data-source="review" data-verification="7.2" data-search="渐近安全量子引力固定点的截断稳定性 量子引力 固定有限导数/维数截断，自动枚举算符并证明一个 regulator/gauge 稳定的 fixed-point 指标。 steven weinberg；frg 社区">
+      <div class="card-top"><div><span class="id">QG-01</span><span class="status">本轮新增</span></div><div class="score"><strong>8.9</strong><small>AI 子题 /10</small></div></div>
+      <h3>渐近安全量子引力固定点的截断稳定性</h3>
+      <p class="meta">量子引力 · 1976– · Steven Weinberg；FRG 社区</p>
+      <div class="score-row"><span>完整问题 7.0</span><span>历史名题</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>固定有限导数/维数截断，自动枚举算符并证明一个 regulator/gauge 稳定的 fixed-point 指标。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>functional RG beta 函数生成与截断搜索</p></section><section><h4>V · 独立核验器</h4><p>多 regulator/gauge、谱稳定与独立离散 RG</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>7.2</strong><span>受限反例／证书</span></div><h4>方向化可验证性</h4><p>对“渐近安全量子引力固定点的截断稳定性”，最强验收方向是受限反例／证书（7.2/10）：候选答案一旦给出，可用多 regulator/gauge、谱稳定与独立离散 RG检查证书的局部恒等式、约束和误差界。相对地，一般定理正证只有6.0/10，因为一般定理仍要跨越参数、尺度或紧性障碍；现有硬墙是截断收敛不自动推出完整理论；只声称受控截断的稳定性。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：一般定理正证 6.0/10</small></section>
+      <section><h4>物理接口</h4><p>量子引力 UV 完备性</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>截断收敛不自动推出完整理论</p><p><b>边界：</b>只声称受控截断的稳定性。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://www.frontiersin.org/journals/physics/articles/10.3389/fphy.2020.00269/full" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article>
+<article class="problem-card" data-domain="拓扑量子场论" data-era="现代方向" data-source="review" data-verification="7.2" data-search="模张量范畴 witt 群的族关系 拓扑量子场论 确定一个无限 braided-category 家族的 witt 阶与全部低阶关系。 davydov–müger–nikshych–ostrik">
+      <div class="card-top"><div><span class="id">TQFT-02</span><span class="status">本轮新增</span></div><div class="score"><strong>8.9</strong><small>AI 子题 /10</small></div></div>
+      <h3>模张量范畴 Witt 群的族关系</h3>
+      <p class="meta">拓扑量子场论 · 2010– · Davydov–Müger–Nikshych–Ostrik</p>
+      <div class="score-row"><span>完整问题 7.8</span><span>现代方向</span><span><span>权威综述</span></span></div>
+      <section><h4>可发表切片</h4><p>确定一个无限 braided-category 家族的 Witt 阶与全部低阶关系。</p></section>
+      <div class="gv"><section><h4>G · 候选生成器</h4><p>凝聚候选、融合规则与数论模式搜索</p></section><section><h4>V · 独立核验器</h4><p>中心/凝聚构造、模数据与 pivotal 一致性</p></section></div>
+      <section class="verification-argument"><div class="verification-head"><strong>7.2</strong><span>遗漏对象／反例</span></div><h4>方向化可验证性</h4><p>对“模张量范畴 Witt 群的族关系”，最强验收方向是遗漏对象／反例（7.2/10）：候选答案一旦给出，可用中心/凝聚构造、模数据与 pivotal 一致性检查新对象是否满足定义且不等价于已列对象。相对地，完备分类只有5.3/10，因为完备性要求排除清单之外的一切对象；现有硬墙是需要在 Drinfeld center 商下识别等价；仅针对明确家族。因此这里排的是候选答案的验收强度，不是完整问题的解决概率，也不能把有限实例自动外推成一般定理。</p><small>较弱方向：完备分类 5.3/10</small></section>
+      <section><h4>物理接口</h4><p>任意子凝聚、拓扑序的可逆关系</p></section>
+      <details><summary>最大障碍与断言边界</summary><p><b>障碍：</b>需要在 Drinfeld center 商下识别等价</p><p><b>边界：</b>仅针对明确家族。</p></details>
+      <div class="card-foot"><span>中：须进一步收窄参数区或模型族</span><a href="https://arxiv.org/abs/1001.2023" target="_blank" rel="noreferrer">权威来源 ↗</a></div>
+    </article></div></div></section>
+<section class="block"><div class="wrap"><div class="eyebrow">Negative audit</div><h2>为什么这些著名题没进榜</h2><p class="intro">排除不是说它们不重要，而是防止“已解决基准”“只有数值拟合”或“物理接口太弱”污染适合度统计。</p><div class="audit"><article><h3>最小 Kochen–Specker 集</h3><p>当前下界、构造和‘最小’所指维数/射线/上下文口径易混；审计来源结论冲突，先列待核而非虚构开放状态。</p></article><article><h3>渐近好量子 LDPC 码是否存在</h3><p>基础存在性已有突破；保留的是阈值—码率—距离及译码权衡。</p></article><article><h3>NLTS 存在性</h3><p>基础版本已有定理；只保留 qPCP/gap amplification 加强版。</p></article><article><h3>一圈 all-plus Yang–Mills 振幅</h3><p>闭式和证明已知；仅可作回归基准，不是开放题。</p></article><article><h3>标准 XXX/XXZ 有限链 Bethe 谱</h3><p>经典可解基准；新颖性不足，除非换成非对角边界等新切片。</p></article><article><h3>黑洞 Page 曲线本身</h3><p>岛公式已有重大解决；保留 Hilbert 空间因子化和真实黑洞信息问题。</p></article><article><h3>一维有隙系统面积律</h3><p>已解决；保留一般二维受限子类。</p></article><article><h3>庞加莱猜想</h3><p>已解决且不应作为当前 AI 开放题。</p></article><article><h3>孪生素数/Goldbach 筛法优化</h3><p>可作方法论对照，但本次要求数学物理/理论物理，缺少足够直接物理接口。</p></article><article><h3>一般 Kerr 外部稳定性</h3><p>已有重大定理；改列极端/近极端参数缺口。</p></article><article><h3>任意维 SIC 的纯数值搜索</h3><p>没有精确数域证书时 verifier 不达 8.5，按硬门槛剔除。</p></article><article><h3>三维 Ising 的‘闭式解’</h3><p>命题边界不清且难独立验收；改为高温/各向异性解析定理与 bootstrap 子题。</p></article><article><h3>完整 M-theory 非微扰定义</h3><p>研究纲领而非单一可判定命题；有限 BFSS 可观测量进入矩阵模型切片。</p></article><article><h3>所有弦论 de Sitter 真空的存在性</h3><p>定义和控制条件争议大，难形成独立 verifier，未过 8.8。</p></article><article><h3>量子退火的一般指数加速</h3><p>缺少稳定统一命题；有限实例又多为基准复现，工作流适合度未过门槛。</p></article></div></div></section>
+</main><footer><div class="wrap"><p>数据与页面由同一构建脚本生成。<a href="../data/2026-08-13-public-mathphys-ai-census.json">下载 JSON</a> · <a href="../downloads/2026-08-13-codex-public-mathphys-ai-census.md">阅读统计报告</a> · <a href="https://chatgpt.com/share/6a7deaa6-607c-83ea-b150-2948dd7838d3" target="_blank" rel="noreferrer">筛法方法对话 ↗</a></p><p>注意：本页是选题审计，不是解决悬赏承诺。截止日期后的论文可能改变开放状态。</p></div></footer>
+<script>
+const catalog=document.querySelector('.catalog'),cards=[...document.querySelectorAll('.problem-card')];const q=document.getElementById('search-input'),d=document.getElementById('domain-filter'),e=document.getElementById('era-filter'),s=document.getElementById('source-filter'),v=document.getElementById('verification-sort'),count=document.getElementById('result-count');function filter(){const needle=q.value.trim().toLowerCase();let shown=0;const ordered=[...cards].sort((a,b)=>v.value==='verification'?Number(b.dataset.verification)-Number(a.dataset.verification):Number(b.querySelector('.score strong').textContent)-Number(a.querySelector('.score strong').textContent));ordered.forEach(card=>catalog.appendChild(card));for(const card of cards){const ok=(!needle||card.dataset.search.includes(needle))&&(!d.value||card.dataset.domain===d.value)&&(!e.value||card.dataset.era===e.value)&&(!s.value||card.dataset.source===s.value);card.classList.toggle('hide',!ok);if(ok)shown++}count.textContent=`显示 ${shown} / ${cards.length} 项`}[q,d,e,s,v].forEach(el=>el.addEventListener('input',filter));filter();
+</script></body></html>
