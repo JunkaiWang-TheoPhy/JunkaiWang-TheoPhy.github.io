@@ -31,6 +31,12 @@ main:
         
   - title: "Blogs"
     url: /blogs/
+
+  - title: "Blog"
+    url: /blog/
+
+  - title: "Essay"
+    url: /essay/
     
   - title: "Award"
     url: /award/

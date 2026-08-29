@@ -232,6 +232,12 @@ kramdown:
 
 # These settings control the types of collections used by the template
 collections:
+  blog:
+    output: true
+    permalink: /blog/:path/
+  essay:
+    output: true
+    permalink: /essay/:path/
   blogs:
     output: true
     permalink: /blogs/:path/
