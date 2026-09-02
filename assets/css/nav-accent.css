@@ -1,10 +1,14 @@
-/* Accent color for CV/SoI/SoP nav links (plain CSS, no Sass). */
+/* Accent colors for the independent writing sub-sites and selected pages. */
 :root {
   --nav-accent-color: #1f7a8c;
+  --nav-blog-color: #e85d75;
+  --nav-essay-color: #2f83c5;
 }
 
 html[data-theme="dark"] {
   --nav-accent-color: #7fd3e6;
+  --nav-blog-color: #ff8fa3;
+  --nav-essay-color: #78c5ff;
 }
 
 #site-nav a[href$="/cv/"],
@@ -15,6 +19,17 @@ html[data-theme="dark"] {
   font-family: "Segoe Script", "Apple Chancery", "Zapfino", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 }
 
+#site-nav a[href$="/blog/"],
+#site-nav a[href$="/essay/"] {
+  text-decoration: none;
+  font-family: "Segoe Script", "Apple Chancery", "Bradley Hand", cursive;
+  font-weight: 700;
+  letter-spacing: .02em;
+}
+
+#site-nav a[href$="/blog/"] { color: var(--nav-blog-color); }
+#site-nav a[href$="/essay/"] { color: var(--nav-essay-color); }
+
 .page__title.fancy-title {
   font-family: "Segoe Script", "Apple Chancery", "Zapfino", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 }
@@ -23,6 +38,12 @@ html[data-theme="dark"] {
 #site-nav a[href$="/soi/"]:hover,
 #site-nav a[href$="/sop/"]:hover {
   color: var(--nav-accent-color);
+}
+
+#site-nav a[href$="/blog/"]:hover,
+#site-nav a[href$="/essay/"]:hover {
+  filter: saturate(1.35) brightness(1.08);
+  transform: translateY(-1px);
 }
 
 #site-nav a[href$="/cv/"]::before,

@@ -29,13 +29,13 @@ main:
   # - title: "Narrative"
   #   url: /narrative/
         
-  - title: "Blogs"
+  - title: "Archive"
     url: /blogs/
 
-  - title: "Blog"
+  - title: "Research Notes"
     url: /blog/
 
-  - title: "Essay"
+  - title: "Field Notes"
     url: /essay/
     
   - title: "Award"
