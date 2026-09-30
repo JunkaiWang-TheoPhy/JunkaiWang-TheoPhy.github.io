@@ -47,7 +47,7 @@ Out of passion for research, I continued to pursue scholarly study as a visiting
 
    **Keywords:** *Intersection with Quantum Artificial Intelligence and HEP & CMP Physics.*
    - **Quantum information and complexity in quantum matter and quantum gravity:** especially holographic quantum information and related topics.
-   - **Quantum for AI:** Quantum Artificial Intelligence and Quantum Machine Learning; for example, **Quantum Automated Learning** (arXiv:2502.05264), submitted to Nature Portfolio, as a Schrodinger-picture version of quantum machine learning that can avoid classical gradients; I will have a preprint on improving it in collaboration with Prof. Dong-Ling Deng.
+   - **Quantum for AI:** Quantum Artificial Intelligence and Quantum Machine Learning; for example, **Quantum Automated Learning** (arXiv:2502.05264), submitted to Nature Portfolio, as a Schrodinger-picture version of quantum machine learning that can avoid classical gradients.
 
 4. **AI for Fundamental Science**
 
@@ -71,7 +71,7 @@ By faculty-guided advanced learning seminars, I learnt various Advanced mathemat
 
 By auditing graduate-level courses during my visit at UC Berkeley, I learnt String Theory (by Geoff Penington), Advanced Quantum Field Theory (by Petr Hořava), and the Standard Model* (by Yasunori Nomura);
 
-By auditing advanced courses during my visit in Beijing, I learnt String Theory (by Chi-ming Chang), Quantum Information (by Jin-peng Liu), Quantum Machine Learning (by Dong-Ling Deng), Gauge Field Theory (by Haipeng An), Particle Cosmology (by Zhong-zhi Xianyu), and Advanced General Relativity (by Lars Anderson).
+By auditing advanced courses during my visit in Beijing, I learnt String Theory (by Chi-ming Chang), Quantum Information (by Jin-peng Liu), Gauge Field Theory (by Haipeng An), Particle Cosmology (by Zhong-zhi Xianyu), and Advanced General Relativity (by Lars Anderson).
 
 
 
