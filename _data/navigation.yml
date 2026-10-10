@@ -35,8 +35,8 @@ main:
   # - title: "Research Notes"
   #   url: /blog/
 
-  - title: "Field Notes"
-    url: /essay/
+  # - title: "Field Notes"
+  #   url: /essay/
     
   - title: "Award"
     url: /award/
