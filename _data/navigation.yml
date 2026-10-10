@@ -14,8 +14,8 @@ main:
   - title: "Talks"
     url: /talks/    
 
-  - title: "Conference Attend"
-    url: /conference-attending/
+  # - title: "Conference Attend"
+  #   url: /conference-attending/
 
   - title: "Leadership"
     url: /activities/
@@ -32,8 +32,8 @@ main:
   - title: "Archive"
     url: /blogs/
 
-  - title: "Research Notes"
-    url: /blog/
+  # - title: "Research Notes"
+  #   url: /blog/
 
   - title: "Field Notes"
     url: /essay/
